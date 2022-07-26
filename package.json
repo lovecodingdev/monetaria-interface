@@ -75,7 +75,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-markdown": "^8.0.1",
-    "react-number-format": "^4.9.1",
+    "react-number-format": "^4.9.3",
     "reflect-metadata": "^0.1.13",
     "remark-gfm": "^3.0.1",
     "request": "^2.88.2",
