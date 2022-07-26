@@ -32,7 +32,7 @@
     "@emotion/react": "latest",
     "@emotion/server": "latest",
     "@emotion/styled": "latest",
-    "@gnosis.pm/safe-apps-web3-react": "^1.2.0",
+    "@gnosis.pm/safe-apps-web3-react": "^1.4.2",
     "@graphql-codegen/add": "^3.1.1",
     "@graphql-codegen/cli": "^2.6.2",
     "@graphql-codegen/typescript-operations": "^2.3.2",
