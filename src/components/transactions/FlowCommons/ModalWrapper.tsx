@@ -28,7 +28,7 @@ export interface ModalWrapperProps {
 
 export const ModalWrapper: React.FC<{
   underlyingAsset: string;
-  title: ReactElement;
+  title?: ReactElement;
   requiredChainId?: number;
   // if true wETH will stay wETH otherwise wETH will be returned as ETH
   keepWrappedSymbol?: boolean;
@@ -90,7 +90,7 @@ export const ModalWrapper: React.FC<{
 
   return (
     <>
-      {!mainTxState.success && (
+      {title && !mainTxState.success && (
         <TxModalTitle title={title} symbol={hideTitleSymbol ? undefined : symbol} />
       )}
       {isWrongNetwork && (

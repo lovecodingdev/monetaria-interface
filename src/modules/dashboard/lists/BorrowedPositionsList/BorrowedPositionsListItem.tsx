@@ -11,6 +11,7 @@ import { ListButtonsColumn } from '../ListButtonsColumn';
 import { ListItemAPYButton } from '../ListItemAPYButton';
 import { ListItemWrapper } from '../ListItemWrapper';
 import { ListValueColumn } from '../ListValueColumn';
+import { Link, ROUTES } from '../../../../components/primitives/Link';
 
 export const BorrowedPositionsListItem = ({
   reserve,
@@ -73,7 +74,7 @@ export const BorrowedPositionsListItem = ({
       </ListColumn>
 
       <ListButtonsColumn>
-        <Button
+        {/* <Button
           disabled={!isActive}
           variant="contained"
           onClick={() => openRepay(reserve.underlyingAsset, borrowRateMode)}
@@ -86,6 +87,13 @@ export const BorrowedPositionsListItem = ({
           onClick={() => openBorrow(reserve.underlyingAsset)}
         >
           <Trans>Borrow</Trans>
+        </Button> */}
+        <Button
+          variant="outlined"
+          component={Link}
+          href={ROUTES.actions(reserve.underlyingAsset, currentMarket, "supply")}
+        >
+          <Trans>Actions</Trans>
         </Button>
       </ListButtonsColumn>
     </ListItemWrapper>
