@@ -14,9 +14,7 @@ import {
   useAppDataContext,
 } from 'src/hooks/app-data-provider/useAppDataProvider';
 import { MainLayout } from 'src/layouts/MainLayout';
-import { ReserveActions } from 'src/modules/reserve-overview/ReserveActions';
-import { ReserveConfiguration } from 'src/modules/reserve-overview/ReserveConfiguration';
-import { ReserveTopDetails } from 'src/modules/reserve-overview/ReserveTopDetails';
+import { ActionsTopDetails } from 'src/modules/actions/ActionsTopDetails';
 
 import { ContentContainer } from '../src/components/ContentContainer';
 import { ActionTabs } from '../src/components/transactions/ActionTabs/ActionTabs';
@@ -43,7 +41,7 @@ export default function Actions() {
 
   return (
     <>
-      <ReserveTopDetails underlyingAsset={underlyingAsset} />
+      <ActionsTopDetails underlyingAsset={underlyingAsset} />
       <ActionTabs underlyingAsset={underlyingAsset} />
     </>
   );
