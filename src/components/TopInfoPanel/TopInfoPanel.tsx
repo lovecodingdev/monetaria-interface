@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Box, Container, Paper } from '@mui/material';
 import { ReactNode } from 'react';
 
 import { PageTitle, PageTitleProps } from './PageTitle';
@@ -16,13 +16,15 @@ export const TopInfoPanel = ({
   children,
 }: TopInfoPanelProps) => {
   return (
-    <Box
-      sx={{
+    <Paper
+      sx={theme=>({
         bgcolor: 'background.header',
-        pt: { xs: 10, md: 12 },
-        pb: { xs: 18, md: 20, lg: '94px', xl: '92px', xxl: '96px' },
+        py: { xs: 9, md: 10, lg: '20px', xl: '20px', xxl: '20px' },
+        marginX: '120px', 
+        mt: '24px',
         color: '#F1F1F3',
-      }}
+        border: `1px solid ${theme.palette.divider}`,
+      })}
     >
       <Container sx={{ pb: 0 }}>
         <Box sx={{ px: { xs: 4, xsm: 6 } }}>
@@ -40,7 +42,7 @@ export const TopInfoPanel = ({
             sx={{
               display: 'flex',
               alignItems: 'flex-start',
-              gap: { xs: 3, xsm: 8 },
+              gap: 16,
               flexWrap: 'wrap',
               width: '100%',
             }}
@@ -49,6 +51,6 @@ export const TopInfoPanel = ({
           </Box>
         </Box>
       </Container>
-    </Box>
+    </Paper>
   );
 };

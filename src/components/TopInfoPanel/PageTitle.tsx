@@ -30,9 +30,10 @@ export const PageTitle = ({ pageTitle, withMarketSwitcher }: PageTitleProps) => 
           <Typography
             variant={downToXSM ? 'h2' : upToLG ? 'display1' : 'h1'}
             sx={{
-              color: withMarketSwitcher ? 'text.muted' : 'text.white',
+              color: 'text.primary',
               mr: { xs: 5, xsm: 3 },
               mb: { xs: 1, xsm: 0 },
+              fontSize: '24px',
             }}
           >
             {pageTitle}
@@ -47,7 +48,7 @@ export const PageTitle = ({ pageTitle, withMarketSwitcher }: PageTitleProps) => 
           mb: !pageTitle ? 4 : 0,
         }}
       >
-        {withMarketSwitcher && <MarketSwitcher />}
+        {/* {withMarketSwitcher && <MarketSwitcher />} */}
         {/* <BridgeButton bridge={bridge} variant="surface" withoutIcon={!upToMD} /> */}
         {/* NOTE:// Removing for now  */}
       </Box>
