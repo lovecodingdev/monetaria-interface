@@ -44,7 +44,7 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                 component={Link}
                 href={item.link}
                 variant="h2"
-                color="#F1F1F3"
+                color="#080F26"
                 sx={{ width: '100%', p: 4 }}
                 onClick={() => (setOpen ? setOpen(false) : undefined)}
               >
@@ -55,9 +55,12 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                 component={Link}
                 href={item.link}
                 sx={(theme) => ({
-                  color: '#F1F1F3',
+                  color: '#080F26',
                   p: '6px 8px',
                   position: 'relative',
+                  '&:hover': {
+                    background: 'none',
+                  },
                   '.active&:after, &:hover&:after': {
                     transform: 'scaleX(1)',
                     transformOrigin: 'bottom left',
@@ -67,12 +70,13 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                     position: 'absolute',
                     width: '100%',
                     transform: 'scaleX(0)',
-                    height: '2px',
-                    bottom: '-6px',
+                    height: '100%',
                     left: '0',
-                    background: theme.palette.gradients.aaveGradient,
                     transformOrigin: 'bottom right',
                     transition: 'transform 0.25s ease-out',
+                    zIndex: -1,
+                    background: 'rgba(215, 215, 215, 0.25)',
+                    borderRadius: '100px',
                   },
                 })}
               >

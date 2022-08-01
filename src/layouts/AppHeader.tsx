@@ -21,6 +21,7 @@ import { NavItems } from './components/NavItems';
 import { MobileMenu } from './MobileMenu';
 import { SettingsMenu } from './SettingsMenu';
 import WalletWidget from './WalletWidget';
+import { MarketSwitcher } from '../components/MarketSwitcher';
 
 interface Props {
   children: React.ReactElement;
@@ -114,10 +115,21 @@ export function AppHeader() {
             mr: 3,
             transition: '0.3s ease all',
             '&:hover': { opacity: 0.7 },
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'space-between',
           }}
           onClick={() => setMobileMenuOpen(false)}
         >
-          <img src={uiConfig.appLogo} alt="An SVG of an eye" height={20} />
+          <img src={uiConfig.appLogo} alt="An SVG of an eye" />
+          <Box
+            sx={{
+              fontSize: '28px',
+              fontWeight: '700',
+            }}
+          >
+            monetaria.io
+          </Box>
         </Box>
         <Box sx={{ mr: sm ? 1 : 3 }}>
           {ENABLE_TESTNET && (
@@ -145,6 +157,8 @@ export function AppHeader() {
         </Box>
 
         <Box sx={{ flexGrow: 1 }} />
+
+        <MarketSwitcher />
 
         {!mobileMenuOpen && (
           <WalletWidget
