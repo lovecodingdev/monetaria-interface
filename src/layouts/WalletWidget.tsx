@@ -314,6 +314,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
           sx={{
             p: connected ? '5px 8px' : undefined,
             minWidth: hideWalletAccountText ? 'unset' : undefined,
+            backgroundColor: '#074592',
           }}
           startIcon={connected && !hideWalletAccountText && accountAvatar}
           endIcon={
