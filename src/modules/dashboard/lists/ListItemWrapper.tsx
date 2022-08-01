@@ -33,7 +33,7 @@ export const ListItemWrapper = ({
     <ListItem {...rest}>
       <ListColumn maxWidth={160} isRow>
         <Link
-          href={ROUTES.reserveOverview(detailsAddress, currentMarket)}
+          href={ROUTES.actions(detailsAddress, currentMarket)}
           noWrap
           sx={{ display: 'inline-flex', alignItems: 'center' }}
         >

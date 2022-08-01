@@ -25,7 +25,7 @@ export const ListHeader = ({ head }: ListHeaderProps) => {
         </ListColumn>
       ))}
 
-      <ListButtonsColumn />
+      {/* <ListButtonsColumn /> */}
     </ListHeaderWrapper>
   );
 };

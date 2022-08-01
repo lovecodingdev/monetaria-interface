@@ -86,12 +86,13 @@ export const DashboardTopPanel = () => {
 
   return (
     <>
-      <TopInfoPanel
-        pageTitle={<Trans>Dashboard</Trans>}
-        withMarketSwitcher
-        bridge={currentNetworkConfig.bridge}
-      >
-        <TopInfoPanelItem icon={<WalletIcon />} title={<Trans>Net worth</Trans>} loading={loading}>
+      <TopInfoPanel pageTitle={<Trans>Dashboard</Trans>} bridge={currentNetworkConfig.bridge}>
+        <TopInfoPanelItem
+          icon={<WalletIcon />}
+          hideIcon
+          title={<Trans>Net worth</Trans>}
+          loading={loading}
+        >
           {currentAccount ? (
             <FormattedNumber
               value={Number(user?.netWorthUSD || 0)}
@@ -99,7 +100,6 @@ export const DashboardTopPanel = () => {
               variant={valueTypographyVariant}
               visibleDecimals={2}
               compact
-              symbolsColor="#A5A8B6"
               symbolsVariant={noDataTypographyVariant}
             />
           ) : (
@@ -109,6 +109,7 @@ export const DashboardTopPanel = () => {
 
         <TopInfoPanelItem
           icon={<NetAPYIcon />}
+          hideIcon
           title={
             <div style={{ display: 'flex' }}>
               <Trans>Net APY</Trans>
@@ -123,7 +124,6 @@ export const DashboardTopPanel = () => {
               variant={valueTypographyVariant}
               visibleDecimals={2}
               percent
-              symbolsColor="#A5A8B6"
               symbolsVariant={noDataTypographyVariant}
             />
           ) : (
@@ -134,6 +134,7 @@ export const DashboardTopPanel = () => {
         {currentAccount && user?.healthFactor !== '-1' && (
           <TopInfoPanelItem
             icon={<EmptyHeartIcon />}
+            hideIcon
             title={
               <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
                 <Trans>Health factor</Trans>
@@ -153,7 +154,7 @@ export const DashboardTopPanel = () => {
             <HealthFactorNumber
               value={user?.healthFactor || '-1'}
               variant={valueTypographyVariant}
-              onInfoClick={() => setOpen(true)}
+              // onInfoClick={() => setOpen(true)}
               HALIntegrationComponent={
                 currentMarketData.halIntegration && (
                   <HALLink
@@ -187,7 +188,6 @@ export const DashboardTopPanel = () => {
                   visibleDecimals={2}
                   compact
                   symbol="USD"
-                  symbolsColor="#A5A8B6"
                   symbolsVariant={noDataTypographyVariant}
                   data-cy={'Claim_Value'}
                 />
@@ -207,14 +207,14 @@ export const DashboardTopPanel = () => {
         )}
       </TopInfoPanel>
 
-      <LiquidationRiskParametresInfoModal
+      {/* <LiquidationRiskParametresInfoModal
         open={open}
         setOpen={setOpen}
         healthFactor={user?.healthFactor || '-1'}
         loanToValue={loanToValue}
         currentLoanToValue={user?.currentLoanToValue || '0'}
         currentLiquidationThreshold={user?.currentLiquidationThreshold || '0'}
-      />
+      /> */}
     </>
   );
 };

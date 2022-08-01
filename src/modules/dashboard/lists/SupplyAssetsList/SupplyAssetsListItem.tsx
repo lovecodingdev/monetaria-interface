@@ -67,21 +67,21 @@ export const SupplyAssetsListItem = ({
         />
       </ListColumn>
 
-      <ListButtonsColumn>
-        {/* <Button
+      {/* <ListButtonsColumn>
+        <Button
           disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
           variant="contained"
           onClick={() => openSupply(underlyingAsset)}
         >
           <Trans>Supply</Trans>
-        </Button> */}
-        {/* <Button
+        </Button>
+        <Button
           variant="outlined"
           component={Link}
           href={ROUTES.reserveOverview(detailsAddress, currentMarket)}
         >
           <Trans>Details</Trans>
-        </Button> */}
+        </Button>
         <Button
           variant="outlined"
           component={Link}
@@ -89,7 +89,7 @@ export const SupplyAssetsListItem = ({
         >
           <Trans>Actions</Trans>
         </Button>
-      </ListButtonsColumn>
+      </ListButtonsColumn> */}
     </ListItemWrapper>
   );
 };

@@ -70,8 +70,8 @@ export const SuppliedPositionsListItem = ({
         />
       </ListColumn>
 
-      <ListButtonsColumn>
-        {/* <Button
+      {/* <ListButtonsColumn>
+        <Button
           disabled={!isActive}
           variant="contained"
           onClick={() => openWithdraw(underlyingAsset)}
@@ -96,7 +96,7 @@ export const SuppliedPositionsListItem = ({
           >
             <Trans>Supply</Trans>
           </Button>
-        )} */}
+        )}
         <Button
           variant="outlined"
           component={Link}
@@ -104,7 +104,7 @@ export const SuppliedPositionsListItem = ({
         >
           <Trans>Actions</Trans>
         </Button>
-      </ListButtonsColumn>
+      </ListButtonsColumn> */}
     </ListItemWrapper>
   );
 };
