@@ -30,7 +30,7 @@ export const ConnectWalletPaper = ({
         ...sx,
       }}
     >
-      <LoveGhost style={{ marginBottom: '16px' }} />
+      {/* <LoveGhost style={{ marginBottom: '16px' }} /> */}
       <>
         {loading ? (
           <CircularProgress />
