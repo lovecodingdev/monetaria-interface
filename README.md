@@ -11,3 +11,8 @@ cp .env.example .env.local
 yarn
 yarn dev
 ```
+
+## env file type
+
+.env: can run on live and test mode.
+.env.local: run on test mode.
