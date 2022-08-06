@@ -52,7 +52,7 @@ export const TopInfoPanel = ({
             sx={{
               display: 'flex',
               alignItems: 'flex-start',
-              gap: 4,
+              gap: 8,
               flexWrap: 'wrap',
             }}
           >
