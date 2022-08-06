@@ -121,6 +121,6 @@ export const ROUTES = {
   dynamicRenderedProposal: (proposalId: number) => `/governance/proposal?proposalId=${proposalId}`,
   reserveOverview: (underlyingAsset: string, marketName: CustomMarket) =>
     `/reserve-overview/?underlyingAsset=${underlyingAsset}&marketName=${marketName}`,
-  actions: (underlyingAsset: string, marketName: CustomMarket) =>
-    `/actions/?underlyingAsset=${underlyingAsset}&marketName=${marketName}`,
+  actions: (underlyingAsset: string, marketName: CustomMarket, type: string) =>
+    `/actions/?underlyingAsset=${underlyingAsset}&marketName=${marketName}&type=${type}`,
 };

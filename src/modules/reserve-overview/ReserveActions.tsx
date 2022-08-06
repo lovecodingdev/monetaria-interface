@@ -35,13 +35,15 @@ import { Link, ROUTES } from '../../components/primitives/Link';
 import { getEmodeMessage } from '../../components/transactions/Emode/EmodeNaming';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { ConnectWalletButton } from 'src/components/WalletConnection/ConnectWalletButton';
+import borderGradient from "src/layouts/borderGradient";
+
 
 const PaperWrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <Paper sx={{ pt: 4, pb: { xs: 4, xsm: 6 }, px: { xs: 4, xsm: 6 } }}>
-      <Typography variant="h3" sx={{ mb: { xs: 6, xsm: 10 } }}>
+    <Paper sx={{ p: 4, ...borderGradient}}>
+      {/* <Typography variant="h3" sx={{ mb: { xs: 6, xsm: 10 } }}>
         <Trans>Your info</Trans>
-      </Typography>
+      </Typography> */}
 
       {children}
     </Paper>
@@ -209,7 +211,7 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
       <Row align="flex-start" mb={6}>
         {alert}
       </Row>
-      <Row
+      {/* <Row
         caption={<Trans>Wallet balance</Trans>}
         align="flex-start"
         mb={6}
@@ -229,9 +231,9 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
             symbol="USD"
           />
         </Box>
-      </Row>
+      </Row> */}
 
-      <Row
+      {/* <Row
         caption={
           <AvailableTooltip
             variant="description"
@@ -246,9 +248,9 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
           variant="secondary14"
           symbol={poolReserve.symbol}
         />
-      </Row>
+      </Row> */}
 
-      <Row
+      {/* <Row
         caption={
           <AvailableTooltip
             variant="description"
@@ -269,7 +271,57 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
             <Trans>Unavailable</Trans>
           </Typography>
         )}
-      </Row>
+      </Row> */}
+
+      <Stack direction="row" justifyContent="space-between" spacing={2}>
+        <Box sx={{
+          display: 'flex',
+        }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: "10px" }}>
+            <Typography variant={"secondary8"}>Wallet balance</Typography>
+            <FormattedNumber
+              value={balance?.amount || 0}
+              variant="h3"
+              symbol={poolReserve.symbol}
+            />
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: "10px" }}>
+            <Typography variant={"secondary8"}>Available to supply</Typography>
+            <FormattedNumber
+              value={maxAmountToSupply}
+              variant="h3"
+              symbol={poolReserve.symbol}
+            />
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: "10px" }}>
+            <Typography variant={"secondary8"}>Available to borrow</Typography>
+            <FormattedNumber
+              value={canBorrow ? maxAmountToBorrow : '0'}
+              variant="h3"
+              symbol={poolReserve.symbol}
+            />
+          </Box>
+        </Box>
+
+        <Stack direction="row" spacing={2}>
+          <Button
+            disabled={!canBorrow || user?.totalCollateralMarketReferenceCurrency === '0'}
+            variant="outlined"
+            onClick={() => openBorrow(underlyingAsset)}
+            fullWidth={downToXSM}
+          >
+            <Trans>Borrow</Trans> {downToXSM && poolReserve.symbol}
+          </Button>
+          <Button
+            variant="contained"
+            disabled={balance?.amount === '0'}
+            onClick={() => openSupply(underlyingAsset)}
+            fullWidth={downToXSM}
+          >
+            <Trans>Supply</Trans> {downToXSM && poolReserve.symbol}
+          </Button>
+        </Stack>
+      </Stack>
 
       {balance?.amount !== '0' && user?.totalCollateralMarketReferenceCurrency === '0' && (
         <Alert sx={{ mb: '12px' }} severity="info" icon={false}>
@@ -312,27 +364,6 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
           </Trans>
         </Alert>
       )}
-
-      <Row mb={5} />
-
-      <Stack direction="row" spacing={2}>
-        <Button
-          variant="contained"
-          disabled={balance?.amount === '0'}
-          onClick={() => openSupply(underlyingAsset)}
-          fullWidth={downToXSM}
-        >
-          <Trans>Supply</Trans> {downToXSM && poolReserve.symbol}
-        </Button>
-        <Button
-          disabled={!canBorrow || user?.totalCollateralMarketReferenceCurrency === '0'}
-          variant="contained"
-          onClick={() => openBorrow(underlyingAsset)}
-          fullWidth={downToXSM}
-        >
-          <Trans>Borrow</Trans> {downToXSM && poolReserve.symbol}
-        </Button>
-      </Stack>
     </PaperWrapper>
   );
 };

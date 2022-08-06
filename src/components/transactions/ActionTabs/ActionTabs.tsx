@@ -21,6 +21,7 @@ import { styled } from '@mui/system';
 
 interface ActionTabsProps {
   underlyingAsset: string;
+  witch: string;
 }
 
 const NewTabs = styled(Tabs)({
@@ -38,8 +39,8 @@ const NewTab = styled(Tab)`
   }
 `;
 
-export const ActionTabs = ({ underlyingAsset }: ActionTabsProps) => {
-  const [selectedTab, setSelectedTab] = React.useState(0);
+export const ActionTabs = ({ underlyingAsset, witch }: ActionTabsProps) => {
+  const [selectedTab, setSelectedTab] = React.useState(Number(witch == 'Borrow'));
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);

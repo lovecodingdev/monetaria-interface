@@ -228,7 +228,7 @@ export const MarketSwitcher = () => {
             <ToggleButton
               value={SelectedMarketVersion.V3}
               sx={{
-                backgroundColor: theme.palette.mode === 'dark' ? '#EAEBEF' : '#383D51',
+                backgroundColor: theme.palette.mode === 'dark' ? '#EAEBEF' : '#074592',
                 '&.Mui-selected, &.Mui-selected:hover': {
                   backgroundColor: theme.palette.mode === 'dark' ? '#292E41' : '#FFFFFF',
                   boxShadow: '0px 1px 0px rgba(0, 0, 0, 0.05)',
@@ -256,7 +256,7 @@ export const MarketSwitcher = () => {
             <ToggleButton
               value={SelectedMarketVersion.V2}
               sx={{
-                backgroundColor: theme.palette.mode === 'dark' ? '#EAEBEF' : '#383D51',
+                backgroundColor: theme.palette.mode === 'dark' ? '#EAEBEF' : '#074592',
                 '&.Mui-selected, &.Mui-selected:hover': {
                   backgroundColor: theme.palette.mode === 'dark' ? '#292E41' : '#FFFFFF',
                   boxShadow: '0px 1px 0px rgba(0, 0, 0, 0.05)',

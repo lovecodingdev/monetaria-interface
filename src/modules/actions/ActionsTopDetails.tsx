@@ -56,7 +56,7 @@ export const ActionsTopDetails = ({ underlyingAsset }: ActionsTopDetailsProps) =
     return (
       <Box mr={3} sx={{ mr: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {loading ? (
-          <Skeleton variant="circular" width={40} height={40} sx={{ background: '#383D51' }} />
+          <Skeleton variant="circular" width={40} height={40} sx={{ background: '#074592' }} />
         ) : (
           <img
             src={`/icons/tokens/${poolReserve.iconSymbol.toLowerCase()}.svg`}
@@ -79,7 +79,7 @@ export const ActionsTopDetails = ({ underlyingAsset }: ActionsTopDetailsProps) =
 
   const ReserveName = () => {
     return loading ? (
-      <Skeleton width={60} height={28} sx={{ background: '#383D51' }} />
+      <Skeleton width={60} height={28} sx={{ background: '#074592' }} />
     ) : (
       <Typography variant={valueTypographyVariant}>{poolReserve.name}</Typography>
     );
@@ -136,7 +136,7 @@ export const ActionsTopDetails = ({ underlyingAsset }: ActionsTopDetailsProps) =
               <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
                 <ReserveName />
                 {loading ? (
-                  <Skeleton width={16} height={16} sx={{ ml: 1, background: '#383D51' }} />
+                  <Skeleton width={16} height={16} sx={{ ml: 1, background: '#074592' }} />
                 ) : (
                   <Box sx={{ display: 'flex' }}>
                     <TokenLinkDropdown poolReserve={poolReserve} downToSM={downToSM} />
@@ -197,7 +197,7 @@ export const ActionsTopDetails = ({ underlyingAsset }: ActionsTopDetailsProps) =
               symbolsVariant={symbolsTypographyVariant}
             />
             {loading ? (
-              <Skeleton width={16} height={16} sx={{ ml: 1, background: '#383D51' }} />
+              <Skeleton width={16} height={16} sx={{ ml: 1, background: '#074592' }} />
             ) : (
               <CircleIcon tooltipText="View oracle contract" downToSM={downToSM}>
                 <Link

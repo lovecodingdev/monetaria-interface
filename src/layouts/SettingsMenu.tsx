@@ -69,7 +69,7 @@ export function SettingsMenu() {
           </Typography>
         </MenuItem>
 
-        <DarkModeSwitcher component={MenuItem} />
+        {/* <DarkModeSwitcher component={MenuItem} /> */}
         {PROD_ENV && <TestNetModeSwitcher />}
         <LanguageListItem onClick={handleLanguageClick} component={MenuItem} />
       </Menu>

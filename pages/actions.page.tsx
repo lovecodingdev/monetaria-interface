@@ -23,6 +23,7 @@ export default function Actions() {
   const router = useRouter();
   const { reserves } = useAppDataContext();
   const underlyingAsset = router.query.underlyingAsset as string;
+  const type = router.query.type as string;
   const { breakpoints } = useTheme();
   const lg = useMediaQuery(breakpoints.up('lg'));
 
@@ -42,7 +43,7 @@ export default function Actions() {
   return (
     <>
       <ActionsTopDetails underlyingAsset={underlyingAsset} />
-      <ActionTabs underlyingAsset={underlyingAsset} />
+      <ActionTabs underlyingAsset={underlyingAsset} witch={type} />
     </>
   );
 }

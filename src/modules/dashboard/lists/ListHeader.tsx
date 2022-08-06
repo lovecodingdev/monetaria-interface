@@ -15,15 +15,17 @@ export const ListHeader = ({ head }: ListHeaderProps) => {
     <ListHeaderWrapper>
       <ListColumn maxWidth={160} isRow>
         <ListHeaderTitle>
-          <Trans>Assets</Trans>
+          <Trans>Assets name</Trans>
         </ListHeaderTitle>
       </ListColumn>
 
-      {head.map((title, i) => (
-        <ListColumn key={i}>
-          <ListHeaderTitle>{title}</ListHeaderTitle>
-        </ListColumn>
-      ))}
+      {head.map((title, i) => {
+        return (
+          <ListColumn key={i} align={title.key == "Actions" ? "right" : 'center'}>
+            <ListHeaderTitle>{title}</ListHeaderTitle>
+          </ListColumn>
+        )
+      })}
 
       {/* <ListButtonsColumn /> */}
     </ListHeaderWrapper>

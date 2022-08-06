@@ -56,17 +56,59 @@ export default function AssetsList() {
     }
   }
 
+  // const header = [
+  //   {
+  //     title: <Trans>Asset</Trans>,
+  //     sortKey: 'symbol',
+  //   },
+  //   {
+  //     title: <Trans>Total supplied</Trans>,
+  //     sortKey: 'totalLiquidityUSD',
+  //   },
+  //   {
+  //     title: <Trans>Supply APY</Trans>,
+  //     sortKey: 'supplyAPY',
+  //   },
+  //   {
+  //     title: <Trans>Total borrowed</Trans>,
+  //     sortKey: 'totalDebtUSD',
+  //   },
+  //   {
+  //     title: (
+  //       <VariableAPYTooltip
+  //         text={<Trans>Borrow APY, variable</Trans>}
+  //         key="APY_list_variable_type"
+  //         variant="subheader2"
+  //       />
+  //     ),
+  //     sortKey: 'variableBorrowAPY',
+  //   },
+  //   {
+  //     title: (
+  //       <StableAPYTooltip
+  //         text={<Trans>Borrow APY, stable</Trans>}
+  //         key="APY_list_stable_type"
+  //         variant="subheader2"
+  //       />
+  //     ),
+  //     sortKey: 'stableBorrowAPY',
+  //   },
+  // ];
   const header = [
     {
-      title: <Trans>Asset</Trans>,
+      title: <Trans>Asset name</Trans>,
       sortKey: 'symbol',
     },
     {
-      title: <Trans>Total supplied</Trans>,
+      title: <Trans>TVL</Trans>,
+      sortKey: 'tvl',
+    },
+    {
+      title: <Trans>Total supplyd</Trans>,
       sortKey: 'totalLiquidityUSD',
     },
     {
-      title: <Trans>Supply APY</Trans>,
+      title: <Trans>Supply APR</Trans>,
       sortKey: 'supplyAPY',
     },
     {
@@ -76,22 +118,12 @@ export default function AssetsList() {
     {
       title: (
         <VariableAPYTooltip
-          text={<Trans>Borrow APY, variable</Trans>}
+          text={<Trans>Borrow APY</Trans>}
           key="APY_list_variable_type"
           variant="subheader2"
         />
       ),
-      sortKey: 'variableBorrowAPY',
-    },
-    {
-      title: (
-        <StableAPYTooltip
-          text={<Trans>Borrow APY, stable</Trans>}
-          key="APY_list_stable_type"
-          variant="subheader2"
-        />
-      ),
-      sortKey: 'stableBorrowAPY',
+      sortKey: 'BorrowAPY',
     },
   ];
 
@@ -109,6 +141,7 @@ export default function AssetsList() {
           {header.map((col) => (
             <ListColumn
               isRow={col.sortKey === 'symbol'}
+              align='right'
               maxWidth={col.sortKey === 'symbol' ? 280 : undefined}
               key={col.sortKey}
             >
@@ -123,7 +156,7 @@ export default function AssetsList() {
               </ListHeaderTitle>
             </ListColumn>
           ))}
-          <ListColumn maxWidth={95} minWidth={95} />
+          {/* <ListColumn maxWidth={95} minWidth={95} /> */}
         </ListHeaderWrapper>
       )}
 

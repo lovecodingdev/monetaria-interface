@@ -21,7 +21,7 @@ export const PageTitle = ({ pageTitle, withMarketSwitcher }: PageTitleProps) => 
       sx={{
         display: 'flex',
         alignItems: { xs: 'flex-start', xsm: 'center' },
-        mb: pageTitle ? 4 : 0,
+        mb: pageTitle ? 0 : 0,
         flexDirection: { xs: 'column', xsm: 'row' },
       }}
     >
@@ -45,7 +45,7 @@ export const PageTitle = ({ pageTitle, withMarketSwitcher }: PageTitleProps) => 
         sx={{
           display: 'flex',
           alignItems: 'flex-start',
-          mb: !pageTitle ? 4 : 0,
+          mb: !pageTitle ? 0 : 0,
         }}
       >
         {/* {withMarketSwitcher && <MarketSwitcher />} */}
