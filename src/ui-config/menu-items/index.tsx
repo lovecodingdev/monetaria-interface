@@ -63,26 +63,26 @@ const moreMenuItems: MoreMenuItem[] = [
     title: t`FAQ`,
     icon: <QuestionMarkCircleIcon />,
   },
-  {
-    link: 'https://docs.aave.com/portal/',
-    title: t`Developers`,
-    icon: <BookOpenIcon />,
-  },
+  // {
+  //   link: 'https://docs.aave.com/portal/',
+  //   title: t`Developers`,
+  //   icon: <BookOpenIcon />,
+  // },
   {
     link: 'https://discord.gg/7kHKnkDEUf',
     title: t`Discord`,
     icon: <DiscordIcon />,
   },
-  {
-    link: 'https://github.com/aave/interface',
-    title: t`Github`,
-    icon: <GithubIcon />,
-  },
-  {
-    link: 'https://classic.aave.com',
-    title: t`Switch to Aave Classic`,
-    icon: <AaveClassic />,
-  },
+  // {
+  //   link: 'https://github.com/aave/interface',
+  //   title: t`Github`,
+  //   icon: <GithubIcon />,
+  // },
+  // {
+  //   link: 'https://classic.aave.com',
+  //   title: t`Switch to Aave Classic`,
+  //   icon: <AaveClassic />,
+  // },
 ];
 
 export const moreMenuExtraItems: MoreMenuItem[] = [];

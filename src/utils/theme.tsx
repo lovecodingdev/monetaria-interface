@@ -127,7 +127,7 @@ export const getDesignTokens = (mode: 'light' | 'dark') => {
     palette: {
       mode,
       primary: {
-        main: getColor('#383D51', '#EAEBEF'),
+        main: getColor('#074592', '#EAEBEF'),
         light: getColor('#62677B', '#F1F1F3'),
         dark: getColor('#292E41', '#D2D4DC'),
       },
@@ -173,7 +173,7 @@ export const getDesignTokens = (mode: 'light' | 'dark') => {
       background: {
         default: getColor('#F1F1F3', '#1B2030'),
         paper: getColor('#FFFFFF', '#292E41'),
-        surface: getColor('#F7F7F9', '#383D51'),
+        surface: getColor('#F7F7F9', '#074592'),
         header: getColor('#FFFFFF', '#1B2030'),
       },
       divider: getColor('#EAEBEF', '#EBEBEF14'),
@@ -409,7 +409,7 @@ export function getThemedComponents(theme: Theme) {
               color: theme.palette.common.white,
               border: '1px solid',
               borderColor: '#EBEBED1F',
-              backgroundColor: '#383D51',
+              backgroundColor: '#074592',
               '&:hover, &.Mui-focusVisible': {
                 backgroundColor: theme.palette.background.header,
               },
@@ -793,7 +793,7 @@ export function getThemedComponents(theme: Theme) {
       MuiToggleButtonGroup: {
         styleOverrides: {
           root: {
-            backgroundColor: '#383D51',
+            backgroundColor: '#074592',
             border: '1px solid rgba(235, 235, 237, 0.12)',
             padding: '4px',
           },
@@ -804,7 +804,7 @@ export function getThemedComponents(theme: Theme) {
           root: {
             border: '0px',
             flex: 1,
-            backgroundColor: '#383D51',
+            backgroundColor: '#074592',
             borderRadius: '4px',
 
             '&.Mui-selected, &.Mui-selected:hover': {

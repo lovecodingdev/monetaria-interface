@@ -37,10 +37,11 @@ export const ListWrapper = ({
     <Paper
       sx={(theme) => ({
         mt: withTopMargin ? 4 : 0,
-        border: `1px solid ${theme.palette.divider}`,
+        overflow: 'hidden',
+        border: '1px solid #00aae98a',
       })}
     >
-      <Box
+      {/* <Box
         sx={{
           px: { xs: 4, xsm: 6 },
           py: { xs: 3.5, xsm: 4 },
@@ -102,9 +103,9 @@ export const ListWrapper = ({
             <span />
           </Box>
         )}
-      </Box>
+      </Box> */}
 
-      {topInfo && (
+      {/* {topInfo && (
         <Box
           sx={{
             display: 'flex',
@@ -116,10 +117,10 @@ export const ListWrapper = ({
         >
           {topInfo}
         </Box>
-      )}
-      {subChildrenComponent && !collapsed && (
+      )} */}
+      {/* {subChildrenComponent && !collapsed && (
         <Box sx={{ marginBottom: { xs: 2, xsm: 0 } }}>{subChildrenComponent}</Box>
-      )}
+      )} */}
       <Box sx={{ display: collapsed ? 'none' : 'block' }}>{children}</Box>
     </Paper>
   );

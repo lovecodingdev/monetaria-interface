@@ -25,6 +25,14 @@ export const ListItemLoader = () => {
       <ListColumn>
         <Skeleton width={70} height={20} />
       </ListColumn>
+      
+      <ListColumn>
+        <Skeleton width={70} height={20} />
+      </ListColumn>
+
+      <ListColumn>
+        <Skeleton width={70} height={20} />
+      </ListColumn>
 
       <ListButtonsColumn>
         <Skeleton height={38} width={74} />
