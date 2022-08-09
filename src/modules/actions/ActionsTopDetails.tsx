@@ -2,6 +2,7 @@ import { ExternalLinkIcon } from '@heroicons/react/outline';
 import { Trans } from '@lingui/macro';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackOutlined';
 import {
+  Container, 
   Box,
   Button,
   Divider,
@@ -86,11 +87,7 @@ export const ActionsTopDetails = ({ underlyingAsset }: ActionsTopDetailsProps) =
   };
 
   return (
-    <Box 
-      sx={{ 
-        position: 'relative',
-      }}
-    >
+    <>
       <Button
         size="medium"
         color="primary"
@@ -105,9 +102,7 @@ export const ActionsTopDetails = ({ underlyingAsset }: ActionsTopDetailsProps) =
           else router.push('/markets');
         }}
         sx={theme=>({ 
-          position: 'absolute',
-          top: '24px',
-          left: '120px',
+          marginTop: "12px", 
           border: `1px solid ${theme.palette.divider}`,
           borderRadius: '8px'
         })}
@@ -119,8 +114,7 @@ export const ActionsTopDetails = ({ underlyingAsset }: ActionsTopDetailsProps) =
           justifyContent: 'space-between',
           gap: 2,
           flexWrap: 'wrap',
-          width: '40%',
-          marginX: 'auto',
+          width: '100%',
           marginTop: '20px',
           padding: '16px',
         }}
@@ -215,6 +209,6 @@ export const ActionsTopDetails = ({ underlyingAsset }: ActionsTopDetailsProps) =
           </Box>
         </TopInfoPanelItem>
       </Paper>
-    </Box>
+    </>
   );
 };

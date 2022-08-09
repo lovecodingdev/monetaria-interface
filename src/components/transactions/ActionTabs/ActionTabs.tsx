@@ -76,7 +76,7 @@ export const ActionTabs = ({ underlyingAsset, witch }: ActionTabsProps) => {
     <Paper
       sx={(theme) => ({
         border: `1px solid ${theme.palette.divider}`,
-        width: '40%', 
+        width: '100%', 
         bgcolor: 'background.paper', 
         margin: '20px auto',
         padding: '20px',

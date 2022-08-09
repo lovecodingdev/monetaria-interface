@@ -83,7 +83,7 @@ export const SupplyAssetsListMobileItem = ({
       </Row>
 
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 5 }}>
-        <Button
+        {/* <Button
           disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
           variant="contained"
           onClick={() => openSupply(underlyingAsset)}
@@ -99,7 +99,26 @@ export const SupplyAssetsListMobileItem = ({
           fullWidth
         >
           <Trans>Details</Trans>
-        </Button>
+        </Button> */}
+        <Link href={ROUTES.actions(detailsAddress, currentMarket, "Borrow")}
+          noWrap>
+          <Button
+            // disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
+            variant="outlined"
+          // onClick={() => openBorrow(underlyingAsset)}
+          >
+            <Trans>Borrow</Trans>
+          </Button>
+        </Link>
+        <Link href={ROUTES.actions(detailsAddress, currentMarket, "Supply")}
+          noWrap>
+          <Button
+            // disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
+            variant="contained"
+          // onClick={() => openSupply(underlyingAsset)}
+          >
+            <Trans>Supply</Trans>
+          </Button></Link>
       </Box>
     </ListMobileItemWrapper>
   );

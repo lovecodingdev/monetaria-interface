@@ -1,5 +1,6 @@
 import { useLingui } from '@lingui/react';
-import { Button, List, ListItem, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Button, List, ListItem, ListItemText, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Trans } from '@lingui/macro';
 import * as React from 'react';
 
 import { Link } from '../../components/primitives/Link';
@@ -44,7 +45,7 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                 component={Link}
                 href={item.link}
                 variant="h2"
-                color="#080F26"
+                color="#F1F1F3"
                 sx={{ width: '100%', p: 4 }}
                 onClick={() => (setOpen ? setOpen(false) : undefined)}
               >
@@ -55,8 +56,8 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                 component={Link}
                 href={item.link}
                 sx={(theme) => ({
-                  color: '#080F26',
-                  p: '6px 8px',
+                  color: { xs: '#F1F1F3', md: 'text.primary' },
+                  py: { xs: 1.5, md: 2 },
                   position: 'relative',
                   '&:hover': {
                     background: 'none',
@@ -80,7 +81,9 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                   },
                 })}
               >
-                {i18n._(item.title)}
+                <ListItemText>
+                  <Trans>{i18n._(item.title)}</Trans>
+                </ListItemText>
               </Button>
             )}
           </ListItem>

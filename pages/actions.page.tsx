@@ -1,6 +1,7 @@
 import { Trans } from '@lingui/macro';
 import {
   Box,
+  Container,
   ToggleButton,
   ToggleButtonGroup,
   Typography,
@@ -41,10 +42,20 @@ export default function Actions() {
   const isOverview = mode === 'overview';
 
   return (
-    <>
-      <ActionsTopDetails underlyingAsset={underlyingAsset} />
-      <ActionTabs underlyingAsset={underlyingAsset} witch={type} />
-    </>
+    <Container>
+      <Box sx={{ 
+        width: {
+          lg: "50%",
+          md: "60%",
+          sm: "80%",
+          xs: "100%"
+        }, 
+        marginX: 'auto'
+      }}>
+        <ActionsTopDetails underlyingAsset={underlyingAsset} />
+        <ActionTabs underlyingAsset={underlyingAsset} witch={type} />
+      </Box>
+    </Container>
   );
 }
 

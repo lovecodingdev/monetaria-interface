@@ -17,7 +17,7 @@ export const TopInfoPanel = ({
   children,
 }: TopInfoPanelProps) => {
   return (
-    <Container sx={{ pb: 0 }}>
+    <Container sx={{ pb: 0, flexGrow: 0 }}>
       <Paper
         sx={{
           bgcolor: 'background.header',

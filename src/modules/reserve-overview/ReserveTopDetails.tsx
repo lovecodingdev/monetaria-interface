@@ -93,7 +93,6 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
         sx={theme => ({
           bgcolor: 'transparent',
           py: 0,
-          marginX: '120px',
           mt: '12px',
           color: '#F1F1F3',
           border: `0px`,
