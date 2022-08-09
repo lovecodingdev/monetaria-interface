@@ -70,7 +70,7 @@ export default function Staking() {
       <ContentContainer>
         {currentAccount ? (
           <>
-            <Box
+            {/* <Box
               sx={{
                 display: { xs: 'flex', lg: 'none' },
                 justifyContent: { xs: 'center', xsm: 'flex-start' },
@@ -86,18 +86,18 @@ export default function Staking() {
               >
                 <ToggleButton value="aave" disabled={mode === 'aave'}>
                   <Typography variant="subheader1">
-                    <Trans>Stake Aave</Trans>
+                    <Trans>Stake MNT</Trans>
                   </Typography>
                 </ToggleButton>
                 <ToggleButton value="bpt" disabled={mode === 'bpt'}>
                   <Typography variant="subheader1">
-                    <Trans>Stake Aave/ETH BPT</Trans>
+                    <Trans>Stake MNT/ETH BPT</Trans>
                   </Typography>
                 </ToggleButton>
               </ToggleButtonGroup>
-            </Box>
+            </Box> */}
 
-            <Grid container spacing={4}>
+            {/* <Grid container spacing={4}>
               <Grid
                 item
                 xs={12}
@@ -105,8 +105,8 @@ export default function Staking() {
                 sx={{ display: { xs: !isStakeAAVE ? 'none' : 'block', lg: 'block' } }}
               >
                 <StakingPanel
-                  stakeTitle="Aave"
-                  stakedToken="AAVE"
+                  stakeTitle="MNT"
+                  stakedToken="MNT"
                   maxSlash="0.3"
                   icon="aave"
                   stakeData={data.stakeGeneralResult?.stakeGeneralUIData.aave}
@@ -125,7 +125,7 @@ export default function Staking() {
                 sx={{ display: { xs: isStakeAAVE ? 'none' : 'block', lg: 'block' } }}
               >
                 <StakingPanel
-                  stakeTitle="AAVE/ETH BPT"
+                  stakeTitle="MNT/ETH BPT"
                   stakedToken="ABPT"
                   maxSlash="0.3"
                   icon="stkbpt"
@@ -140,7 +140,7 @@ export default function Staking() {
                     <Typography color="text.muted" sx={{ mt: 4 }} variant="caption">
                       <Trans>
                         The Balancer Pool Token (BPT) is a liquidity pool token. You can receive BPT
-                        by depositing a combination of AAVE + ETH in the{' '}
+                        by depositing a combination of MNT + ETH in the{' '}
                         <Link
                           href="https://pools.balancer.exchange/#/pool/0xc697051d1c6296c24ae3bcef39aca743861d9a81/about"
                           variant="caption"
@@ -156,7 +156,30 @@ export default function Staking() {
                   }
                 />
               </Grid>
-            </Grid>
+            </Grid> */}
+            <Box sx={{
+              width: {
+                lg: "50%",
+                md: "60%",
+                sm: "80%",
+                xs: "100%"
+              },
+              marginX: 'auto'
+            }}>
+              <StakingPanel
+                stakeTitle="MNT"
+                stakedToken="MNT"
+                maxSlash="0.3"
+                icon="aave"
+                stakeData={data.stakeGeneralResult?.stakeGeneralUIData.aave}
+                stakeUserData={data.stakeUserResult?.stakeUserUIData.aave}
+                ethUsdPrice={data.stakeGeneralResult?.stakeGeneralUIData.usdPriceEth}
+                onStakeAction={() => openStake('aave', 'AAVE')}
+                onCooldownAction={() => openStakeCooldown('aave')}
+                onUnstakeAction={() => openUnstake('aave', 'AAVE')}
+                onStakeRewardClaimAction={() => openStakeRewardsClaim('aave')}
+              />
+            </Box>
           </>
         ) : (
           <ConnectWalletPaper

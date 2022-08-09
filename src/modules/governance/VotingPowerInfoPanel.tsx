@@ -28,7 +28,7 @@ export function VotingPowerInfoPanel() {
                     <Trans>Voting power</Trans>
                   </Typography>
                   <Typography variant="caption" color="text.secondary">
-                    (AAVE + stkAAVE)
+                    (MNT + stkMNT)
                   </Typography>
                 </>
               }
@@ -43,7 +43,7 @@ export function VotingPowerInfoPanel() {
                     <Trans>Proposition power</Trans>
                   </Typography>
                   <Typography variant="caption" color="text.secondary">
-                    (AAVE + stkAAVE)
+                    (MNT + stkMNT)
                   </Typography>
                 </>
               }

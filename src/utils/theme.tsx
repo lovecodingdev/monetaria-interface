@@ -579,8 +579,8 @@ export function getThemedComponents(theme: Theme) {
               paddingRight: '96px',
             },
             [theme.breakpoints.up('lg')]: {
-              paddingLeft: '0px',
-              paddingRight: '0px',
+              paddingLeft: '96px',
+              paddingRight: '96px',
             },
             [theme.breakpoints.up('xl')]: {
               maxWidth: 'unset',

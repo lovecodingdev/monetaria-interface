@@ -39,7 +39,7 @@ export const StakingHeader: React.FC<StakingHeaderProps> = ({ tvl, stkEmission, 
 
           <Typography sx={{ color: '#8E92A3', maxWidth: '824px' }}>
             <Trans>
-              AAVE holders can stake their AAVE in the Safety Module to add more security to the
+              MNT holders can stake their MNT in the Safety Module to add more security to the
               protocol and earn Safety Incentives. In the case of a shortfall event, up to 30% of
               your stake can be slashed to cover the deficit, providing an additional layer of
               protection for the protocol.
@@ -78,7 +78,7 @@ export const StakingHeader: React.FC<StakingHeaderProps> = ({ tvl, stkEmission, 
         {/** TBD value */}
         <FormattedNumber
           value={stkEmission || 0}
-          symbol="AAVE"
+          symbol="MNT"
           variant={valueTypographyVariant}
           symbolsVariant={symbolsTypographyVariant}
           symbolsColor="#A5A8B6"
