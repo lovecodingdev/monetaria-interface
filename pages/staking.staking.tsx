@@ -170,7 +170,7 @@ export default function Staking() {
                 stakeTitle="MNT"
                 stakedToken="MNT"
                 maxSlash="0.3"
-                icon="aave"
+                icon="mnt"
                 stakeData={data.stakeGeneralResult?.stakeGeneralUIData.aave}
                 stakeUserData={data.stakeUserResult?.stakeUserUIData.aave}
                 ethUsdPrice={data.stakeGeneralResult?.stakeGeneralUIData.usdPriceEth}
