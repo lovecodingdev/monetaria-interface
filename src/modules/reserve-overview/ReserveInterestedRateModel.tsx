@@ -73,12 +73,14 @@ export const ReserveInterestedRateModel = () => {
                 position: 'relative'
             }}>
                 <Typography variant={"secondary8"} style={{
-                    position: 'absolute', 
-                    left: '43px', 
-                    top: '19px', 
+                    position: 'absolute',
+                    left: '43px',
+                    top: '19px',
                     fontSize: '14px'
                 }}>APY %</Typography>
-                <ReactApexChart options={options} series={series} type={"area"} height={200} />
+                {(typeof window !== 'undefined') &&
+                    <ReactApexChart options={options} series={series} type={"area"} height={200} />
+                }
             </Box>
         </ReserveNormalPaper>
     );
