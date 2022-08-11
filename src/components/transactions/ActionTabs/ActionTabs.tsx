@@ -40,7 +40,7 @@ const NewTab = styled(Tab)`
 `;
 
 export const ActionTabs = ({ underlyingAsset, witch }: ActionTabsProps) => {
-  const [selectedTab, setSelectedTab] = React.useState(Number(witch == 'Borrow'));
+  const [selectedTab, setSelectedTab] = useState(Number(witch == 'Borrow'));
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
@@ -71,6 +71,8 @@ export const ActionTabs = ({ underlyingAsset, witch }: ActionTabsProps) => {
 
   //Withdraw
   const [withdrawUnWrapped, setWithdrawUnWrapped] = useState(true);
+
+  if (underlyingAsset == undefined) return <></>;
 
   return (
     <Paper
