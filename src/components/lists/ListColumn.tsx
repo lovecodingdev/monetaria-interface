@@ -30,7 +30,7 @@ export const ListColumn = ({
           : align,
         justifyContent: isRow ? 'flex-start' : 'flex-end',
         flex: 1,
-        minWidth: minWidth || '70px',
+        minWidth: minWidth || '40px',
         maxWidth,
         overflow: 'hidden',
         p: 1,

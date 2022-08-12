@@ -17,7 +17,12 @@ import { isProposalStateImmutable } from 'src/modules/governance/utils/immutable
 import { governanceConfig } from 'src/ui-config/governanceConfig';
 
 import { ProposalListItem } from './ProposalListItem';
+import { MNTProposalListItem } from './MNTProposalListItem';
 import { enhanceProposalWithTimes } from './utils/formatProposal';
+
+import { ListColumn } from '../../components/lists/ListColumn';
+import { ListHeaderTitle } from '../../components/lists/ListHeaderTitle';
+import { ListHeaderWrapper } from '../../components/lists/ListHeaderWrapper';
 
 export function ProposalsList({ proposals: initialProposals }: GovernancePageProps) {
   // will only initially be set to true, till the client is hydrated with new proposals
@@ -83,6 +88,32 @@ export function ProposalsList({ proposals: initialProposals }: GovernancePagePro
 
   usePolling(fetchNewProposals, 30000, false, [proposals.length]);
   usePolling(updatePendingProposals, 10000, false, [proposals.length]);
+
+  const header = [
+    {
+      title: <Trans>Id</Trans>,
+      sortKey: 'symbol',
+      maxWidth: 40,
+    },
+    {
+      title: <Trans>Name</Trans>,
+      sortKey: 'name',
+    },
+    {
+      title: <Trans>Executed on</Trans>,
+      sortKey: 'executed_on',
+      align: 'right',
+    },
+    {
+      title: <Trans>Status</Trans>,
+      sortKey: 'status',
+      maxWidth: 100,
+    },
+  ];
+
+  const [sortName, setSortName] = useState('');
+  const [sortDesc, setSortDesc] = useState(false);
+
   return (
     <div>
       <Box
@@ -112,7 +143,20 @@ export function ProposalsList({ proposals: initialProposals }: GovernancePagePro
           ))}
         </Select>
       </Box>
-      {(loadingNewProposals || updatingPendingProposals) && <LinearProgress />}
+      {/* {(loadingNewProposals || updatingPendingProposals) && <LinearProgress />} */}
+      <ListHeaderWrapper px={6}>
+        {header.map((col) => (
+          <ListColumn
+            isRow={col.sortKey === 'symbol'}
+            align={col.align ? 'right' : 'left'}
+            maxWidth={col.maxWidth}
+            key={col.sortKey}
+          >
+            <ListHeaderTitle>{col.title}</ListHeaderTitle>
+          </ListColumn>
+        ))}
+        {/* <ListColumn maxWidth={95} minWidth={95} /> */}
+      </ListHeaderWrapper>
       {proposals
         .slice()
         .reverse()
@@ -120,7 +164,7 @@ export function ProposalsList({ proposals: initialProposals }: GovernancePagePro
           (proposal) => proposalFilter === 'all' || proposal.proposal.state === proposalFilter
         )
         .map(({ proposal, prerendered, ipfs }) => (
-          <ProposalListItem
+          <MNTProposalListItem
             key={proposal.id}
             proposal={proposal}
             ipfs={ipfs}

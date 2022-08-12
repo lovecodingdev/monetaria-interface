@@ -65,7 +65,7 @@ export default function Staking() {
 
   return (
     <>
-      <StakingHeader tvl={tvl} stkEmission={stkEmission} loading={data.loading} />
+      {/* <StakingHeader tvl={tvl} stkEmission={stkEmission} loading={data.loading} /> */}
 
       <ContentContainer>
         {currentAccount ? (

@@ -39,7 +39,7 @@ export const navigation: Navigation[] = [
   },
   {
     link: ROUTES.governance,
-    title: t`Vote`,
+    title: t`V o t e`,
     dataCy: 'menuGovernance',
     isVisible: () =>
       process.env.NEXT_PUBLIC_ENABLE_GOVERNANCE === 'true' &&
