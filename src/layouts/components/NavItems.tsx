@@ -1,5 +1,13 @@
 import { useLingui } from '@lingui/react';
-import { Button, List, ListItem, ListItemText, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { Trans } from '@lingui/macro';
 import * as React from 'react';
 
@@ -35,6 +43,7 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
             sx={{
               width: { xs: '100%', md: 'unset' },
               mr: { xs: 0, md: 2 },
+              textAlign: 'center',
             }}
             data-cy={item.dataCy}
             disablePadding
