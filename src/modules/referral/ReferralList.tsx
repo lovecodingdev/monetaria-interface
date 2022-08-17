@@ -12,12 +12,9 @@ import { ListHeaderTitle } from '../../components/lists/ListHeaderTitle';
 import { ListHeaderWrapper } from '../../components/lists/ListHeaderWrapper';
 import { ListWrapper } from '../../components/lists/ListWrapper';
 import { useProtocolDataContext } from '../../hooks/useProtocolDataContext';
-import { AssetsListItem } from './AssetsListItem';
-import { AssetsListItemLoader } from './AssetsListItemLoader';
-import { AssetsListMobileItem } from './AssetsListMobileItem';
-import { AssetsListMobileItemLoader } from './AssetsListMobileItemLoader';
+import { ReferralListItem } from './ReferralListItem';
 
-export default function AssetsList() {
+export default function ReferralList() {
   const { reserves, loading } = useAppDataContext();
   const { currentMarketData, currentNetworkConfig } = useProtocolDataContext();
 
@@ -58,80 +55,20 @@ export default function AssetsList() {
     }
   }
 
-  // const header = [
-  //   {
-  //     title: <Trans>Asset</Trans>,
-  //     sortKey: 'symbol',
-  //   },
-  //   {
-  //     title: <Trans>Total supplied</Trans>,
-  //     sortKey: 'totalLiquidityUSD',
-  //   },
-  //   {
-  //     title: <Trans>Supply APY</Trans>,
-  //     sortKey: 'supplyAPY',
-  //   },
-  //   {
-  //     title: <Trans>Total borrowed</Trans>,
-  //     sortKey: 'totalDebtUSD',
-  //   },
-  //   {
-  //     title: (
-  //       <VariableAPYTooltip
-  //         text={<Trans>Borrow APY, variable</Trans>}
-  //         key="APY_list_variable_type"
-  //         variant="subheader2"
-  //       />
-  //     ),
-  //     sortKey: 'variableBorrowAPY',
-  //   },
-  //   {
-  //     title: (
-  //       <StableAPYTooltip
-  //         text={<Trans>Borrow APY, stable</Trans>}
-  //         key="APY_list_stable_type"
-  //         variant="subheader2"
-  //       />
-  //     ),
-  //     sortKey: 'stableBorrowAPY',
-  //   },
-  // ];
   const header = [
     {
-      title: <Trans>Asset name</Trans>,
-      sortKey: 'symbol',
+      title: <Trans>Referral address</Trans>,
+      sortKey: 'referralAddress',
     },
     {
-      title: <Trans>TVL</Trans>,
+      title: <Trans>Rewards received</Trans>,
       sortKey: 'tvl',
-    },
-    {
-      title: <Trans>Total supplyd</Trans>,
-      sortKey: 'totalLiquidityUSD',
-    },
-    {
-      title: <Trans>Supply APR</Trans>,
-      sortKey: 'supplyAPY',
-    },
-    {
-      title: <Trans>Total borrowed</Trans>,
-      sortKey: 'totalDebtUSD',
-    },
-    {
-      title: (
-        <VariableAPYTooltip
-          text={<Trans>Borrow APY</Trans>}
-          key="APY_list_variable_type"
-          variant="subheader2"
-        />
-      ),
-      sortKey: 'BorrowAPY',
     },
   ];
 
   return (
     <ListWrapper
-      title={<Trans>Assets</Trans>}
+      title={<Trans>My referrals</Trans>}
       captionSize="h2"
     >
       {!isTableChangedToCards && (
@@ -139,7 +76,7 @@ export default function AssetsList() {
           {header.map((col) => (
             <ListColumn
               isRow={col.sortKey === 'symbol'}
-              align='right'
+              align='center'
               maxWidth={col.sortKey === 'symbol' ? 280 : undefined}
               key={col.sortKey}
             >
@@ -158,31 +95,11 @@ export default function AssetsList() {
         </ListHeaderWrapper>
       )}
 
-      {loading ? (
-        isTableChangedToCards ? (
-          <>
-            <AssetsListMobileItemLoader />
-            <AssetsListMobileItemLoader />
-            <AssetsListMobileItemLoader />
-          </>
-        ) : (
-          <>
-            <AssetsListItemLoader />
-            <AssetsListItemLoader />
-            <AssetsListItemLoader />
-            <AssetsListItemLoader />
-            <AssetsListItemLoader />
-          </>
+      {/* {filteredData.map(
+        (reserve) =>
+          <ReferralListItem {...reserve} key={reserve.id} />
         )
-      ) : (
-        filteredData.map((reserve) =>
-          isTableChangedToCards ? (
-            <AssetsListMobileItem {...reserve} key={reserve.id} />
-          ) : (
-            <AssetsListItem {...reserve} key={reserve.id} />
-          )
-        )
-      )}
+      } */}
     </ListWrapper>
   );
 }

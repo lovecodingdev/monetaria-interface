@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { PageTitle, PageTitleProps } from './PageTitle';
 
 import borderGradient from "src/layouts/borderGradient";
+
 interface TopInfoPanelProps extends PageTitleProps {
   children?: ReactNode;
   titleComponent?: ReactNode;

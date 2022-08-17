@@ -182,35 +182,9 @@ export const SupplyAssetsList = () => {
 
   return (
     <ListWrapper
-      title={<Trans>Assets to supply</Trans>}
+      title={<Trans>Assets</Trans>}
       localStorageName="supplyAssetsDashboardTableCollapse"
       withTopMargin
-      subChildrenComponent={
-        <>
-          <Box sx={{ px: 6 }}>
-            {user?.isInIsolationMode && (
-              <Alert severity="warning">
-                <Trans>
-                  Collateral usage is limited because of isolation mode.{' '}
-                  <Link href="https://docs.aave.com/faq/" target="_blank">
-                    Learn More
-                  </Link>
-                </Trans>
-              </Alert>
-            )}
-            {alert}
-          </Box>
-
-          {filteredSupplyReserves.length >= 1 && (
-            <DashboardListTopPanel
-              value={isShowZeroAssets}
-              onClick={setIsShowZeroAssets}
-              localStorageName={localStorageName}
-              bridge={bridge}
-            />
-          )}
-        </>
-      }
     >
       <>
         {!downToXSM && <ListHeader head={head} />}

@@ -47,6 +47,11 @@ export const navigation: Navigation[] = [
       !ENABLE_TESTNET,
   },
   {
+    link: ROUTES.referral,
+    title: t`Referral`,
+    dataCy: 'menuReferral',
+  },
+  {
     link: ROUTES.faucet,
     title: t`Faucet`,
     isVisible: () => process.env.NEXT_PUBLIC_ENV === 'staging' || ENABLE_TESTNET,
