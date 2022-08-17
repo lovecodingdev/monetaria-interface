@@ -59,6 +59,27 @@ export const ReferralTopPanel = () => {
             >
               Referral Link
             </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                mt: '12px',
+                padding: '12px',
+                color: '#F1F1F3',
+                borderRadius: '8px',
+                background: '#EEF0F2',
+              }}
+            >
+              <Typography variant="secondary16" 
+                sx={{
+                  color: 'text.primary',
+                }}
+              >
+                https://monetaria.io/8239481
+              </Typography>
+              <Button>Copy</Button>
+            </Box>
           </Box>
         </Box>
       </Paper >
