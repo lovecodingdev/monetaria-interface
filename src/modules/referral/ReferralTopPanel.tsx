@@ -1,11 +1,12 @@
 import { Trans } from '@lingui/macro';
-import * as React from 'react';
+import { useState } from 'react';
 import { Button, Typography, Box, Paper, Container } from '@mui/material';
 import borderGradient from "src/layouts/borderGradient";
 import { PageTitle, PageTitleProps } from 'src/components/TopInfoPanel/PageTitle';
 import ReferralList from './ReferralList'
 
 export const ReferralTopPanel = () => {
+  const [referralLink, setReferralLink] = useState('https://monetaria.io/8239481');
   return (
     <Container 
       sx={{ 
@@ -76,9 +77,9 @@ export const ReferralTopPanel = () => {
                   color: 'text.primary',
                 }}
               >
-                https://monetaria.io/8239481
+                {referralLink}
               </Typography>
-              <Button>Copy</Button>
+              <Button onClick={() => navigator.clipboard.writeText(referralLink)}>Copy</Button>
             </Box>
           </Box>
         </Box>
