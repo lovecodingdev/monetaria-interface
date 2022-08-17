@@ -1,5 +1,5 @@
 import { MainLayout } from 'src/layouts/MainLayout';
-import ReferralList from 'src/modules/referral/ReferralList';
+import RewardList from 'src/modules/referral/RewardList';
 import { ReferralTopPanel } from 'src/modules/referral/ReferralTopPanel';
 
 import { ContentContainer } from '../src/components/ContentContainer';
@@ -16,7 +16,7 @@ export default function Referral() {
       {currentAccount && !isPermissionsLoading ? (
         <>
           <ContentContainer>
-            <ReferralList />
+            <RewardList />
           </ContentContainer>
         </>
       ) : (
