@@ -130,11 +130,11 @@ export default function ProposalPage({ proposal: initialProposal }: ProposalPage
   const { breakpoints } = useTheme();
   const xsmUp = useMediaQuery(breakpoints.up('xsm'));
 
-  const state = (proposal.state.charAt(0).toUpperCase() + proposal.state.slice(1)) as ProposalState;
-
   useEffect(() => {
     setUrl(window.location.href);
   }, []);
+
+  if (!proposal) return <></>;
 
   const { yaeVotes, yaePercent, nayPercent, nayVotes, totalVotes } = proposal
     ? formatProposal(proposal)
@@ -146,6 +146,9 @@ export default function ProposalPage({ proposal: initialProposal }: ProposalPage
         totalVotes: 0,
       };
   console.log({yaeVotes, yaePercent, nayPercent, nayVotes, totalVotes})
+
+  const state = (proposal.state.charAt(0).toUpperCase() + proposal.state.slice(1)) as ProposalState;
+
   return (
     <>
       <Meta title={proposal.title} description={proposal.body} />
