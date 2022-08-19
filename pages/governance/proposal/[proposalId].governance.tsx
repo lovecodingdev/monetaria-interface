@@ -80,30 +80,34 @@ const GET_PROPOSAL = gql`
   }
 `;
 
-export async function getStaticPaths() {
-  const ProposalFetcher = new Proposal();
-  const paths = [...Array(ProposalFetcher.count()).keys()].map((id) => ({
-    params: { proposalId: id.toString() },
-  }));
+// export async function getStaticPaths() {
+//   const ProposalFetcher = new Proposal();
+//   const paths = [...Array(ProposalFetcher.count()).keys()].map((id) => ({
+//     params: { proposalId: id.toString() },
+//   }));
 
-  return { paths, fallback: false };
-}
+//   return { paths, fallback: false };
+// }
 
-export async function getStaticProps({ params }: { params: { proposalId: string } }) {
-  console.log({params});
-  const { data } = await apolloClient.query({
-    query: GET_PROPOSAL,
-    variables: { id: params.proposalId },
-    context: { client: 'voting' }
-  });
-  console.log({data});
+// export async function getStaticProps({ params }: { params: { proposalId: string } }) {
+//   const IpfsFetcher = new Ipfs();
+//   const ProposalFetcher = new Proposal();
+//   // const VoteFetcher = new Vote();
 
-  return {
-    props: {
-      proposal: data.proposal
-    },
-  };
-}
+//   const proposal = ProposalFetcher.get(Number(params.proposalId));
+//   return {
+//     props: {
+//       proposal,
+//       ipfs: IpfsFetcher.get(Number(params.proposalId)),
+//       prerendered: true,
+//       // votes: await VoteFetcher.get(
+//       //   Number(params.proposalId),
+//       //   proposal.startBlock,
+//       //   proposal.endBlock
+//       // ),
+//     },
+//   };
+// }
 
 interface ProposalPageProps {
   proposal: MNTProposal;
