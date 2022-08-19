@@ -115,6 +115,7 @@ const getStakeLink = (link?: ApolloLink) => {
 
 export const getApolloClient = () => {
   const link = getStakeLink();
+  const snapshotLink = new HttpLink({ uri: 'https://testnet.snapshot.org/graphql' });
 
   const combinedLink = Object.entries(marketsData).reduce((acc, [key, cfg]) => {
     if (cfg.cachingServerUrl && cfg.cachingWSServerUrl && typeof window !== 'undefined') {
@@ -130,7 +131,11 @@ export const getApolloClient = () => {
     }
     return acc;
   }, link);
-
+  const newLink = split(
+    (operation) => operation.getContext().client === 'voting',
+    snapshotLink,
+    combinedLink
+  );
   const cache = new InMemoryCache({});
 
   return new ApolloClient({
@@ -149,7 +154,7 @@ export const getApolloClient = () => {
         });
         if (networkError) console.log(`[Network error]: ${networkError}`);
       }),
-      ...(combinedLink ? [combinedLink] : []),
+      ...(newLink ? [newLink] : []),
     ]),
     connectToDevTools: true,
   });

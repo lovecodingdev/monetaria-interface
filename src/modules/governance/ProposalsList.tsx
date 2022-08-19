@@ -17,77 +17,48 @@ import { isProposalStateImmutable } from 'src/modules/governance/utils/immutable
 import { governanceConfig } from 'src/ui-config/governanceConfig';
 
 import { ProposalListItem } from './ProposalListItem';
-import { MNTProposalListItem } from './MNTProposalListItem';
+import { MNTProposalListItem, MNTProposal } from './MNTProposalListItem';
 import { enhanceProposalWithTimes } from './utils/formatProposal';
 
 import { ListColumn } from '../../components/lists/ListColumn';
 import { ListHeaderTitle } from '../../components/lists/ListHeaderTitle';
 import { ListHeaderWrapper } from '../../components/lists/ListHeaderWrapper';
+import { useQuery, gql } from '@apollo/client';
+
+const GET_PROPOSALS = gql`
+  query Proposals {
+    proposals(
+      first: 20
+      skip: 0
+      where: { space_in: ["mnt.eth"] }
+      orderBy: "created"
+      orderDirection: desc
+    ) {
+      id
+      title
+      body
+      choices
+      start
+      end
+      snapshot
+      state
+      author
+      space {
+        id
+        name
+      }
+    }
+  }
+`;
 
 export function ProposalsList({ proposals: initialProposals }: GovernancePageProps) {
-  // will only initially be set to true, till the client is hydrated with new proposals
-  const [loadingNewProposals, setLoadingNewProposals] = useState(true);
-  const [updatingPendingProposals, setUpdatingPendingProposals] = useState(true);
-  const [proposals, setProposals] = useState(initialProposals);
-  const [proposalFilter, setProposalFilter] = useState<string>('all');
 
   const handleChange = (event: SelectChangeEvent) => {
-    setProposalFilter(event.target.value as string);
+    console.log(event.target.value as string);
   };
 
-  async function fetchNewProposals() {
-    try {
-      const count = await governanceContract.getProposalsCount();
-      const nextProposals: GovernancePageProps['proposals'] = [];
-      console.log(`fetching ${count - proposals.length} new proposals`);
-      if (count - proposals.length) {
-        for (let i = proposals.length; i < count; i++) {
-          const { values, ...rest } = await governanceContract.getProposal({ proposalId: i });
-          const proposal = await enhanceProposalWithTimes(rest);
-          nextProposals.push({
-            ipfs: {
-              id: i,
-              originalHash: proposal.ipfsHash,
-              ...(await getProposalMetadata(proposal.ipfsHash, governanceConfig.ipfsGateway)),
-            },
-            proposal: proposal,
-            prerendered: false,
-          });
-        }
-        setProposals((p) => [...p, ...nextProposals]);
-      }
-      setLoadingNewProposals(false);
-    } catch (e) {
-      console.log('error fetching new proposals', e);
-    }
-  }
-
-  async function updatePendingProposals() {
-    const pendingProposals = proposals.filter(
-      ({ proposal }) => !isProposalStateImmutable(proposal)
-    );
-    console.log('update pending proposals', pendingProposals.length);
-
-    try {
-      if (pendingProposals.length) {
-        const copy = [...proposals];
-        for (const { proposal } of pendingProposals) {
-          const { values, ...rest } = await governanceContract.getProposal({
-            proposalId: proposal.id,
-          });
-          copy[proposal.id].proposal = await enhanceProposalWithTimes(rest);
-          copy[proposal.id].prerendered = false;
-        }
-        setProposals(copy);
-      }
-      setUpdatingPendingProposals(false);
-    } catch (e) {
-      console.log('error updating proposals', e);
-    }
-  }
-
-  usePolling(fetchNewProposals, 30000, false, [proposals.length]);
-  usePolling(updatePendingProposals, 10000, false, [proposals.length]);
+  const { loading, data } = useQuery(GET_PROPOSALS, { context: { client: 'voting' } });
+  console.log({loading, data});
 
   const header = [
     {
@@ -132,7 +103,7 @@ export function ProposalsList({ proposals: initialProposals }: GovernancePagePro
         <Typography sx={{ mx: 4 }}>
           <Trans>Filter</Trans>
         </Typography>
-        <Select id="filter" value={proposalFilter} sx={{ minWidth: 140 }} onChange={handleChange}>
+        <Select id="filter" value={'all'} sx={{ minWidth: 140 }} onChange={handleChange}>
           <MenuItem value="all">
             <Trans>All proposals</Trans>
           </MenuItem>
@@ -157,7 +128,12 @@ export function ProposalsList({ proposals: initialProposals }: GovernancePagePro
         ))}
         {/* <ListColumn maxWidth={95} minWidth={95} /> */}
       </ListHeaderWrapper>
-      {proposals
+      {!loading && 
+        data.proposals.map((proposal: MNTProposal, index: number) => (
+          <MNTProposalListItem key={index} proposalId={index + 1} proposal={proposal} />
+        ))
+      }
+      {/* {proposals
         .slice()
         .reverse()
         .filter(
@@ -170,7 +146,7 @@ export function ProposalsList({ proposals: initialProposals }: GovernancePagePro
             ipfs={ipfs}
             prerendered={prerendered}
           />
-        ))}
+        ))} */}
     </div>
   );
 }

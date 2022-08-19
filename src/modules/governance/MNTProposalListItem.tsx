@@ -1,70 +1,74 @@
 import { Trans } from '@lingui/macro';
 import { Button, Typography, Box } from '@mui/material';
 import { useRouter } from 'next/router';
-import { ReserveSubheader } from 'src/components/ReserveSubheader';
-import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 
-import { IncentivesCard } from '../../components/incentives/IncentivesCard';
-import { AMPLWarning } from '../../components/infoTooltips/AMPLWarning';
 import { ListColumn } from '../../components/lists/ListColumn';
 import { ListItem } from '../../components/lists/ListItem';
-import { FormattedNumber } from '../../components/primitives/FormattedNumber';
 import { Link, ROUTES } from '../../components/primitives/Link';
-import { TokenIcon } from '../../components/primitives/TokenIcon';
-import { ComputedReserveData } from '../../hooks/app-data-provider/useAppDataProvider';
-import { formatProposal } from './utils/formatProposal';
-import { isProposalStateImmutable } from './utils/immutableStates';
-import { GovernancePageProps } from 'pages/governance/index.governance';
+
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { StateBadge } from './StateBadge';
+import { ProposalState } from '@aave/contract-helpers';
 
 dayjs.extend(relativeTime);
 
-export function MNTProposalListItem({
-  proposal,
-  prerendered,
-  ipfs,
-}: GovernancePageProps['proposals'][0]) {
-  const router = useRouter();
-  const { nayPercent, yaePercent, nayVotes, yaeVotes, quorumReached, diffReached } =
-    formatProposal(proposal);
+export interface MNTSpace {
+  __typename: string, 
+  id: string, 
+  name: string
+}
 
-  const mightBeStale = prerendered && !isProposalStateImmutable(proposal);
+export interface MNTProposal {
+  author: string,
+  body: string,
+  choices: Array<string>,
+  end: number,
+  id: string,
+  snapshot: string,
+  space: MNTSpace,
+  start: number,
+  state: string,
+  title: string,
+  __typename: string,
+}
+
+export function MNTProposalListItem({
+  proposalId,
+  proposal,
+}: {
+  proposalId: number;
+  proposal: MNTProposal;
+}) {
+  const router = useRouter();
 
   return (
     <ListItem
       px={6}
       minHeight={76}
-      onClick={() =>
-        router.push(
-          prerendered
-            ? ROUTES.prerenderedProposal(proposal.id)
-            : ROUTES.dynamicRenderedProposal(proposal.id)
-        )
-      }
+      onClick={() => router.push(ROUTES.prerenderedProposal(proposalId))}
       sx={{ cursor: 'pointer' }}
       button
     >
-
       <ListColumn isRow maxWidth={40}>
-        <Typography variant="secondary16">{proposal.id}.</Typography>
+        <Typography variant="secondary16">{proposalId}.</Typography>
       </ListColumn>
 
       <ListColumn align="left">
-        <Typography variant="secondary16">{ipfs.title}</Typography>
+        <Typography variant="secondary16">{proposal.title}</Typography>
       </ListColumn>
 
       <ListColumn align="right" maxWidth={100}>
-        <Typography>
-          {dayjs
-            .unix(proposal.executionTime || proposal.expirationTimestamp)
-            .format('MMM DD, YYYY')}
-        </Typography>
+        <Typography>{dayjs.unix(proposal.start).format('MMM DD, YYYY')}</Typography>
       </ListColumn>
       <ListColumn align="left" maxWidth={100}>
-        <StateBadge state={proposal.state} loading={mightBeStale} />
+        <StateBadge
+          state={
+            (proposal.state.charAt(0).toUpperCase() + proposal.state.slice(1)) as ProposalState
+          }
+          loading={false}
+        />
       </ListColumn>
     </ListItem>
   );
-};
+}
