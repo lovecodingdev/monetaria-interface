@@ -22,6 +22,22 @@ export interface GovernanceConfig {
   ipfsGateway: string;
 }
 
+export interface MNTGovernanceConfig {
+  chainId: ChainId;
+  walletBalanceProvider: string;
+  votingAssetName: string;
+  averageNetworkBlockTime: number;
+  queryGovernanceDataUrl: string;
+  wsGovernanceDataUrl: string;
+  mntTokenAddress: string;
+  mMntTokenAddress: string;
+  stkMntTokenAddress: string;
+  governanceForumLink: string;
+  governanceSnapshotLink: string;
+  governanceFAQLink: string;
+  ipfsGateway: string;
+}
+
 export const governanceConfig: GovernanceConfig = {
   chainId: ChainId.mainnet,
   votingAssetName: 'AAVE + stkAAVE',
@@ -41,5 +57,24 @@ export const governanceConfig: GovernanceConfig = {
     AAVE_GOVERNANCE_V2_EXECUTOR_LONG: '0xEE56e2B3D491590B5b31738cC34d5232F378a8D5',
     AAVE_GOVERNANCE_V2_HELPER: '0x16ff7583ea21055bf5f929ec4b896d997ff35847',
   },
+  ipfsGateway: 'https://gateway.pinata.cloud/ipfs',
+};
+
+export const mntGovernanceConfig: MNTGovernanceConfig = {
+  chainId: ChainId.rinkeby,
+  votingAssetName: 'MNT + stkMNT',
+  averageNetworkBlockTime: 13.5,
+  queryGovernanceDataUrl: 'https://api.thegraph.com/subgraphs/name/aave/governance-v2',
+  wsGovernanceDataUrl: 'wss://api.thegraph.com/subgraphs/name/aave/governance-v2',
+  aaveTokenAddress: '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9',
+  aAaveTokenAddress: '0xDa5E8e1C3596D3Cc11a4dd5aD66b8f03B5410F8C',
+  stkAaveTokenAddress: '0x4da27a545c0c5b758a6ba100e3a049001de870f5',
+  mntTokenAddress: '0x5e335625aBc0FB4616a0A79945897cb33693F1e6',
+  mMntTokenAddress: '0x5e335625aBc0FB4616a0A79945897cb33693F1e6',
+  stkMntTokenAddress: '0x5e335625aBc0FB4616a0A79945897cb33693F1e6',
+  governanceForumLink: 'https://governance.aave.com',
+  governanceFAQLink: 'https://docs.aave.com/faq/governance',
+  walletBalanceProvider: '0x116674C3Efe4e31F192d855284619DEd6fE2a1b9',
+  governanceSnapshotLink: 'https://snapshot.org/#/aave.eth',
   ipfsGateway: 'https://gateway.pinata.cloud/ipfs',
 };

@@ -118,8 +118,8 @@ export const ROUTES = {
   governance: '/governance',
   referral: '/referral',
   faucet: '/faucet',
-  prerenderedProposal: (proposalId: number) => `/governance/proposal/${proposalId}`,
-  dynamicRenderedProposal: (proposalId: number) => `/governance/proposal?proposalId=${proposalId}`,
+  prerenderedProposal: (proposalId: string) => `/governance/proposal/${proposalId}`,
+  dynamicRenderedProposal: (proposalId: string) => `/governance/proposal?proposalId=${proposalId}`,
   reserveOverview: (underlyingAsset: string, marketName: CustomMarket) =>
     `/reserve-overview/?underlyingAsset=${underlyingAsset}&marketName=${marketName}`,
   actions: (underlyingAsset: string, marketName: CustomMarket, type: string) =>

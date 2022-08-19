@@ -19,11 +19,9 @@ import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Meta } from 'src/components/Meta';
-import { CheckBadge } from 'src/components/primitives/CheckBadge';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 import { Row } from 'src/components/primitives/Row';
 import { GovernanceDataProvider } from 'src/hooks/governance-data-provider/GovernanceDataProvider';
-import { usePolling } from 'src/hooks/usePolling';
 import { MainLayout } from 'src/layouts/MainLayout';
 import { ProposalTopPanel } from 'src/modules/governance/proposal/ProposalTopPanel';
 import { VoteInfo } from 'src/modules/governance/proposal/VoteInfo';
@@ -44,6 +42,43 @@ import { ContentContainer } from '../../../src/components/ContentContainer';
 import { GovVoteModal } from 'src/components/transactions/GovVote/GovVoteModal';
 import { FormattedProposalTime } from 'src/modules/governance/FormattedProposalTime';
 // import { Vote } from 'src/static-build/vote';
+import { useQuery, gql } from '@apollo/client';
+import { apolloClient } from 'src/utils/apolloClient';
+import { MNTProposal } from 'src/modules/governance/MNTProposalListItem';
+import { MntTokensBalanceProvider } from 'src/hooks/governance-data-provider/MntTokensDataProvider';
+import { ProposalState } from '@aave/contract-helpers';
+
+const GET_PROPOSAL = gql`
+  query Proposal($id: String!){
+    proposal(id: $id) {
+      id
+      title
+      body
+      choices
+      start
+      end
+      snapshot
+      state
+      author
+      created
+      scores
+      scores_by_strategy
+      scores_total
+      scores_updated
+      plugins
+      network
+      strategies {
+        name
+        network
+        params
+      }
+      space {
+        id
+        name
+      }
+    }
+  }
+`;
 
 export async function getStaticPaths() {
   const ProposalFetcher = new Proposal();
@@ -55,29 +90,23 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: { params: { proposalId: string } }) {
-  const IpfsFetcher = new Ipfs();
-  const ProposalFetcher = new Proposal();
-  // const VoteFetcher = new Vote();
+  console.log({params});
+  const { data } = await apolloClient.query({
+    query: GET_PROPOSAL,
+    variables: { id: params.proposalId },
+    context: { client: 'voting' }
+  });
+  console.log({data});
 
-  const proposal = ProposalFetcher.get(Number(params.proposalId));
   return {
     props: {
-      proposal,
-      ipfs: IpfsFetcher.get(Number(params.proposalId)),
-      prerendered: true,
-      // votes: await VoteFetcher.get(
-      //   Number(params.proposalId),
-      //   proposal.startBlock,
-      //   proposal.endBlock
-      // ),
+      proposal: data.proposal
     },
   };
 }
 
 interface ProposalPageProps {
-  ipfs?: IpfsType;
-  proposal?: CustomProposalType;
-  prerendered?: boolean;
+  proposal: MNTProposal;
 }
 
 const CenterAlignedImage = styled('img')({
@@ -90,63 +119,32 @@ const StyledLink = styled('a')({
   color: 'inherit',
 });
 
-export default function ProposalPage({
-  proposal: initialProposal,
-  ipfs,
-  prerendered,
-}: ProposalPageProps) {
+export default function ProposalPage({ proposal: initialProposal }: ProposalPageProps) {
   const [url, setUrl] = useState('');
   const [proposal, setProposal] = useState(initialProposal);
-  const [loading, setLoading] = useState(!proposal || !isProposalStateImmutable(proposal));
+  const [loading, setLoading] = useState(false);
   const { breakpoints } = useTheme();
   const xsmUp = useMediaQuery(breakpoints.up('xsm'));
 
-  const mightBeStale = !proposal || !isProposalStateImmutable(proposal);
-
-  async function updateProposal() {
-    if (!proposal) return;
-    const { values, ...rest } = await governanceContract.getProposal({ proposalId: proposal.id });
-    setProposal(await enhanceProposalWithTimes(rest));
-    setLoading(false);
-  }
-
-  usePolling(updateProposal, 10000, !mightBeStale, []);
-
-  // seed when no ssg
-  useEffect(() => {
-    if (!proposal && initialProposal) setProposal(initialProposal);
-  }, [initialProposal]);
+  const state = (proposal.state.charAt(0).toUpperCase() + proposal.state.slice(1)) as ProposalState;
 
   useEffect(() => {
     setUrl(window.location.href);
   }, []);
 
-  const {
-    yaeVotes,
-    yaePercent,
-    nayPercent,
-    nayVotes,
-    diffReached,
-    quorumReached,
-    requiredDiff,
-    minQuorumVotes,
-    diff,
-  } = proposal
+  const { yaeVotes, yaePercent, nayPercent, nayVotes, totalVotes } = proposal
     ? formatProposal(proposal)
     : {
         yaeVotes: 0,
         yaePercent: 0,
         nayPercent: 0,
         nayVotes: 0,
-        diffReached: false,
-        quorumReached: false,
-        minQuorumVotes: 0,
-        requiredDiff: 0,
-        diff: 0,
+        totalVotes: 0,
       };
+  console.log({yaeVotes, yaePercent, nayPercent, nayVotes, totalVotes})
   return (
     <>
-      {ipfs && <Meta title={ipfs.title} description={ipfs.shortDescription} />}
+      <Meta title={proposal.title} description={proposal.body} />
       <ProposalTopPanel />
 
       <ContentContainer>
@@ -158,9 +156,9 @@ export default function ProposalPage({
               </Typography>
               <Box sx={{ px: { md: 18 }, pt: 8 }}>
                 <Typography variant="h2" sx={{ mb: 6 }}>
-                  {ipfs?.title || <Skeleton />}
+                  {proposal.title || <Skeleton />}
                 </Typography>
-                {proposal && ipfs ? (
+                {proposal ? (
                   <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Box
                       sx={{
@@ -171,14 +169,14 @@ export default function ProposalPage({
                       }}
                     >
                       <Box sx={{ mr: '24px', mb: { xs: '2px', sm: 0 } }}>
-                        <StateBadge state={proposal.state} loading={loading} />
+                        <StateBadge state={state} loading={loading} />
                       </Box>
                       {!loading && (
                         <FormattedProposalTime
-                          state={proposal.state}
-                          executionTime={proposal.executionTime}
-                          executionTimeWithGracePeriod={proposal.executionTimeWithGracePeriod}
-                          expirationTimestamp={proposal.expirationTimestamp}
+                          state={state}
+                          executionTime={proposal.end}
+                          executionTimeWithGracePeriod={proposal.end}
+                          expirationTimestamp={proposal.end}
                         />
                       )}
                     </Box>
@@ -186,20 +184,8 @@ export default function ProposalPage({
                     <Button
                       component="a"
                       target="__BLANK"
-                      href={`${governanceConfig.ipfsGateway}/${ipfs.ipfsHash}`}
-                      startIcon={
-                        <SvgIcon sx={{ '& path': { strokeWidth: '1' } }}>
-                          <DownloadIcon />
-                        </SvgIcon>
-                      }
-                    >
-                      {xsmUp && <Trans>Raw-Ipfs</Trans>}
-                    </Button>
-                    <Button
-                      component="a"
-                      target="__BLANK"
                       href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                        ipfs.title
+                        proposal.title
                       )}&url=${url}`}
                       startIcon={<Twitter />}
                     >
@@ -211,7 +197,7 @@ export default function ProposalPage({
                     <Skeleton />
                   </Typography>
                 )}
-                {ipfs ? (
+                {proposal ? (
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
@@ -231,7 +217,7 @@ export default function ProposalPage({
                       },
                     }}
                   >
-                    {ipfs.description}
+                    {proposal.body}
                   </ReactMarkdown>
                 ) : (
                   <>
@@ -272,37 +258,21 @@ export default function ProposalPage({
                         alignItems: 'flex-end',
                       }}
                     >
-                      <StateBadge state={proposal.state} loading={loading} />
+                      <StateBadge state={state} loading={loading} />
                       <Box sx={{ mt: '2px' }}>
                         <FormattedProposalTime
-                          state={proposal.state}
-                          executionTime={proposal.executionTime}
-                          expirationTimestamp={proposal.expirationTimestamp}
-                          executionTimeWithGracePeriod={proposal.executionTimeWithGracePeriod}
+                          state={state}
+                          executionTime={proposal.end}
+                          expirationTimestamp={proposal.end}
+                          executionTimeWithGracePeriod={proposal.end}
                         />
                       </Box>
                     </Box>
                   </Row>
                   <Row
-                    caption={<Trans>Quorum</Trans>}
-                    sx={{ height: 48 }}
-                    captionVariant="description"
-                  >
-                    <CheckBadge
-                      loading={loading}
-                      text={quorumReached ? <Trans>Reached</Trans> : <Trans>Not reached</Trans>}
-                      checked={quorumReached}
-                      sx={{ height: 48 }}
-                      variant="description"
-                    />
-                  </Row>
-                  <Row
                     caption={
                       <>
                         <Trans>Current votes</Trans>
-                        <Typography variant="caption" color="text.muted">
-                          Required
-                        </Typography>
                       </>
                     }
                     sx={{ height: 48 }}
@@ -314,47 +284,6 @@ export default function ProposalPage({
                         visibleDecimals={2}
                         sx={{ display: 'block' }}
                       />
-                      <FormattedNumber
-                        variant="caption"
-                        value={minQuorumVotes}
-                        visibleDecimals={2}
-                        color="text.muted"
-                      />
-                    </Box>
-                  </Row>
-                  <Row
-                    caption={<Trans>Differential</Trans>}
-                    sx={{ height: 48 }}
-                    captionVariant="description"
-                  >
-                    <CheckBadge
-                      loading={loading}
-                      text={diffReached ? <Trans>Reached</Trans> : <Trans>Not reached</Trans>}
-                      checked={diffReached}
-                      sx={{ height: 48 }}
-                      variant="description"
-                    />
-                  </Row>
-                  <Row
-                    caption={
-                      <>
-                        <Trans>Current differential</Trans>
-                        <Typography variant="caption" color="text.muted">
-                          Required
-                        </Typography>
-                      </>
-                    }
-                    sx={{ height: 48 }}
-                    captionVariant="description"
-                  >
-                    <Box sx={{ textAlign: 'right' }}>
-                      <FormattedNumber value={diff} visibleDecimals={2} sx={{ display: 'block' }} />
-                      <FormattedNumber
-                        variant="caption"
-                        value={requiredDiff}
-                        visibleDecimals={2}
-                        color="text.muted"
-                      />
                     </Box>
                   </Row>
                   <Row
@@ -362,11 +291,7 @@ export default function ProposalPage({
                     sx={{ height: 48 }}
                     captionVariant="description"
                   >
-                    <FormattedNumber
-                      value={normalize(proposal.totalVotingSupply, 18)}
-                      visibleDecimals={0}
-                      compact={false}
-                    />
+                    <FormattedNumber value={totalVotes} visibleDecimals={0} compact={false} />
                   </Row>
                 </>
               ) : (
@@ -386,9 +311,6 @@ export default function ProposalPage({
                     caption={
                       <>
                         <Trans>Created</Trans>
-                        <Typography variant="caption" color="text.muted">
-                          Block
-                        </Typography>
                       </>
                     }
                     sx={{ height: 48 }}
@@ -396,10 +318,7 @@ export default function ProposalPage({
                   >
                     <Box sx={{ textAlign: 'right' }}>
                       <Typography>
-                        ~ {dayjs.unix(proposal.creationTimestamp).format('DD MMM YYYY, hh:mm a')}
-                      </Typography>
-                      <Typography variant="caption" color="text.muted">
-                        {proposal.proposalCreated}
+                        ~ {dayjs.unix(proposal.created).format('DD MMM YYYY, hh:mm a')}
                       </Typography>
                     </Box>
                   </Row>
@@ -407,9 +326,6 @@ export default function ProposalPage({
                     caption={
                       <>
                         <Trans>Started</Trans>
-                        <Typography variant="caption" color="text.muted">
-                          Block
-                        </Typography>
                       </>
                     }
                     sx={{ height: 48 }}
@@ -417,14 +333,26 @@ export default function ProposalPage({
                   >
                     <Box sx={{ textAlign: 'right' }}>
                       <Typography>
-                        ~ {dayjs.unix(proposal.startTimestamp).format('DD MMM YYYY, hh:mm a')}
-                      </Typography>
-                      <Typography variant="caption" color="text.muted">
-                        {proposal.startBlock}
+                        ~ {dayjs.unix(proposal.start).format('DD MMM YYYY, hh:mm a')}
                       </Typography>
                     </Box>
                   </Row>
-                  {proposal.executed && (
+                  <Row
+                    caption={
+                      <>
+                        <Trans>End</Trans>
+                      </>
+                    }
+                    sx={{ height: 48 }}
+                    captionVariant="description"
+                  >
+                    <Box sx={{ textAlign: 'right' }}>
+                      <Typography>
+                        ~ {dayjs.unix(proposal.end).format('DD MMM YYYY, hh:mm a')}
+                      </Typography>
+                    </Box>
+                  </Row>
+                  {/* {proposal.executed && (
                     <Row
                       caption={<Trans>Executed</Trans>}
                       sx={{ height: 48 }}
@@ -434,54 +362,18 @@ export default function ProposalPage({
                         {dayjs.unix(proposal.executionTime).format('DD MMM YYYY, hh:mm a')}
                       </Typography>
                     </Row>
-                  )}
-                  {ipfs?.author && (
-                    <Row
-                      caption={<Trans>Author</Trans>}
-                      sx={{ height: 48 }}
-                      captionVariant="description"
+                  )} */}
+                  <Row
+                    caption={<Trans>Author</Trans>}
+                    sx={{ height: 48 }}
+                    captionVariant="description"
+                  >
+                    <Typography
+                      sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}
                     >
-                      <Typography
-                        sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}
-                      >
-                        {ipfs.author}
-                      </Typography>
-                    </Row>
-                  )}
-                  <Box sx={{ mt: 10, mb: 2, display: 'flex', gap: 2 }}>
-                    {ipfs?.discussions && (
-                      <Button
-                        component={Link}
-                        target="_blank"
-                        href={ipfs.discussions}
-                        variant="outlined"
-                        endIcon={
-                          <SvgIcon>
-                            <ExternalLinkIcon />
-                          </SvgIcon>
-                        }
-                      >
-                        <Trans>Forum discussion</Trans>
-                      </Button>
-                    )}
-                    {prerendered && ( // only render the button for prerendered proposals as fro them we can be sure ci already ran
-                      <Button
-                        component={Link}
-                        target="_blank"
-                        href={`https://github.com/bgd-labs/seatbelt-for-ghosts/tree/master/reports/Aave/0xEC568fffba86c094cf06b22134B23074DFE2252c/${String(
-                          proposal.id
-                        ).padStart(3, '0')}.md`}
-                        variant="outlined"
-                        endIcon={
-                          <SvgIcon>
-                            <ExternalLinkIcon />
-                          </SvgIcon>
-                        }
-                      >
-                        <Trans>Seatbelt report</Trans>
-                      </Button>
-                    )}
-                  </Box>
+                      {proposal.author}
+                    </Typography>
+                  </Row>
                 </>
               ) : (
                 <>
@@ -500,8 +392,10 @@ ProposalPage.getLayout = function getLayout(page: React.ReactElement) {
   return (
     <MainLayout>
       <GovernanceDataProvider>
-        {page}
-        <GovVoteModal />
+        <MntTokensBalanceProvider>
+          {page}
+          <GovVoteModal />
+        </MntTokensBalanceProvider>
       </GovernanceDataProvider>
     </MainLayout>
   );

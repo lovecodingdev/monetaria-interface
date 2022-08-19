@@ -28,7 +28,6 @@ import { useQuery, gql } from '@apollo/client';
 const GET_PROPOSALS = gql`
   query Proposals {
     proposals(
-      first: 20
       skip: 0
       where: { space_in: ["mnt.eth"] }
       orderBy: "created"
@@ -43,10 +42,22 @@ const GET_PROPOSALS = gql`
       snapshot
       state
       author
+      created
+      scores
+      scores_by_strategy
+      scores_total
+      scores_updated
+      plugins
+      network
+      strategies {
+        name
+        network
+        params
+      }
       space {
         id
         name
-      }
+      }  
     }
   }
 `;

@@ -6,11 +6,12 @@ import { ConnectWalletButton } from 'src/components/WalletConnection/ConnectWall
 import { useVotingPower } from 'src/hooks/governance-data-provider/useVotingPower';
 import { useModalContext } from 'src/hooks/useModal';
 import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
+import { useMntTokensProviderContext } from 'src/hooks/governance-data-provider/MntTokensDataProvider';
 
 export function VotingPowerInfoPanel() {
   const { currentAccount } = useWeb3Context();
-  const { votingPower, propositionPower } = useVotingPower();
-  const { openGovDelegation } = useModalContext();
+  const { mntTokens } = useMntTokensProviderContext();
+  
   // TODO: if not logged in & loading, show some placeholder
   return (
     <>
@@ -23,37 +24,19 @@ export function VotingPowerInfoPanel() {
             <Row
               sx={{ py: 2 }}
               caption={
-                <>
-                  <Typography variant="description">
-                    <Trans>Voting power</Trans>
-                  </Typography>
-                  <Typography variant="caption" color="text.secondary">
-                    (MNT)
-                  </Typography>
-                </>
+                <Typography variant="description">
+                  <Trans>Voting power</Trans>
+                </Typography>
               }
             >
-              <FormattedNumber value={votingPower || 0} variant="main16" visibleDecimals={2} />
-            </Row>
-            <Row
-              sx={{ py: 2 }}
-              caption={
-                <>
-                  <Typography variant="description">
-                    <Trans>Proposition power</Trans>
-                  </Typography>
-                  <Typography variant="caption" color="text.secondary">
-                    (MNT)
-                  </Typography>
-                </>
-              }
-            >
-              <FormattedNumber value={propositionPower || 0} variant="main16" visibleDecimals={2} />
+              <Box>
+                <FormattedNumber value={mntTokens.mnt || 0} variant="main16" visibleDecimals={2} />{" MNT"}
+              </Box>
             </Row>
           </>
         )}
       </Box>
-      <Divider />
+      {/* <Divider />
       <Box sx={{ px: 6, pt: 4, pb: 6, display: 'flex', alignItems: 'center' }}>
         <Box sx={{ flexGrow: 1 }}>
           <Typography>Delegate your power</Typography>
@@ -69,7 +52,7 @@ export function VotingPowerInfoPanel() {
         ) : (
           <ConnectWalletButton />
         )}
-      </Box>
+      </Box> */}
     </>
   );
 }

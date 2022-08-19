@@ -14,23 +14,28 @@ import { ProposalState } from '@aave/contract-helpers';
 dayjs.extend(relativeTime);
 
 export interface MNTSpace {
-  __typename: string, 
-  id: string, 
-  name: string
+  __typename: string;
+  id: string;
+  name: string;
 }
 
 export interface MNTProposal {
-  author: string,
-  body: string,
-  choices: Array<string>,
-  end: number,
-  id: string,
-  snapshot: string,
-  space: MNTSpace,
-  start: number,
-  state: string,
-  title: string,
-  __typename: string,
+  id: string;
+  title: string;
+  body: string;
+  choices: Array<string>;
+  start: number;
+  end: number;
+  snapshot: string;
+  state: string;
+  author: string;
+  created: number;
+  scores: Array<number>;
+  scores_total: number;
+  scores_updated: number;
+  network: string;
+  space: MNTSpace;
+  __typename: string;
 }
 
 export function MNTProposalListItem({
@@ -42,11 +47,13 @@ export function MNTProposalListItem({
 }) {
   const router = useRouter();
 
+  const state = (proposal.state.charAt(0).toUpperCase() + proposal.state.slice(1)) as ProposalState;
+
   return (
     <ListItem
       px={6}
       minHeight={76}
-      onClick={() => router.push(ROUTES.prerenderedProposal(proposalId))}
+      onClick={() => router.push(ROUTES.dynamicRenderedProposal(proposal.id))}
       sx={{ cursor: 'pointer' }}
       button
     >
@@ -62,12 +69,7 @@ export function MNTProposalListItem({
         <Typography>{dayjs.unix(proposal.start).format('MMM DD, YYYY')}</Typography>
       </ListColumn>
       <ListColumn align="left" maxWidth={100}>
-        <StateBadge
-          state={
-            (proposal.state.charAt(0).toUpperCase() + proposal.state.slice(1)) as ProposalState
-          }
-          loading={false}
-        />
+        <StateBadge state={state} loading={false} />
       </ListColumn>
     </ListItem>
   );

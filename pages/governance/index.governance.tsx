@@ -1,6 +1,6 @@
 import { Grid, Paper } from '@mui/material';
 import { GovDelegationModal } from 'src/components/transactions/GovDelegation/GovDelegationModal';
-import { AaveTokensBalanceProvider } from 'src/hooks/governance-data-provider/AaveTokensDataProvider';
+import { MntTokensBalanceProvider } from 'src/hooks/governance-data-provider/MntTokensDataProvider';
 import { GovernanceDataProvider } from 'src/hooks/governance-data-provider/GovernanceDataProvider';
 import { MainLayout } from 'src/layouts/MainLayout';
 import { GovernanceTopPanel } from 'src/modules/governance/GovernanceTopPanel';
@@ -64,10 +64,10 @@ Governance.getLayout = function getLayout(page: React.ReactElement) {
   return (
     <MainLayout>
       <GovernanceDataProvider>
-        <AaveTokensBalanceProvider>
+        <MntTokensBalanceProvider>
           {page}
-          <GovDelegationModal />
-        </AaveTokensBalanceProvider>
+          {/* <GovDelegationModal /> */}
+        </MntTokensBalanceProvider>
       </GovernanceDataProvider>
     </MainLayout>
   );

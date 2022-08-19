@@ -24,7 +24,7 @@ export enum ModalType {
 
 export interface ModalArgsType {
   underlyingAsset?: string;
-  proposalId?: number;
+  proposalId?: string;
   support?: boolean;
   power?: string;
   icon?: string;
@@ -55,7 +55,7 @@ export interface ModalContextType<T extends ModalArgsType> {
   openFaucet: (underlyingAsset: string) => void;
   openSwap: (underlyingAsset: string) => void;
   openGovDelegation: () => void;
-  openGovVote: (proposalId: number, support: boolean, power: string) => void;
+  openGovVote: (proposalId: string, support: boolean, power: string) => void;
   close: () => void;
   type?: ModalType;
   args: T;

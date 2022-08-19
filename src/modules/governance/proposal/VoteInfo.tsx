@@ -1,7 +1,7 @@
 import { ProposalState } from '@aave/contract-helpers';
 import { normalize } from '@aave/math-utils';
 import { Trans } from '@lingui/macro';
-import { Alert, Button, Typography } from '@mui/material';
+import { Alert, Button, Typography, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { ConnectWalletButton } from 'src/components/WalletConnection/ConnectWalletButton';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
@@ -10,62 +10,52 @@ import { useGovernanceDataProvider } from 'src/hooks/governance-data-provider/Go
 import { useModalContext } from 'src/hooks/useModal';
 import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
 import { CustomProposalType } from 'src/static-build/proposal';
+import { useMntTokensProviderContext } from 'src/hooks/governance-data-provider/MntTokensDataProvider';
+import { useQuery, gql } from '@apollo/client';
+import { MNTProposal } from '../MNTProposalListItem';
 
-export function VoteInfo({ id, state, strategy, startBlock }: CustomProposalType) {
+const GET_VOTES = gql`
+  query Votes($proposal: String!, $voter: String!) {
+    votes (
+      where: {
+        proposal: $proposal
+        voter: $voter
+      }
+    ) {
+      id
+      voter
+      created
+      choice
+      vp
+      vp_by_strategy
+      vp_state
+    }
+  }
+`;
+
+export function VoteInfo({ id, state }: MNTProposal) {
   const { openGovVote } = useModalContext();
   const { currentAccount } = useWeb3Context();
 
-  const [votedPower, setVotedPower] = useState<string>();
-  const [support, setSupport] = useState<boolean>();
-  const [didVote, setDidVote] = useState<boolean>();
-  const [power, setPower] = useState<string>('0');
+  let votedPower = "0";
+  let support = false;
+  let didVote = false;
 
-  const { governanceService } = useGovernanceDataProvider();
-  const voteOngoing = state === ProposalState.Active;
+  const voteOngoing = state === ProposalState.Active.toLowerCase();
 
-  const fetchCurrentVote = async () => {
-    try {
-      const { support, votingPower } = await governanceService.getVoteOnProposal({
-        user: currentAccount,
-        proposalId: id,
-      });
+  const { mntTokens: {mnt: power} } = useMntTokensProviderContext();
 
-      if (votingPower && votingPower.toString() !== '0') {
-        setSupport(support);
-        setVotedPower(normalize(votingPower.toString(), 18));
-        setDidVote(true);
-      } else {
-        setDidVote(false);
-      }
-    } catch (e) {
-      console.log('error fetching vote info', e);
-    }
-  };
+  const { loading, data } = useQuery(GET_VOTES, {
+    variables: { proposal: id, voter: currentAccount },
+    context: { client: 'voting' } 
+  });
 
-  const fetchVotingPower = async () => {
-    try {
-      const power = await governanceService.getVotingPowerAt({
-        user: currentAccount,
-        block: startBlock,
-        strategy,
-      });
-      setPower(power);
-    } catch (e) {
-      console.log('error fetching voting power for proposal', id);
-    }
-  };
-
-  useEffect(() => {
-    if (!currentAccount) {
-      setSupport(undefined);
-      setDidVote(undefined);
-      setVotedPower(undefined);
-      setPower('0');
-    } else {
-      fetchCurrentVote();
-      fetchVotingPower();
-    }
-  }, [voteOngoing, currentAccount, startBlock]);
+  if (!loading && data.votes.lengnth > 0) {
+    const vote = data.votes[0];
+    support = vote.choice == 0;
+    votedPower = vote.vp;
+    didVote = true;
+  }
 
   return (
     <>
@@ -84,13 +74,12 @@ export function VoteInfo({ id, state, strategy, startBlock }: CustomProposalType
               <Typography variant="description">
                 <Trans>Voting power</Trans>
               </Typography>
-              <Typography variant="caption" color="text.secondary">
-                (AAVE + stkAAVE)
-              </Typography>
             </>
           }
         >
-          <FormattedNumber value={power || 0} variant="main16" visibleDecimals={2} />
+          <Box>
+            <FormattedNumber value={power || 0} variant="main16" visibleDecimals={2} />{" MNT"}
+          </Box>
         </Row>
       )}
       {currentAccount && didVote && (

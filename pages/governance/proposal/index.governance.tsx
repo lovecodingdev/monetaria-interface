@@ -12,50 +12,66 @@ import { IpfsType } from 'src/static-build/ipfs';
 import { CustomProposalType } from 'src/static-build/proposal';
 import { governanceConfig } from 'src/ui-config/governanceConfig';
 import ProposalPage from './[proposalId].governance';
+import { MntTokensBalanceProvider } from 'src/hooks/governance-data-provider/MntTokensDataProvider';
+import { useQuery, gql } from '@apollo/client';
+import { MNTProposal } from 'src/modules/governance/MNTProposalListItem';
+
+const GET_PROPOSAL = gql`
+  query Proposal($id: String!){
+    proposal(id: $id) {
+      id
+      title
+      body
+      choices
+      start
+      end
+      snapshot
+      state
+      author
+      created
+      scores
+      scores_by_strategy
+      scores_total
+      scores_updated
+      plugins
+      network
+      strategies {
+        name
+        network
+        params
+      }
+      space {
+        id
+        name
+      }
+    }
+  }
+`;
 
 export default function DynamicProposal() {
   const router = useRouter();
-  const id = Number(router.query.proposalId);
-  const [proposal, setProposal] = useState<CustomProposalType>();
-  const [ipfs, setIpfs] = useState<IpfsType>();
+  const id = router.query.proposalId;
 
-  async function updateProposal() {
-    const { values, ...rest } = await governanceContract.getProposal({ proposalId: id });
-    setProposal(await enhanceProposalWithTimes(rest));
-  }
-
-  async function fetchIpfs() {
-    if (!proposal) return;
-    const newIpfs = {
-      id,
-      originalHash: proposal.ipfsHash,
-      ...(await getProposalMetadata(proposal.ipfsHash, governanceConfig?.ipfsGateway)),
-    };
-    setIpfs(newIpfs);
-  }
-
-  // poll every 10s
-  usePolling(
-    updateProposal,
-    20000,
-    (proposal ? isProposalStateImmutable(proposal) : false) || id === undefined,
-    [id]
+  const { data, loading } = useQuery(
+    GET_PROPOSAL,
+    {
+      variables: { id },
+      context: { client: 'voting' }
+    }
   );
+  console.log({data});
 
-  // // fetch ipfs on initial load
-  useEffect(() => {
-    if (!proposal || ipfs) return;
-    fetchIpfs();
-  }, [proposal, ipfs]);
-  return <ProposalPage ipfs={ipfs} proposal={proposal} />;
+  return loading ? <></> : <ProposalPage proposal={data.proposal} />;
 }
 
 DynamicProposal.getLayout = function getLayout(page: React.ReactElement) {
   return (
     <MainLayout>
       <GovernanceDataProvider>
-        {page}
-        <GovVoteModal />
+        <MntTokensBalanceProvider>
+          {page}
+          <GovVoteModal />
+        </MntTokensBalanceProvider>
       </GovernanceDataProvider>
     </MainLayout>
   );

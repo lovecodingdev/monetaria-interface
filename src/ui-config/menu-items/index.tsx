@@ -32,19 +32,13 @@ export const navigation: Navigation[] = [
     link: ROUTES.staking,
     title: t`Stake`,
     dataCy: 'menuStake',
-    isVisible: () =>
-      process.env.NEXT_PUBLIC_ENABLE_STAKING === 'true' &&
-      process.env.NEXT_PUBLIC_ENV === 'prod' &&
-      !ENABLE_TESTNET,
+    isVisible: () => process.env.NEXT_PUBLIC_ENABLE_STAKING === 'true' && !ENABLE_TESTNET,
   },
   {
     link: ROUTES.governance,
     title: t`Vote`,
     dataCy: 'menuGovernance',
-    isVisible: () =>
-      process.env.NEXT_PUBLIC_ENABLE_GOVERNANCE === 'true' &&
-      process.env.NEXT_PUBLIC_ENV === 'prod' &&
-      !ENABLE_TESTNET,
+    isVisible: () => process.env.NEXT_PUBLIC_ENABLE_GOVERNANCE === 'true' && !ENABLE_TESTNET,
   },
   {
     link: ROUTES.referral,
