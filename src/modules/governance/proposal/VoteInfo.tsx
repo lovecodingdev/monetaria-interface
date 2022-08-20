@@ -43,16 +43,18 @@ export function VoteInfo({ id, state }: MNTProposal) {
 
   const voteOngoing = state === ProposalState.Active.toLowerCase();
 
-  const { mntTokens: {mnt: power} } = useMntTokensProviderContext();
+  const {
+    mntTokens: { mnt: power },
+  } = useMntTokensProviderContext();
 
   const { loading, data } = useQuery(GET_VOTES, {
     variables: { proposal: id, voter: currentAccount },
-    context: { client: 'voting' } 
+    context: { client: 'voting' },
   });
 
-  if (!loading && data.votes.lengnth > 0) {
+  if (!loading && data.votes.length > 0) {
     const vote = data.votes[0];
-    support = vote.choice == 0;
+    support = vote.choice == 1;
     votedPower = vote.vp;
     didVote = true;
   }
