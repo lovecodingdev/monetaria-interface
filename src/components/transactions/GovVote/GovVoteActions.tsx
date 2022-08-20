@@ -7,7 +7,7 @@ import { TxActionsWrapper } from '../TxActionsWrapper';
 export type GovVoteActionsProps = {
   isWrongNetwork: boolean;
   blocked: boolean;
-  proposalId: number;
+  proposalId: string;
   support: boolean;
 };
 
