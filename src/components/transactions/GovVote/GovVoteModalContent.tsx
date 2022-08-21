@@ -78,11 +78,11 @@ export const GovVoteModalContent = ({
           {handleBlocked()}
         </Typography>
       )}
-      <TxModalDetails gasLimit={gasLimit}>
+      <TxModalDetails gasLimit={"21000"}>
         <DetailsNumberLine description={<Trans>Voting power</Trans>} value={votingPower} />
       </TxModalDetails>
 
-      {txError && <GasEstimationError txError={txError} />}
+      {/* {txError && <GasEstimationError txError={txError} />} */}
 
       <MNTGovVoteActions
         proposalId={proposalId}
