@@ -30,6 +30,7 @@ export function MoreMenu() {
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
         onClick={handleClick}
+        disableRipple={true}
         sx={{
           color: '#080F26',
           minWidth: 'unset',
