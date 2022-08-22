@@ -64,28 +64,16 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
               <Button
                 component={Link}
                 href={item.link}
+                disableRipple={true}
                 sx={(theme) => ({
                   color: { xs: '#F1F1F3', md: 'text.primary' },
                   py: { xs: 1.5, md: 2 },
                   position: 'relative',
                   '&:hover': {
-                    background: 'none',
+                    borderRadius: '100px',
                   },
-                  '.active&:after, &:hover&:after': {
-                    transform: 'scaleX(1)',
-                    transformOrigin: 'bottom left',
-                  },
-                  '&:after': {
-                    content: "''",
-                    position: 'absolute',
-                    width: '100%',
-                    transform: 'scaleX(0)',
-                    height: '100%',
-                    left: '0',
-                    transformOrigin: 'bottom right',
-                    transition: 'transform 0.25s ease-out',
-                    zIndex: -1,
-                    background: 'rgba(215, 215, 215, 0.25)',
+                  '&.active': {
+                    background: '#FFFFFF',
                     borderRadius: '100px',
                   },
                 })}

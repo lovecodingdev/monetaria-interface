@@ -152,7 +152,13 @@ export function AppHeader() {
           )}
         </Box>
 
-        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+        <Box 
+          sx={{ 
+            display: { xs: 'none', md: 'block' }, 
+            background: '#F6F8F9',
+            borderRadius: '100px',
+          }}
+        >
           <NavItems />
         </Box>
 
