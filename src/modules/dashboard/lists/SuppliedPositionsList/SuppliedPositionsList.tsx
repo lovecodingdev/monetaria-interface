@@ -82,14 +82,14 @@ export const SuppliedPositionsList = () => {
     >
       {suppliedPosition.length ? (
         <>
-          {!downToXSM && <ListHeader head={head} />}
+          {/* {!downToXSM && <ListHeader head={head} />}
           {suppliedPosition.map((item) =>
             downToXSM ? (
               <SuppliedPositionsListMobileItem {...item} user={user} key={item.underlyingAsset} />
             ) : (
               <SuppliedPositionsListItem {...item} user={user} key={item.underlyingAsset} />
             )
-          )}
+          )} */}
         </>
       ) : (
         <DashboardContentNoData text={<Trans>Nothing supplied yet</Trans>} />

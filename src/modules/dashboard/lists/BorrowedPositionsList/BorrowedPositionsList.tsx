@@ -118,7 +118,7 @@ export const BorrowedPositionsList = () => {
     >
       {borrowPositions.length ? (
         <>
-          {!downToXSM && <ListHeader head={head} />}
+          {/* {!downToXSM && <ListHeader head={head} />}
           {borrowPositions.map((item) =>
             downToXSM ? (
               <BorrowedPositionsListMobileItem
@@ -131,7 +131,7 @@ export const BorrowedPositionsList = () => {
                 key={item.underlyingAsset + item.borrowRateMode}
               />
             )
-          )}
+          )} */}
         </>
       ) : (
         <DashboardContentNoData text={<Trans>Nothing borrowed yet</Trans>} />
