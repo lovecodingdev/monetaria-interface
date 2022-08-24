@@ -16,22 +16,23 @@ export const DashboardContentWrapper = ({ isBorrow }: DashboardContentWrapperPro
   const paperWidth = '100%';
 
   return (
-    // <Box
-    //   sx={{
-    //     display: isDesktop ? 'flex' : 'block',
-    //     justifyContent: 'space-between',
-    //     alignItems: 'flex-start',
-    //   }}
-    // >
-      <Box sx={{ display: { xs: isBorrow ? 'none' : 'block', lg: 'block' }, width: paperWidth, }}>
-        {/* <SuppliedPositionsList /> */}
-        <SupplyAssetsList />
+    <Box>
+      <Box
+        sx={{
+          display: isDesktop ? 'flex' : 'block',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          gap: 4,
+        }}
+      >
+        <Box sx={{ display: { xs: isBorrow ? 'none' : 'block', lg: 'block' }, width: paperWidth, }}>
+          <SuppliedPositionsList />
+        </Box>
+        <Box sx={{ display: { xs: !isBorrow ? 'none' : 'block', lg: 'block' }, width: paperWidth }}>
+          <BorrowedPositionsList />
+        </Box>
       </Box>
-
-    //   <Box sx={{ display: { xs: !isBorrow ? 'none' : 'block', lg: 'block' }, width: paperWidth }}>
-    //     <BorrowedPositionsList />
-    //     <BorrowAssetsList />
-    //   </Box>
-    // </Box>
+      <SupplyAssetsList />
+    </Box>
   );
 };
