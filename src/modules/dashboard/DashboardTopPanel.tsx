@@ -97,7 +97,7 @@ export const DashboardTopPanel = () => {
             }}
           >
             <img src={currentNetworkConfig.networkLogoPath} alt="" width="40" height="40" />
-            <Trans>{currentMarketData.marketTitle} Market</Trans>
+            {currentMarketData.marketTitle} Market
           </Box>
         }
         bridge={currentNetworkConfig.bridge}
