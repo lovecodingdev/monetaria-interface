@@ -86,10 +86,39 @@ export const DashboardTopPanel = () => {
 
   return (
     <>
-      <TopInfoPanel pageTitle={<Trans>Dashboard</Trans>} bridge={currentNetworkConfig.bridge}>
+      <TopInfoPanel
+        pageTitle={
+          <Box 
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'row',
+              gap: 2,
+            }}
+          >
+            <img src={currentNetworkConfig.networkLogoPath} alt="" width="40" height="40" />
+            <Trans>{currentMarketData.marketTitle} Market</Trans>
+          </Box>
+        }
+        bridge={currentNetworkConfig.bridge}
+      >
+        <TopInfoPanelItem icon={<WalletIcon />} title={<Trans>Net worth</Trans>} loading={loading}>
+          {currentAccount ? (
+            <FormattedNumber
+              value={Number(user?.netWorthUSD || 0)}
+              symbol="USD"
+              variant={valueTypographyVariant}
+              visibleDecimals={2}
+              compact
+              symbolsVariant={noDataTypographyVariant}
+            />
+          ) : (
+            <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
+          )}
+        </TopInfoPanelItem>
+
         <TopInfoPanelItem
           icon={<NetAPYIcon />}
-          hideIcon
           title={
             <div style={{ display: 'flex' }}>
               <Trans>Net APY</Trans>
@@ -111,50 +140,9 @@ export const DashboardTopPanel = () => {
           )}
         </TopInfoPanelItem>
 
-        <TopInfoPanelItem
-          icon={<WalletIcon />}
-          hideIcon
-          title={<Trans>My Borrow</Trans>}
-          loading={loading}
-        >
-          {currentAccount ? (
-            <FormattedNumber
-              value={Number(user?.netWorthUSD || 0)}
-              symbol="USD"
-              variant={valueTypographyVariant}
-              visibleDecimals={2}
-              compact
-              symbolsVariant={noDataTypographyVariant}
-            />
-          ) : (
-            <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
-          )}
-        </TopInfoPanelItem>
-        <TopInfoPanelItem
-          icon={<WalletIcon />}
-          hideIcon
-          title={<Trans>My Supply</Trans>}
-          loading={loading}
-        >
-          {currentAccount ? (
-            <FormattedNumber
-              value={Number(user?.netWorthUSD || 0)}
-              symbol="USD"
-              variant={valueTypographyVariant}
-              visibleDecimals={2}
-              compact
-              symbolsVariant={noDataTypographyVariant}
-            />
-          ) : (
-            <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
-          )}
-        </TopInfoPanelItem>
-
-
-        {/* {currentAccount && user?.healthFactor !== '-1' && (
+        {currentAccount && user?.healthFactor !== '-1' && (
           <TopInfoPanelItem
             icon={<EmptyHeartIcon />}
-            hideIcon
             title={
               <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
                 <Trans>Health factor</Trans>
@@ -174,19 +162,19 @@ export const DashboardTopPanel = () => {
             <HealthFactorNumber
               value={user?.healthFactor || '-1'}
               variant={valueTypographyVariant}
-              // onInfoClick={() => setOpen(true)}
-              HALIntegrationComponent={
-                currentMarketData.halIntegration && (
-                  <HALLink
-                    healthFactor={user?.healthFactor || '-1'}
-                    marketName={currentMarketData.halIntegration.marketName}
-                    integrationURL={currentMarketData.halIntegration.URL}
-                  />
-                )
-              }
+              onInfoClick={() => setOpen(true)}
+              // HALIntegrationComponent={
+              //   currentMarketData.halIntegration && (
+              //     <HALLink
+              //       healthFactor={user?.healthFactor || '-1'}
+              //       marketName={currentMarketData.halIntegration.marketName}
+              //       integrationURL={currentMarketData.halIntegration.URL}
+              //     />
+              //   )
+              // }
             />
           </TopInfoPanelItem>
-        )} */}
+        )}
 
         {/* {currentAccount && claimableRewardsUsd > 0 && (
           <TopInfoPanelItem
@@ -208,6 +196,7 @@ export const DashboardTopPanel = () => {
                   visibleDecimals={2}
                   compact
                   symbol="USD"
+                  symbolsColor="#A5A8B6"
                   symbolsVariant={noDataTypographyVariant}
                   data-cy={'Claim_Value'}
                 />
@@ -227,14 +216,14 @@ export const DashboardTopPanel = () => {
         )} */}
       </TopInfoPanel>
 
-      {/* <LiquidationRiskParametresInfoModal
+      <LiquidationRiskParametresInfoModal
         open={open}
         setOpen={setOpen}
         healthFactor={user?.healthFactor || '-1'}
         loanToValue={loanToValue}
         currentLoanToValue={user?.currentLoanToValue || '0'}
         currentLiquidationThreshold={user?.currentLiquidationThreshold || '0'}
-      /> */}
+      />
     </>
   );
 };
