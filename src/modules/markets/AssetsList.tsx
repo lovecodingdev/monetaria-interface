@@ -133,6 +133,7 @@ export default function AssetsList() {
     <ListWrapper
       title={<Trans>Assets</Trans>}
       captionSize="h2"
+      withSearch
     >
       {!isTableChangedToCards && (
         <ListHeaderWrapper px={6}>

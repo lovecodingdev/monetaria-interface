@@ -185,6 +185,7 @@ export const SupplyAssetsList = () => {
       title={<Trans>Assets</Trans>}
       localStorageName="supplyAssetsDashboardTableCollapse"
       withTopMargin
+      withSearch
     >
       <>
         {!downToXSM && <ListHeader head={head} />}

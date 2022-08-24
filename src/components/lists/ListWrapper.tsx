@@ -1,6 +1,9 @@
 import { Trans } from '@lingui/macro';
 import { Box, Paper, Typography } from '@mui/material';
 import { ReactNode, useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
 
 import { toggleLocalStorageClick } from '../../helpers/toggle-local-storage-click';
 
@@ -14,6 +17,7 @@ interface ListWrapperProps {
   withTopMargin?: boolean;
   noData?: boolean;
   captionSize?: 'h2' | 'h3';
+  withSearch?: boolean;
 }
 
 export const ListWrapper = ({
@@ -26,6 +30,7 @@ export const ListWrapper = ({
   withTopMargin,
   noData,
   captionSize = 'h3',
+  withSearch = false,
 }: ListWrapperProps) => {
   const [isCollapse, setIsCollapse] = useState(
     localStorageName ? localStorage.getItem(localStorageName) === 'true' : false
@@ -65,6 +70,30 @@ export const ListWrapper = ({
           </Typography>
           {subTitleComponent}
         </Box>
+        
+        {withSearch &&
+          <Box
+            component="form"
+            sx={{ 
+              p: '2px', 
+              display: 'flex', 
+              alignItems: 'center',
+              background: '#F6F8F9',
+              height: '32px',
+              borderRadius: '8px',
+              border: '1px solid #EEF0F2',
+            }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+            <IconButton type="button" aria-label="search">
+              <SearchIcon />
+            </IconButton>
+          </Box>      
+        }
 
         {/* {!!localStorageName && !noData && (
           <Box
