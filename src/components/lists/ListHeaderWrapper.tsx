@@ -14,7 +14,7 @@ export const ListHeaderWrapper = ({ px = 4, children, ...rest }: ListHeaderWrapp
         display: 'flex',
         alignItems: 'flex-end',
         px,
-        pt: 1,
+        pt: 4,
         pb: 1,
         position: 'sticky',
         top: 0,
