@@ -49,7 +49,7 @@ export const SuppliedPositionsList = () => {
     />,
   ];
 
-  if (loading) return <ListLoader title={<Trans>Your supplies</Trans>} head={head} />;
+  // if (loading) return <ListLoader title={<Trans>Your supplies</Trans>} head={head} />;
 
   return (
     <ListWrapper

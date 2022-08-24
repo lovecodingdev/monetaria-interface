@@ -78,21 +78,21 @@ export const BorrowedPositionsList = () => {
     <APYTypeTooltip text={<Trans>APY type</Trans>} key="APY type" variant="subheader2" />,
   ];
 
-  if (loading) return <ListLoader title={<Trans>Your borrows</Trans>} head={head} />;
+  // if (loading) return <ListLoader title={<Trans>Your borrows</Trans>} head={head} />;
 
   return (
     <ListWrapper
       title={<Trans>Your borrows</Trans>}
       localStorageName="borrowedAssetsDashboardTableCollapse"
-      subTitleComponent={
-        currentMarketData.v3 ? (
-          <DashboardEModeButton
-            userEmodeCategoryId={user.userEmodeCategoryId}
-            onClick={() => openEmode()}
-            baseAssetSymbol={currentNetworkConfig.baseAssetSymbol}
-          />
-        ) : undefined
-      }
+      // subTitleComponent={
+      //   currentMarketData.v3 ? (
+      //     <DashboardEModeButton
+      //       userEmodeCategoryId={user.userEmodeCategoryId}
+      //       onClick={() => openEmode()}
+      //       baseAssetSymbol={currentNetworkConfig.baseAssetSymbol}
+      //     />
+      //   ) : undefined
+      // }
       noData={!borrowPositions.length}
       topInfo={
         <>
