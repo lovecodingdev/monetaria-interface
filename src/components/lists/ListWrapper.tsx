@@ -17,7 +17,7 @@ interface ListWrapperProps {
   withTopMargin?: boolean;
   noData?: boolean;
   captionSize?: 'h2' | 'h3';
-  withSearch?: boolean;
+  onSearch?: (search: string) => void;
 }
 
 export const ListWrapper = ({
@@ -30,7 +30,7 @@ export const ListWrapper = ({
   withTopMargin,
   noData,
   captionSize = 'h3',
-  withSearch = false,
+  onSearch,
 }: ListWrapperProps) => {
   const [isCollapse, setIsCollapse] = useState(
     localStorageName ? localStorage.getItem(localStorageName) === 'true' : false
@@ -71,7 +71,7 @@ export const ListWrapper = ({
           {subTitleComponent}
         </Box>
         
-        {withSearch &&
+        {onSearch &&
           <Box
             component="form"
             sx={{ 
@@ -88,6 +88,7 @@ export const ListWrapper = ({
               sx={{ ml: 1, flex: 1 }}
               placeholder="Search"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={(e) => onSearch(e.target.value)}
             />
             <IconButton type="button" aria-label="search">
               <SearchIcon />

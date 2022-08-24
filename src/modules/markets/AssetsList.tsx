@@ -39,6 +39,7 @@ export default function AssetsList() {
 
   const [sortName, setSortName] = useState('');
   const [sortDesc, setSortDesc] = useState(false);
+  const [search, setSearch] = useState('');
 
   if (sortDesc) {
     if (sortName === 'symbol') {
@@ -133,7 +134,7 @@ export default function AssetsList() {
     <ListWrapper
       title={<Trans>Assets</Trans>}
       captionSize="h2"
-      withSearch
+      onSearch={(search) => setSearch(search.toLowerCase())}
     >
       {!isTableChangedToCards && (
         <ListHeaderWrapper px={6}>
@@ -176,7 +177,9 @@ export default function AssetsList() {
           </>
         )
       ) : (
-        filteredData.map((reserve) =>
+        filteredData
+          .filter((r) => r.symbol.toLowerCase().includes(search))
+          .map((reserve) =>
           isTableChangedToCards ? (
             <AssetsListMobileItem {...reserve} key={reserve.id} />
           ) : (

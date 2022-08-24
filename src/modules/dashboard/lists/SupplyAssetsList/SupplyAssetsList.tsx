@@ -38,6 +38,7 @@ export const SupplyAssetsList = () => {
   const [isShowZeroAssets, setIsShowZeroAssets] = useState(
     localStorage.getItem(localStorageName) === 'true'
   );
+  const [search, setSearch] = useState('');
 
   const tokensToSupply = reserves
     .filter((reserve: ComputedReserveData) => !reserve.isFrozen)
@@ -185,11 +186,13 @@ export const SupplyAssetsList = () => {
       title={<Trans>Assets</Trans>}
       localStorageName="supplyAssetsDashboardTableCollapse"
       withTopMargin
-      withSearch
+      onSearch={(search) => setSearch(search.toLowerCase())}
     >
       <>
         {!downToXSM && <ListHeader head={head} />}
-        {supplyReserves.map((item) =>
+        {supplyReserves
+          .filter((r) => r.symbol.toLowerCase().includes(search))
+          .map((item) =>
           downToXSM ? (
             <SupplyAssetsListMobileItem {...item} key={item.id} />
           ) : (
