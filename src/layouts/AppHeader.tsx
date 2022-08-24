@@ -55,7 +55,7 @@ export function AppHeader() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [md]);
 
-  const headerHeight = 48;
+  const headerHeight = 82;
 
   const disableTestnet = () => {
     localStorage.setItem('testnetsEnabled', 'false');
@@ -96,10 +96,11 @@ export function AppHeader() {
           transition: theme.transitions.create('top'),
           zIndex: theme.zIndex.appBar,
           bgcolor: 'background.header',
-          padding: {
-            xs: mobileMenuOpen || walletWidgetOpen ? '8px 20px' : '8px 8px 8px 20px',
-            xsm: '8px 20px',
-          },
+          // padding: {
+          //   xs: mobileMenuOpen || walletWidgetOpen ? '8px 20px' : '8px 8px 8px 20px',
+          //   xsm: '8px 20px',
+          // },
+          padding: '20px',
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'space-between',
@@ -118,18 +119,12 @@ export function AppHeader() {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'space-between',
+            gap: 2,
           }}
           onClick={() => setMobileMenuOpen(false)}
         >
           <img src={uiConfig.appLogo} alt="An SVG of an eye" />
-          <Box
-            sx={{
-              fontSize: '28px',
-              fontWeight: '700',
-            }}
-          >
-            monetaria.io
-          </Box>
+          <img src={uiConfig.monetariaText} alt="An SVG of an eye" />
         </Box>
         <Box sx={{ mr: sm ? 1 : 3 }}>
           {ENABLE_TESTNET && (
@@ -157,6 +152,7 @@ export function AppHeader() {
             display: { xs: 'none', md: 'block' }, 
             background: '#F6F8F9',
             borderRadius: '100px',
+            padding: '4px',
           }}
         >
           <NavItems />

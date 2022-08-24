@@ -67,7 +67,7 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                 disableRipple={true}
                 sx={(theme) => ({
                   color: { xs: '#F1F1F3', md: 'text.primary' },
-                  py: { xs: 1.5, md: 2 },
+                  py: { xs: 1.5, md: 1 },
                   position: 'relative',
                   '&:hover': {
                     borderRadius: '100px',
