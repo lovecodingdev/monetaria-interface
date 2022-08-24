@@ -39,7 +39,6 @@ export default function MarketsCaurosel() {
                     })
                     : {}),
             })));
-        console.log(filteredData);
     }, [reserves, currentNetworkConfig]);
     const breakpoint = {
         340: {

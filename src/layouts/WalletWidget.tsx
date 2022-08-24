@@ -1,6 +1,7 @@
 import { DuplicateIcon, LogoutIcon } from '@heroicons/react/outline';
 import { ChevronDownIcon, ChevronUpIcon, ExternalLinkIcon } from '@heroicons/react/solid';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import AccountBalanceWalletIcon from '../../public/icons/markets/account-icon.svg';
+
 import { Trans } from '@lingui/macro';
 import {
   Box,
@@ -317,17 +318,12 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
             p: connected ? '5px 8px' : undefined,
             minWidth: hideWalletAccountText ? 'unset' : undefined,
             // backgroundColor: '#074592',
+            '& .MuiButton-startIcon': {
+              marginLeft: 0,
+            },
           }}
           // startIcon={connected && !hideWalletAccountText && accountAvatar}
-          startIcon={
-            <SvgIcon
-              sx={{
-                display: { xs: 'none', md: 'block' },
-              }}
-            >
-              <AccountBalanceWalletIcon />
-            </SvgIcon>
-          }
+          startIcon={<AccountBalanceWalletIcon />}
           endIcon={
             connected &&
             !hideWalletAccountText && (
