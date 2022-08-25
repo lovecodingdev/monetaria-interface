@@ -192,15 +192,11 @@ export const MarketSwitcher = () => {
         },
       }}
     >
-      {/* <Box>
-        <Typography variant="subheader2" color="text.secondary" sx={{ px: 4, pt: 2 }}>
-          <Trans>
-            {ENABLE_TESTNET || STAGING_ENV
-              ? 'Select Monetaria Testnet Market'
-              : 'Select Monetaria Market'}
-          </Trans>
+      <Box>
+        <Typography variant="subheader2" color="text.secondary" sx={{ px: 4, pt: 4  }}>
+          Select Market
         </Typography>
-      </Box> */}
+      </Box>
 
       {/* {isV3MarketsAvailable && (
         <Box sx={{ mx: '18px', display: 'flex', justifyContent: 'center' }}>
@@ -299,6 +295,12 @@ export const MarketSwitcher = () => {
                 (!market.v3 && selectedMarketVersion === SelectedMarketVersion.V3)
                   ? 'none'
                   : 'flex',
+              margin: '16px',
+              border: '1px solid rgba(21, 126, 255, 0.15)',
+              borderRadius: '8px',
+              '&.Mui-selected': {
+                background: '#F3F8FF',
+              }
             }}
           >
             <MarketLogo
