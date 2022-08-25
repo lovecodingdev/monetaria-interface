@@ -1,4 +1,4 @@
-import { API_ETH_MOCK_ADDRESS } from '@aave/contract-helpers';
+import { API_ETH_MOCK_ADDRESS, InterestRate } from '@aave/contract-helpers';
 import { USD_DECIMALS, valueToBigNumber } from '@aave/math-utils';
 import { Trans } from '@lingui/macro';
 import { Alert, Box, useMediaQuery, useTheme } from '@mui/material';
@@ -71,6 +71,17 @@ export const SupplyAssetsList = () => {
         ? false
         : !hasDifferentCollateral;
 
+      const userRes = user?.userReservesData.find((userRes) => userRes.reserve.id === reserve.id);
+      const userData = {
+        underlyingBalance: userRes?.underlyingBalance || '0',
+        underlyingBalanceUSD: userRes?.underlyingBalanceUSD || '0',
+        variableBorrows: userRes?.variableBorrows || '0',
+        variableBorrowsUSD: userRes?.variableBorrowsUSD || '0',
+        stableBorrows: userRes?.stableBorrows || '0',
+        stableBorrowsUSD: userRes?.stableBorrowsUSD || '0',
+        borrowRateMode: userRes?.variableBorrows !== '0' ? InterestRate.Variable : InterestRate.Stable,
+      }
+  
       if (reserve.isWrappedBaseAsset) {
         let baseAvailableToDeposit = valueToBigNumber(
           walletBalances[API_ETH_MOCK_ADDRESS.toLowerCase()]?.amount
@@ -101,6 +112,7 @@ export const SupplyAssetsList = () => {
             usageAsCollateralEnabledOnUser,
             detailsAddress: reserve.underlyingAsset,
             id: reserve.id + 'base',
+            ...userData,
           },
           {
             ...reserve,
@@ -112,6 +124,7 @@ export const SupplyAssetsList = () => {
               Number(availableToDepositUSD) <= 0 ? '0' : availableToDepositUSD.toString(),
             usageAsCollateralEnabledOnUser,
             detailsAddress: reserve.underlyingAsset,
+            ...userData,
           },
         ];
       }
@@ -126,6 +139,7 @@ export const SupplyAssetsList = () => {
           Number(availableToDepositUSD) <= 0 ? '0' : availableToDepositUSD.toString(),
         usageAsCollateralEnabledOnUser,
         detailsAddress: reserve.underlyingAsset,
+        ...userData,
       };
     })
     .flat();
@@ -143,9 +157,10 @@ export const SupplyAssetsList = () => {
     ? filteredSupplyReserves
     : sortedSupplyReserves;
 
-  
   const head = [
     <Trans key="Balance">Balance</Trans>,
+    <Trans key="Supplied Balance">Supplied</Trans>,
+    <Trans key="Borrowed Balance">Borrowed</Trans>,
     <Trans key="APY">APY</Trans>,
     <Trans key="Can be collateral">Can be collateral</Trans>,
     <Trans key="APY, variable">APY, variable</Trans>,

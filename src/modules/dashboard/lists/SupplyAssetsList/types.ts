@@ -1,4 +1,5 @@
 import { ReserveIncentiveResponse } from '../../../../hooks/app-data-provider/useIncentiveData';
+import { InterestRate } from '@aave/contract-helpers';
 
 export type SupplyAssetsItem = {
   underlyingAsset: string;
@@ -18,4 +19,11 @@ export type SupplyAssetsItem = {
   isActive?: boolean;
   usageAsCollateralEnabledOnUser: boolean;
   detailsAddress: string;
+  underlyingBalance: string;
+  underlyingBalanceUSD: string;
+  variableBorrows: string,
+  variableBorrowsUSD: string,
+  stableBorrows: string,
+  stableBorrowsUSD: string,
+  borrowRateMode: InterestRate,
 };

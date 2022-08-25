@@ -21,7 +21,7 @@ export const ListHeader = ({ head }: ListHeaderProps) => {
 
       {head.map((title, i) => {
         return (
-          <ListColumn key={i} align={title.key == "Actions" ? "right" : 'center'}>
+          <ListColumn key={i} align={title.key == "Actions" ? "right" : 'center'} minWidth={title.key == "Actions" ? 170 : 0}>
             <ListHeaderTitle>{title}</ListHeaderTitle>
           </ListColumn>
         )

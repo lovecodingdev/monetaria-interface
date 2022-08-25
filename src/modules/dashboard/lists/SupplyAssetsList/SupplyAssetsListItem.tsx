@@ -15,6 +15,7 @@ import { ListValueColumn } from '../ListValueColumn';
 import { SupplyAssetsItem } from './types';
 import { FormattedNumber } from '../../../../components/primitives/FormattedNumber';
 import { NoData } from '../../../../components/primitives/NoData';
+import { InterestRate } from '@aave/contract-helpers';
 
 export const SupplyAssetsListItem = ({
   symbol,
@@ -32,12 +33,17 @@ export const SupplyAssetsListItem = ({
   isIsolated,
   usageAsCollateralEnabledOnUser,
   detailsAddress,
+  underlyingBalance,
+  underlyingBalanceUSD,
+  variableBorrows,
+  variableBorrowsUSD,
+  stableBorrows,
+  stableBorrowsUSD,
+  borrowRateMode,
 }: SupplyAssetsItem) => {
   const { currentMarket } = useProtocolDataContext();
   // const { openSupply, openBorrow } = useModalContext();
-  const openSupply = () => {
 
-  }
   return (
     <ListItemWrapper
       symbol={symbol}
@@ -62,7 +68,17 @@ export const SupplyAssetsListItem = ({
           />
         }
       />
-
+      <ListValueColumn
+        value={Number(underlyingBalance)}
+        subValue={Number(underlyingBalanceUSD)}
+        disabled={Number(underlyingBalance) === 0}
+      />
+      <ListValueColumn
+        value={Number(borrowRateMode === InterestRate.Variable ? variableBorrows : stableBorrows)}
+        subValue={Number(
+          borrowRateMode === InterestRate.Variable ? variableBorrowsUSD : stableBorrowsUSD
+        )}
+      />
       <ListAPRColumn value={Number(supplyAPY)} incentives={aIncentivesData} symbol={symbol} />
 
       <ListColumn>
@@ -127,7 +143,8 @@ export const SupplyAssetsListItem = ({
             // onClick={() => openSupply(underlyingAsset)}
           >
             <Trans>Supply</Trans>
-          </Button></Link>
+          </Button>
+        </Link>
         {/* <Button
           disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
           variant="contained"
