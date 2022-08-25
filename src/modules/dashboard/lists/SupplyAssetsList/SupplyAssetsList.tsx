@@ -159,10 +159,10 @@ export const SupplyAssetsList = () => {
 
   const head = [
     <Trans key="Balance">Balance</Trans>,
-    <Trans key="Supplied Balance">Supplied</Trans>,
-    <Trans key="Borrowed Balance">Borrowed</Trans>,
     <Trans key="APY">APY</Trans>,
     <Trans key="Can be collateral">Can be collateral</Trans>,
+    <Trans key="Supplied Balance">Supply Balance</Trans>,
+    <Trans key="Borrowed Balance">Borrow Balance</Trans>,
     <Trans key="APY, variable">APY, variable</Trans>,
     <Trans key="APY, stable">APY, stable</Trans>,
     <Trans key="Actions">Actions</Trans>,

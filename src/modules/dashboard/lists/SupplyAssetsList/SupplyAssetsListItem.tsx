@@ -68,6 +68,14 @@ export const SupplyAssetsListItem = ({
           />
         }
       />
+      <ListAPRColumn value={Number(supplyAPY)} incentives={aIncentivesData} symbol={symbol} />
+
+      <ListColumn>
+        <ListItemCanBeCollateral
+          isIsolated={isIsolated}
+          usageAsCollateralEnabled={usageAsCollateralEnabledOnUser}
+        />
+      </ListColumn>
       <ListValueColumn
         value={Number(underlyingBalance)}
         subValue={Number(underlyingBalanceUSD)}
@@ -79,15 +87,6 @@ export const SupplyAssetsListItem = ({
           borrowRateMode === InterestRate.Variable ? variableBorrowsUSD : stableBorrowsUSD
         )}
       />
-      <ListAPRColumn value={Number(supplyAPY)} incentives={aIncentivesData} symbol={symbol} />
-
-      <ListColumn>
-        <ListItemCanBeCollateral
-          isIsolated={isIsolated}
-          usageAsCollateralEnabled={usageAsCollateralEnabledOnUser}
-        />
-      </ListColumn>
-
       <ListColumn>
         <Box
           sx={{
