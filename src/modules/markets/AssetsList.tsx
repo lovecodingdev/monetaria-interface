@@ -21,7 +21,6 @@ export default function AssetsList() {
   const { reserves, loading } = useAppDataContext();
   const { currentMarketData, currentNetworkConfig } = useProtocolDataContext();
 
-  
   const theme = useTheme();
   const isTableChangedToCards = useMediaQuery(theme.breakpoints.down('xsm'));
 
