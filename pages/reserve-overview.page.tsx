@@ -88,10 +88,14 @@ export default function ReserveOverview() {
               mr: { xs: 0, lg: 4 },
             }}
           >
-            {/* {reserve && <ReserveConfiguration reserve={reserve} />} */}
-            <ReserveSupplyInfo reserve={reserve} />
-            <ReserveBorrowInfo reserve={reserve} />
-            <ReserveEModeInfo reserve={reserve} />
+            {reserve && 
+              <>
+                {/* <ReserveConfiguration reserve={reserve} /> */}
+                <ReserveSupplyInfo reserve={reserve} />
+                <ReserveBorrowInfo reserve={reserve} />
+                <ReserveEModeInfo reserve={reserve} />
+              </>
+            }
           </Stack>
 
           {/* * Right panel with actions */}
@@ -104,7 +108,7 @@ export default function ReserveOverview() {
             }}
           >
             <ReserveActions underlyingAsset={underlyingAsset} />
-            <ReserveInterestRateModel reserve={reserve} />
+            {reserve && <ReserveInterestRateModel reserve={reserve} />}
           </Stack>
         </Box>
       </ContentContainer>
