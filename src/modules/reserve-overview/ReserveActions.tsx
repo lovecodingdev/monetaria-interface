@@ -208,7 +208,7 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
 
   return (
     <PaperWrapper>
-      <Row align="flex-start" mb={6}>
+      <Row align="flex-start" mb={0}>
         {alert}
       </Row>
       {/* <Row
@@ -278,7 +278,7 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
           display: 'flex',
         }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: "10px" }}>
-            <Typography variant={"secondary8"}>Wallet balance</Typography>
+            <Typography variant={"secondary14"}>Wallet balance</Typography>
             <FormattedNumber
               value={balance?.amount || 0}
               variant="h3"
@@ -286,7 +286,7 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
             />
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: "10px" }}>
-            <Typography variant={"secondary8"}>Available to supply</Typography>
+            <Typography variant={"secondary14"}>Available to supply</Typography>
             <FormattedNumber
               value={maxAmountToSupply}
               variant="h3"
@@ -294,7 +294,7 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
             />
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: "10px" }}>
-            <Typography variant={"secondary8"}>Available to borrow</Typography>
+            <Typography variant={"secondary14"}>Available to borrow</Typography>
             <FormattedNumber
               value={canBorrow ? maxAmountToBorrow : '0'}
               variant="h3"

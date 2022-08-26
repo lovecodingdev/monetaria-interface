@@ -40,9 +40,8 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
   const router = useRouter();
   const { reserves, loading } = useAppDataContext();
   const { currentMarket, currentNetworkConfig, currentChainId } = useProtocolDataContext();
-  const { market, network } = getMarketInfoById(currentMarket);
+  // const { market, network } = getMarketInfoById(currentMarket);
   const { addERC20Token, switchNetwork, chainId: connectedChainId, connected } = useWeb3Context();
-  const [mode, setMode] = useState<'overview' | 'actions' | ''>('');
 
   const theme = useTheme();
   const downToSM = useMediaQuery(theme.breakpoints.down('sm'));
@@ -83,7 +82,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
     return loading ? (
       <Skeleton width={60} height={28} sx={{ background: '#074592' }} />
     ) : (
-      <Typography variant={valueTypographyVariant}>{poolReserve.name}</Typography>
+      <Typography variant={valueTypographyVariant} sx={{ color: '#000' }}>{poolReserve.name}</Typography>
     );
   };
 
@@ -125,12 +124,12 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
       <TopInfoPanel
         titleComponent={
           <Box>
-            <Box
+            {/* <Box
               sx={{
                 display: 'flex',
                 alignItems: downToSM ? 'flex-start' : 'center',
                 alignSelf: downToSM ? 'flex-start' : 'center',
-                mb: 4,
+                // mb: 4,
                 minHeight: '40px',
                 flexDirection: downToSM ? 'column' : 'row',
               }}
@@ -138,105 +137,85 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
 
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <MarketLogo size={20} logo={network.networkLogoPath} />
-                <Typography variant="h3"
-                  sx={{ color: mode === 'dark' ? '#A5A8B6' : '#000' }}
-                  component="div">
+                <Typography variant="h3" sx={{ color: '#000' }} component="div">
                   {market.marketTitle} <Trans>Market</Trans>
                 </Typography>
-                {market.v3 && (
-                  <Box
-                    sx={{
-                      color: '#fff',
-                      px: 2,
-                      mx: 2,
-                      borderRadius: '12px',
-                      background: (theme) => theme.palette.gradients.aaveGradient,
-                    }}
-                  >
-                    <Typography variant="subheader2">Version 3</Typography>
+              </Box>
+            </Box> */}
+
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <ReserveIcon />
+              <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
+                <ReserveName /> 
+                {!loading && (
+                  <Typography sx={{ color: '#A5A8B6' }} variant={symbolsTypographyVariant}>
+                    ({poolReserve.symbol})
+                  </Typography>
+                )}
+                {loading ? (
+                  <Skeleton width={16} height={16} sx={{ ml: 1, background: '#074592' }} />
+                ) : (
+                  <Box sx={{ display: 'flex' }}>
+                    <TokenLinkDropdown poolReserve={poolReserve} downToSM={downToSM} />
+                    {connected && (
+                      <AddTokenDropdown
+                        poolReserve={poolReserve}
+                        downToSM={downToSM}
+                        switchNetwork={switchNetwork}
+                        addERC20Token={addERC20Token}
+                        currentChainId={currentChainId}
+                        connectedChainId={connectedChainId}
+                      />
+                    )}
                   </Box>
                 )}
               </Box>
             </Box>
-
-            {downToSM && (
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 6 }}>
-                <ReserveIcon />
-                <Box>
-                  {!loading && (
-                    <Typography sx={{ color: '#A5A8B6' }} variant="caption">
-                      {poolReserve.symbol}
-                    </Typography>
-                  )}
-                  <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
-                    <ReserveName />
-                    {loading ? (
-                      <Skeleton width={16} height={16} sx={{ ml: 1, background: '#074592' }} />
-                    ) : (
-                      <Box sx={{ display: 'flex' }}>
-                        <TokenLinkDropdown poolReserve={poolReserve} downToSM={downToSM} />
-                        {connected && (
-                          <AddTokenDropdown
-                            poolReserve={poolReserve}
-                            downToSM={downToSM}
-                            switchNetwork={switchNetwork}
-                            addERC20Token={addERC20Token}
-                            currentChainId={currentChainId}
-                            connectedChainId={connectedChainId}
-                          />
-                        )}
-                      </Box>
-                    )}
-                  </Box>
-                </Box>
-              </Box>
-            )}
           </Box>
         }
       >
         {/* {!downToSM && (
-        <>
-          <TopInfoPanelItem
-            title={!loading && <Trans>{poolReserve.symbol}</Trans>}
-            withoutIconWrapper
-            icon={<ReserveIcon />}
-            loading={loading}
-          >
-            <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
-              <ReserveName />
-              {loading ? (
-                <Skeleton width={16} height={16} sx={{ ml: 1, background: '#074592' }} />
-              ) : (
-                <Box sx={{ display: 'flex' }}>
-                  <TokenLinkDropdown poolReserve={poolReserve} downToSM={downToSM} />
-                  {connected && (
-                    <AddTokenDropdown
-                      poolReserve={poolReserve}
-                      downToSM={downToSM}
-                      switchNetwork={switchNetwork}
-                      addERC20Token={addERC20Token}
-                      currentChainId={currentChainId}
-                      connectedChainId={connectedChainId}
-                    />
-                  )}
-                </Box>
-              )}
-            </Box>
-          </TopInfoPanelItem>
-          <Divider
-            orientation="vertical"
-            flexItem
-            sx={{ my: 1, borderColor: 'rgba(235, 235, 239, 0.08)' }}
-          />
-        </>
-      )} */}
+          <>
+            <TopInfoPanelItem
+              title={!loading && <Trans>{poolReserve.symbol}</Trans>}
+              withoutIconWrapper
+              icon={<ReserveIcon />}
+              loading={loading}
+            >
+              <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
+                <ReserveName />
+                {loading ? (
+                  <Skeleton width={16} height={16} sx={{ ml: 1, background: '#074592' }} />
+                ) : (
+                  <Box sx={{ display: 'flex' }}>
+                    <TokenLinkDropdown poolReserve={poolReserve} downToSM={downToSM} />
+                    {connected && (
+                      <AddTokenDropdown
+                        poolReserve={poolReserve}
+                        downToSM={downToSM}
+                        switchNetwork={switchNetwork}
+                        addERC20Token={addERC20Token}
+                        currentChainId={currentChainId}
+                        connectedChainId={connectedChainId}
+                      />
+                    )}
+                  </Box>
+                )}
+              </Box>
+            </TopInfoPanelItem>
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{ my: 1, borderColor: 'rgba(235, 235, 239, 0.08)' }}
+            />
+          </>
+        )} */}
         <TopInfoPanelItem title={<Trans>Reserve Size</Trans>} loading={loading} hideIcon>
           <FormattedNumber
             value={poolReserve?.totalLiquidityUSD}
             symbol="USD"
             variant={valueTypographyVariant}
             symbolsVariant={symbolsTypographyVariant}
-            symbolsColor="#A5A8B6"
           />
         </TopInfoPanelItem>
 
@@ -246,7 +225,6 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
             symbol="USD"
             variant={valueTypographyVariant}
             symbolsVariant={symbolsTypographyVariant}
-            symbolsColor="#A5A8B6"
           />
         </TopInfoPanelItem>
 
@@ -256,7 +234,6 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
             percent
             variant={valueTypographyVariant}
             symbolsVariant={symbolsTypographyVariant}
-            symbolsColor="#A5A8B6"
           />
         </TopInfoPanelItem>
 

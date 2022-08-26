@@ -18,10 +18,10 @@ import { MainLayout } from 'src/layouts/MainLayout';
 import { ReserveActions } from 'src/modules/reserve-overview/ReserveActions';
 import { ReserveConfiguration } from 'src/modules/reserve-overview/ReserveConfiguration';
 import { ReserveTopDetails } from 'src/modules/reserve-overview/ReserveTopDetails';
-import { ReserveDetail } from 'src/modules/reserve-overview/ReserveDetail';
+import { ReserveSupplyInfo } from 'src/modules/reserve-overview/ReserveSupplyInfo';
 import { ReserveBorrowInfo } from 'src/modules/reserve-overview/ReserveBorrowInfo';
 import { ReserveEModeInfo } from 'src/modules/reserve-overview/ReserveEModeInfo';
-import { ReserveInterestedRateModel } from 'src/modules/reserve-overview/ReserveInterestedRateModel';
+import { ReserveInterestRateModel } from 'src/modules/reserve-overview/ReserveInterestRateModel';
 
 import { ContentContainer } from '../src/components/ContentContainer';
 
@@ -89,9 +89,9 @@ export default function ReserveOverview() {
             }}
           >
             {/* {reserve && <ReserveConfiguration reserve={reserve} />} */}
-            <ReserveDetail />
-            <ReserveBorrowInfo />
-            <ReserveEModeInfo />
+            <ReserveSupplyInfo reserve={reserve} />
+            <ReserveBorrowInfo reserve={reserve} />
+            <ReserveEModeInfo reserve={reserve} />
           </Stack>
 
           {/* * Right panel with actions */}
@@ -104,7 +104,7 @@ export default function ReserveOverview() {
             }}
           >
             <ReserveActions underlyingAsset={underlyingAsset} />
-            <ReserveInterestedRateModel />
+            <ReserveInterestRateModel reserve={reserve} />
           </Stack>
         </Box>
       </ContentContainer>
