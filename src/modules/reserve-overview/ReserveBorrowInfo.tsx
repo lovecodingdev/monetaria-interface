@@ -3,6 +3,10 @@ import { ReserveNormalPaper } from "./ReserveNormalPaper"
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 import { ComputedReserveData } from 'src/hooks/app-data-provider/useAppDataProvider';
 
+import { Trans } from '@lingui/macro';
+import { StableAPYTooltip } from 'src/components/infoTooltips/StableAPYTooltip';
+import { VariableAPYTooltip } from 'src/components/infoTooltips/VariableAPYTooltip';
+
 export const ReserveBorrowInfo = ({reserve}: {reserve: ComputedReserveData}) => {
   return (
     <ReserveNormalPaper title="Borrow info">
@@ -16,7 +20,11 @@ export const ReserveBorrowInfo = ({reserve}: {reserve: ComputedReserveData}) => 
         <Stack direction='row' justifyContent={'space-between'} style={{
           width: "100%"
         }}>
-          <Typography variant="secondary14">APY, variable</Typography>
+          <VariableAPYTooltip
+            text={<Trans>APY, variable</Trans>}
+            key="APY_res_variable_type"
+            variant="secondary14"
+          />
           <FormattedNumber
             value={reserve.variableBorrowAPY}
             percent
@@ -27,7 +35,11 @@ export const ReserveBorrowInfo = ({reserve}: {reserve: ComputedReserveData}) => 
         <Stack direction='row' justifyContent={'space-between'} style={{
           width: "100%"
         }}>
-          <Typography variant="secondary14">APY, stable</Typography>
+          <StableAPYTooltip
+            text={<Trans>APY, stable</Trans>}
+            key="APY_res_stable_type"
+            variant="secondary14"
+          />
           <FormattedNumber
             value={reserve.stableBorrowAPY}
             percent

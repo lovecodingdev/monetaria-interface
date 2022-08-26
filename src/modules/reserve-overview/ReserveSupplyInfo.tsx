@@ -2,6 +2,11 @@ import { Stack, Typography } from "@mui/material";
 import { ReserveNormalPaper } from "./ReserveNormalPaper"
 import { ComputedReserveData } from 'src/hooks/app-data-provider/useAppDataProvider';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
+import { Trans } from '@lingui/macro';
+
+import { MaxLTVTooltip } from 'src/components/infoTooltips/MaxLTVTooltip';
+import { LiquidationThresholdTooltip } from 'src/components/infoTooltips/LiquidationThresholdTooltip';
+import { LiquidationPenaltyTooltip } from 'src/components/infoTooltips/LiquidationPenaltyTooltip';
 
 export const ReserveSupplyInfo = ({reserve}: {reserve: ComputedReserveData} ) => {
   return (
@@ -43,7 +48,7 @@ export const ReserveSupplyInfo = ({reserve}: {reserve: ComputedReserveData} ) =>
         <Stack direction='row' justifyContent={'space-between'} style={{
           width: "100%"
         }}>
-          <Typography variant="secondary14">Max LTV</Typography>
+          <MaxLTVTooltip variant="secondary14" text={<Trans>Max LTV</Trans>} />
           <FormattedNumber
             value={reserve.formattedBaseLTVasCollateral}
             percent
@@ -54,7 +59,7 @@ export const ReserveSupplyInfo = ({reserve}: {reserve: ComputedReserveData} ) =>
         <Stack direction='row' justifyContent={'space-between'} style={{
           width: "100%"
         }}>
-          <Typography variant="secondary14">Liquidation threshold</Typography>
+          <LiquidationThresholdTooltip variant="secondary14" text={<Trans>Liquidation threshold</Trans>} />
           <FormattedNumber
             value={reserve.formattedReserveLiquidationThreshold}
             percent
@@ -65,7 +70,7 @@ export const ReserveSupplyInfo = ({reserve}: {reserve: ComputedReserveData} ) =>
         <Stack direction='row' justifyContent={'space-between'} style={{
           width: "100%"
         }}>
-          <Typography variant="secondary14">Liquidation penalty</Typography>
+          <LiquidationPenaltyTooltip variant="secondary14" text={<Trans>Liquidation penalty</Trans>} />
           <FormattedNumber
             value={reserve.formattedReserveLiquidationBonus}
             percent
