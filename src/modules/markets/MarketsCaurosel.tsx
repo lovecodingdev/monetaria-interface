@@ -82,7 +82,7 @@ export default function MarketsCaurosel() {
         <Swiper
           navigation
           breakpoints={breakpoint}
-          spaceBetween={20}
+          spaceBetween={16}
           loop={true}
           modules={[Navigation, Autoplay]}
           // freeMode={true}

@@ -24,7 +24,7 @@ export const CauroselItem = (props: ComputedReserveData) => {
           justifyContent: 'space-around',
         }}
       >
-        <Typography variant="secondary12" component="div">
+        <Typography variant="secondary12" component="div" sx={{ whiteSpace: 'nowrap' }}>
           {String(props.name).length > 12 ? props.name.slice(0, 12) + '...' : props.name}
         </Typography>
         <Typography
