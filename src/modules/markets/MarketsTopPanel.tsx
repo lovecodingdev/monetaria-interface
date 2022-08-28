@@ -1,6 +1,6 @@
 import { valueToBigNumber } from '@aave/math-utils';
 import { Trans } from '@lingui/macro';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery, useTheme, Box } from '@mui/material';
 import * as React from 'react';
 import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
 
@@ -8,6 +8,7 @@ import { FormattedNumber } from '../../components/primitives/FormattedNumber';
 import { TopInfoPanel } from '../../components/TopInfoPanel/TopInfoPanel';
 import { TopInfoPanelItem } from '../../components/TopInfoPanel/TopInfoPanelItem';
 import { useAppDataContext } from '../../hooks/app-data-provider/useAppDataProvider';
+import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 
 import TotalBorrowIcon from '../../../public/icons/markets/total-borrow-indicator.svg';
 import TotalSupplyIcon from '../../../public/icons/markets/total-supply-indicator.svg';
@@ -15,6 +16,7 @@ import PieIcon from '../../../public/icons/markets/pie-icon.svg';
 import { NoData } from '../../components/primitives/NoData';
 
 export const MarketsTopPanel = () => {
+  const { currentNetworkConfig, currentMarketData, currentMarket } = useProtocolDataContext();
   const { reserves, loading } = useAppDataContext();
   const { currentAccount } = useWeb3Context();
 
@@ -38,7 +40,20 @@ export const MarketsTopPanel = () => {
   const symbolsVariant = downToSM ? 'secondary16' : 'secondary21';
 
   return (
-    <TopInfoPanel pageTitle={<Trans>Markets</Trans>}>
+    <TopInfoPanel pageTitle={
+        <Box 
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'row',
+            gap: 2,
+          }}
+        >
+          <img src={currentNetworkConfig.networkLogoPath} alt="" width="40" height="40" />
+          {currentMarketData.marketTitle} Market
+        </Box>
+      }
+    >
       <TopInfoPanelItem
         icon={<PieIcon />}
         hideIcon
