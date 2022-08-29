@@ -9,7 +9,7 @@ export const ContentContainer = ({ children }: ContentContainerProps) => {
   return (
     <Box
       sx={{
-        mt: '24px',
+        mt: { xs: '16px', md: '24px' },
       }}
     >
       <Container>{children}</Container>

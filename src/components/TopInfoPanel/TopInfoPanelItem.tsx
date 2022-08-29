@@ -53,7 +53,7 @@ export const TopInfoPanelItem = ({
         ) : (
           <Box
             sx={{
-              display: { xs: 'none', md: 'flex' },
+              display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               border: '1px solid #EEF0F2',

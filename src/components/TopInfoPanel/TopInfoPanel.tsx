@@ -23,7 +23,7 @@ export const TopInfoPanel = ({
         sx={{
           bgcolor: 'background.header',
           py: { xs: 9, md: 10, lg: '20px', xl: '20px', xxl: '20px' },
-          mt: '24px',
+          mt: { xs: '16px', md: '24px' },
           color: '#F1F1F3',
           ...borderGradient
         }}

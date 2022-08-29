@@ -563,12 +563,12 @@ export function getThemedComponents(theme: Theme) {
             flex: 1,
             paddingBottom: '39px',
             [theme.breakpoints.up('xs')]: {
-              paddingLeft: '8px',
-              paddingRight: '8px',
+              paddingLeft: '16px',
+              paddingRight: '16px',
             },
             [theme.breakpoints.up('xsm')]: {
-              paddingLeft: '20px',
-              paddingRight: '20px',
+              paddingLeft: '32px',
+              paddingRight: '32px',
             },
             [theme.breakpoints.up('sm')]: {
               paddingLeft: '48px',

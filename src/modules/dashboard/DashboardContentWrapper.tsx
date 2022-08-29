@@ -19,16 +19,17 @@ export const DashboardContentWrapper = ({ isBorrow }: DashboardContentWrapperPro
     <Box>
       <Box
         sx={{
-          display: isDesktop ? 'flex' : 'block',
+          display: 'flex',
+          flexDirection: isDesktop ? 'row' : 'column',
           justifyContent: 'space-between',
           alignItems: 'flex-start',
           gap: 4,
         }}
       >
-        <Box sx={{ display: { xs: isBorrow ? 'none' : 'block', lg: 'block' }, width: paperWidth, }}>
+        <Box sx={{ flex: 1, width: paperWidth }}>
           <SuppliedPositionsList />
         </Box>
-        <Box sx={{ display: { xs: !isBorrow ? 'none' : 'block', lg: 'block' }, width: paperWidth }}>
+        <Box sx={{ flex: 1, width: paperWidth }}>
           <BorrowedPositionsList />
         </Box>
       </Box>

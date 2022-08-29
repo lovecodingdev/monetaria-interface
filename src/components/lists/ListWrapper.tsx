@@ -41,7 +41,7 @@ export const ListWrapper = ({
   return (
     <Paper
       sx={(theme) => ({
-        mt: withTopMargin ? 4 : 0,
+        mt: withTopMargin ? { xs: 4, md: 6 } : 0,
         p: 4,
         overflow: 'hidden',
         border: '1px solid #00aae98a',
@@ -52,6 +52,7 @@ export const ListWrapper = ({
         sx={{
           // px: { xs: 4, xsm: 6 },
           // py: { xs: 3.5, xsm: 4 },
+          pb: 4,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',

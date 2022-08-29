@@ -35,7 +35,7 @@ export const HealthFactorNumber = ({
       sx={{
         display: 'inline-flex',
         alignItems: { xs: 'flex-start', xsm: 'center' },
-        flexDirection: { xs: 'column', xsm: 'row' },
+        flexDirection: 'row',
       }}
       data-cy={'HealthFactorTopPannel'}
     >
