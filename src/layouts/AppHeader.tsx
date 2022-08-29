@@ -40,7 +40,7 @@ function HideOnScroll({ children }: Props) {
 export function AppHeader() {
   const { breakpoints } = useTheme();
   const md = useMediaQuery(breakpoints.down('md'));
-  const sm = useMediaQuery(breakpoints.down('sm'));
+  const xsm = useMediaQuery(breakpoints.down('xsm'));
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [walletWidgetOpen, setWalletWidgetOpen] = useState(false);
@@ -124,9 +124,9 @@ export function AppHeader() {
           onClick={() => setMobileMenuOpen(false)}
         >
           <img src={uiConfig.appLogo} alt="An SVG of an eye" />
-          <img src={uiConfig.monetariaText} alt="An SVG of an eye" />
+          {!xsm && <img src={uiConfig.monetariaText} alt="An SVG of an eye" />}
         </Box>
-        <Box sx={{ mr: sm ? 1 : 3 }}>
+        <Box sx={{ mr: xsm ? 1 : 3 }}>
           {ENABLE_TESTNET && (
             <ContentWithTooltip tooltipContent={testnetTooltip} offset={[0, -4]} withoutHover>
               <Button

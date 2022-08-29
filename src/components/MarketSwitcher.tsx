@@ -141,32 +141,34 @@ export const MarketSwitcher = () => {
                 logo={network.networkLogoPath}
                 testChainName={getMarketHelpData(market.marketTitle).testChainName}
               />
-              <Box sx={{ mr: 1, display: 'inline-flex', alignItems: 'flex-start' }}>
-                <Typography
-                  variant={upToLG ? 'display1' : 'h1'}
-                  sx={{
-                    fontSize: '16px',
-                    color: '#074592',
-                    lineHeight: '1.55rem',
-                    mr: 1,
-                  }}
-                >
-                  {getMarketHelpData(market.marketTitle).name} {market.isFork ? 'Fork' : ''}
-                  {upToLG && ' Market'}
-                </Typography>
-                {/* {market.v3 && (
-                  <Box
+              {!downToXSM &&
+                <Box sx={{ mr: 1, display: 'inline-flex', alignItems: 'flex-start' }}>
+                  <Typography
+                    variant={upToLG ? 'display1' : 'h1'}
                     sx={{
-                      color: '#fff',
-                      px: 2,
-                      borderRadius: '12px',
-                      background: (theme) => theme.palette.gradients.aaveGradient,
+                      fontSize: '16px',
+                      color: '#074592',
+                      lineHeight: '1.55rem',
+                      mr: 1,
                     }}
                   >
-                    <Typography variant="subheader2">Version 3</Typography>
-                  </Box>
-                )} */}
-              </Box>
+                    {getMarketHelpData(market.marketTitle).name} {market.isFork ? 'Fork' : ''}
+                    {upToLG && ' Market'}
+                  </Typography>
+                  {/* {market.v3 && (
+                    <Box
+                      sx={{
+                        color: '#fff',
+                        px: 2,
+                        borderRadius: '12px',
+                        background: (theme) => theme.palette.gradients.aaveGradient,
+                      }}
+                    >
+                      <Typography variant="subheader2">Version 3</Typography>
+                    </Box>
+                  )} */}
+                </Box>
+              }
             </Box>
           );
         },

@@ -1,4 +1,4 @@
-import { MenuIcon } from '@heroicons/react/outline';
+// import { MenuIcon } from '@heroicons/react/outline';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import {
@@ -23,6 +23,7 @@ import { LanguageListItem, LanguagesList } from './components/LanguageSwitcher';
 import { MobileCloseButton } from './components/MobileCloseButton';
 import { NavItems } from './components/NavItems';
 import { TestNetModeSwitcher } from './components/TestNetModeSwitcher';
+import MenuIcon from 'public/icons/menu.svg';
 
 interface MobileMenuProps {
   open: boolean;
@@ -56,13 +57,11 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
         <MobileCloseButton setOpen={setOpen} />
       ) : (
         <Button
-          variant="surface"
-          sx={{ p: '7px 8px', minWidth: 'unset', ml: 2 }}
+          // variant="surface"
+          sx={{ p: '0px', minWidth: 'unset', ml: 2 }}
           onClick={() => setOpen(true)}
         >
-          <SvgIcon sx={{ color: '#F1F1F3' }} fontSize="small">
-            <MenuIcon />
-          </SvgIcon>
+          <MenuIcon />
         </Button>
       )}
 
