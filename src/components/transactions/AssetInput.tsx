@@ -1,4 +1,6 @@
+import { ChevronDownIcon } from '@heroicons/react/solid';
 import { Trans } from '@lingui/macro';
+import { ChevronRight } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -159,6 +161,7 @@ export const AssetInput = <T extends Asset = Asset>({
                 <Typography variant="h3" sx={{ lineHeight: '28px' }} data-cy={'inputAsset'}>
                   {symbol}
                 </Typography>
+                <ChevronRight sx={{transform: 'rotate(90deg)'}} />
               </Box>
             </ButtonBase>
           ) : (
