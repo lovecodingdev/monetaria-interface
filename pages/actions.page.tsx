@@ -18,15 +18,17 @@ import { ActionsTopDetails } from 'src/modules/actions/ActionsTopDetails';
 
 import { ContentContainer } from '../src/components/ContentContainer';
 import { ActionTabs } from '../src/components/transactions/ActionTabs/ActionTabs';
+import { TokenSelectModal } from 'src/components/transactions/ActionTabs/TokenSelectModal';
+import { useModalContext } from 'src/hooks/useModal';
 
 export default function Actions() {
   const router = useRouter();
   const { reserves } = useAppDataContext();
-  const underlyingAsset = router.query.underlyingAsset as string;
+  const { openSelectToken, close } = useModalContext();
+  const [underlyingAsset, setUnderlyingAsset] = useState(router.query.underlyingAsset as string);
   const type = router.query.type as string;
   const { breakpoints } = useTheme();
   const lg = useMediaQuery(breakpoints.up('lg'));
-
   const [mode, setMode] = useState<'overview' | 'actions' | ''>('');
 
   useEffect(() => {
@@ -39,6 +41,12 @@ export default function Actions() {
   ) as ComputedReserveData;
 
   const isOverview = mode === 'overview';
+
+  const onSelectReserve = (r: ComputedReserveData) => {
+    console.log(r);
+    setUnderlyingAsset(r.underlyingAsset);
+    close();
+  }
 
   return (
     <Container>
@@ -54,6 +62,7 @@ export default function Actions() {
         <ActionsTopDetails underlyingAsset={underlyingAsset} />
         <ActionTabs underlyingAsset={underlyingAsset} witch={type} />
       </Box>
+      <TokenSelectModal onSelect={onSelectReserve}/>
     </Container>
   );
 }

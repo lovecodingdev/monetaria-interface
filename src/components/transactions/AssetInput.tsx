@@ -9,9 +9,11 @@ import {
   Select,
   SelectChangeEvent,
   Typography,
+  ButtonBase,
 } from '@mui/material';
 import React, { ReactNode } from 'react';
 import NumberFormat, { NumberFormatProps } from 'react-number-format';
+import { useModalContext } from 'src/hooks/useModal';
 
 import { CapType } from '../caps/helper';
 import { AvailableTooltip } from '../infoTooltips/AvailableTooltip';
@@ -88,6 +90,8 @@ export const AssetInput = <T extends Asset = Asset>({
   inputTitle,
   isMaxSelected,
 }: AssetInputProps<T>) => {
+  const { openSelectToken } = useModalContext();
+
   const handleSelect = (event: SelectChangeEvent) => {
     const newAsset = assets.find((asset) => asset.symbol === event.target.value) as T;
     onSelect && onSelect(newAsset);
@@ -145,16 +149,18 @@ export const AssetInput = <T extends Asset = Asset>({
           />
 
           {!onSelect || assets.length === 1 ? (
-            <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
-              <TokenIcon
-                aToken={asset.aToken}
-                symbol={asset.iconSymbol || asset.symbol}
-                sx={{ mr: 2, ml: 4 }}
-              />
-              <Typography variant="h3" sx={{ lineHeight: '28px' }} data-cy={'inputAsset'}>
-                {symbol}
-              </Typography>
-            </Box>
+            <ButtonBase onClick={()=>openSelectToken()} disableTouchRipple>
+              <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
+                <TokenIcon
+                  aToken={asset.aToken}
+                  symbol={asset.iconSymbol || asset.symbol}
+                  sx={{ mr: 2, ml: 4 }}
+                />
+                <Typography variant="h3" sx={{ lineHeight: '28px' }} data-cy={'inputAsset'}>
+                  {symbol}
+                </Typography>
+              </Box>
+            </ButtonBase>
           ) : (
             <FormControl>
               <Select

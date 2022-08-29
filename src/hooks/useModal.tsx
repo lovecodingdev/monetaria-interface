@@ -20,6 +20,7 @@ export enum ModalType {
   Swap,
   GovDelegation,
   GovVote,
+  SelectToken,
 }
 
 export interface ModalArgsType {
@@ -56,6 +57,7 @@ export interface ModalContextType<T extends ModalArgsType> {
   openSwap: (underlyingAsset: string) => void;
   openGovDelegation: () => void;
   openGovVote: (proposalId: string, support: boolean, power: string) => void;
+  openSelectToken: () => void;
   close: () => void;
   type?: ModalType;
   args: T;
@@ -153,6 +155,9 @@ export const ModalContextProvider: React.FC = ({ children }) => {
         openGovVote: (proposalId, support, power) => {
           setType(ModalType.GovVote);
           setArgs({ proposalId, support, power });
+        },
+        openSelectToken: () => {
+          setType(ModalType.SelectToken);
         },
         close: () => {
           setType(undefined);
