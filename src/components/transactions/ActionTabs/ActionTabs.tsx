@@ -32,6 +32,8 @@ const NewTabs = styled(Tabs)({
 
 const NewTab = styled(Tab)`
   margin: 0px 4px;
+  min-width: 60px;
+  padding: 4px 12px;
 
   &.Mui-selected, &:hover {
     background: #EEF0F2;
