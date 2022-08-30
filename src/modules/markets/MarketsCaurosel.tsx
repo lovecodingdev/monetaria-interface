@@ -57,7 +57,7 @@ export default function MarketsCaurosel() {
 
   return (
     <Box sx={{
-      marginBottom: "20px",
+      marginBottom: {xs: '16px', md: '24px'},
       padding: '16px',
       background: 'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.87) 100%)',
       borderRadius: '16px',
