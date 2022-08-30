@@ -25,13 +25,19 @@ interface ActionTabsProps {
 }
 
 const NewTabs = styled(Tabs)({
+  '& .MuiTabs-flexContainer': {
+    justifyContent: 'space-between',
+    padding: '2px',
+    borderRadius: '100px',
+    border: '1px solid #EEF0F2',
+  },
   '& .MuiTabs-indicator': {
     display: 'none',
   },
 });
 
 const NewTab = styled(Tab)`
-  margin: 0px 4px;
+  margin: 0px;
   @media (max-width: 639px) {
     min-width: 60px;
     padding: 4px 12px;
@@ -83,8 +89,9 @@ export const ActionTabs = ({ underlyingAsset, witch }: ActionTabsProps) => {
         border: `1px solid ${theme.palette.divider}`,
         width: '100%', 
         bgcolor: 'background.paper', 
-        margin: '20px auto',
-        padding: '20px',
+        my: {xs: '16px', md: '24px'},
+        mx: 'auto',
+        padding: {xs: '16px', md: '24px'},
       })}
     >
       <Box>
