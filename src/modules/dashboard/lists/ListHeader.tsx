@@ -20,8 +20,10 @@ export const ListHeader = ({ head }: ListHeaderProps) => {
       </ListColumn>
 
       {head.map((title, i) => {
+        const values = title?.valueOf() as Record<string, string>;
+        const isAction = values['key'] === 'Actions';
         return (
-          <ListColumn key={i} align={title.key == "Actions" ? "right" : 'center'} minWidth={title.key == "Actions" ? 170 : 0}>
+          <ListColumn key={i} align={isAction ? 'right' : 'center'} minWidth={isAction ? 170 : 0}>
             <ListHeaderTitle>{title}</ListHeaderTitle>
           </ListColumn>
         )

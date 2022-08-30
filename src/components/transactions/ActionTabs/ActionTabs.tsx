@@ -38,6 +38,7 @@ const NewTabs = styled(Tabs)({
 
 const NewTab = styled(Tab)`
   margin: 0px;
+  min-height: 40px;
   @media (max-width: 639px) {
     min-width: 60px;
     padding: 4px 12px;
