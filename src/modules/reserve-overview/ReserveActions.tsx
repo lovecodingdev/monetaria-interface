@@ -273,21 +273,44 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
         )}
       </Row> */}
 
-      <Stack direction="row" justifyContent="space-between" spacing={2}>
-        <Box sx={{
+      <Box
+        sx={{
           display: 'flex',
-        }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: "10px" }}>
-            <Typography variant={"secondary14"}>Wallet balance</Typography>
+          justifyContent: 'space-between',
+          flexDirection: { xs: 'column', md: 'row' },
+          gap: 2,
+        }}
+      >
+        <Box 
+          sx={{
+            display: 'flex',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              marginRight: '10px',
+            }}
+          >
+            <Typography variant={'secondary14'}>Wallet balance</Typography>
             <FormattedNumber
               value={balance?.amount || 0}
               variant="h3"
               symbol={poolReserve.symbol}
             />
           </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: "10px" }}>
-            <Typography variant={"secondary14"}>Available to supply</Typography>
-            <FormattedNumber
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              marginRight: '10px',
+            }}
+          >
+            <Typography variant={'secondary14'}>Available to supply</Typography>
+            <FormattedNumber 
               value={maxAmountToSupply}
               variant="h3"
               symbol={poolReserve.symbol}
@@ -321,7 +344,7 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
             <Trans>Supply</Trans> {downToXSM && poolReserve.symbol}
           </Button>
         </Stack>
-      </Stack>
+      </Box>
 
       {balance?.amount !== '0' && user?.totalCollateralMarketReferenceCurrency === '0' && (
         <Alert sx={{ mb: '12px' }} severity="info" icon={false}>

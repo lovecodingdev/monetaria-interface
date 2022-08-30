@@ -77,15 +77,13 @@ export default function ReserveOverview() {
           </ToggleButtonGroup>
         </Box> */}
 
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
           {/* * Main status and configuration panel */}
           <Stack
             direction={'column'}
             spacing={4}
             sx={{
-              display: { xs: !isOverview ? 'none' : 'block', lg: 'block' },
               width: { xs: '100%', lg: 'calc(40% - 20px)' },
-              mr: { xs: 0, lg: 4 },
             }}
           >
             {reserve && 
@@ -103,7 +101,6 @@ export default function ReserveOverview() {
             direction={'column'}
             spacing={4}
             sx={{
-              display: { xs: isOverview ? 'none' : 'block', lg: 'block' },
               width: { xs: '100%', lg: '60%' },
             }}
           >
