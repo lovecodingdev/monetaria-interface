@@ -110,10 +110,12 @@ export const SupplyAssetsListMobileItem = ({
             position: 'absolute',
             bottom: '-20px',
             left: 'calc(50% - 20px)',
+            filter:
+              'drop-shadow(0px 0px 1px rgba(26, 32, 36, 0.32)) drop-shadow(0px 8px 16px rgba(91, 104, 113, 0.24))',
           }}
         />
       </Box>
-      
+
       <ListValueRow
         title={<Trans>Wallet balance</Trans>}
         value={Number(walletBalance)}
