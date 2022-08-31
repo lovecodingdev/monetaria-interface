@@ -1,20 +1,28 @@
 import react from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, ButtonBase } from "@mui/material";
 import { TokenIcon } from '../../components/primitives/TokenIcon';
 import { ComputedReserveData } from '../../hooks/app-data-provider/useAppDataProvider';
 import { IncentivesCard } from '../../components/incentives/IncentivesCard';
+import { useRouter } from 'next/router';
+import { Link, ROUTES } from '../../components/primitives/Link';
+import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 
 export const CauroselItem = (props: ComputedReserveData) => {
+  const router = useRouter();
+  const { currentMarket } = useProtocolDataContext();
 
   return (
-    <Box sx={{
-      padding: "8px 16px",
-      display: "flex",
-      alignItems: "center",
-      borderRadius: "8px",
-      border: '1px solid #719aad38', 
-      background: "linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.609) 100%)",
-    }}>
+    <ButtonBase 
+      sx={{
+        padding: "8px 16px",
+        display: "flex",
+        alignItems: "center",
+        borderRadius: "8px",
+        border: '1px solid #719aad38', 
+        background: "linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.609) 100%)",
+      }}
+      onClick={() => router.push(ROUTES.reserveOverview(props.underlyingAsset, currentMarket))}
+    >
       <TokenIcon symbol={props.iconSymbol} fontSize="large" />
       <Box
         sx={{
@@ -41,6 +49,6 @@ export const CauroselItem = (props: ComputedReserveData) => {
             symbolsVariant="secondary14" />
         </Typography>
       </Box>
-    </Box>
+    </ButtonBase>
   )
 }
