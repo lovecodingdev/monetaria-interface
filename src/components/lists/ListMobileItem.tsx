@@ -27,10 +27,10 @@ export const ListMobileItem = ({
   currentMarket,
 }: ListMobileItemProps) => {
   return (
-    <Box>
-      <Divider />
+    <Box sx={{mb: 4}}>
+      {/* <Divider /> */}
 
-      <Box sx={{ px: 4, pt: 4, pb: 6 }}>
+      <Box sx={{ px: 4, pt: 4, pb: 6}} className="card-border">
         <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
           {loading ? (
             <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
