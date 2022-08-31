@@ -198,7 +198,14 @@ export const SupplyAssetsListMobileItem = ({
         />
       </Row>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 5 }}>
+      <Box 
+        sx={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'space-between', 
+          mt: 5,
+          gap: 4,
+        }}>
         {/* <Button
           disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
           variant="contained"
@@ -216,25 +223,24 @@ export const SupplyAssetsListMobileItem = ({
         >
           <Trans>Details</Trans>
         </Button> */}
-        <Link href={ROUTES.actions(detailsAddress, currentMarket, "Borrow")}
-          noWrap>
-          <Button
-            // disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
-            variant="outlined"
-          // onClick={() => openBorrow(underlyingAsset)}
-          >
-            <Trans>Borrow</Trans>
-          </Button>
-        </Link>
-        <Link href={ROUTES.actions(detailsAddress, currentMarket, "Supply")}
-          noWrap>
-          <Button
-            // disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
-            variant="contained"
-          // onClick={() => openSupply(underlyingAsset)}
-          >
-            <Trans>Supply</Trans>
-          </Button></Link>
+
+        <Button
+          variant="outlined"
+          component={Link}
+          href={ROUTES.actions(detailsAddress, currentMarket, "Borrow")}
+          sx={{flex: 1}}
+        >
+          <Trans>Borrow</Trans>
+        </Button>
+
+        <Button
+          variant="contained"
+          component={Link}
+          href={ROUTES.actions(detailsAddress, currentMarket, "Supply")}
+          sx={{flex: 1}}
+        >
+          <Trans>Supply</Trans>
+        </Button>
       </Box>
     </Box>
     // </ListMobileItemWrapper>
