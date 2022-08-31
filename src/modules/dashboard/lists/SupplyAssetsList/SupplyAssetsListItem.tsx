@@ -40,6 +40,12 @@ export const SupplyAssetsListItem = ({
   stableBorrows,
   stableBorrowsUSD,
   borrowRateMode,
+  borrowingEnabled,
+  stableBorrowRateEnabled,
+  variableBorrowAPY,
+  stableBorrowAPY,
+  vIncentivesData,
+  sIncentivesData,
 }: SupplyAssetsItem) => {
   const { currentMarket } = useProtocolDataContext();
   // const { openSupply, openBorrow } = useModalContext();
@@ -87,41 +93,10 @@ export const SupplyAssetsListItem = ({
           borrowRateMode === InterestRate.Variable ? variableBorrowsUSD : stableBorrowsUSD
         )}
       />
-      <ListColumn>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            textAlign: 'center',
-          }}
-        >
-          {supplyAPY.toString() !== '-1' ? (
-            <FormattedNumber value={Number(supplyAPY)} percent variant={'secondary14'} symbolsVariant={'secondary14'} />
-          ) : (
-            <NoData variant={'secondary14'} color="text.secondary" />
-          )}
-        </Box>
-      </ListColumn>
 
-      <ListColumn>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            textAlign: 'center',
-          }}
-        >
-          {supplyAPY.toString() !== '-1' ? (
-            <FormattedNumber value={Number(supplyAPY)} percent variant={'secondary14'} symbolsVariant={'secondary14'} />
-          ) : (
-            <NoData variant={'secondary14'} color="text.secondary" />
-          )}
-        </Box>
-      </ListColumn>
+      <ListAPRColumn value={Number(variableBorrowAPY)} incentives={vIncentivesData} symbol={symbol} />
+
+      <ListAPRColumn value={Number(stableBorrowAPY)} incentives={sIncentivesData} symbol={symbol} />
 
       <ListButtonsColumn>
         <Link href={ROUTES.actions(detailsAddress, currentMarket, "Borrow")}
