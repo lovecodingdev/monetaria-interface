@@ -1,5 +1,5 @@
 import react from "react";
-import { Box, Typography, ButtonBase } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { TokenIcon } from '../../components/primitives/TokenIcon';
 import { ComputedReserveData } from '../../hooks/app-data-provider/useAppDataProvider';
 import { IncentivesCard } from '../../components/incentives/IncentivesCard';
@@ -12,8 +12,9 @@ export const CauroselItem = (props: ComputedReserveData) => {
   const { currentMarket } = useProtocolDataContext();
 
   return (
-    <ButtonBase 
+    <Box 
       sx={{
+        cursor: 'pointer',
         padding: "8px 16px",
         display: "flex",
         alignItems: "center",
@@ -49,6 +50,6 @@ export const CauroselItem = (props: ComputedReserveData) => {
             symbolsVariant="secondary14" />
         </Typography>
       </Box>
-    </ButtonBase>
+    </Box>
   )
 }
