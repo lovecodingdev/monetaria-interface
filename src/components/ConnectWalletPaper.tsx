@@ -3,7 +3,6 @@ import { CircularProgress, Paper, PaperProps, Typography } from '@mui/material';
 import { ReactNode } from 'react';
 import { ConnectWalletButton } from './WalletConnection/ConnectWalletButton';
 
-import LoveGhost from '/public/loveGhost.svg';
 
 interface ConnectWalletPaperProps extends PaperProps {
   loading?: boolean;
@@ -31,6 +30,7 @@ export const ConnectWalletPaper = ({
       }}
     >
       {/* <LoveGhost style={{ marginBottom: '16px' }} /> */}
+      <img src="/welcome.png" style={{ width: '256px', height: '192px' }} alt="welcome" />
       <>
         {loading ? (
           <CircularProgress />
