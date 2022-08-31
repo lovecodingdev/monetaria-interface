@@ -1,0 +1,30 @@
+/* card border */
+.card-border::before {
+  content: ' ';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+
+  background: 
+    linear-gradient(-7deg, #0082bf44, transparent 15%, transparent 85%, #0082bf44);
+
+  --bw: 1px;
+  --r: 16px;
+  --g: #0000 calc(98% - var(--bw)),#000 calc(100% - var(--bw)) 98%,#0000;
+  --mask: 
+    radial-gradient(farthest-side at 100% 100% ,var(--g)) 0 0 /var(--r) var(--r) no-repeat, 
+    radial-gradient(farthest-side at 0% 100% ,var(--g)) 100% 0 /var(--r) var(--r) no-repeat, 
+    radial-gradient(farthest-side at 100% 0%,var(--g)) 0 100%/var(--r) var(--r) no-repeat, 
+    radial-gradient(farthest-side at 0% 0%,var(--g)) 100% 100%/var(--r) var(--r) no-repeat, 
+    linear-gradient(90deg,#000 var(--bw),#0000 0 calc(100% - var(--bw)),#000 0) 50%/100% calc(100% - var(--r) * 2 + var(--bw)) no-repeat, 
+    linear-gradient( #000 var(--bw),#0000 0 calc(100% - var(--bw)),#000 0) 50%/calc(100% - var(--r) * 2 + var(--bw)) 100% no-repeat;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+
+.card-border {
+  overflow: hidden;
+  position: relative;
+}

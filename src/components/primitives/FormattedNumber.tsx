@@ -81,9 +81,9 @@ export function FormattedNumber({
         flexDirection: 'row',
         alignItems: 'center',
         position: 'relative',
-        ...rest.sx,
         color: '#080F26',
         fontWeight: 500,
+        ...rest.sx,
       }}
       noWrap
     >

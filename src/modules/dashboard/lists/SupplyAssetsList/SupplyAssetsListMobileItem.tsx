@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Paper, Stack, Typography } from '@mui/material';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 
 import { CapsHint } from '../../../../components/caps/CapsHint';
@@ -12,6 +12,9 @@ import { ListItemCanBeCollateral } from '../ListItemCanBeCollateral';
 import { ListMobileItemWrapper } from '../ListMobileItemWrapper';
 import { ListValueRow } from '../ListValueRow';
 import { SupplyAssetsItem } from './types';
+import { InterestRate } from '@aave/contract-helpers';
+import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
 
 export const SupplyAssetsListMobileItem = ({
   symbol,
@@ -31,20 +34,88 @@ export const SupplyAssetsListMobileItem = ({
   detailsAddress,
   underlyingBalance,
   underlyingBalanceUSD,
+  variableBorrows,
+  variableBorrowsUSD,
+  stableBorrows,
+  stableBorrowsUSD,
+  borrowRateMode,
+  borrowingEnabled,
+  stableBorrowRateEnabled,
+  variableBorrowAPY,
+  stableBorrowAPY,
+  vIncentivesData,
+  sIncentivesData,
 }: SupplyAssetsItem) => {
   const { currentMarket } = useProtocolDataContext();
   const { openSupply } = useModalContext();
 
   return (
-    <ListMobileItemWrapper
-      symbol={symbol}
-      iconSymbol={iconSymbol}
-      name={name}
-      underlyingAsset={underlyingAsset}
-      currentMarket={currentMarket}
-    >
+    // <ListMobileItemWrapper
+    //   symbol={symbol}
+    //   iconSymbol={iconSymbol}
+    //   name={name}
+    //   underlyingAsset={underlyingAsset}
+    //   currentMarket={currentMarket}
+    // >
+    <Box className="card-border" sx={{ my: 4, padding: 4 }}>
+      <Box
+        sx={{
+          padding: 2,
+          color: 'white',
+          borderRadius: 4,
+          background:
+            'linear-gradient(104.25deg, #074592 0%, #C729FF 100%), rgba(241, 241, 241, 0.1)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 1,
+          mb: 4,
+          position: 'relative',
+        }}
+      >
+        <Box
+          sx={{display: 'flex', justifyContent: 'space-between'}}
+        >
+          <Typography variant="description" noWrap>
+            Supply APY
+          </Typography>
+          <Typography variant="description" noWrap>
+            Borrow APY
+          </Typography>
+        </Box>
+        <Box
+          sx={{display: 'flex', justifyContent: 'space-between'}}
+        >
+          <FormattedNumber 
+            value={supplyAPY} 
+            percent 
+            variant={"secondary14"} 
+            symbolsVariant={"secondary14"} 
+            sx={{color: 'white'}}
+            symbolsColor="white"
+          />
+          <FormattedNumber 
+            value={stableBorrowAPY} 
+            percent 
+            variant={"secondary14"} 
+            symbolsVariant={"secondary14"} 
+            sx={{color: 'white'}}
+            symbolsColor="white"
+          />
+        </Box>
+        <TokenIcon 
+          symbol={iconSymbol} 
+          sx={{
+            width: '40px', 
+            height: '40px',
+            position: 'absolute',
+            bottom: '-20px',
+            left: 'calc(50% - 20px)',
+          }}
+        />
+      </Box>
+      
       <ListValueRow
-        title={<Trans>Supply balance</Trans>}
+        title={<Trans>Wallet balance</Trans>}
         value={Number(walletBalance)}
         subValue={walletBalanceUSD}
         disabled={Number(walletBalance) === 0}
@@ -58,7 +129,7 @@ export const SupplyAssetsListMobileItem = ({
         }
       />
 
-      <Row
+      {/* <Row
         caption={<Trans>Supply APY</Trans>}
         align="flex-start"
         captionVariant="description"
@@ -70,7 +141,7 @@ export const SupplyAssetsListMobileItem = ({
           symbol={symbol}
           variant="secondary14"
         />
-      </Row>
+      </Row> */}
 
       <Row
         caption={<Trans>Can be collateral</Trans>}
@@ -81,6 +152,47 @@ export const SupplyAssetsListMobileItem = ({
         <ListItemCanBeCollateral
           isIsolated={isIsolated}
           usageAsCollateralEnabled={usageAsCollateralEnabledOnUser}
+        />
+      </Row>
+
+      <ListValueRow
+        title={<Trans>Supply balance</Trans>}
+        value={Number(underlyingBalance)}
+        subValue={underlyingBalanceUSD}
+        disabled={Number(underlyingBalance) === 0}
+      />
+
+      <ListValueRow
+        title={<Trans>Borrow balance</Trans>}
+        value={Number(borrowRateMode === InterestRate.Variable ? variableBorrows : stableBorrows)}
+        subValue={borrowRateMode === InterestRate.Variable ? variableBorrowsUSD : stableBorrowsUSD}
+        disabled={Number(underlyingBalance) === 0}
+      />
+
+      <Row
+        caption={<Trans>APY, variable</Trans>}
+        align="flex-start"
+        captionVariant="description"
+        mb={2}
+      >
+        <IncentivesCard
+          value={Number(variableBorrowAPY)}
+          incentives={vIncentivesData}
+          symbol={symbol}
+          variant="secondary14"
+        />
+      </Row>
+      <Row
+        caption={<Trans>APY, stable</Trans>}
+        align="flex-start"
+        captionVariant="description"
+        mb={2}
+      >
+        <IncentivesCard
+          value={Number(stableBorrowAPY)}
+          incentives={sIncentivesData}
+          symbol={symbol}
+          variant="secondary14"
         />
       </Row>
 
@@ -122,6 +234,7 @@ export const SupplyAssetsListMobileItem = ({
             <Trans>Supply</Trans>
           </Button></Link>
       </Box>
-    </ListMobileItemWrapper>
+    </Box>
+    // </ListMobileItemWrapper>
   );
 };

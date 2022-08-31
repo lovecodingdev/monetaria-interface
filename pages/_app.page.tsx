@@ -1,4 +1,5 @@
 import '/public/fonts/Gilroy/Gilroy.css';
+import '/public/mnt.css';
 
 import { ApolloProvider } from '@apollo/client';
 import { CacheProvider, EmotionCache } from '@emotion/react';
