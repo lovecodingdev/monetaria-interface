@@ -88,7 +88,7 @@ export const ActionsTopDetails = ({ underlyingAsset }: ActionsTopDetailsProps) =
 
   return (
     <>
-      <Button
+      {/* <Button
         size="medium"
         color="primary"
         startIcon={
@@ -106,7 +106,7 @@ export const ActionsTopDetails = ({ underlyingAsset }: ActionsTopDetailsProps) =
           border: `1px solid ${theme.palette.divider}`,
           borderRadius: '8px'
         })}
-      >Back</Button>
+      >Back</Button> */}
       <Paper
         sx={{
           display: 'flex',
@@ -115,7 +115,7 @@ export const ActionsTopDetails = ({ underlyingAsset }: ActionsTopDetailsProps) =
           gap: 2,
           flexWrap: 'wrap',
           width: '100%',
-          marginTop: '20px',
+          marginTop: {xs: '16px', md: '24px'},
           padding: '16px',
         }}
       >

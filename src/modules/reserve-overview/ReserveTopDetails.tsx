@@ -88,7 +88,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
 
   return (
     <>
-      <Paper
+      {/* <Paper
         sx={theme => ({
           bgcolor: 'transparent',
           py: 0,
@@ -120,7 +120,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
             <Trans>Back</Trans>
           </Button>
         </Container>
-      </Paper>
+      </Paper> */}
       <TopInfoPanel
         titleComponent={
           <Box>
