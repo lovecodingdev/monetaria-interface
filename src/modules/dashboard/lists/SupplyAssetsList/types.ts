@@ -21,9 +21,15 @@ export type SupplyAssetsItem = {
   detailsAddress: string;
   underlyingBalance: string;
   underlyingBalanceUSD: string;
-  variableBorrows: string,
-  variableBorrowsUSD: string,
-  stableBorrows: string,
-  stableBorrowsUSD: string,
-  borrowRateMode: InterestRate,
+  variableBorrows: string;
+  variableBorrowsUSD: string;
+  stableBorrows: string;
+  stableBorrowsUSD: string;
+  borrowRateMode: InterestRate;
+  borrowingEnabled: boolean;
+  stableBorrowRateEnabled: boolean;
+  variableBorrowAPY: string;
+  stableBorrowAPY: string;
+  vIncentivesData?: ReserveIncentiveResponse[];
+  sIncentivesData?: ReserveIncentiveResponse[];
 };
