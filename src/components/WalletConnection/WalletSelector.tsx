@@ -73,13 +73,16 @@ const WalletRow = ({ walletName, walletType }: WalletRowProps) => {
       sx={{
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         width: '100%',
         mb: '8px',
+        background: '#F3F8FF',
+        border: '1px solid rgba(21, 126, 255, 0.15)',
+        borderRadius: '12px',
       }}
       size="large"
       onClick={() => connectWallet(walletType)}
-      endIcon={getWalletIcon(walletType)}
+      startIcon={getWalletIcon(walletType)}
     >
       {walletName}
     </Button>
@@ -125,8 +128,8 @@ export const WalletSelector = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-      <TxModalTitle title="Connect a wallet" />
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <TxModalTitle title="Connect wallet" />
       {error && (
         <Alert severity="error" sx={{ mb: '24px' }}>
           {handleBlocking()}

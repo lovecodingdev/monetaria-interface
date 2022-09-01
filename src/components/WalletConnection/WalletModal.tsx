@@ -6,7 +6,7 @@ export const WalletModal = () => {
   const { isWalletModalOpen, setWalletModalOpen } = useWalletModalContext();
 
   return (
-    <BasicModal open={isWalletModalOpen} setOpen={setWalletModalOpen}>
+    <BasicModal open={isWalletModalOpen} setOpen={setWalletModalOpen} withCloseButton={false}>
       <WalletSelector />
     </BasicModal>
   );
