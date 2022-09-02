@@ -31,23 +31,25 @@ interface MobileMenuProps {
   headerHeight: number;
 }
 
-const MenuItemsWrapper = ({ children, title }: { children: ReactNode; title: ReactNode }) => (
-  <Box sx={{ mb: 6, '&:last-of-type': { mb: 0, '.MuiDivider-root': { display: 'none' } } }}>
+const MenuItemsWrapper = ({ children, title }: { children: ReactNode; title?: ReactNode }) => (
+  <Box sx={{ mb: 2, '&:last-of-type': { mb: 0, '.MuiDivider-root': { display: 'none' } } }}>
     <Box sx={{ px: 2 }}>
-      <Typography variant="subheader2" sx={{ color: '#A5A8B6', px: 4, py: 2 }}>
+      {/* <Typography variant="subheader2" sx={{ color: '#A5A8B6', px: 4, py: 2 }}>
         {title}
-      </Typography>
+      </Typography> */}
 
       {children}
     </Box>
 
-    <Divider sx={{ borderColor: '#F2F3F729', mt: 6 }} />
+    {/* <Divider sx={{ borderColor: '#F2F3F729', mt: 6 }} /> */}
   </Box>
 );
 
 export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => {
   const { i18n } = useLingui();
   const [isLanguagesListOpen, setIsLanguagesListOpen] = useState(false);
+  const [isOpenMore, setIsOpenMore] = useState(false);
+  const [isOpenSettings, setIsOpenSettings] = useState(false);
 
   useEffect(() => setIsLanguagesListOpen(false), [open]);
 
@@ -70,26 +72,88 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
           <>
             <MenuItemsWrapper title={<Trans>Menu</Trans>}>
               <NavItems setOpen={setOpen} />
-            </MenuItemsWrapper>
-            <MenuItemsWrapper title={<Trans>Global settings</Trans>}>
-              <List>
-                {/* <DarkModeSwitcher /> */}
-                {PROD_ENV && <TestNetModeSwitcher />}
-                <LanguageListItem onClick={() => setIsLanguagesListOpen(true)} />
-              </List>
-            </MenuItemsWrapper>
-            <MenuItemsWrapper title={<Trans>Links</Trans>}>
-              <List>
-                {moreNavigation.map((item, index) => (
-                  <ListItem component={Link} href={item.link} sx={{ color: '#F1F1F3' }} key={index}>
-                    <ListItemIcon sx={{ minWidth: 'unset', mr: 3 }}>
-                      <SvgIcon sx={{ fontSize: '20px', color: '#F1F1F3' }}>{item.icon}</SvgIcon>
-                    </ListItemIcon>
-
-                    <ListItemText>{i18n._(item.title)}</ListItemText>
-                  </ListItem>
-                ))}
-              </List>
+              <ListItem
+                sx={{
+                  width: { xs: '100%', md: 'unset' },
+                  mr: { xs: 0, md: 2 },
+                  textAlign: 'center',
+                  cursor: 'pointer',
+                }}
+                data-cy="more"
+                disablePadding
+                onClick={() => setIsOpenMore(!isOpenMore)}
+              >
+                <Typography
+                  variant="h2"
+                  color="#080F26"
+                  sx={{
+                    width: '100%',
+                    mx: 4,
+                    py: 4,
+                    textAlign: 'start',
+                    borderBottom: '1px solid rgba(8, 15, 38, 0.15)',
+                  }}
+                >
+                  More
+                </Typography>
+              </ListItem>
+              {isOpenMore && (
+                <MenuItemsWrapper title={<Trans>More</Trans>}>
+                  <List>
+                    {moreNavigation.map((item, index) => (
+                      <ListItem
+                        component={Link}
+                        href={item.link}
+                        sx={{ 
+                          color: '#080F26',
+                          pl: 8,
+                        }}
+                        key={index}
+                      >
+                        <ListItemIcon sx={{ minWidth: 'unset', mr: 3 }}>
+                          <SvgIcon sx={{ fontSize: '20px', color: '#080F26' }}>{item.icon}</SvgIcon>
+                        </ListItemIcon>
+    
+                        <ListItemText>{i18n._(item.title)}</ListItemText>
+                      </ListItem>
+                    ))}
+                  </List>
+                </MenuItemsWrapper>
+              )}
+              <ListItem
+                sx={{
+                  width: { xs: '100%', md: 'unset' },
+                  mr: { xs: 0, md: 2 },
+                  textAlign: 'center',
+                  cursor: 'pointer',
+                }}
+                data-cy="more"
+                disablePadding
+                onClick={() => setIsOpenSettings(!isOpenSettings)}
+              >
+                <Typography
+                  variant="h2"
+                  color="#080F26"
+                  sx={{
+                    width: '100%',
+                    mx: 4,
+                    py: 4,
+                    textAlign: 'start',
+                    borderBottom: '1px solid rgba(8, 15, 38, 0.15)',
+                  }}
+                >
+                  Settings
+                </Typography>
+              </ListItem>
+              {isOpenSettings && (
+                <MenuItemsWrapper title={<Trans>Global settings</Trans>}>
+                  <List sx={{pl: 4}}>
+                    {/* <DarkModeSwitcher /> */}
+                    {PROD_ENV && <TestNetModeSwitcher />}
+                    <LanguageListItem onClick={() => setIsLanguagesListOpen(true)} />
+                  </List>
+                </MenuItemsWrapper>
+              )}
             </MenuItemsWrapper>
           </>
         ) : (

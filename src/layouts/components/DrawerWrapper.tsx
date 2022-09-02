@@ -18,13 +18,13 @@ export const DrawerWrapper = ({ open, setOpen, children, headerHeight }: DrawerW
       sx={{ top: `${headerHeight}px` }}
       PaperProps={{
         sx: {
-          background: '#00377ae0',
-          backdropFilter: 'blur(5px)',
+          background: '#ffffff',
+          // backdropFilter: 'blur(5px)',
           boxShadow: 'none',
           borderRadius: 'unset',
           width: '100%',
           top: `${headerHeight}px`,
-          pt: 6,
+          pt: 2,
           pb: 15,
           minHeight: '100vh',
         },

@@ -54,8 +54,14 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                 component={Link}
                 href={item.link}
                 variant="h2"
-                color="#F1F1F3"
-                sx={{ width: '100%', p: 4 }}
+                color="#080F26"
+                sx={{
+                  width: '100%',
+                  mx: 4,
+                  py: 4,
+                  textAlign: 'start',
+                  borderBottom: '1px solid rgba(8, 15, 38, 0.15)',
+                }}
                 onClick={() => (setOpen ? setOpen(false) : undefined)}
               >
                 {i18n._(item.title)}
