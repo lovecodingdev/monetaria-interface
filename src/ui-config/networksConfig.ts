@@ -67,6 +67,22 @@ export const networkConfigs: Record<string, BaseNetworkConfig> = {
     isTestnet: true,
     networkLogoPath: '/icons/networks/ethereum.svg',
   },
+  [ChainId.rinkeby]: {
+    name: 'Ethereum Rinkeby',
+    publicJsonRPCUrl: [
+      // 'https://eth-rinkeby.alchemyapi.io/v2/demo',
+      'https://rinkeby-light.eth.linkpool.io/',
+    ],
+    // protocolDataUrl: '',
+    baseUniswapAdapter: '',
+    baseAssetSymbol: 'ETH',
+    wrappedBaseAssetSymbol: 'WETH',
+    baseAssetDecimals: 18,
+    explorerLink: 'https://rinkeby.etherscan.io/',
+    // rpcOnly: true,
+    isTestnet: true,
+    networkLogoPath: '/icons/networks/ethereum.svg',
+  },
   [ChainId.mainnet]: {
     name: 'Ethereum',
     privateJsonRPCUrl: 'https://eth-mainnet.gateway.pokt.network/v1/lb/62b3314e123e6f00397f19ca',

@@ -61,7 +61,7 @@ export const governanceConfig: GovernanceConfig = {
 };
 
 export const mntGovernanceConfig: MNTGovernanceConfig = {
-  chainId: ChainId.goerli,
+  chainId: ChainId.rinkeby,
   votingAssetName: 'MNT + stkMNT',
   averageNetworkBlockTime: 13.5,
   queryGovernanceDataUrl: 'https://api.thegraph.com/subgraphs/name/aave/governance-v2',

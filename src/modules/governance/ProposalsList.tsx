@@ -69,7 +69,6 @@ export function ProposalsList({ proposals: initialProposals }: GovernancePagePro
   };
 
   const { loading, data } = useQuery(GET_PROPOSALS, { context: { client: 'voting' } });
-  console.log({loading, data});
 
   const header = [
     {

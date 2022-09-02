@@ -59,7 +59,6 @@ export default function DynamicProposal() {
       context: { client: 'voting' }
     }
   );
-  console.log({data});
 
   return loading ? <></> : <ProposalPage proposal={data.proposal} />;
 }
