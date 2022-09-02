@@ -98,6 +98,7 @@ export const AssetsListMobileItem = ({ ...reserve }: ComputedReserveData) => {
         }
         captionVariant="description"
         align="flex-start"
+        mb={4}
       >
         <IncentivesCard
           align="flex-end"
@@ -108,14 +109,17 @@ export const AssetsListMobileItem = ({ ...reserve }: ComputedReserveData) => {
         />
       </Row>
 
-      {/* <Button
+      <Button
         variant="outlined"
         component={Link}
         href={ROUTES.reserveOverview(reserve.underlyingAsset, currentMarket)}
         fullWidth
+        sx={{
+          background: 'rgba(21, 126, 255, 0.05)'
+        }}
       >
-        <Trans>View details</Trans>
-      </Button> */}
+        <Trans>Details</Trans>
+      </Button>
     </ListMobileItemWrapper>
   );
 };
