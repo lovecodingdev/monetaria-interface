@@ -1,4 +1,4 @@
-import { PoolInterface } from '@aave/contract-helpers';
+import { PoolInterface } from '@monetaria/contract-helpers';
 import { Trans } from '@lingui/macro';
 import { useTransactionHandler } from 'src/helpers/useTransactionHandler';
 import { useTxBuilderContext } from 'src/hooks/useTxBuilder';

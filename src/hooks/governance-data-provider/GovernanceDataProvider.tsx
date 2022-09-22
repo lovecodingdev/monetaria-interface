@@ -1,4 +1,4 @@
-import { AaveGovernanceService, GovernancePowerDelegationToken } from '@aave/contract-helpers';
+import { AaveGovernanceService, GovernancePowerDelegationToken } from '@monetaria/contract-helpers';
 import React, { useContext } from 'react';
 import { governanceConfig } from 'src/ui-config/governanceConfig';
 

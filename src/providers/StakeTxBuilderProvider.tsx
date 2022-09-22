@@ -1,4 +1,4 @@
-import { StakingService } from '@aave/contract-helpers';
+import { StakingService } from '@monetaria/contract-helpers';
 import React, { ReactElement } from 'react';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { getStakeConfig } from 'src/ui-config/stakeConfig';

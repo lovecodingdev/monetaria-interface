@@ -12,7 +12,7 @@ import { ListItemCanBeCollateral } from '../ListItemCanBeCollateral';
 import { ListMobileItemWrapper } from '../ListMobileItemWrapper';
 import { ListValueRow } from '../ListValueRow';
 import { SupplyAssetsItem } from './types';
-import { InterestRate } from '@aave/contract-helpers';
+import { InterestRate } from '@monetaria/contract-helpers';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 

@@ -1,4 +1,4 @@
-import { ChainId, Stake } from '@aave/contract-helpers';
+import { ChainId, Stake } from '@monetaria/contract-helpers';
 
 export interface StakeConfig {
   chainId: ChainId;

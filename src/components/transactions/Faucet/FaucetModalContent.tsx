@@ -1,4 +1,4 @@
-import { mintAmountsPerToken } from '@aave/contract-helpers';
+import { mintAmountsPerToken } from '@monetaria/contract-helpers';
 import { normalize } from '@aave/math-utils';
 import { Trans } from '@lingui/macro';
 import { useModalContext } from 'src/hooks/useModal';

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { API_ETH_MOCK_ADDRESS } from '@aave/contract-helpers';
+import { API_ETH_MOCK_ADDRESS } from '@monetaria/contract-helpers';
 import { useProtocolDataContext } from '../../hooks/useProtocolDataContext';
 import { useAppDataContext } from 'src/hooks/app-data-provider/useAppDataProvider';
 // import { useMediaQuery } from '@mui/material';

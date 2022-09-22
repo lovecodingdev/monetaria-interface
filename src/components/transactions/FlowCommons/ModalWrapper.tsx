@@ -1,4 +1,4 @@
-import { API_ETH_MOCK_ADDRESS, PERMISSION } from '@aave/contract-helpers';
+import { API_ETH_MOCK_ADDRESS, PERMISSION } from '@monetaria/contract-helpers';
 import React from 'react';
 import { ReactElement } from 'react-markdown/lib/react-markdown';
 import {

@@ -1,4 +1,4 @@
-import { UiStakeDataProvider } from '@aave/contract-helpers';
+import { UiStakeDataProvider } from '@monetaria/contract-helpers';
 import { usePolling } from '../usePolling';
 import { useApolloClient } from '@apollo/client';
 import { getProvider } from 'src/utils/marketsAndNetworksConfig';

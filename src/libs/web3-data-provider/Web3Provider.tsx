@@ -14,7 +14,7 @@ import {
 import { useWeb3React } from '@web3-react/core';
 import { BigNumber, providers } from 'ethers';
 import { SignatureLike } from '@ethersproject/bytes';
-import { API_ETH_MOCK_ADDRESS, transactionType } from '@aave/contract-helpers';
+import { API_ETH_MOCK_ADDRESS, transactionType } from '@monetaria/contract-helpers';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import { TorusConnector } from '@web3-react/torus-connector';

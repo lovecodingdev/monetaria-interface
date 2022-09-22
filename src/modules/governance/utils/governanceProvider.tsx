@@ -1,4 +1,4 @@
-import { AaveGovernanceService } from '@aave/contract-helpers';
+import { AaveGovernanceService } from '@monetaria/contract-helpers';
 import { governanceConfig } from '../../../ui-config/governanceConfig';
 import { getProvider } from '../../../utils/marketsAndNetworksConfig';
 

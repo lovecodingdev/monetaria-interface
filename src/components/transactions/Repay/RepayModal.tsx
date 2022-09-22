@@ -1,4 +1,4 @@
-import { InterestRate, PERMISSION } from '@aave/contract-helpers';
+import { InterestRate, PERMISSION } from '@monetaria/contract-helpers';
 import { Trans } from '@lingui/macro';
 import React, { useState } from 'react';
 import { useAppDataContext } from 'src/hooks/app-data-provider/useAppDataProvider';

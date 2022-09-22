@@ -1,4 +1,4 @@
-import { ReserveDataHumanized } from '@aave/contract-helpers';
+import { ReserveDataHumanized } from '@monetaria/contract-helpers';
 import {
   ComputedUserReserve,
   formatReservesAndIncentives,

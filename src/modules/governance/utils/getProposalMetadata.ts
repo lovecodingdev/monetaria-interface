@@ -1,4 +1,4 @@
-import { ProposalMetadata } from '@aave/contract-helpers';
+import { ProposalMetadata } from '@monetaria/contract-helpers';
 import { base58 } from 'ethers/lib/utils';
 import fetch from 'isomorphic-unfetch';
 import matter from 'gray-matter';

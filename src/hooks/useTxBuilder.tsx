@@ -4,7 +4,7 @@ import {
   IncentivesControllerV2Interface,
   LendingPool,
   PoolInterface,
-} from '@aave/contract-helpers';
+} from '@monetaria/contract-helpers';
 import React, { useContext } from 'react';
 
 export interface TxBuilderContextInterface {

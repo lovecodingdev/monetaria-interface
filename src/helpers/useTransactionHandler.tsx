@@ -1,4 +1,4 @@
-import { EthereumTransactionTypeExtended, GasType, Pool } from '@aave/contract-helpers';
+import { EthereumTransactionTypeExtended, GasType, Pool } from '@monetaria/contract-helpers';
 import { SignatureLike } from '@ethersproject/bytes';
 import { TransactionResponse } from '@ethersproject/providers';
 import { DependencyList, useEffect, useRef, useState } from 'react';

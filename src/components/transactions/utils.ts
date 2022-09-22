@@ -1,4 +1,4 @@
-import { ChainId } from '@aave/contract-helpers';
+import { ChainId } from '@monetaria/contract-helpers';
 import { BigNumber } from 'bignumber.js';
 
 export enum ErrorType {

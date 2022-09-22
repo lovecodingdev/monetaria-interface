@@ -1,4 +1,4 @@
-import { PERMISSION } from '@aave/contract-helpers';
+import { PERMISSION } from '@monetaria/contract-helpers';
 import { Trans } from '@lingui/macro';
 import React, { useState } from 'react';
 import { ModalContextType, ModalType, useModalContext } from 'src/hooks/useModal';

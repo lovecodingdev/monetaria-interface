@@ -1,4 +1,4 @@
-import { ChainId } from '@aave/contract-helpers';
+import { ChainId } from '@monetaria/contract-helpers';
 
 export function hexToAscii(_hex: string): string {
   const hex = _hex.toString();

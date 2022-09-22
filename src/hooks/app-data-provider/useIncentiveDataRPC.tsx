@@ -3,7 +3,7 @@ import {
   ReservesIncentiveDataHumanized,
   UiIncentiveDataProvider,
   UserReservesIncentivesDataHumanized,
-} from '@aave/contract-helpers';
+} from '@monetaria/contract-helpers';
 import { useApolloClient } from '@apollo/client';
 import { useState } from 'react';
 import { getProvider } from 'src/utils/marketsAndNetworksConfig';

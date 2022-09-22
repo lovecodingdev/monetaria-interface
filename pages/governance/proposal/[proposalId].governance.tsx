@@ -46,7 +46,7 @@ import { useQuery, gql } from '@apollo/client';
 import { apolloClient } from 'src/utils/apolloClient';
 import { MNTProposal } from 'src/modules/governance/MNTProposalListItem';
 import { MntTokensBalanceProvider } from 'src/hooks/governance-data-provider/MntTokensDataProvider';
-import { ProposalState } from '@aave/contract-helpers';
+import { ProposalState } from '@monetaria/contract-helpers';
 
 const GET_PROPOSAL = gql`
   query Proposal($id: String!){

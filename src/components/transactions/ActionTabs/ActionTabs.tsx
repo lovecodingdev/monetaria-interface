@@ -8,7 +8,7 @@ import { ModalWrapper } from '../FlowCommons/ModalWrapper';
 import { SupplyModalContent } from '../Supply/SupplyModalContent';
 import { BorrowModalContent } from '../Borrow/BorrowModalContent';
 import { WithdrawModalContent } from '../Withdraw/WithdrawModalContent';
-import { InterestRate, PERMISSION } from '@aave/contract-helpers';
+import { InterestRate, PERMISSION } from '@monetaria/contract-helpers';
 
 //Repay
 import { RepayModalContent } from '../Repay/RepayModalContent';

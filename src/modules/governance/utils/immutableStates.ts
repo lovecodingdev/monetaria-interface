@@ -1,4 +1,4 @@
-import { ProposalState } from '@aave/contract-helpers';
+import { ProposalState } from '@monetaria/contract-helpers';
 
 export const isProposalStateImmutable = (proposal: { state: ProposalState }) =>
   ![

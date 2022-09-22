@@ -1,4 +1,4 @@
-import { Pool } from '@aave/contract-helpers';
+import { Pool } from '@monetaria/contract-helpers';
 import { Trans } from '@lingui/macro';
 import { BoxProps } from '@mui/material';
 import { utils } from 'ethers';

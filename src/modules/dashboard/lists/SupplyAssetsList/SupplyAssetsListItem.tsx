@@ -15,7 +15,7 @@ import { ListValueColumn } from '../ListValueColumn';
 import { SupplyAssetsItem } from './types';
 import { FormattedNumber } from '../../../../components/primitives/FormattedNumber';
 import { NoData } from '../../../../components/primitives/NoData';
-import { InterestRate } from '@aave/contract-helpers';
+import { InterestRate } from '@monetaria/contract-helpers';
 
 export const SupplyAssetsListItem = ({
   symbol,

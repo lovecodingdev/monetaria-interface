@@ -9,7 +9,7 @@ import { Link, ROUTES } from '../../components/primitives/Link';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { StateBadge } from './StateBadge';
-import { ProposalState } from '@aave/contract-helpers';
+import { ProposalState } from '@monetaria/contract-helpers';
 
 dayjs.extend(relativeTime);
 

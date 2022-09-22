@@ -1,4 +1,4 @@
-import { ChainId, ChainIdToNetwork } from '@aave/contract-helpers';
+import { ChainId, ChainIdToNetwork } from '@monetaria/contract-helpers';
 import { providers as ethersProviders } from 'ethers';
 
 import {

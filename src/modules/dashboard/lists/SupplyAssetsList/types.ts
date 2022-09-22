@@ -1,5 +1,5 @@
 import { ReserveIncentiveResponse } from '../../../../hooks/app-data-provider/useIncentiveData';
-import { InterestRate } from '@aave/contract-helpers';
+import { InterestRate } from '@monetaria/contract-helpers';
 
 export type SupplyAssetsItem = {
   underlyingAsset: string;

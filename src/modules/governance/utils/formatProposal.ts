@@ -1,4 +1,4 @@
-import { ChainId, Proposal, ProposalState } from '@aave/contract-helpers';
+import { ChainId, Proposal, ProposalState } from '@monetaria/contract-helpers';
 import { normalizeBN } from '@aave/math-utils';
 import BigNumber from 'bignumber.js';
 import { getProvider } from 'src/utils/marketsAndNetworksConfig';

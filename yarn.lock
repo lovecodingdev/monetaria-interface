@@ -2578,6 +2578,13 @@
   resolved "https://registry.npmjs.org/@metamask/safe-event-emitter/-/safe-event-emitter-2.0.0.tgz"
   integrity sha512-/kSXhY692qiV1MXu6EeOZvg5nECLclxNXcKCxJ3cXQgYuRymRHpdx/t7JXfsK+JLjwA1e1c1/SBrlQYpusC29Q==
 
+"@monetaria/contract-helpers@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@monetaria/contract-helpers/-/contract-helpers-1.0.1.tgz#9a8f775323a1607ce1118aa2f9ce11fa5784b425"
+  integrity sha512-wLP4OtJ7cbDdbCe2GSMjevnKaW+RgmmjcGcr3hs4xP7sk+FeXccO/1V7NLFQ05FOrPU1iQBX9a91d8yKpjUb9w==
+  dependencies:
+    isomorphic-unfetch "^3.1.0"
+
 "@mui/base@5.0.0-alpha.72":
   version "5.0.0-alpha.72"
   resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.72.tgz#551d64402ee5065cf81fd1388a3e7ab8c426fe3e"

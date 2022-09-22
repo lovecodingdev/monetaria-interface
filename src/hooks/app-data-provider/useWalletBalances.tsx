@@ -1,4 +1,4 @@
-import { API_ETH_MOCK_ADDRESS, WalletBalanceProvider } from '@aave/contract-helpers';
+import { API_ETH_MOCK_ADDRESS, WalletBalanceProvider } from '@monetaria/contract-helpers';
 import { nativeToUSD, normalize, USD_DECIMALS } from '@aave/math-utils';
 import { useApolloClient, useQuery } from '@apollo/client';
 import { BigNumber } from 'bignumber.js';

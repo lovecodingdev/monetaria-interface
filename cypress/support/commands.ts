@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // injects a web3 provider into the local window state
 
-// import { ChainId } from '@aave/contract-helpers';
+// import { ChainId } from '@monetaria/contract-helpers';
 // import { MARKETS } from './steps/common';
 // import { configEnvWithTenderly } from './steps/configuration.steps';
 

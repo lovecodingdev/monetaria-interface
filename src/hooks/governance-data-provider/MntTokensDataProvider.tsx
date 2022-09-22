@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { WalletBalanceProvider } from '@aave/contract-helpers';
+import { WalletBalanceProvider } from '@monetaria/contract-helpers';
 import { normalize } from '@aave/math-utils';
 import { mntGovernanceConfig } from 'src/ui-config/governanceConfig';
 import { getProvider } from 'src/utils/marketsAndNetworksConfig';

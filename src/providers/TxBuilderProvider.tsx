@@ -7,7 +7,7 @@ import {
   LendingPool,
   Pool,
   PoolInterface,
-} from '@aave/contract-helpers';
+} from '@monetaria/contract-helpers';
 import React, { ReactElement } from 'react';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { TxBuilderContext } from 'src/hooks/useTxBuilder';

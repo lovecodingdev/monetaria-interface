@@ -1,4 +1,4 @@
-import { ChainId } from '@aave/contract-helpers';
+import { ChainId } from '@monetaria/contract-helpers';
 import { ReactNode } from 'react';
 // import { PermissionView } from 'src/components/transactions/FlowCommons/PermissionView';
 
@@ -213,6 +213,14 @@ export const marketsData: {
       WALLET_BALANCE_PROVIDER: '0x75CC0f0E3764be7594772D08EEBc322970CbB3a9',
       UI_POOL_DATA_PROVIDER: '0xC576539371a2f425545B7BF4eb2a14Eee1944a1C',
       UI_INCENTIVE_DATA_PROVIDER: '0xACFd610B51ac6B70F030B277EA8A2A8D2143dC7A',
+
+      // LENDING_POOL_ADDRESS_PROVIDER: '0xabf63fe04c46e4f539F9a63E8ab4355636e802AA'.toLowerCase(),
+      // LENDING_POOL: '0xb7d086dcbc9ceca5479d64e8168eeaf3aa74782a',
+      // WETH_GATEWAY: '0x301fd6DC1fEb455a38575C1610D033836C90A720',
+      // WALLET_BALANCE_PROVIDER: '0xDE620449A1896fBDF532A9a05618C8047C0CC020',
+      // UI_POOL_DATA_PROVIDER: '0x41e3057c29D12bdf0f4cceE00883504767ed6db9',
+      // UI_INCENTIVE_DATA_PROVIDER: '0x25c5Fa5e212bd834eC3839ac2c451Ed3927c8363',
+      // FAUCET: '0x681860075529352da2C94082Eb66c59dF958e89C',
     },
   },
   [CustomMarket.proto_arbitrum_v3]: {
