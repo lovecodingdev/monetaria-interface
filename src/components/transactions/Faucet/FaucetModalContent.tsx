@@ -1,5 +1,5 @@
 import { mintAmountsPerToken } from '@monetaria/contract-helpers';
-import { normalize } from '@aave/math-utils';
+import { normalize } from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
 import { useModalContext } from 'src/hooks/useModal';
 import { GasEstimationError } from '../FlowCommons/GasEstimationError';

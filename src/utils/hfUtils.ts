@@ -3,7 +3,7 @@ import {
   calculateHealthFactorFromBalancesBigUnits,
   valueToBigNumber,
   BigNumberValue,
-} from '@aave/math-utils';
+} from '@monetaria/math-utils';
 import {
   ComputedReserveData,
   ExtendedFormattedUser,

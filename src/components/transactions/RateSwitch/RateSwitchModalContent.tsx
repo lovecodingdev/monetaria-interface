@@ -1,5 +1,5 @@
 import { InterestRate } from '@monetaria/contract-helpers';
-import { valueToBigNumber } from '@aave/math-utils';
+import { valueToBigNumber } from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
 import { Alert } from '@mui/material';
 import { useModalContext } from 'src/hooks/useModal';

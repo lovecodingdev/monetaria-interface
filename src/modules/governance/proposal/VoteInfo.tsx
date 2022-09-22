@@ -1,5 +1,5 @@
 import { ProposalState } from '@monetaria/contract-helpers';
-import { normalize } from '@aave/math-utils';
+import { normalize } from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
 import { Alert, Button, Typography, Box } from '@mui/material';
 import { useEffect, useState } from 'react';

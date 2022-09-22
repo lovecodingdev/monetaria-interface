@@ -7,7 +7,7 @@ import {
   calculateHealthFactorFromBalancesBigUnits,
   USD_DECIMALS,
   valueToBigNumber,
-} from '@aave/math-utils';
+} from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
 import Typography from '@mui/material/Typography';
 import BigNumber from 'bignumber.js';

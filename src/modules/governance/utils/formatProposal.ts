@@ -1,5 +1,5 @@
 import { ChainId, Proposal, ProposalState } from '@monetaria/contract-helpers';
-import { normalizeBN } from '@aave/math-utils';
+import { normalizeBN } from '@monetaria/math-utils';
 import BigNumber from 'bignumber.js';
 import { getProvider } from 'src/utils/marketsAndNetworksConfig';
 import { MNTProposal } from '../MNTProposalListItem';

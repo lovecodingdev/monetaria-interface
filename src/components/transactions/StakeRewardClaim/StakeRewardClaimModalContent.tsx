@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import { normalize } from '@aave/math-utils';
+import { normalize } from '@monetaria/math-utils';
 import { getNetworkConfig } from 'src/utils/marketsAndNetworksConfig';
 import { TxErrorView } from '../FlowCommons/Error';
 import { TxSuccessView } from '../FlowCommons/Success';

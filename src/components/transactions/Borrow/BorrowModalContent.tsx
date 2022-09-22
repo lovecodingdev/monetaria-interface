@@ -3,7 +3,7 @@ import {
   calculateHealthFactorFromBalancesBigUnits,
   USD_DECIMALS,
   valueToBigNumber,
-} from '@aave/math-utils';
+} from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
 import { Alert, Box, Checkbox, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { useRef, useState } from 'react';

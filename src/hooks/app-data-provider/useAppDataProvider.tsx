@@ -5,7 +5,7 @@ import {
   formatUserSummaryAndIncentives,
   FormatUserSummaryAndIncentivesResponse,
   UserReserveData,
-} from '@aave/math-utils';
+} from '@monetaria/math-utils';
 import BigNumber from 'bignumber.js';
 import React, { useContext } from 'react';
 import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';

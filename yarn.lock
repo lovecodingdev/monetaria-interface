@@ -2585,6 +2585,14 @@
   dependencies:
     isomorphic-unfetch "^3.1.0"
 
+"@monetaria/math-utils@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@monetaria/math-utils/-/math-utils-1.0.0.tgz#7a53457c2e31d7337ce7f4ea6e4cc704cfa66f19"
+  integrity sha512-fYdjiSRTw5iSLc853n/FgfijxD6SuJfweaF3XkAsQD/GIs97zDNsTAfU4HjmtK/U75S0Ed88F6RPz3xiI0UwoQ==
+  dependencies:
+    bignumber.js "^9.0.1"
+    tslib "^2.3.1"
+
 "@mui/base@5.0.0-alpha.72":
   version "5.0.0-alpha.72"
   resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.72.tgz#551d64402ee5065cf81fd1388a3e7ab8c426fe3e"

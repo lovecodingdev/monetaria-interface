@@ -1,5 +1,5 @@
 import { API_ETH_MOCK_ADDRESS, WalletBalanceProvider } from '@monetaria/contract-helpers';
-import { nativeToUSD, normalize, USD_DECIMALS } from '@aave/math-utils';
+import { nativeToUSD, normalize, USD_DECIMALS } from '@monetaria/math-utils';
 import { useApolloClient, useQuery } from '@apollo/client';
 import { BigNumber } from 'bignumber.js';
 import { gql } from 'graphql-tag';

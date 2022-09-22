@@ -1,4 +1,4 @@
-import { calculateHealthFactorFromBalancesBigUnits, valueToBigNumber } from '@aave/math-utils';
+import { calculateHealthFactorFromBalancesBigUnits, valueToBigNumber } from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
 import { Alert, Typography } from '@mui/material';
 import { useAppDataContext } from 'src/hooks/app-data-provider/useAppDataProvider';

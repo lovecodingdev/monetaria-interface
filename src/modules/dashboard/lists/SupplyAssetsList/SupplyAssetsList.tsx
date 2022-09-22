@@ -1,5 +1,5 @@
 import { API_ETH_MOCK_ADDRESS, InterestRate } from '@monetaria/contract-helpers';
-import { USD_DECIMALS, valueToBigNumber } from '@aave/math-utils';
+import { USD_DECIMALS, valueToBigNumber } from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
 import { Alert, Box, useMediaQuery, useTheme } from '@mui/material';
 import BigNumber from 'bignumber.js';

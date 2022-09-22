@@ -1,4 +1,4 @@
-import { valueToBigNumber } from '@aave/math-utils';
+import { valueToBigNumber } from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
 import { Box, Typography, useTheme } from '@mui/material';
 import BigNumber from 'bignumber.js';

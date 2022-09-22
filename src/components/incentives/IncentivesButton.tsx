@@ -1,4 +1,4 @@
-import { valueToBigNumber } from '@aave/math-utils';
+import { valueToBigNumber } from '@monetaria/math-utils';
 import { DotsHorizontalIcon } from '@heroicons/react/solid';
 import { Box, SvgIcon, Typography } from '@mui/material';
 import { useState } from 'react';

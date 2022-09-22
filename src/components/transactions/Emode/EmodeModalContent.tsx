@@ -1,4 +1,4 @@
-import { formatUserSummary } from '@aave/math-utils';
+import { formatUserSummary } from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
 import { Alert, Box, Button, Link, SvgIcon, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';

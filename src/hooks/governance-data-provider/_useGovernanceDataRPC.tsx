@@ -3,7 +3,7 @@ import {
   GovernancePowerDelegationTokenService,
   tEthereumAddress,
 } from '@monetaria/contract-helpers';
-import { normalize, valueToBigNumber } from '@aave/math-utils';
+import { normalize, valueToBigNumber } from '@monetaria/math-utils';
 import { useApolloClient } from '@apollo/client';
 import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
 import { GovernanceConfig } from 'src/ui-config/governanceConfig';

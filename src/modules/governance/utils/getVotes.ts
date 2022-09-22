@@ -1,4 +1,4 @@
-import { normalizeBN } from '@aave/math-utils';
+import { normalizeBN } from '@monetaria/math-utils';
 import { governanceConfig } from 'src/ui-config/governanceConfig';
 import { governanceContract } from './governanceProvider';
 

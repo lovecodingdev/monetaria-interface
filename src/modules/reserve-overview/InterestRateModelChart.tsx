@@ -9,7 +9,7 @@ import { AxisLeft } from '@visx/axis';
 import { max, bisector } from 'd3-array';
 import { Group } from '@visx/group';
 import { useTheme } from '@mui/material';
-import { normalizeBN, RAY, rayDiv, rayMul } from '@aave/math-utils';
+import { normalizeBN, RAY, rayDiv, rayMul } from '@monetaria/math-utils';
 import { BigNumber } from 'bignumber.js';
 import { Text } from '@visx/text';
 import { ChartLegend } from './ChartLegend';

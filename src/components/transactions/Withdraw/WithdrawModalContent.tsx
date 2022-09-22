@@ -1,5 +1,5 @@
 import { API_ETH_MOCK_ADDRESS } from '@monetaria/contract-helpers';
-import { calculateHealthFactorFromBalancesBigUnits, valueToBigNumber } from '@aave/math-utils';
+import { calculateHealthFactorFromBalancesBigUnits, valueToBigNumber } from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
 import { Alert, Box, Checkbox, Typography } from '@mui/material';
 import BigNumber from 'bignumber.js';

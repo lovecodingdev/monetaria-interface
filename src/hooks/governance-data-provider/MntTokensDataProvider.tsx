@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { WalletBalanceProvider } from '@monetaria/contract-helpers';
-import { normalize } from '@aave/math-utils';
+import { normalize } from '@monetaria/math-utils';
 import { mntGovernanceConfig } from 'src/ui-config/governanceConfig';
 import { getProvider } from 'src/utils/marketsAndNetworksConfig';
 import { useProtocolDataContext } from '../useProtocolDataContext';

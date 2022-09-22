@@ -1,4 +1,4 @@
-import { normalize, UserIncentiveData, valueToBigNumber } from '@aave/math-utils';
+import { normalize, UserIncentiveData, valueToBigNumber } from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
 import { Box, Button, useMediaQuery, useTheme } from '@mui/material';
 import * as React from 'react';

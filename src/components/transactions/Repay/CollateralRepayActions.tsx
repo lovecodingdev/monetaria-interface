@@ -10,7 +10,7 @@ import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
 import { TxActionsWrapper } from '../TxActionsWrapper';
 import { OptimalRate } from 'paraswap-core';
 import { getRepayCallData } from 'src/hooks/useSwap';
-import { normalize } from '@aave/math-utils';
+import { normalize } from '@monetaria/math-utils';
 
 export interface RepayActionProps extends BoxProps {
   rateMode: InterestRate;

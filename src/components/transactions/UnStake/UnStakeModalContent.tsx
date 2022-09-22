@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Typography } from '@mui/material';
 import { AssetInput } from '../AssetInput';
-import { normalize, valueToBigNumber } from '@aave/math-utils';
+import { normalize, valueToBigNumber } from '@monetaria/math-utils';
 import { getNetworkConfig } from 'src/utils/marketsAndNetworksConfig';
 import { TxErrorView } from '../FlowCommons/Error';
 import { TxSuccessView } from '../FlowCommons/Success';

@@ -1,4 +1,4 @@
-import { valueToBigNumber } from '@aave/math-utils';
+import { valueToBigNumber } from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
 import { Button, Typography, useMediaQuery, useTheme, Box } from '@mui/material';
 import * as React from 'react';
