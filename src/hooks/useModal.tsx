@@ -21,6 +21,7 @@ export enum ModalType {
   GovDelegation,
   GovVote,
   SelectToken,
+  Actions,
 }
 
 export interface ModalArgsType {
@@ -31,6 +32,7 @@ export interface ModalArgsType {
   icon?: string;
   stakeAssetName?: string;
   currentRateMode?: InterestRate;
+  actionTab?: ModalType;
 }
 
 export type TxStateType = {
@@ -58,6 +60,7 @@ export interface ModalContextType<T extends ModalArgsType> {
   openGovDelegation: () => void;
   openGovVote: (proposalId: string, support: boolean, power: string) => void;
   openSelectToken: () => void;
+  openActions: (underlyingAsset: string, actionTab: ModalType) => void;
   close: () => void;
   type?: ModalType;
   args: T;
@@ -158,6 +161,10 @@ export const ModalContextProvider: React.FC = ({ children }) => {
         },
         openSelectToken: () => {
           setType(ModalType.SelectToken);
+        },
+        openActions: (underlyingAsset, actionTab) => {
+          setType(ModalType.Actions);
+          setArgs({ underlyingAsset, actionTab });
         },
         close: () => {
           setType(undefined);

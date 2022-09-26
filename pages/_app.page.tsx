@@ -37,6 +37,7 @@ import { WalletModalContextProvider } from 'src/hooks/useWalletModal';
 import { PermissionProvider } from 'src/hooks/usePermissions';
 import AaveMetaImage from 'public/aaveMetaLogo.png';
 import { FaucetModal } from 'src/components/transactions/Faucet/FaucetModal';
+import { ActionTabsModal } from 'src/components/transactions/ActionTabs/ActionTabsModal';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -97,6 +98,7 @@ export default function MyApp(props: MyAppProps) {
                                   <EmodeModal />
                                   <SwapModal />
                                   <FaucetModal />
+                                  <ActionTabsModal />
                                 </GasStationProvider>
                               </WalletModalContextProvider>
                             </TxBuilderProvider>

@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/macro';
 import { Button, Box } from '@mui/material';
-import { useModalContext } from 'src/hooks/useModal';
+import { useModalContext, ModalType } from 'src/hooks/useModal';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 
 import { CapsHint } from '../../../../components/caps/CapsHint';
@@ -48,7 +48,7 @@ export const SupplyAssetsListItem = ({
   sIncentivesData,
 }: SupplyAssetsItem) => {
   const { currentMarket } = useProtocolDataContext();
-  // const { openSupply, openBorrow } = useModalContext();
+  const { openActions } = useModalContext();
 
   return (
     <ListItemWrapper
@@ -99,26 +99,24 @@ export const SupplyAssetsListItem = ({
       <ListAPRColumn value={Number(stableBorrowAPY)} incentives={sIncentivesData} symbol={symbol} />
 
       <ListButtonsColumn>
-        <Link href={ROUTES.actions(detailsAddress, currentMarket, "Borrow")}
-          noWrap>
-          <Button
-            // disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
-            variant="outlined"
-            // onClick={() => openBorrow(underlyingAsset)}
-          >
-            <Trans>Borrow</Trans>
-          </Button>
-        </Link>
-        <Link href={ROUTES.actions(detailsAddress, currentMarket, "Supply")}
-          noWrap>
-          <Button
-            // disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
-            variant="contained"
-            // onClick={() => openSupply(underlyingAsset)}
-          >
-            <Trans>Supply</Trans>
-          </Button>
-        </Link>
+        <Button
+          // component={Link}
+          // href={ROUTES.actions(detailsAddress, currentMarket, "Borrow")}
+          // disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
+          variant="outlined"
+          onClick={() => openActions(underlyingAsset, ModalType.Borrow)}
+        >
+          <Trans>Borrow</Trans>
+        </Button>
+        <Button
+          // component={Link}
+          // href={ROUTES.actions(detailsAddress, currentMarket, "Supply")}
+          // disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
+          variant="contained"
+          onClick={() => openActions(underlyingAsset, ModalType.Supply)}
+        >
+          <Trans>Supply</Trans>
+        </Button>
         {/* <Button
           disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
           variant="contained"
