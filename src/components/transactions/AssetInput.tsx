@@ -92,7 +92,7 @@ export const AssetInput = <T extends Asset = Asset>({
   inputTitle,
   isMaxSelected,
 }: AssetInputProps<T>) => {
-  const { openSelectToken } = useModalContext();
+  // const { openSelectToken } = useModalContext();
 
   const handleSelect = (event: SelectChangeEvent) => {
     const newAsset = assets.find((asset) => asset.symbol === event.target.value) as T;
@@ -151,19 +151,29 @@ export const AssetInput = <T extends Asset = Asset>({
           />
 
           {!onSelect || assets.length === 1 ? (
-            <ButtonBase onClick={()=>openSelectToken()} disableTouchRipple>
-              <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
-                <TokenIcon
-                  aToken={asset.aToken}
-                  symbol={asset.iconSymbol || asset.symbol}
-                  sx={{ mr: 2, ml: 4 }}
-                />
-                <Typography variant="h3" sx={{ lineHeight: '28px' }} data-cy={'inputAsset'}>
-                  {symbol}
-                </Typography>
-                <ChevronRight sx={{transform: 'rotate(90deg)'}} />
-              </Box>
-            </ButtonBase>
+            // <ButtonBase onClick={()=>openSelectToken()} disableTouchRipple>
+            //   <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
+            //     <TokenIcon
+            //       aToken={asset.aToken}
+            //       symbol={asset.iconSymbol || asset.symbol}
+            //       sx={{ mr: 2, ml: 4 }}
+            //     />
+            //     <Typography variant="h3" sx={{ lineHeight: '28px' }} data-cy={'inputAsset'}>
+            //       {symbol}
+            //     </Typography>
+            //     <ChevronRight sx={{transform: 'rotate(90deg)'}} />
+            //   </Box>
+            // </ButtonBase>
+            <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
+              <TokenIcon
+                aToken={asset.aToken}
+                symbol={asset.iconSymbol || asset.symbol}
+                sx={{ mr: 2, ml: 4 }}
+              />
+              <Typography variant="h3" sx={{ lineHeight: '28px' }} data-cy={'inputAsset'}>
+                {symbol}
+              </Typography>
+            </Box>
           ) : (
             <FormControl>
               <Select
