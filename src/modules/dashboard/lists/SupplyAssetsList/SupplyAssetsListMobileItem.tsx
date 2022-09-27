@@ -7,7 +7,7 @@ import { CapType } from '../../../../components/caps/helper';
 import { IncentivesCard } from '../../../../components/incentives/IncentivesCard';
 import { Link, ROUTES } from '../../../../components/primitives/Link';
 import { Row } from '../../../../components/primitives/Row';
-import { useModalContext } from '../../../../hooks/useModal';
+import { useModalContext, ModalType } from '../../../../hooks/useModal';
 import { ListItemCanBeCollateral } from '../ListItemCanBeCollateral';
 import { ListMobileItemWrapper } from '../ListMobileItemWrapper';
 import { ListValueRow } from '../ListValueRow';
@@ -47,7 +47,7 @@ export const SupplyAssetsListMobileItem = ({
   sIncentivesData,
 }: SupplyAssetsItem) => {
   const { currentMarket } = useProtocolDataContext();
-  const { openSupply } = useModalContext();
+  const { openActions } = useModalContext();
 
   return (
     // <ListMobileItemWrapper
@@ -226,18 +226,20 @@ export const SupplyAssetsListMobileItem = ({
 
         <Button
           variant="outlined"
-          component={Link}
-          href={ROUTES.actions(detailsAddress, currentMarket, "Borrow")}
+          // component={Link}
+          // href={ROUTES.actions(detailsAddress, currentMarket, "Borrow")}
           sx={{flex: 1}}
+          onClick={() => openActions(underlyingAsset, ModalType.Borrow)}
         >
           <Trans>Borrow</Trans>
         </Button>
 
         <Button
           variant="contained"
-          component={Link}
-          href={ROUTES.actions(detailsAddress, currentMarket, "Supply")}
+          // component={Link}
+          // href={ROUTES.actions(detailsAddress, currentMarket, "Supply")}
           sx={{flex: 1}}
+          onClick={() => openActions(underlyingAsset, ModalType.Supply)}
         >
           <Trans>Supply</Trans>
         </Button>
