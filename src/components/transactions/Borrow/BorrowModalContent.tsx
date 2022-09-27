@@ -59,8 +59,8 @@ const BorrowModeSwitch = ({
         />
       }
       captionVariant="description"
-      mb={1}
-      pt={5}
+      mb={4}
+      pt={1}
       flexDirection="column"
       align="flex-start"
       captionColor="text.secondary"
@@ -70,7 +70,10 @@ const BorrowModeSwitch = ({
         value={interestRateMode}
         exclusive
         onChange={(_, value) => setInterestRateMode(value)}
-        sx={{ width: '100%', mt: 0.5 }}
+        sx={{ 
+          width: '100%', 
+          mt: 0.5,
+        }}
       >
         <ToggleButton
           value={InterestRate.Variable}
@@ -215,6 +218,15 @@ export const BorrowModalContent = ({
       : poolReserve.vIncentivesData;
   return (
     <>
+      {poolReserve.stableBorrowRateEnabled && (
+        <BorrowModeSwitch
+          interestRateMode={interestRateMode}
+          setInterestRateMode={setInterestRateMode}
+          variableRate={poolReserve.variableBorrowAPY}
+          stableRate={poolReserve.stableBorrowAPY}
+        />
+      )}
+
       <AssetInput
         value={amount}
         onChange={handleChange}
@@ -239,15 +251,6 @@ export const BorrowModalContent = ({
         <Typography variant="helperText" color="error.main">
           {handleBlocked()}
         </Typography>
-      )}
-
-      {poolReserve.stableBorrowRateEnabled && (
-        <BorrowModeSwitch
-          interestRateMode={interestRateMode}
-          setInterestRateMode={setInterestRateMode}
-          variableRate={poolReserve.variableBorrowAPY}
-          stableRate={poolReserve.stableBorrowAPY}
-        />
       )}
 
       <TxModalDetails gasLimit={gasLimit}>

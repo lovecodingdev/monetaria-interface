@@ -793,9 +793,10 @@ export function getThemedComponents(theme: Theme) {
       MuiToggleButtonGroup: {
         styleOverrides: {
           root: {
-            backgroundColor: '#074592',
-            border: '1px solid rgba(235, 235, 237, 0.12)',
-            padding: '4px',
+            backgroundColor: 'white',
+            border: '1px solid #EEF0F2',
+            padding: '2px',
+            borderRadius: '8px',
           },
         },
       },
@@ -804,30 +805,18 @@ export function getThemedComponents(theme: Theme) {
           root: {
             border: '0px',
             flex: 1,
-            backgroundColor: '#074592',
-            borderRadius: '4px',
+            backgroundColor: 'transparent',
+            borderRadius: '8px',
 
             '&.Mui-selected, &.Mui-selected:hover': {
-              backgroundColor: '#FFFFFF',
-              borderRadius: '4px !important',
+              backgroundColor: '#E5E9EB',
             },
 
-            '&.Mui-selected, &.Mui-disabled': {
-              zIndex: 100,
-              height: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-
-              '.MuiTypography-subheader1': {
-                background: theme.palette.gradients.aaveGradient,
-                backgroundClip: 'text',
-                textFillColor: 'transparent',
-              },
-              '.MuiTypography-secondary14': {
-                background: theme.palette.gradients.aaveGradient,
-                backgroundClip: 'text',
-                textFillColor: 'transparent',
-              },
+            '.MuiTypography-subheader1': {
+              color: '#252C32',
+            },
+            '.MuiTypography-secondary14': {
+              color: '#252C32',
             },
           },
         },
