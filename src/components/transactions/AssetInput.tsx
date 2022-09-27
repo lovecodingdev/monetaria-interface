@@ -107,22 +107,23 @@ export const AssetInput = <T extends Asset = Asset>({
 
   return (
     <Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+      {/* <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
         <Typography color="text.secondary">
           {inputTitle ? inputTitle : <Trans>Amount</Trans>}
         </Typography>
         {capType && <AvailableTooltip capType={capType} />}
       </Box>
-
+ */}
       <Box
         sx={(theme) => ({
-          p: '8px 12px',
+          p: '16px',
           border: `1px solid ${theme.palette.divider}`,
-          borderRadius: '6px',
-          mb: 1,
+          borderRadius: '12px',
+          background: '#EEF0F2',
+          mb: 4,
         })}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
           <InputBase
             sx={{ flex: 1 }}
             placeholder="0.00"
@@ -272,6 +273,59 @@ export const AssetInput = <T extends Asset = Asset>({
           )}
         </Box>
       </Box>
+      {asset.balance && onChange && (
+        <Box
+          sx={{
+            display: 'flex',
+            gap: 2,
+          }}
+        >
+          <ButtonBase
+            sx={{
+              flex: 1,
+              padding: '8px',
+              background: '#EEF0F2',
+              borderRadius: '8px',
+            }}
+            onClick={() => onChange('-0.25')}
+          >
+            25%
+          </ButtonBase>
+          <ButtonBase
+            sx={{
+              flex: 1,
+              padding: '8px',
+              background: '#EEF0F2',
+              borderRadius: '8px',
+            }}
+            onClick={() => onChange('-0.5')}
+          >
+            50%
+          </ButtonBase>
+          <ButtonBase
+            sx={{
+              flex: 1,
+              padding: '8px',
+              background: '#EEF0F2',
+              borderRadius: '8px',
+            }}
+            onClick={() => onChange('-0.75')}
+          >
+            75%
+          </ButtonBase>
+          <ButtonBase
+            sx={{
+              flex: 1,
+              padding: '8px',
+              background: '#EEF0F2',
+              borderRadius: '8px',
+            }}
+            onClick={() => onChange('-1')}
+          >
+            100%
+          </ButtonBase>
+        </Box>
+      )}
     </Box>
   );
 };

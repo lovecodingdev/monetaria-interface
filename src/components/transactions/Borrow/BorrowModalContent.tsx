@@ -118,13 +118,12 @@ export const BorrowModalContent = ({
   const formattedMaxAmountToBorrow = maxAmountToBorrow.toString(10);
 
   const isMaxSelected = _amount === '-1';
-  const amount = isMaxSelected ? maxAmountToBorrow.toString(10) : _amount;
+  const amount = Number(_amount) < 0 ? maxAmountToBorrow.multipliedBy(-Number(_amount)).toString(10) : _amount;
 
   // We set this in a useEffect, so it doesnt constantly change when
   // max amount selected
   const handleChange = (_value: string) => {
-    const maxSelected = _value === '-1';
-    const value = maxSelected ? maxAmountToBorrow.toString() : _value;
+    const value = Number(_value) < 0 ? maxAmountToBorrow.multipliedBy(-Number(_value)).toString(10) : _value;
     amountRef.current = value;
     setAmount(value);
   };

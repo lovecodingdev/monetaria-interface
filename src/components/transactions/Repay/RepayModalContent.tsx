@@ -88,11 +88,13 @@ export const RepayModalContent = ({
   }
 
   const isMaxSelected = _amount === '-1';
-  const amount = isMaxSelected ? maxAmountToRepay.toString(10) : _amount;
+  const amount =
+    Number(_amount) < 0 ? maxAmountToRepay.multipliedBy(-Number(_amount)).toString(10) : _amount;
 
   const handleChange = (value: string) => {
     const maxSelected = value === '-1';
-    amountRef.current = maxSelected ? maxAmountToRepay.toString(10) : value;
+    amountRef.current =
+      Number(value) < 0 ? maxAmountToRepay.multipliedBy(-Number(value)).toString(10) : value;
     setAmount(value);
     if (maxSelected && (repayWithATokens || maxAmountToRepay.eq(debt))) {
       if (

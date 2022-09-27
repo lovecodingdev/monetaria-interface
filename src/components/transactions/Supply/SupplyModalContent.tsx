@@ -67,11 +67,12 @@ export const SupplyModalContent = ({
     underlyingAsset
   );
   const isMaxSelected = _amount === '-1';
-  const amount = isMaxSelected ? maxAmountToSupply.toString(10) : _amount;
+  const amount =
+    Number(_amount) < 0 ? maxAmountToSupply.multipliedBy(-Number(_amount)).toString(10) : _amount;
 
   const handleChange = (value: string) => {
-    const maxSelected = value === '-1';
-    amountRef.current = maxSelected ? maxAmountToSupply.toString(10) : value;
+    amountRef.current =
+      Number(value) < 0 ? maxAmountToSupply.multipliedBy(-Number(value)).toString(10) : value;
     setAmount(value);
   };
 

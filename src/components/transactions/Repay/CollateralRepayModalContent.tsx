@@ -75,7 +75,10 @@ export function CollateralRepayModalContent({
   const safeAmountToRepayAll = valueToBigNumber(debt).multipliedBy('1.0025');
 
   const isMaxSelected = _amount === '-1';
-  const amount = isMaxSelected ? safeAmountToRepayAll.toString() : _amount;
+  const amount =
+    Number(_amount) < 0
+      ? safeAmountToRepayAll.multipliedBy(-Number(_amount)).toString(10)
+      : _amount;
   const usdValue = valueToBigNumber(amount).multipliedBy(poolReserve.priceInUSD);
 
   const { priceRoute, inputAmountUSD, inputAmount, outputAmount, outputAmountUSD } = useSwap({
@@ -101,8 +104,8 @@ export function CollateralRepayModalContent({
     safeAmountToRepayAll
   );
   const handleChange = (value: string) => {
-    const maxSelected = value === '-1';
-    amountRef.current = maxSelected ? maxRepayableDebt.toString(10) : value;
+    amountRef.current =
+      Number(value) < 0 ? maxRepayableDebt.multipliedBy(-Number(value)).toString(10) : value;
     setAmount(value);
   };
   // for v3 we need hf after withdraw collateral, because when removing collateral to repay
