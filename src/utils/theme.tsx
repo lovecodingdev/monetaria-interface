@@ -255,7 +255,7 @@ export const getDesignTokens = (mode: 'light' | 'dark') => {
         fontWeight: 400,
         letterSpacing: pxToRem(0.15),
         lineHeight: '143%',
-        fontSize: pxToRem(14),
+        fontSize: pxToRem(12),
       },
       caption: {
         fontFamily: FONT,

@@ -29,7 +29,6 @@ export const CircleIcon = ({ downToSM, tooltipText, children }: CircleIconProps)
       >
         <Box
           sx={{
-            bgcolor: '#074592',
             width: downToSM ? '18px' : '24px',
             height: downToSM ? '18px' : '24px',
             borderRadius: '50%',

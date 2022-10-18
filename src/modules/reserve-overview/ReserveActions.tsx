@@ -276,14 +276,15 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-between',
-          flexDirection: { xs: 'column', md: 'row' },
+          flexDirection: { xs: 'column'},
           gap: 2,
         }}
       >
         <Box 
           sx={{
             display: 'flex',
+            justifyContent: 'space-between',
+            color: '#A5A8B6',
           }}
         >
           <Box
@@ -294,10 +295,10 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
               marginRight: '10px',
             }}
           >
-            <Typography variant={'secondary14'}>Wallet balance</Typography>
+            <Typography variant={'secondary12'}>Wallet balance</Typography>
             <FormattedNumber
               value={balance?.amount || 0}
-              variant="h3"
+              variant="main14"
               symbol={poolReserve.symbol}
             />
           </Box>
@@ -309,29 +310,29 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
               marginRight: '10px',
             }}
           >
-            <Typography variant={'secondary14'}>Available to supply</Typography>
+            <Typography variant={'secondary12'}>Available to supply</Typography>
             <FormattedNumber 
               value={maxAmountToSupply}
-              variant="h3"
+              variant="main14"
               symbol={poolReserve.symbol}
             />
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: "10px" }}>
-            <Typography variant={"secondary14"}>Available to borrow</Typography>
+            <Typography variant={"secondary12"}>Available to borrow</Typography>
             <FormattedNumber
               value={canBorrow ? maxAmountToBorrow : '0'}
-              variant="h3"
+              variant="main14"
               symbol={poolReserve.symbol}
             />
           </Box>
         </Box>
 
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" spacing={2} justifyContent="space-between">
           <Button
             disabled={!canBorrow || user?.totalCollateralMarketReferenceCurrency === '0'}
             variant="outlined"
             onClick={() => openBorrow(underlyingAsset)}
-            fullWidth={downToXSM}
+            sx={{flex: 1}}
           >
             <Trans>Borrow</Trans> {downToXSM && poolReserve.symbol}
           </Button>
@@ -339,7 +340,7 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
             variant="contained"
             disabled={balance?.amount === '0'}
             onClick={() => openSupply(underlyingAsset)}
-            fullWidth={downToXSM}
+            sx={{flex: 1}}
           >
             <Trans>Supply</Trans> {downToXSM && poolReserve.symbol}
           </Button>

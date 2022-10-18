@@ -22,6 +22,7 @@ import { ReserveSupplyInfo } from 'src/modules/reserve-overview/ReserveSupplyInf
 import { ReserveBorrowInfo } from 'src/modules/reserve-overview/ReserveBorrowInfo';
 import { ReserveEModeInfo } from 'src/modules/reserve-overview/ReserveEModeInfo';
 import { ReserveInterestRateModel } from 'src/modules/reserve-overview/ReserveInterestRateModel';
+import { InfoTabs } from 'src/modules/reserve-overview/InfoTabs';
 
 import { ContentContainer } from '../src/components/ContentContainer';
 
@@ -47,7 +48,6 @@ export default function ReserveOverview() {
 
   return (
     <>
-      <ReserveTopDetails underlyingAsset={underlyingAsset} />
 
       <ContentContainer>
         {/* <Box
@@ -83,15 +83,13 @@ export default function ReserveOverview() {
             direction={'column'}
             spacing={4}
             sx={{
-              width: { xs: '100%', lg: 'calc(40% - 20px)' },
+              width: { xs: '100%', lg: 'calc(44% - 20px)' },
             }}
           >
             {reserve && 
               <>
-                {/* <ReserveConfiguration reserve={reserve} /> */}
-                <ReserveSupplyInfo reserve={reserve} />
-                <ReserveBorrowInfo reserve={reserve} />
-                <ReserveEModeInfo reserve={reserve} />
+                <ReserveTopDetails underlyingAsset={underlyingAsset} />
+                <ReserveActions underlyingAsset={underlyingAsset} />
               </>
             }
           </Stack>
@@ -104,8 +102,7 @@ export default function ReserveOverview() {
               width: { xs: '100%', lg: '60%' },
             }}
           >
-            <ReserveActions underlyingAsset={underlyingAsset} />
-            {reserve && <ReserveInterestRateModel reserve={reserve} />}
+            {reserve && <InfoTabs reserve={reserve} />}
           </Stack>
         </Box>
       </ContentContainer>

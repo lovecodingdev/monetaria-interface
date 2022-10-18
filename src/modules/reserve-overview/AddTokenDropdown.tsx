@@ -87,6 +87,7 @@ export const AddTokenDropdown = ({
                 '.Wallet__iconHover': { opacity: '1 !important' },
               },
               cursor: 'pointer',
+              color: '#080F26',
             }}
           >
             <img

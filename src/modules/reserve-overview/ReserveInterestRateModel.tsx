@@ -1,12 +1,12 @@
 import { Stack, Typography, Box } from "@mui/material";
-import { ReserveNormalPaper } from "./ReserveNormalPaper"
+import { InfoWrapper } from "./InfoWrapper"
 import { ComputedReserveData } from 'src/hooks/app-data-provider/useAppDataProvider';
 import { ParentSize } from '@visx/responsive';
 import { InterestRateModelChart } from './InterestRateModelChart';
 
 export const ReserveInterestRateModel = ({reserve}: {reserve: ComputedReserveData} ) => {
   return (
-    <ReserveNormalPaper title="Interest Rate Model">
+    <InfoWrapper>
       <Box
         sx={{
           minWidth: 0,
@@ -37,6 +37,6 @@ export const ReserveInterestRateModel = ({reserve}: {reserve: ComputedReserveDat
           )}
         </ParentSize>
       </Box>
-    </ReserveNormalPaper>
+    </InfoWrapper>
   );
 }
