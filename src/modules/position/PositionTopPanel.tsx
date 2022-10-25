@@ -110,7 +110,12 @@ export const PositionTopPanel = () => {
             justifyContent: 'space-between',
           }}
         >
-          <TopInfoPanelItem hideIcon icon={<WalletIcon />} title={<Trans>Net worth</Trans>} loading={loading}>
+          <TopInfoPanelItem
+            hideIcon
+            icon={<WalletIcon />}
+            title={<Trans>Net worth</Trans>}
+            loading={loading}
+          >
             {currentAccount ? (
               <FormattedNumber
                 value={Number(user?.netWorthUSD || 0)}
@@ -185,45 +190,6 @@ export const PositionTopPanel = () => {
               />
             </TopInfoPanelItem>
           )}
-
-          {/* {currentAccount && claimableRewardsUsd > 0 && (
-            <TopInfoPanelItem
-              title={<Trans>Available rewards</Trans>}
-              icon={<ClaimGiftIcon />}
-              loading={loading}
-            >
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: { xs: 'flex-start', xsm: 'center' },
-                  flexDirection: { xs: 'column', xsm: 'row' },
-                }}
-              >
-                <Box sx={{ display: 'inline-flex', alignItems: 'center' }} data-cy={'Claim_Box'}>
-                  <FormattedNumber
-                    value={claimableRewardsUsd}
-                    variant={valueTypographyVariant}
-                    visibleDecimals={2}
-                    compact
-                    symbol="USD"
-                    symbolsColor="#A5A8B6"
-                    symbolsVariant={noDataTypographyVariant}
-                    data-cy={'Claim_Value'}
-                  />
-                </Box>
-
-                <Button
-                  variant="gradient"
-                  size="small"
-                  onClick={() => openClaimRewards()}
-                  sx={{ minWidth: 'unset', ml: { xs: 0, xsm: 2 } }}
-                  data-cy={'Dashboard_Claim_Button'}
-                >
-                  <Trans>Claim</Trans>
-                </Button>
-              </Box>
-            </TopInfoPanelItem>
-          )} */}
         </Box>
         <Box
           sx={{
@@ -328,6 +294,31 @@ export const PositionTopPanel = () => {
               )}
             </TopInfoPanelItem>
           </Box>
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
+          <TopInfoPanelItem
+            title={<Trans>Available rewards</Trans>}
+            hideIcon
+            icon={<ClaimGiftIcon />}
+            loading={loading}
+          >
+            <FormattedNumber
+              value={claimableRewardsUsd}
+              variant={valueTypographyVariant}
+              visibleDecimals={2}
+              compact
+              symbol="USD"
+              symbolsVariant={noDataTypographyVariant}
+              data-cy={'Claim_Value'}
+            />
+          </TopInfoPanelItem>
+          <Button
+            variant="contained"
+            onClick={() => openClaimRewards()}
+            sx={{ minWidth: 'unset', ml: { xs: 0, xsm: 2 } }}
+          >
+            <Trans>Claim All Rewards</Trans>
+          </Button>
         </Box>
       </Paper>
 
