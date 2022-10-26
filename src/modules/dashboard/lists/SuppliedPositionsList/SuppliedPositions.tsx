@@ -1,6 +1,6 @@
 import { API_ETH_MOCK_ADDRESS } from '@monetaria/contract-helpers';
 import { Trans } from '@lingui/macro';
-import { Box, useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { fetchIconSymbolAndName } from 'src/ui-config/reservePatches';
 
@@ -17,7 +17,7 @@ import { ListTopInfoItem } from '../ListTopInfoItem';
 import { SuppliedPositionsListItem } from './SuppliedPositionsListItem';
 import { SuppliedPositionsListMobileItem } from './SuppliedPositionsListMobileItem';
 
-export const SuppliedPositionsList = () => {
+export const SuppliedPositions = () => {
   const { user, loading } = useAppDataContext();
   const { currentNetworkConfig } = useProtocolDataContext();
   const theme = useTheme();
@@ -52,42 +52,48 @@ export const SuppliedPositionsList = () => {
   // if (loading) return <ListLoader title={<Trans>Your supplies</Trans>} head={head} />;
 
   return (
-    <Box>
-      <>
-        {!!suppliedPosition.length && (
-          <Box sx={{display: 'flex', my: 4, gap: 4}}>
-            <ListTopInfoItem
-              title={<Trans>Balance</Trans>}
-              value={user?.totalLiquidityUSD || 0}
-            />
-            <ListTopInfoItem
-              title={<Trans>APY</Trans>}
-              value={user?.earnedAPY || 0}
-              percent
-              tooltip={<TotalSupplyAPYTooltip />}
-            />
-            <ListTopInfoItem
-              title={<Trans>Collateral</Trans>}
-              value={user?.totalCollateralUSD || 0}
-              tooltip={<CollateralTooltip />}
-            />
-          </Box>
-        )}
-      </>
+    <ListWrapper
+      title={<Trans>Your supplies</Trans>}
+      localStorageName="suppliedAssetsDashboardTableCollapse"
+      noData={!suppliedPosition.length}
+      topInfo={
+        <>
+          {!!suppliedPosition.length && (
+            <>
+              <ListTopInfoItem
+                title={<Trans>Balance</Trans>}
+                value={user?.totalLiquidityUSD || 0}
+              />
+              <ListTopInfoItem
+                title={<Trans>APY</Trans>}
+                value={user?.earnedAPY || 0}
+                percent
+                tooltip={<TotalSupplyAPYTooltip />}
+              />
+              <ListTopInfoItem
+                title={<Trans>Collateral</Trans>}
+                value={user?.totalCollateralUSD || 0}
+                tooltip={<CollateralTooltip />}
+              />
+            </>
+          )}
+        </>
+      }
+    >
       {suppliedPosition.length ? (
         <>
-          {!downToXSM && <ListHeader head={head} />}
+          {/* {!downToXSM && <ListHeader head={head} />}
           {suppliedPosition.map((item) =>
             downToXSM ? (
               <SuppliedPositionsListMobileItem {...item} user={user} key={item.underlyingAsset} />
             ) : (
               <SuppliedPositionsListItem {...item} user={user} key={item.underlyingAsset} />
             )
-          )}
+          )} */}
         </>
       ) : (
         <DashboardContentNoData text={<Trans>Nothing supplied yet</Trans>} />
       )}
-    </Box>
+    </ListWrapper>
   );
 };

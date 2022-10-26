@@ -15,11 +15,13 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { styled } from '@mui/system';
+import { BorrowedPositionsList } from '../dashboard/lists/BorrowedPositionsList/BorrowedPositionsList';
+import { SuppliedPositionsList } from '../dashboard/lists/SuppliedPositionsList/SuppliedPositionsList';
 
 const NewTabs = styled(Tabs)({
   minHeight: '24px',
   '& .MuiTabs-flexContainer': {
-    justifyContent: 'start',
+    justifyContent: 'center',
     gap: 2,
   },
   '& .MuiTabs-indicator': {
@@ -158,18 +160,14 @@ export const PositionTabs = () => {
             mb: 2,
           }}
         >
-          <NewTab label="Deposits"/>
+          <NewTab label="Supplies"/>
           <NewTab label="Borrows" />
           <NewTab label="Transactions" />
           <NewTab label="Liquidation History" />
         </NewTabs>
       </Box>
-      {selectedTab == 0 &&
-        <></>
-      }
-      {selectedTab == 1 && 
-        <></>
-      }
+      {selectedTab == 0 && <SuppliedPositionsList />}
+      {selectedTab == 1 && <BorrowedPositionsList />}
       {selectedTab == 2 && 
         <></>
       }

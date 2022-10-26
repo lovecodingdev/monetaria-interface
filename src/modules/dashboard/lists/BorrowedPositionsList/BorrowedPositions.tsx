@@ -1,7 +1,7 @@
 import { API_ETH_MOCK_ADDRESS, InterestRate } from '@monetaria/contract-helpers';
 import { valueToBigNumber } from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
-import { Box, useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { useModalContext } from 'src/hooks/useModal';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { fetchIconSymbolAndName } from 'src/ui-config/reservePatches';
@@ -22,7 +22,7 @@ import { ListTopInfoItem } from '../ListTopInfoItem';
 import { BorrowedPositionsListItem } from './BorrowedPositionsListItem';
 import { BorrowedPositionsListMobileItem } from './BorrowedPositionsListMobileItem';
 
-export const BorrowedPositionsList = () => {
+export const BorrowedPositions = () => {
   const { user, loading } = useAppDataContext();
   const { currentMarketData, currentNetworkConfig } = useProtocolDataContext();
   const { openEmode } = useModalContext();
@@ -81,30 +81,44 @@ export const BorrowedPositionsList = () => {
   // if (loading) return <ListLoader title={<Trans>Your borrows</Trans>} head={head} />;
 
   return (
-    <Box>
-      <>
-        {!!borrowPositions.length && (
-          <Box sx={{display: 'flex', my: 4, gap: 4}}>
-          <ListTopInfoItem title={<Trans>Balance</Trans>} value={user?.totalBorrowsUSD || 0} />
-            <ListTopInfoItem
-              title={<Trans>APY</Trans>}
-              value={user?.debtAPY || 0}
-              percent
-              tooltip={<TotalBorrowAPYTooltip />}
-            />
-            <ListTopInfoItem
-              title={<Trans>Borrow power used</Trans>}
-              value={collateralUsagePercent || 0}
-              percent
-              tooltip={<BorrowPowerTooltip />}
-            />
-          </Box>
-        )}
-      </>
-    
+    <ListWrapper
+      title={<Trans>Your borrows</Trans>}
+      localStorageName="borrowedAssetsDashboardTableCollapse"
+      // subTitleComponent={
+      //   currentMarketData.v3 ? (
+      //     <DashboardEModeButton
+      //       userEmodeCategoryId={user.userEmodeCategoryId}
+      //       onClick={() => openEmode()}
+      //       baseAssetSymbol={currentNetworkConfig.baseAssetSymbol}
+      //     />
+      //   ) : undefined
+      // }
+      noData={!borrowPositions.length}
+      topInfo={
+        <>
+          {!!borrowPositions.length && (
+            <>
+              <ListTopInfoItem title={<Trans>Balance</Trans>} value={user?.totalBorrowsUSD || 0} />
+              <ListTopInfoItem
+                title={<Trans>APY</Trans>}
+                value={user?.debtAPY || 0}
+                percent
+                tooltip={<TotalBorrowAPYTooltip />}
+              />
+              <ListTopInfoItem
+                title={<Trans>Borrow power used</Trans>}
+                value={collateralUsagePercent || 0}
+                percent
+                tooltip={<BorrowPowerTooltip />}
+              />
+            </>
+          )}
+        </>
+      }
+    >
       {borrowPositions.length ? (
         <>
-          {!downToXSM && <ListHeader head={head} />}
+          {/* {!downToXSM && <ListHeader head={head} />}
           {borrowPositions.map((item) =>
             downToXSM ? (
               <BorrowedPositionsListMobileItem
@@ -117,11 +131,11 @@ export const BorrowedPositionsList = () => {
                 key={item.underlyingAsset + item.borrowRateMode}
               />
             )
-          )}
+          )} */}
         </>
       ) : (
         <DashboardContentNoData text={<Trans>Nothing borrowed yet</Trans>} />
       )}
-    </Box>
+    </ListWrapper>
   );
 };

@@ -1,8 +1,8 @@
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 import { BorrowAssetsList } from './lists/BorrowAssetsList/BorrowAssetsList';
-import { BorrowedPositionsList } from './lists/BorrowedPositionsList/BorrowedPositionsList';
-import { SuppliedPositionsList } from './lists/SuppliedPositionsList/SuppliedPositionsList';
+import { BorrowedPositions } from './lists/BorrowedPositionsList/BorrowedPositions';
+import { SuppliedPositions } from './lists/SuppliedPositionsList/SuppliedPositions';
 import { SupplyAssetsList } from './lists/SupplyAssetsList/SupplyAssetsList';
 
 interface DashboardContentWrapperProps {
@@ -27,10 +27,10 @@ export const DashboardContentWrapper = ({ isBorrow }: DashboardContentWrapperPro
         }}
       >
         <Box sx={{ flex: 1, width: paperWidth }}>
-          <SuppliedPositionsList />
+          <SuppliedPositions />
         </Box>
         <Box sx={{ flex: 1, width: paperWidth }}>
-          <BorrowedPositionsList />
+          <BorrowedPositions />
         </Box>
       </Box>
       <SupplyAssetsList />
