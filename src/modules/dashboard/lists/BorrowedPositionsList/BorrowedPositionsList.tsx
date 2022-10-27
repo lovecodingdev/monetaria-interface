@@ -76,6 +76,7 @@ export const BorrowedPositionsList = () => {
     <Trans key="Debt">Debt</Trans>,
     <Trans key="APY">APY</Trans>,
     <APYTypeTooltip text={<Trans>APY type</Trans>} key="APY type" variant="subheader2" />,
+    <Trans key="Actions">Actions</Trans>,
   ];
 
   // if (loading) return <ListLoader title={<Trans>Your borrows</Trans>} head={head} />;

@@ -1,7 +1,7 @@
 import { InterestRate } from '@monetaria/contract-helpers';
 import { Trans } from '@lingui/macro';
 import { Button } from '@mui/material';
-import { useModalContext } from 'src/hooks/useModal';
+import { useModalContext, ModalType } from 'src/hooks/useModal';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 
 import { ListColumn } from '../../../../components/lists/ListColumn';
@@ -22,7 +22,7 @@ export const BorrowedPositionsListItem = ({
   borrowRateMode,
   stableBorrowAPY,
 }: ComputedUserReserveData & { borrowRateMode: InterestRate }) => {
-  const { openBorrow, openRepay, openRateSwitch } = useModalContext();
+  const { openActions, openBorrow, openRepay, openRateSwitch } = useModalContext();
   const { currentMarket } = useProtocolDataContext();
   const {
     isActive,
@@ -72,30 +72,20 @@ export const BorrowedPositionsListItem = ({
           currentMarket={currentMarket}
         />
       </ListColumn>
-
-      {/* <ListButtonsColumn>
+      <ListButtonsColumn>
         <Button
-          disabled={!isActive}
-          variant="contained"
-          onClick={() => openRepay(reserve.underlyingAsset, borrowRateMode)}
-        >
-          <Trans>Repay</Trans>
-        </Button>
-        <Button
-          disabled={!isActive || !borrowingEnabled || isFrozen}
           variant="outlined"
-          onClick={() => openBorrow(reserve.underlyingAsset)}
+          onClick={() => openActions(reserve.underlyingAsset, ModalType.Borrow)}
         >
           <Trans>Borrow</Trans>
         </Button>
         <Button
-          variant="outlined"
-          component={Link}
-          href={ROUTES.actions(reserve.underlyingAsset, currentMarket, "supply")}
+          variant="contained"
+          onClick={() => openActions(reserve.underlyingAsset, ModalType.Repay)}
         >
-          <Trans>Actions</Trans>
+          <Trans>Repay</Trans>
         </Button>
-      </ListButtonsColumn> */}
+      </ListButtonsColumn>
     </ListItemWrapper>
   );
 };

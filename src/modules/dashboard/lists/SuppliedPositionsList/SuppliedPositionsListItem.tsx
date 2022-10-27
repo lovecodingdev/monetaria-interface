@@ -4,7 +4,7 @@ import {
   ComputedUserReserveData,
   ExtendedFormattedUser,
 } from 'src/hooks/app-data-provider/useAppDataProvider';
-import { useModalContext } from 'src/hooks/useModal';
+import { useModalContext, ModalType } from 'src/hooks/useModal';
 
 import { ListColumn } from '../../../../components/lists/ListColumn';
 import { useProtocolDataContext } from '../../../../hooks/useProtocolDataContext';
@@ -26,7 +26,7 @@ export const SuppliedPositionsListItem = ({
 }: ComputedUserReserveData & { user: ExtendedFormattedUser }) => {
   const { isIsolated, aIncentivesData, isFrozen, isActive } = reserve;
   const { currentMarketData, currentMarket } = useProtocolDataContext();
-  const { openSupply, openWithdraw, openCollateralChange, openSwap } = useModalContext();
+  const { openActions, openSupply, openWithdraw, openCollateralChange, openSwap } = useModalContext();
   const isSwapButton = isFeatureEnabled.liquiditySwap(currentMarketData);
 
   const canBeEnabledAsCollateral =
@@ -70,41 +70,14 @@ export const SuppliedPositionsListItem = ({
         />
       </ListColumn>
 
-      {/* <ListButtonsColumn>
-        <Button
-          disabled={!isActive}
-          variant="contained"
-          onClick={() => openWithdraw(underlyingAsset)}
-        >
+      <ListButtonsColumn>
+        <Button variant="outlined" onClick={() => openActions(underlyingAsset, ModalType.Withdraw)}>
           <Trans>Withdraw</Trans>
         </Button>
-
-        {isSwapButton ? (
-          <Button
-            disabled={!isActive || isFrozen}
-            variant="outlined"
-            onClick={() => openSwap(underlyingAsset)}
-            data-cy={`swapButton`}
-          >
-            <Trans>Swap</Trans>
-          </Button>
-        ) : (
-          <Button
-            disabled={!isActive || isFrozen}
-            variant="outlined"
-            onClick={() => openSupply(underlyingAsset)}
-          >
-            <Trans>Supply</Trans>
-          </Button>
-        )}
-        <Button
-          variant="outlined"
-          component={Link}
-          href={ROUTES.actions(underlyingAsset, currentMarket, "supply")}
-        >
-          <Trans>Actions</Trans>
+        <Button variant="contained" onClick={() => openActions(underlyingAsset, ModalType.Supply)}>
+          <Trans>Supply</Trans>
         </Button>
-      </ListButtonsColumn> */}
+      </ListButtonsColumn>
     </ListItemWrapper>
   );
 };

@@ -12,7 +12,7 @@ export const ListButtonsColumn = ({ children }: ListButtonsColumnProps) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        maxWidth: 170,
+        // maxWidth: 170,
         minWidth: 170,
         flex: 1,
         '.MuiButton-root': {

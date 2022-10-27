@@ -47,6 +47,7 @@ export const SuppliedPositionsList = () => {
       key="Collateral"
       variant="subheader2"
     />,
+    <Trans key="Actions">Actions</Trans>,
   ];
 
   // if (loading) return <ListLoader title={<Trans>Your supplies</Trans>} head={head} />;
