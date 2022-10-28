@@ -32,6 +32,7 @@ export default function Position() {
             <Box
               sx={{
                 display: 'flex',
+                flexDirection: { xs: 'column', xsm: 'row' },
                 gap: 4,
               }}
             >
