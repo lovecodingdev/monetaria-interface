@@ -607,7 +607,7 @@ export function getThemedComponents(theme: Theme) {
             '&.Mui-checked': {
               transform: 'translateX(14px)',
               '& + .MuiSwitch-track': {
-                backgroundColor: theme.palette.success.main,
+                backgroundColor: '#4094F7',
                 opacity: 1,
               },
             },
@@ -617,7 +617,7 @@ export function getThemedComponents(theme: Theme) {
           },
           thumb: {
             color: theme.palette.common.white,
-            borderRadius: '6px',
+            borderRadius: '8px',
             width: '16px',
             height: '16px',
             boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.12)',
@@ -625,7 +625,7 @@ export function getThemedComponents(theme: Theme) {
           track: {
             opacity: 1,
             backgroundColor: theme.palette.action.active,
-            borderRadius: '8px',
+            borderRadius: '10px',
           },
         },
       },
