@@ -17,6 +17,10 @@ import { ListTopInfoItem } from '../ListTopInfoItem';
 import { SuppliedPositionsListItem } from './SuppliedPositionsListItem';
 import { SuppliedPositionsListMobileItem } from './SuppliedPositionsListMobileItem';
 
+import WalletIcon from 'public/icons/markets/wallet-icon.svg';
+import NetAPYIcon from 'public/icons/markets/net-apy-icon.svg';
+import CollateralIcon from 'public/icons/markets/collateral.svg';
+
 export const SuppliedPositionsList = () => {
   const { user, loading } = useAppDataContext();
   const { currentNetworkConfig } = useProtocolDataContext();
@@ -56,18 +60,21 @@ export const SuppliedPositionsList = () => {
     <Box>
       <>
         {!!suppliedPosition.length && (
-          <Box sx={{display: 'flex', my: 4, gap: 4}}>
+          <Box sx={{ display: 'flex', my: 4, gap: 4 }}>
             <ListTopInfoItem
+              icon={<WalletIcon />}
               title={<Trans>Balance</Trans>}
               value={user?.totalLiquidityUSD || 0}
             />
             <ListTopInfoItem
+              icon={<NetAPYIcon />}
               title={<Trans>APY</Trans>}
               value={user?.earnedAPY || 0}
               percent
               tooltip={<TotalSupplyAPYTooltip />}
             />
             <ListTopInfoItem
+              icon={<CollateralIcon />}
               title={<Trans>Collateral</Trans>}
               value={user?.totalCollateralUSD || 0}
               tooltip={<CollateralTooltip />}

@@ -22,6 +22,10 @@ import { ListTopInfoItem } from '../ListTopInfoItem';
 import { BorrowedPositionsListItem } from './BorrowedPositionsListItem';
 import { BorrowedPositionsListMobileItem } from './BorrowedPositionsListMobileItem';
 
+import WalletIcon from 'public/icons/markets/wallet-icon.svg';
+import NetAPYIcon from 'public/icons/markets/net-apy-icon.svg';
+import PowerIcon from 'public/icons/markets/power.svg';
+
 export const BorrowedPositionsList = () => {
   const { user, loading } = useAppDataContext();
   const { currentMarketData, currentNetworkConfig } = useProtocolDataContext();
@@ -86,14 +90,20 @@ export const BorrowedPositionsList = () => {
       <>
         {!!borrowPositions.length && (
           <Box sx={{display: 'flex', my: 4, gap: 4}}>
-          <ListTopInfoItem title={<Trans>Balance</Trans>} value={user?.totalBorrowsUSD || 0} />
             <ListTopInfoItem
+              icon={<WalletIcon />}
+              title={<Trans>Balance</Trans>}
+              value={user?.totalBorrowsUSD || 0}
+            />
+            <ListTopInfoItem
+              icon={<NetAPYIcon />}              
               title={<Trans>APY</Trans>}
               value={user?.debtAPY || 0}
               percent
               tooltip={<TotalBorrowAPYTooltip />}
             />
             <ListTopInfoItem
+              icon={<PowerIcon />}
               title={<Trans>Borrow power used</Trans>}
               value={collateralUsagePercent || 0}
               percent
