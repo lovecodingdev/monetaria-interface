@@ -162,8 +162,8 @@ export const PositionTabs = () => {
         >
           <NewTab label="Supplies"/>
           <NewTab label="Borrows" />
-          <NewTab label="Transactions" />
-          <NewTab label="Liquidation History" />
+          {/* <NewTab label="Transactions" />
+          <NewTab label="Liquidation History" /> */}
         </NewTabs>
       </Box>
       {selectedTab == 0 && <SuppliedPositionsList />}
