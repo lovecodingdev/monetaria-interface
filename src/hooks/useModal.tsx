@@ -60,7 +60,7 @@ export interface ModalContextType<T extends ModalArgsType> {
   openGovDelegation: () => void;
   openGovVote: (proposalId: string, support: boolean, power: string) => void;
   openSelectToken: () => void;
-  openActions: (underlyingAsset: string, actionTab: ModalType) => void;
+  openActions: (underlyingAsset: string, actionTab: ModalType, args?: object) => void;
   close: () => void;
   type?: ModalType;
   args: T;
@@ -162,9 +162,9 @@ export const ModalContextProvider: React.FC = ({ children }) => {
         openSelectToken: () => {
           setType(ModalType.SelectToken);
         },
-        openActions: (underlyingAsset, actionTab) => {
+        openActions: (underlyingAsset, actionTab, args) => {
           setType(ModalType.Actions);
-          setArgs({ underlyingAsset, actionTab });
+          setArgs({ underlyingAsset, actionTab, ...args });
         },
         close: () => {
           setType(undefined);
