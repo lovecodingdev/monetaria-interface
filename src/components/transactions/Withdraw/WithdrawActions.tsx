@@ -39,7 +39,7 @@ export const WithdrawActions = ({
             user: currentAccount,
             reserve: poolAddress,
             amount: amountToWithdraw,
-            aTokenAddress: poolReserve.aTokenAddress,
+            mTokenAddress: poolReserve.mTokenAddress,
             useOptimizedPath: optimizedPath(chainId),
           });
         } else {
@@ -47,7 +47,7 @@ export const WithdrawActions = ({
             user: currentAccount,
             reserve: poolAddress,
             amount: amountToWithdraw,
-            aTokenAddress: poolReserve.aTokenAddress,
+            mTokenAddress: poolReserve.mTokenAddress,
           });
         }
       },

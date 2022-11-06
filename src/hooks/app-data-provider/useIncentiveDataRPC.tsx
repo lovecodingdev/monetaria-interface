@@ -104,8 +104,8 @@ export function useIncentivesDataRPC(
           __typename: 'Query',
           userIncentives: rawUserIncentiveData.map((userIncentive) => ({
             ...userIncentive,
-            aTokenIncentivesUserData: {
-              ...userIncentive.aTokenIncentivesUserData,
+            mTokenIncentivesUserData: {
+              ...userIncentive.mTokenIncentivesUserData,
               __typename: 'UserIncentiveData',
             },
             vTokenIncentivesUserData: {

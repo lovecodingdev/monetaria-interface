@@ -198,7 +198,7 @@ export const AppDataProvider: React.FC = ({ children }) => {
   );
 
   const isUserHasDeposits = user.userReservesData.some(
-    (userReserve) => userReserve.scaledATokenBalance !== '0'
+    (userReserve) => userReserve.scaledMTokenBalance !== '0'
   );
 
   const earnedAPY = proportions.positiveProportion.dividedBy(user.totalLiquidityUSD).toNumber();

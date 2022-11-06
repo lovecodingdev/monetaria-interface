@@ -19,7 +19,7 @@ export interface RepayActionProps extends BoxProps {
   poolAddress: string;
   symbol: string;
   debtType: InterestRate;
-  repayWithATokens: boolean;
+  repayWithMTokens: boolean;
   blocked?: boolean;
 }
 
@@ -31,7 +31,7 @@ export const RepayActions = ({
   sx,
   symbol,
   debtType,
-  repayWithATokens,
+  repayWithMTokens,
   blocked,
   ...props
 }: RepayActionProps) => {
@@ -46,8 +46,8 @@ export const RepayActions = ({
       handleGetTxns: async () => {
         if (currentMarketData.v3) {
           const newPool: Pool = lendingPool as Pool;
-          if (repayWithATokens) {
-            return newPool.repayWithATokens({
+          if (repayWithMTokens) {
+            return newPool.repayWithMTokens({
               user: currentAccount,
               reserve: poolAddress,
               amount: amountToRepay,
@@ -85,7 +85,7 @@ export const RepayActions = ({
         });
       },
       skip: !amountToRepay || parseFloat(amountToRepay) === 0 || blocked,
-      deps: [amountToRepay, poolAddress, repayWithATokens],
+      deps: [amountToRepay, poolAddress, repayWithMTokens],
     });
 
   return (

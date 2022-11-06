@@ -64,7 +64,7 @@ export const CollateralRepayActions = ({
         return lendingPool.paraswapRepayWithCollateral({
           user: currentAccount,
           fromAsset: fromAssetData.underlyingAsset,
-          fromAToken: fromAssetData.aTokenAddress,
+          fromMToken: fromAssetData.mTokenAddress,
           assetToRepay: poolReserve.underlyingAsset,
           repayWithAmount: normalize(srcAmountWithSlippage, fromAssetData.decimals),
           repayAmount,

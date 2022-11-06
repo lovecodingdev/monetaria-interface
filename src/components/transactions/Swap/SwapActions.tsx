@@ -56,7 +56,7 @@ export const SwapActions = ({
           fromAsset: poolReserve.underlyingAsset,
           toAsset: targetReserve.underlyingAsset,
           swapAll: isMaxSelected,
-          fromAToken: poolReserve.aTokenAddress,
+          fromMToken: poolReserve.mTokenAddress,
           fromAmount: amountToSwap,
           minToAmount: amountToReceive,
           user: currentAccount,
@@ -87,7 +87,7 @@ export const SwapActions = ({
       handleAction={action}
       requiresAmount
       amount={amountToSwap}
-      handleApproval={() => approval(amountToSwap, poolReserve.aTokenAddress)}
+      handleApproval={() => approval(amountToSwap, poolReserve.mTokenAddress)}
       requiresApproval={requiresApproval}
       actionText={<Trans>Swap</Trans>}
       actionInProgressText={<Trans>Swapping</Trans>}

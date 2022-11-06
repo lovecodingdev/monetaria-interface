@@ -78,7 +78,7 @@ export type QueryUserIncentivesArgs = {
 
 export type ReserveData = {
   __typename?: 'ReserveData';
-  aTokenAddress: Scalars['String'];
+  mTokenAddress: Scalars['String'];
   accruedToTreasury: Scalars['String'];
   availableLiquidity: Scalars['String'];
   averageStableRate: Scalars['String'];
@@ -238,7 +238,7 @@ export type UserIncentiveData = {
 
 export type UserIncentivesData = {
   __typename?: 'UserIncentivesData';
-  aTokenIncentivesUserData: UserIncentiveData;
+  mTokenIncentivesUserData: UserIncentiveData;
   id: Scalars['String'];
   sTokenIncentivesUserData: UserIncentiveData;
   underlyingAsset: Scalars['String'];
@@ -249,7 +249,7 @@ export type UserReserveData = {
   __typename?: 'UserReserveData';
   id: Scalars['String'];
   principalStableDebt: Scalars['String'];
-  scaledATokenBalance: Scalars['String'];
+  scaledMTokenBalance: Scalars['String'];
   scaledVariableDebt: Scalars['String'];
   stableBorrowLastUpdateTimestamp: Scalars['Float'];
   stableBorrowRate: Scalars['String'];

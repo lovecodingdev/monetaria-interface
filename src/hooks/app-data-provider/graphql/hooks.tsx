@@ -78,7 +78,7 @@ export type QueryUserIncentivesArgs = {
 
 export type ReserveData = {
   __typename?: 'ReserveData';
-  aTokenAddress: Scalars['String'];
+  mTokenAddress: Scalars['String'];
   accruedToTreasury: Scalars['String'];
   availableLiquidity: Scalars['String'];
   averageStableRate: Scalars['String'];
@@ -238,7 +238,7 @@ export type UserIncentiveData = {
 
 export type UserIncentivesData = {
   __typename?: 'UserIncentivesData';
-  aTokenIncentivesUserData: UserIncentiveData;
+  mTokenIncentivesUserData: UserIncentiveData;
   id: Scalars['String'];
   sTokenIncentivesUserData: UserIncentiveData;
   underlyingAsset: Scalars['String'];
@@ -249,7 +249,7 @@ export type UserReserveData = {
   __typename?: 'UserReserveData';
   id: Scalars['String'];
   principalStableDebt: Scalars['String'];
-  scaledATokenBalance: Scalars['String'];
+  scaledMTokenBalance: Scalars['String'];
   scaledVariableDebt: Scalars['String'];
   stableBorrowLastUpdateTimestamp: Scalars['Float'];
   stableBorrowRate: Scalars['String'];
@@ -447,7 +447,7 @@ export type ReserveDataFragmentFragment = {
   isActive: boolean;
   isFrozen: boolean;
   usageAsCollateralEnabled: boolean;
-  aTokenAddress: string;
+  mTokenAddress: string;
   stableDebtTokenAddress: string;
   variableDebtTokenAddress: string;
   borrowingEnabled: boolean;
@@ -521,7 +521,7 @@ export type C_ProtocolDataQuery = {
       isActive: boolean;
       isFrozen: boolean;
       usageAsCollateralEnabled: boolean;
-      aTokenAddress: string;
+      mTokenAddress: string;
       stableDebtTokenAddress: string;
       variableDebtTokenAddress: string;
       borrowingEnabled: boolean;
@@ -596,7 +596,7 @@ export type C_ProtocolDataUpdateSubscription = {
       isActive: boolean;
       isFrozen: boolean;
       usageAsCollateralEnabled: boolean;
-      aTokenAddress: string;
+      mTokenAddress: string;
       stableDebtTokenAddress: string;
       variableDebtTokenAddress: string;
       borrowingEnabled: boolean;
@@ -656,7 +656,7 @@ export type UserReserveDataFragmentFragment = {
   __typename?: 'UserReserveData';
   id: string;
   underlyingAsset: string;
-  scaledATokenBalance: string;
+  scaledMTokenBalance: string;
   usageAsCollateralEnabledOnUser: boolean;
   scaledVariableDebt: string;
   stableBorrowRate: string;
@@ -679,7 +679,7 @@ export type C_UserDataQuery = {
       __typename?: 'UserReserveData';
       id: string;
       underlyingAsset: string;
-      scaledATokenBalance: string;
+      scaledMTokenBalance: string;
       usageAsCollateralEnabledOnUser: boolean;
       scaledVariableDebt: string;
       stableBorrowRate: string;
@@ -704,7 +704,7 @@ export type C_UserDataUpdateSubscription = {
       __typename?: 'UserReserveData';
       id: string;
       underlyingAsset: string;
-      scaledATokenBalance: string;
+      scaledMTokenBalance: string;
       usageAsCollateralEnabledOnUser: boolean;
       scaledVariableDebt: string;
       stableBorrowRate: string;
@@ -743,7 +743,7 @@ export type C_UserIncentivesQuery = {
     __typename?: 'UserIncentivesData';
     id: string;
     underlyingAsset: string;
-    aTokenIncentivesUserData: {
+    mTokenIncentivesUserData: {
       __typename?: 'UserIncentiveData';
       tokenAddress: string;
       incentiveControllerAddress: string;
@@ -806,7 +806,7 @@ export type C_UserPoolIncentivesDataUpdateSubscription = {
     __typename?: 'UserIncentivesData';
     id: string;
     underlyingAsset: string;
-    aTokenIncentivesUserData: {
+    mTokenIncentivesUserData: {
       __typename?: 'UserIncentiveData';
       tokenAddress: string;
       incentiveControllerAddress: string;
@@ -886,7 +886,7 @@ export const ReserveDataFragmentFragmentDoc = gql`
     isActive
     isFrozen
     usageAsCollateralEnabled
-    aTokenAddress
+    mTokenAddress
     stableDebtTokenAddress
     variableDebtTokenAddress
     borrowingEnabled
@@ -945,7 +945,7 @@ export const UserReserveDataFragmentFragmentDoc = gql`
   fragment UserReserveDataFragment on UserReserveData {
     id
     underlyingAsset
-    scaledATokenBalance
+    scaledMTokenBalance
     usageAsCollateralEnabledOnUser
     scaledVariableDebt
     stableBorrowRate
@@ -1327,7 +1327,7 @@ export const C_UserIncentivesDocument = gql`
     ) {
       id
       underlyingAsset
-      aTokenIncentivesUserData {
+      mTokenIncentivesUserData {
         ...TokenIncentivesUserDataFragment
       }
       vTokenIncentivesUserData {
@@ -1402,7 +1402,7 @@ export const C_UserPoolIncentivesDataUpdateDocument = gql`
     ) {
       id
       underlyingAsset
-      aTokenIncentivesUserData {
+      mTokenIncentivesUserData {
         ...TokenIncentivesUserDataFragment
       }
       vTokenIncentivesUserData {

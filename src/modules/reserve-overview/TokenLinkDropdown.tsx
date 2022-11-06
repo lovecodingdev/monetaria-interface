@@ -75,14 +75,14 @@ export const TokenLinkDropdown = ({ poolReserve, downToSM }: TokenLinkDropdownPr
           </Link>
         </MenuItem>
 
-        <MenuItem key="aToken" value="aToken">
+        <MenuItem key="mToken" value="mToken">
           <Link
             href={currentNetworkConfig.explorerLinkBuilder({
-              address: poolReserve?.aTokenAddress,
+              address: poolReserve?.mTokenAddress,
             })}
             sx={{ display: 'flex' }}
           >
-            <TokenIcon symbol={poolReserve.iconSymbol} aToken={true} sx={{ fontSize: '20px' }} />
+            <TokenIcon symbol={poolReserve.iconSymbol} mToken={true} sx={{ fontSize: '20px' }} />
             <Typography variant="subheader1" sx={{ ml: 3 }} noWrap data-cy={`assetName`}>
               {'a' + poolReserve.symbol}
             </Typography>

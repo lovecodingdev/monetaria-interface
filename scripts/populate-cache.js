@@ -35946,7 +35946,7 @@ var require_IUiIncentiveDataProviderV3_factory = __commonJS({
                   }
                 ],
                 internalType: "struct IUiIncentiveDataProviderV3.UserIncentiveData",
-                name: "aTokenIncentivesUserData",
+                name: "mTokenIncentivesUserData",
                 type: "tuple"
               },
               {
@@ -36432,7 +36432,7 @@ var require_IUiIncentiveDataProviderV3_factory = __commonJS({
                   }
                 ],
                 internalType: "struct IUiIncentiveDataProviderV3.UserIncentiveData",
-                name: "aTokenIncentivesUserData",
+                name: "mTokenIncentivesUserData",
                 type: "tuple"
               },
               {
@@ -36659,7 +36659,7 @@ var require_v3_UiIncentiveDataProvider_contract = __commonJS({
           return response.map((r) => ({
             id: `${this.chainId}-${user}-${r.underlyingAsset}-${lendingPoolAddressProvider}`.toLowerCase(),
             underlyingAsset: r.underlyingAsset.toLowerCase(),
-            aTokenIncentivesUserData: this._formatUserIncentiveData(r.aTokenIncentivesUserData),
+            mTokenIncentivesUserData: this._formatUserIncentiveData(r.mTokenIncentivesUserData),
             vTokenIncentivesUserData: this._formatUserIncentiveData(r.vTokenIncentivesUserData),
             sTokenIncentivesUserData: this._formatUserIncentiveData(r.sTokenIncentivesUserData)
           }));
@@ -36915,7 +36915,7 @@ var require_IUiPoolDataProviderV3_factory = __commonJS({
               },
               {
                 internalType: "address",
-                name: "aTokenAddress",
+                name: "mTokenAddress",
                 type: "address"
               },
               {
@@ -37157,7 +37157,7 @@ var require_IUiPoolDataProviderV3_factory = __commonJS({
               },
               {
                 internalType: "uint256",
-                name: "scaledATokenBalance",
+                name: "scaledMTokenBalance",
                 type: "uint256"
               },
               {
@@ -37308,7 +37308,7 @@ var require_v3_UiPoolDataProvider_contract = __commonJS({
             variableBorrowRate: reserveRaw.variableBorrowRate.toString(),
             stableBorrowRate: reserveRaw.stableBorrowRate.toString(),
             lastUpdateTimestamp: reserveRaw.lastUpdateTimestamp,
-            aTokenAddress: reserveRaw.aTokenAddress.toString(),
+            mTokenAddress: reserveRaw.mTokenAddress.toString(),
             stableDebtTokenAddress: reserveRaw.stableDebtTokenAddress.toString(),
             variableDebtTokenAddress: reserveRaw.variableDebtTokenAddress.toString(),
             interestRateStrategyAddress: reserveRaw.interestRateStrategyAddress.toString(),
@@ -37361,7 +37361,7 @@ var require_v3_UiPoolDataProvider_contract = __commonJS({
             userReserves: userReservesRaw.map((userReserveRaw) => ({
               id: `${this.chainId}-${user}-${userReserveRaw.underlyingAsset}-${lendingPoolAddressProvider}`.toLowerCase(),
               underlyingAsset: userReserveRaw.underlyingAsset.toLowerCase(),
-              scaledATokenBalance: userReserveRaw.scaledATokenBalance.toString(),
+              scaledMTokenBalance: userReserveRaw.scaledMTokenBalance.toString(),
               usageAsCollateralEnabledOnUser: userReserveRaw.usageAsCollateralEnabledOnUser,
               stableBorrowRate: userReserveRaw.stableBorrowRate.toString(),
               scaledVariableDebt: userReserveRaw.scaledVariableDebt.toString(),
@@ -40960,12 +40960,12 @@ var require_wethgateway_contract = __commonJS({
         });
       }
       withdrawETH(_0) {
-        return __async(this, arguments, function* ({ lendingPool, user, amount, onBehalfOf, aTokenAddress }) {
+        return __async(this, arguments, function* ({ lendingPool, user, amount, onBehalfOf, mTokenAddress }) {
           const txs = [];
           const { isApproved, approve } = this.erc20Service;
           const convertedAmount = amount === "-1" ? ethers_1.constants.MaxUint256.toString() : (0, utils_1.valueToWei)(amount, 18);
           const approved = yield isApproved({
-            token: aTokenAddress,
+            token: mTokenAddress,
             user,
             spender: this.wethGatewayAddress,
             amount
@@ -40973,7 +40973,7 @@ var require_wethgateway_contract = __commonJS({
           if (!approved) {
             const approveTx = approve({
               user,
-              token: aTokenAddress,
+              token: mTokenAddress,
               spender: this.wethGatewayAddress,
               amount: ethers_1.constants.MaxUint256.toString()
             });
@@ -41043,7 +41043,7 @@ var require_wethgateway_contract = __commonJS({
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("user")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("onBehalfOf")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isPositiveOrMinusOneAmount)("amount")),
-      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("aTokenAddress")),
+      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("mTokenAddress")),
       (0, tslib_1.__metadata)("design:type", Function),
       (0, tslib_1.__metadata)("design:paramtypes", [Object]),
       (0, tslib_1.__metadata)("design:returntype", Promise)
@@ -41217,7 +41217,7 @@ var require_ILendingPool_factory = __commonJS({
           },
           {
             internalType: "bool",
-            name: "receiveAToken",
+            name: "receiveMToken",
             type: "bool"
           }
         ],
@@ -41424,9 +41424,9 @@ var require_lendingPool_contract = __commonJS({
         });
       }
       withdraw(_0) {
-        return __async(this, arguments, function* ({ user, reserve, amount, onBehalfOf, aTokenAddress }) {
+        return __async(this, arguments, function* ({ user, reserve, amount, onBehalfOf, mTokenAddress }) {
           if (reserve.toLowerCase() === utils_1.API_ETH_MOCK_ADDRESS.toLowerCase()) {
-            if (!aTokenAddress) {
+            if (!mTokenAddress) {
               throw new Error("To withdraw ETH you need to pass the aWETH token address");
             }
             return this.wethGatewayService.withdrawETH({
@@ -41434,7 +41434,7 @@ var require_lendingPool_contract = __commonJS({
               user,
               amount,
               onBehalfOf,
-              aTokenAddress
+              mTokenAddress
             });
           }
           const { decimalsOf } = this.erc20Service;
@@ -41584,7 +41584,7 @@ var require_lendingPool_contract = __commonJS({
         ];
       }
       liquidationCall(_0) {
-        return __async(this, arguments, function* ({ liquidator, liquidatedUser, debtReserve, collateralReserve, purchaseAmount, getAToken, liquidateAll }) {
+        return __async(this, arguments, function* ({ liquidator, liquidatedUser, debtReserve, collateralReserve, purchaseAmount, getMToken, liquidateAll }) {
           const txs = [];
           const { isApproved, approve, decimalsOf } = this.erc20Service;
           const approved = yield isApproved({
@@ -41610,7 +41610,7 @@ var require_lendingPool_contract = __commonJS({
           const lendingPoolContract = this.getContractInstance(this.lendingPoolAddress);
           const txCallback = this.generateTxCallback({
             rawTxMethod: () => __async(this, null, function* () {
-              return lendingPoolContract.populateTransaction.liquidationCall(collateralReserve, debtReserve, liquidatedUser, convertedAmount, getAToken !== null && getAToken !== void 0 ? getAToken : false);
+              return lendingPoolContract.populateTransaction.liquidationCall(collateralReserve, debtReserve, liquidatedUser, convertedAmount, getMToken !== null && getMToken !== void 0 ? getMToken : false);
             }),
             from: liquidator,
             value: (0, utils_1.getTxValue)(debtReserve, convertedAmount)
@@ -41624,7 +41624,7 @@ var require_lendingPool_contract = __commonJS({
         });
       }
       swapCollateral(_0) {
-        return __async(this, arguments, function* ({ user, flash, fromAsset, fromAToken, toAsset, fromAmount, minToAmount, permitSignature, swapAll, onBehalfOf, referralCode, augustus, swapCallData }) {
+        return __async(this, arguments, function* ({ user, flash, fromAsset, fromMToken, toAsset, fromAmount, minToAmount, permitSignature, swapAll, onBehalfOf, referralCode, augustus, swapCallData }) {
           const txs = [];
           const permitParams = permitSignature !== null && permitSignature !== void 0 ? permitSignature : {
             amount: "0",
@@ -41634,7 +41634,7 @@ var require_lendingPool_contract = __commonJS({
             s: "0x0000000000000000000000000000000000000000000000000000000000000000"
           };
           const approved = yield this.erc20Service.isApproved({
-            token: fromAToken,
+            token: fromMToken,
             user,
             spender: this.swapCollateralAddress,
             amount: fromAmount
@@ -41642,7 +41642,7 @@ var require_lendingPool_contract = __commonJS({
           if (!approved) {
             const approveTx = this.erc20Service.approve({
               user,
-              token: fromAToken,
+              token: fromMToken,
               spender: this.swapCollateralAddress,
               amount: ethers_1.constants.MaxUint256.toString()
             });
@@ -41686,7 +41686,7 @@ var require_lendingPool_contract = __commonJS({
         });
       }
       repayWithCollateral(_0) {
-        return __async(this, arguments, function* ({ user, fromAsset, fromAToken, assetToRepay, repayWithAmount, repayAmount, permitSignature, repayAllDebt, rateMode, onBehalfOf, referralCode, flash, useEthPath }) {
+        return __async(this, arguments, function* ({ user, fromAsset, fromMToken, assetToRepay, repayWithAmount, repayAmount, permitSignature, repayAllDebt, rateMode, onBehalfOf, referralCode, flash, useEthPath }) {
           const txs = [];
           const permitParams = permitSignature !== null && permitSignature !== void 0 ? permitSignature : {
             amount: "0",
@@ -41696,7 +41696,7 @@ var require_lendingPool_contract = __commonJS({
             s: "0x0000000000000000000000000000000000000000000000000000000000000000"
           };
           const approved = yield this.erc20Service.isApproved({
-            token: fromAToken,
+            token: fromMToken,
             user,
             spender: this.repayWithCollateralAddress,
             amount: repayWithAmount
@@ -41704,7 +41704,7 @@ var require_lendingPool_contract = __commonJS({
           if (!approved) {
             const approveTx = this.erc20Service.approve({
               user,
-              token: fromAToken,
+              token: fromMToken,
               spender: this.repayWithCollateralAddress,
               amount: ethers_1.constants.MaxUint256.toString()
             });
@@ -41767,7 +41767,7 @@ var require_lendingPool_contract = __commonJS({
         });
       }
       paraswapRepayWithCollateral(_0) {
-        return __async(this, arguments, function* ({ user, fromAsset, fromAToken, assetToRepay, repayWithAmount, repayAmount, permitSignature, repayAllDebt, rateMode, onBehalfOf, referralCode, flash, swapAndRepayCallData, augustus }) {
+        return __async(this, arguments, function* ({ user, fromAsset, fromMToken, assetToRepay, repayWithAmount, repayAmount, permitSignature, repayAllDebt, rateMode, onBehalfOf, referralCode, flash, swapAndRepayCallData, augustus }) {
           const txs = [];
           const permitParams = permitSignature !== null && permitSignature !== void 0 ? permitSignature : {
             amount: "0",
@@ -41777,7 +41777,7 @@ var require_lendingPool_contract = __commonJS({
             s: "0x0000000000000000000000000000000000000000000000000000000000000000"
           };
           const approved = yield this.erc20Service.isApproved({
-            token: fromAToken,
+            token: fromMToken,
             user,
             spender: this.repayWithCollateralAddress,
             amount: repayWithAmount
@@ -41785,7 +41785,7 @@ var require_lendingPool_contract = __commonJS({
           if (!approved) {
             const approveTx = this.erc20Service.approve({
               user,
-              token: fromAToken,
+              token: fromMToken,
               spender: this.repayWithCollateralAddress,
               amount: ethers_1.constants.MaxUint256.toString()
             });
@@ -41902,7 +41902,7 @@ var require_lendingPool_contract = __commonJS({
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("reserve")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isPositiveOrMinusOneAmount)("amount")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("onBehalfOf")),
-      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("aTokenAddress")),
+      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("mTokenAddress")),
       (0, tslib_1.__metadata)("design:type", Function),
       (0, tslib_1.__metadata)("design:paramtypes", [Object]),
       (0, tslib_1.__metadata)("design:returntype", Promise)
@@ -41959,7 +41959,7 @@ var require_lendingPool_contract = __commonJS({
       methodValidators_1.LPSwapCollateralValidator,
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("user")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromAsset")),
-      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromAToken")),
+      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromMToken")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("toAsset")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("onBehalfOf")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("augustus")),
@@ -41973,7 +41973,7 @@ var require_lendingPool_contract = __commonJS({
       methodValidators_1.LPRepayWithCollateralValidator,
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("user")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromAsset")),
-      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromAToken")),
+      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromMToken")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("assetToRepay")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("onBehalfOf")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isPositiveAmount)("repayWithAmount")),
@@ -41986,7 +41986,7 @@ var require_lendingPool_contract = __commonJS({
       methodValidators_1.LPRepayWithCollateralValidator,
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("user")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromAsset")),
-      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromAToken")),
+      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromMToken")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("assetToRepay")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("onBehalfOf")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isPositiveAmount)("repayWithAmount")),
@@ -44655,7 +44655,7 @@ var require_IL2Pool_factory = __commonJS({
             type: "bytes32"
           }
         ],
-        name: "repayWithATokens",
+        name: "repayWithMTokens",
         outputs: [
           {
             internalType: "uint256",
@@ -44874,7 +44874,7 @@ var require_L2Encoder_factory = __commonJS({
           },
           {
             internalType: "bool",
-            name: "receiveAToken",
+            name: "receiveMToken",
             type: "bool"
           }
         ],
@@ -44965,7 +44965,7 @@ var require_L2Encoder_factory = __commonJS({
             type: "uint256"
           }
         ],
-        name: "encodeRepayWithATokensParams",
+        name: "encodeRepayWithMTokensParams",
         outputs: [
           {
             internalType: "bytes32",
@@ -45371,14 +45371,14 @@ var require_v3_pool_rollups = __commonJS({
           return txs;
         });
       }
-      repayWithATokens(_0, _1) {
+      repayWithMTokens(_0, _1) {
         return __async(this, arguments, function* ({ reserve, user, amount, numericRateMode }, txs) {
           const encoder = this.getEncoder();
-          const encodedParams = yield encoder.encodeRepayWithATokensParams(reserve, amount, numericRateMode);
+          const encodedParams = yield encoder.encodeRepayWithMTokensParams(reserve, amount, numericRateMode);
           const l2PoolContract = this.getContractInstance(this.l2PoolAddress);
           const txCallback = this.generateTxCallback({
             rawTxMethod: () => __async(this, null, function* () {
-              return l2PoolContract.populateTransaction.repayWithATokens(encodedParams);
+              return l2PoolContract.populateTransaction.repayWithMTokens(encodedParams);
             }),
             from: user,
             value: (0, utils_1.getTxValue)(reserve, amount)
@@ -45432,9 +45432,9 @@ var require_v3_pool_rollups = __commonJS({
         });
       }
       liquidationCall(_0, _1) {
-        return __async(this, arguments, function* ({ liquidator, liquidatedUser, debtReserve, collateralReserve, debtToCover, getAToken }, txs) {
+        return __async(this, arguments, function* ({ liquidator, liquidatedUser, debtReserve, collateralReserve, debtToCover, getMToken }, txs) {
           const encoder = this.getEncoder();
-          const encodedParams = yield encoder.encodeLiquidationCall(collateralReserve, debtReserve, liquidatedUser, debtToCover, getAToken !== null && getAToken !== void 0 ? getAToken : false);
+          const encodedParams = yield encoder.encodeLiquidationCall(collateralReserve, debtReserve, liquidatedUser, debtToCover, getMToken !== null && getMToken !== void 0 ? getMToken : false);
           const l2PoolContract = this.getContractInstance(this.l2PoolAddress);
           const txCallback = this.generateTxCallback({
             rawTxMethod: () => __async(this, null, function* () {
@@ -45501,7 +45501,7 @@ var require_v3_pool_rollups = __commonJS({
       (0, tslib_1.__metadata)("design:type", Function),
       (0, tslib_1.__metadata)("design:paramtypes", [Object, Array]),
       (0, tslib_1.__metadata)("design:returntype", Promise)
-    ], L2Pool.prototype, "repayWithATokens", null);
+    ], L2Pool.prototype, "repayWithMTokens", null);
     (0, tslib_1.__decorate)([
       methodValidators_1.L2PValidator,
       (0, tslib_1.__metadata)("design:type", Function),
@@ -45722,7 +45722,7 @@ var require_IPool_factory = __commonJS({
           {
             indexed: false,
             internalType: "bool",
-            name: "receiveAToken",
+            name: "receiveMToken",
             type: "bool"
           }
         ],
@@ -45834,7 +45834,7 @@ var require_IPool_factory = __commonJS({
           {
             indexed: false,
             internalType: "bool",
-            name: "useATokens",
+            name: "useMTokens",
             type: "bool"
           }
         ],
@@ -46501,7 +46501,7 @@ var require_IPool_factory = __commonJS({
               },
               {
                 internalType: "address",
-                name: "aTokenAddress",
+                name: "mTokenAddress",
                 type: "address"
               },
               {
@@ -46692,7 +46692,7 @@ var require_IPool_factory = __commonJS({
           },
           {
             internalType: "address",
-            name: "aTokenAddress",
+            name: "mTokenAddress",
             type: "address"
           },
           {
@@ -46740,7 +46740,7 @@ var require_IPool_factory = __commonJS({
           },
           {
             internalType: "bool",
-            name: "receiveAToken",
+            name: "receiveMToken",
             type: "bool"
           }
         ],
@@ -46860,7 +46860,7 @@ var require_IPool_factory = __commonJS({
             type: "uint256"
           }
         ],
-        name: "repayWithATokens",
+        name: "repayWithMTokens",
         outputs: [
           {
             internalType: "uint256",
@@ -47429,9 +47429,9 @@ var require_v3_pool_contract = __commonJS({
         });
       }
       withdraw(_0) {
-        return __async(this, arguments, function* ({ user, reserve, amount, onBehalfOf, aTokenAddress, useOptimizedPath }) {
+        return __async(this, arguments, function* ({ user, reserve, amount, onBehalfOf, mTokenAddress, useOptimizedPath }) {
           if (reserve.toLowerCase() === utils_1.API_ETH_MOCK_ADDRESS.toLowerCase()) {
-            if (!aTokenAddress) {
+            if (!mTokenAddress) {
               throw new Error("To withdraw ETH you need to pass the aWETH token address");
             }
             return this.wethGatewayService.withdrawETH({
@@ -47439,7 +47439,7 @@ var require_v3_pool_contract = __commonJS({
               user,
               amount,
               onBehalfOf,
-              aTokenAddress
+              mTokenAddress
             });
           }
           const { decimalsOf } = this.erc20Service;
@@ -47678,7 +47678,7 @@ var require_v3_pool_contract = __commonJS({
         });
       }
       liquidationCall(_0) {
-        return __async(this, arguments, function* ({ liquidator, liquidatedUser, debtReserve, collateralReserve, purchaseAmount, getAToken, liquidateAll, useOptimizedPath }) {
+        return __async(this, arguments, function* ({ liquidator, liquidatedUser, debtReserve, collateralReserve, purchaseAmount, getMToken, liquidateAll, useOptimizedPath }) {
           const txs = [];
           const { isApproved, approve, decimalsOf } = this.erc20Service;
           const approved = yield isApproved({
@@ -47708,13 +47708,13 @@ var require_v3_pool_contract = __commonJS({
               debtReserve,
               collateralReserve,
               debtToCover: convertedAmount,
-              getAToken
+              getMToken
             }, txs);
           }
           const poolContract = this.getContractInstance(this.poolAddress);
           const txCallback = this.generateTxCallback({
             rawTxMethod: () => __async(this, null, function* () {
-              return poolContract.populateTransaction.liquidationCall(collateralReserve, debtReserve, liquidatedUser, convertedAmount, getAToken !== null && getAToken !== void 0 ? getAToken : false);
+              return poolContract.populateTransaction.liquidationCall(collateralReserve, debtReserve, liquidatedUser, convertedAmount, getMToken !== null && getMToken !== void 0 ? getMToken : false);
             }),
             from: liquidator,
             value: (0, utils_1.getTxValue)(debtReserve, convertedAmount)
@@ -47728,7 +47728,7 @@ var require_v3_pool_contract = __commonJS({
         });
       }
       swapCollateral(_0) {
-        return __async(this, arguments, function* ({ user, flash, fromAsset, fromAToken, toAsset, fromAmount, minToAmount, permitSignature, swapAll, referralCode, augustus, swapCallData }) {
+        return __async(this, arguments, function* ({ user, flash, fromAsset, fromMToken, toAsset, fromAmount, minToAmount, permitSignature, swapAll, referralCode, augustus, swapCallData }) {
           const txs = [];
           const permitParams = permitSignature !== null && permitSignature !== void 0 ? permitSignature : {
             amount: "0",
@@ -47738,7 +47738,7 @@ var require_v3_pool_contract = __commonJS({
             s: "0x0000000000000000000000000000000000000000000000000000000000000000"
           };
           const approved = yield this.erc20Service.isApproved({
-            token: fromAToken,
+            token: fromMToken,
             user,
             spender: this.swapCollateralAddress,
             amount: fromAmount
@@ -47746,7 +47746,7 @@ var require_v3_pool_contract = __commonJS({
           if (!approved) {
             const approveTx = this.erc20Service.approve({
               user,
-              token: fromAToken,
+              token: fromMToken,
               spender: this.swapCollateralAddress,
               amount: ethers_1.constants.MaxUint256.toString()
             });
@@ -47790,7 +47790,7 @@ var require_v3_pool_contract = __commonJS({
         });
       }
       paraswapRepayWithCollateral(_0) {
-        return __async(this, arguments, function* ({ user, fromAsset, fromAToken, assetToRepay, repayWithAmount, repayAmount, permitSignature, repayAllDebt, rateMode, referralCode, flash, swapAndRepayCallData, augustus }) {
+        return __async(this, arguments, function* ({ user, fromAsset, fromMToken, assetToRepay, repayWithAmount, repayAmount, permitSignature, repayAllDebt, rateMode, referralCode, flash, swapAndRepayCallData, augustus }) {
           const txs = [];
           const permitParams = permitSignature !== null && permitSignature !== void 0 ? permitSignature : {
             amount: "0",
@@ -47800,7 +47800,7 @@ var require_v3_pool_contract = __commonJS({
             s: "0x0000000000000000000000000000000000000000000000000000000000000000"
           };
           const approved = yield this.erc20Service.isApproved({
-            token: fromAToken,
+            token: fromMToken,
             user,
             spender: this.repayWithCollateralAddress,
             amount: repayWithAmount
@@ -47808,7 +47808,7 @@ var require_v3_pool_contract = __commonJS({
           if (!approved) {
             const approveTx = this.erc20Service.approve({
               user,
-              token: fromAToken,
+              token: fromMToken,
               spender: this.repayWithCollateralAddress,
               amount: ethers_1.constants.MaxUint256.toString()
             });
@@ -47908,10 +47908,10 @@ var require_v3_pool_contract = __commonJS({
           return txs;
         });
       }
-      repayWithATokens(_0) {
+      repayWithMTokens(_0) {
         return __async(this, arguments, function* ({ user, amount, reserve, rateMode, useOptimizedPath }) {
           if (reserve.toLowerCase() === utils_1.API_ETH_MOCK_ADDRESS.toLowerCase()) {
-            throw new Error("Can not repay with aTokens with eth. Should be WETH instead");
+            throw new Error("Can not repay with mTokens with eth. Should be WETH instead");
           }
           const txs = [];
           const { decimalsOf } = this.erc20Service;
@@ -47921,7 +47921,7 @@ var require_v3_pool_contract = __commonJS({
           const decimals = yield decimalsOf(reserve);
           const convertedAmount = amount === "-1" ? ethers_1.constants.MaxUint256.toString() : (0, utils_1.valueToWei)(amount, decimals);
           if (useOptimizedPath) {
-            return this.l2PoolService.repayWithATokens({
+            return this.l2PoolService.repayWithMTokens({
               user,
               reserve,
               amount: convertedAmount,
@@ -47930,7 +47930,7 @@ var require_v3_pool_contract = __commonJS({
           }
           const txCallback = this.generateTxCallback({
             rawTxMethod: () => __async(this, null, function* () {
-              return populateTransaction.repayWithATokens(reserve, convertedAmount, numericRateMode);
+              return populateTransaction.repayWithMTokens(reserve, convertedAmount, numericRateMode);
             }),
             from: user,
             value: (0, utils_1.getTxValue)(reserve, convertedAmount)
@@ -48006,7 +48006,7 @@ var require_v3_pool_contract = __commonJS({
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("reserve")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isPositiveOrMinusOneAmount)("amount")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("onBehalfOf")),
-      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("aTokenAddress")),
+      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("mTokenAddress")),
       (0, tslib_1.__metadata)("design:type", Function),
       (0, tslib_1.__metadata)("design:paramtypes", [Object]),
       (0, tslib_1.__metadata)("design:returntype", Promise)
@@ -48073,7 +48073,7 @@ var require_v3_pool_contract = __commonJS({
       methodValidators_1.LPSwapCollateralValidatorV3,
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("user")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromAsset")),
-      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromAToken")),
+      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromMToken")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("toAsset")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("augustus")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isPositiveAmount)("fromAmount")),
@@ -48086,7 +48086,7 @@ var require_v3_pool_contract = __commonJS({
       methodValidators_1.LPRepayWithCollateralValidatorV3,
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("user")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromAsset")),
-      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromAToken")),
+      (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("fromMToken")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("assetToRepay")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isPositiveAmount)("repayWithAmount")),
       (0, tslib_1.__param)(0, (0, paramValidators_1.isPositiveAmount)("repayAmount")),
@@ -48114,7 +48114,7 @@ var require_v3_pool_contract = __commonJS({
       (0, tslib_1.__metadata)("design:type", Function),
       (0, tslib_1.__metadata)("design:paramtypes", [Object]),
       (0, tslib_1.__metadata)("design:returntype", Promise)
-    ], Pool.prototype, "repayWithATokens", null);
+    ], Pool.prototype, "repayWithMTokens", null);
     (0, tslib_1.__decorate)([
       methodValidators_1.LPValidatorV3,
       (0, tslib_1.__param)(0, (0, paramValidators_1.isEthAddress)("user")),
@@ -60316,11 +60316,11 @@ var require_calculate_user_reserve_incentives = __commonJS({
     var calculate_accrued_incentives_1 = require_calculate_accrued_incentives();
     function calculateUserReserveIncentives({ reserveIncentives, userIncentives, currentTimestamp, userReserveData }) {
       const calculatedUserIncentives = [];
-      userIncentives.aTokenIncentivesUserData.userRewardsInformation.forEach((userReserveIncentive) => {
+      userIncentives.mTokenIncentivesUserData.userRewardsInformation.forEach((userReserveIncentive) => {
         const reserveIncentive = reserveIncentives.aIncentiveData.rewardsTokenInformation.find((reward) => reward.rewardTokenAddress === userReserveIncentive.rewardTokenAddress);
         if (reserveIncentive) {
           const accruedRewards = userReserveData ? (0, calculate_accrued_incentives_1.calculateAccruedIncentives)({
-            principalUserBalance: new bignumber_js_1.default(userReserveData.scaledATokenBalance),
+            principalUserBalance: new bignumber_js_1.default(userReserveData.scaledMTokenBalance),
             reserveIndex: new bignumber_js_1.default(reserveIncentive.tokenIncentivesIndex),
             userIndex: new bignumber_js_1.default(userReserveIncentive.tokenIncentivesUserIndex),
             precision: reserveIncentive.precision,
@@ -60331,8 +60331,8 @@ var require_calculate_user_reserve_incentives = __commonJS({
             emissionEndTimestamp: reserveIncentive.emissionEndTimestamp
           }) : new bignumber_js_1.default("0");
           calculatedUserIncentives.push({
-            tokenAddress: userIncentives.aTokenIncentivesUserData.tokenAddress,
-            incentiveController: userIncentives.aTokenIncentivesUserData.incentiveControllerAddress,
+            tokenAddress: userIncentives.mTokenIncentivesUserData.tokenAddress,
+            incentiveController: userIncentives.mTokenIncentivesUserData.incentiveControllerAddress,
             rewardTokenAddress: userReserveIncentive.rewardTokenAddress,
             rewardTokenDecimals: userReserveIncentive.rewardTokenDecimals,
             accruedRewards,
@@ -60752,7 +60752,7 @@ var require_generate_user_reserve_summary = __commonJS({
       const poolReserve = userReserve.reserve;
       const { priceInMarketReferenceCurrency, decimals } = poolReserve;
       const underlyingBalance = (0, pool_math_1.getLinearBalance)({
-        balance: userReserve.scaledATokenBalance,
+        balance: userReserve.scaledMTokenBalance,
         index: poolReserve.liquidityIndex,
         rate: poolReserve.liquidityRate,
         lastUpdateTimestamp: poolReserve.lastUpdateTimestamp,

@@ -121,18 +121,18 @@ export const TxSuccessView = ({
             >
               <TokenIcon
                 symbol={symbol}
-                aToken={true}
+                mToken={true}
                 sx={{ fontSize: '32px', mt: '12px', mb: '8px' }}
               />
               <Typography variant="description" color="text.primary" sx={{ mx: '24px' }}>
-                <Trans>Add aToken to the wallet to track your supply balance.</Trans>
+                <Trans>Add mToken to the wallet to track your supply balance.</Trans>
               </Typography>
               <Button
                 onClick={() => {
                   addERC20Token({
                     address: addToken.address,
                     decimals: addToken.decimals,
-                    symbol: addToken.aToken ? `a${addToken.symbol}` : addToken.symbol,
+                    symbol: addToken.mToken ? `a${addToken.symbol}` : addToken.symbol,
                     image: !/_/.test(addToken.symbol) ? base64 : undefined,
                   });
                 }}
@@ -144,7 +144,7 @@ export const TxSuccessView = ({
                   <Base64Token
                     symbol={addToken.symbol}
                     onImageGenerated={setBase64}
-                    aToken={addToken.aToken}
+                    mToken={addToken.mToken}
                   />
                 )}
                 <img

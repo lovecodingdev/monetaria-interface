@@ -66,8 +66,8 @@ msgid "APY, variable"
 msgstr "APY, μεταβλητό"
 
 #: src/ui-config/errorMapping.tsx
-msgid "AToken supply is not zero"
-msgstr "Η προσφορά AToken δεν είναι μηδενική"
+msgid "MToken supply is not zero"
+msgstr "Η προσφορά MToken δεν είναι μηδενική"
 
 #: src/modules/governance/GovernanceTopPanel.tsx
 msgid "Aave Governance"
@@ -98,7 +98,7 @@ msgid "Action requires an active reserve"
 msgstr "Η δράση απαιτεί ενεργό απόθεμα"
 
 #: src/components/transactions/FlowCommons/Success.tsx
-msgid "Add aToken to the wallet to track your supply balance."
+msgid "Add mToken to the wallet to track your supply balance."
 msgstr ""
 
 #: src/components/transactions/FlowCommons/Success.tsx
@@ -1463,8 +1463,8 @@ msgid "The app is running in testnet mode. Learn how it works in"
 msgstr ""
 
 #: src/ui-config/errorMapping.tsx
-msgid "The caller of the function is not an AToken"
-msgstr "Ο καλών της συνάρτησης δεν είναι AToken"
+msgid "The caller of the function is not an MToken"
+msgstr "Ο καλών της συνάρτησης δεν είναι MToken"
 
 #: src/ui-config/errorMapping.tsx
 msgid "The caller of this function must be a pool"

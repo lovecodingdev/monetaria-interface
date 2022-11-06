@@ -156,17 +156,17 @@ export const SupplyModalContent = ({
 
   // token info to add to wallet
   const addToken: ERC20TokenType = {
-    address: poolReserve.aTokenAddress,
+    address: poolReserve.mTokenAddress,
     symbol: poolReserve.iconSymbol,
     decimals: poolReserve.decimals,
-    aToken: true,
+    mToken: true,
   };
 
   // collateralization state
   let willBeUsedAsCollateral: CollateralType = poolReserve.usageAsCollateralEnabled
     ? CollateralType.ENABLED
     : CollateralType.DISABLED;
-  const userHasSuppliedReserve = userReserve && userReserve.scaledATokenBalance !== '0';
+  const userHasSuppliedReserve = userReserve && userReserve.scaledMTokenBalance !== '0';
   const userHasCollateral = user.totalCollateralUSD !== '0';
 
   if (poolReserve.isIsolated) {

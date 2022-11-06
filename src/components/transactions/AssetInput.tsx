@@ -58,7 +58,7 @@ export interface Asset {
   symbol: string;
   iconSymbol?: string;
   address?: string;
-  aToken?: boolean;
+  mToken?: boolean;
   priceInUsd?: string;
   decimals?: number;
 }
@@ -155,7 +155,7 @@ export const AssetInput = <T extends Asset = Asset>({
             // <ButtonBase onClick={()=>openSelectToken()} disableTouchRipple>
             //   <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
             //     <TokenIcon
-            //       aToken={asset.aToken}
+            //       mToken={asset.mToken}
             //       symbol={asset.iconSymbol || asset.symbol}
             //       sx={{ mr: 2, ml: 4 }}
             //     />
@@ -167,7 +167,7 @@ export const AssetInput = <T extends Asset = Asset>({
             // </ButtonBase>
             <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
               <TokenIcon
-                aToken={asset.aToken}
+                mToken={asset.mToken}
                 symbol={asset.iconSymbol || asset.symbol}
                 sx={{ mr: 2, ml: 4 }}
               />
@@ -208,7 +208,7 @@ export const AssetInput = <T extends Asset = Asset>({
                     >
                       <TokenIcon
                         symbol={asset.iconSymbol || asset.symbol}
-                        aToken={asset.aToken}
+                        mToken={asset.mToken}
                         sx={{ mr: 2, ml: 4 }}
                       />
                       <Typography variant="main16" color="text.primary">
@@ -225,7 +225,7 @@ export const AssetInput = <T extends Asset = Asset>({
                     data-cy={`assetsSelectOption_${asset.symbol.toUpperCase()}`}
                   >
                     <TokenIcon
-                      aToken={asset.aToken}
+                      mToken={asset.mToken}
                       symbol={asset.iconSymbol || asset.symbol}
                       sx={{ fontSize: '22px', mr: 1 }}
                     />

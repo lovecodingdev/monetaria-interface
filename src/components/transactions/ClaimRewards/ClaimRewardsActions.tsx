@@ -31,7 +31,7 @@ export const ClaimRewardsActions = ({
         const allReserves: string[] = [];
         reserves.forEach((reserve) => {
           if (reserve.aIncentivesData && reserve.aIncentivesData.length > 0) {
-            allReserves.push(reserve.aTokenAddress);
+            allReserves.push(reserve.mTokenAddress);
           }
           if (reserve.vIncentivesData && reserve.vIncentivesData.length > 0) {
             allReserves.push(reserve.variableDebtTokenAddress);

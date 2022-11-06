@@ -27,7 +27,7 @@ export const AddTokenDropdown = ({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [changingNetwork, setChangingNetwork] = useState(false);
   const [underlyingBase64, setUnderlyingBase64] = useState('');
-  const [aTokenBase64, setATokenBase64] = useState('');
+  const [mTokenBase64, setMTokenBase64] = useState('');
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
@@ -61,18 +61,18 @@ export const AddTokenDropdown = ({
 
   return (
     <>
-      {/* Load base64 token symbol for adding underlying and aTokens to wallet */}
+      {/* Load base64 token symbol for adding underlying and mTokens to wallet */}
       {poolReserve?.symbol && !/_/.test(poolReserve.symbol) && (
         <>
           <Base64Token
             symbol={poolReserve.iconSymbol}
             onImageGenerated={setUnderlyingBase64}
-            aToken={false}
+            mToken={false}
           />
           <Base64Token
             symbol={poolReserve.iconSymbol}
-            onImageGenerated={setATokenBase64}
-            aToken={true}
+            onImageGenerated={setMTokenBase64}
+            mToken={true}
           />
         </>
       )}
@@ -159,8 +159,8 @@ export const AddTokenDropdown = ({
         </MenuItem>
 
         <MenuItem
-          key="atoken"
-          value="atoken"
+          key="mtoken"
+          value="mtoken"
           onClick={() => {
             if (currentChainId !== connectedChainId) {
               switchNetwork(currentChainId).then(() => {
@@ -168,16 +168,16 @@ export const AddTokenDropdown = ({
               });
             } else {
               addERC20Token({
-                address: poolReserve.aTokenAddress,
+                address: poolReserve.mTokenAddress,
                 decimals: poolReserve.decimals,
                 symbol: `a${poolReserve.symbol}`,
-                image: !/_/.test(poolReserve.symbol) ? aTokenBase64 : undefined,
+                image: !/_/.test(poolReserve.symbol) ? mTokenBase64 : undefined,
               });
             }
             handleClose();
           }}
         >
-          <TokenIcon symbol={poolReserve.iconSymbol} sx={{ fontSize: '20px' }} aToken={true} />
+          <TokenIcon symbol={poolReserve.iconSymbol} sx={{ fontSize: '20px' }} mToken={true} />
           <Typography variant="subheader1" sx={{ ml: 3 }} noWrap data-cy={`assetName`}>
             {`a${poolReserve.symbol}`}
           </Typography>

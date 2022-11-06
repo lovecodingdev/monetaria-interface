@@ -51,7 +51,7 @@ export function CollateralRepayModalContent({
       balance: userReserve.underlyingBalance,
       symbol: userReserve.reserve.symbol,
       iconSymbol: userReserve.reserve.iconSymbol,
-      aToken: true,
+      mToken: true,
     }));
   const [tokenToRepayWith, setTokenToRepayWith] = useState<Asset>(repayTokens[0]);
 

@@ -66,7 +66,7 @@ msgid "APY, variable"
 msgstr ""
 
 #: src/ui-config/errorMapping.tsx
-msgid "AToken supply is not zero"
+msgid "MToken supply is not zero"
 msgstr ""
 
 #: src/modules/governance/GovernanceTopPanel.tsx
@@ -98,7 +98,7 @@ msgid "Action requires an active reserve"
 msgstr ""
 
 #: src/components/transactions/FlowCommons/Success.tsx
-msgid "Add aToken to the wallet to track your supply balance."
+msgid "Add mToken to the wallet to track your supply balance."
 msgstr ""
 
 #: src/components/transactions/FlowCommons/Success.tsx
@@ -1462,7 +1462,7 @@ msgid "The app is running in testnet mode. Learn how it works in"
 msgstr ""
 
 #: src/ui-config/errorMapping.tsx
-msgid "The caller of the function is not an AToken"
+msgid "The caller of the function is not an MToken"
 msgstr ""
 
 #: src/ui-config/errorMapping.tsx

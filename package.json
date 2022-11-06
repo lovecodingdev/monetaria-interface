@@ -25,8 +25,6 @@
     "test:open": "DOTENV_CONFIG_PATH='.env.local' cypress open"
   },
   "dependencies": {
-    "@aave/contract-helpers": "1.5.1",
-    "@aave/math-utils": "1.5.1",
     "@apollo/client": "^3.5.10",
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
@@ -39,8 +37,8 @@
     "@graphql-codegen/typescript-react-apollo": "^3.2.8",
     "@heroicons/react": "^1.0.6",
     "@lingui/react": "^3.13.2",
-    "@monetaria/contract-helpers": "^1.0.1",
-    "@monetaria/math-utils": "^1.0.0",
+    "@monetaria/contract-helpers": "^1.0.2",
+    "@monetaria/math-utils": "^1.0.2",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",
     "@paraswap/sdk": "5.6.0-alpha.3",
