@@ -15,10 +15,21 @@ import {
 import { useWalletBalances } from '../../../../hooks/app-data-provider/useWalletBalances';
 import { useProtocolDataContext } from '../../../../hooks/useProtocolDataContext';
 import { DashboardListTopPanel } from '../../DashboardListTopPanel';
+import {
+  assetCanBeBorrowedByUser,
+  getMaxAmountAvailableToBorrow,
+} from 'src/utils/getMaxAmountAvailableToBorrow';
+import { VariableAPYTooltip } from 'src/components/infoTooltips/VariableAPYTooltip';
+import { StableAPYTooltip } from 'src/components/infoTooltips/StableAPYTooltip';
+import { AvailableTooltip } from 'src/components/infoTooltips/AvailableTooltip';
+import { CapType } from 'src/components/caps/helper';
 import { ListHeader } from '../ListHeader';
 import { ListLoader } from '../ListLoader';
 import { SupplyAssetsListItem } from './SupplyAssetsListItem';
 import { SupplyAssetsListMobileItem } from './SupplyAssetsListMobileItem';
+import { BorrowAssetsListItem } from '../BorrowAssetsList/BorrowAssetsListItem';
+import { BorrowAssetsListMobileItem } from '../BorrowAssetsList/BorrowAssetsListMobileItem';
+import { BorrowAssetsItem } from '../BorrowAssetsList/types';
 
 export const SupplyAssetsList = () => {
   const { currentNetworkConfig } = useProtocolDataContext();
@@ -66,10 +77,10 @@ export const SupplyAssetsList = () => {
 
       const usageAsCollateralEnabledOnUser = !user?.isInIsolationMode
         ? reserve.usageAsCollateralEnabled &&
-          (!isIsolated || (isIsolated && !hasDifferentCollateral))
+        (!isIsolated || (isIsolated && !hasDifferentCollateral))
         : !isIsolated
-        ? false
-        : !hasDifferentCollateral;
+          ? false
+          : !hasDifferentCollateral;
 
       const userRes = user?.userReservesData.find((userRes) => userRes.reserve.id === reserve.id);
       const userData = {
@@ -81,7 +92,7 @@ export const SupplyAssetsList = () => {
         stableBorrowsUSD: userRes?.stableBorrowsUSD || '0',
         borrowRateMode: userRes?.variableBorrows !== '0' ? InterestRate.Variable : InterestRate.Stable,
       }
-  
+
       if (reserve.isWrappedBaseAsset) {
         let baseAvailableToDeposit = valueToBigNumber(
           walletBalances[API_ETH_MOCK_ADDRESS.toLowerCase()]?.amount
@@ -144,6 +155,61 @@ export const SupplyAssetsList = () => {
     })
     .flat();
 
+
+  // BorrowAssetsItem
+
+  const tokensToBorrow: BorrowAssetsItem[] = reserves
+    .filter((reserve) => assetCanBeBorrowedByUser(reserve, user))
+    .map<BorrowAssetsItem>((reserve) => {
+      const availableBorrows = user
+        ? getMaxAmountAvailableToBorrow(reserve, user, InterestRate.Variable).toNumber()
+        : 0;
+
+      const availableBorrowsInUSD = valueToBigNumber(availableBorrows)
+        .multipliedBy(reserve.formattedPriceInMarketReferenceCurrency)
+        .multipliedBy(marketReferencePriceInUsd)
+        .shiftedBy(-USD_DECIMALS)
+        .toFixed(2);
+
+      return {
+        ...reserve,
+        totalBorrows: reserve.totalDebt,
+        availableBorrows,
+        availableBorrowsInUSD,
+        stableBorrowRate:
+          reserve.stableBorrowRateEnabled && reserve.borrowingEnabled
+            ? Number(reserve.stableBorrowAPY)
+            : -1,
+        variableBorrowRate: reserve.borrowingEnabled ? Number(reserve.variableBorrowAPY) : -1,
+        iconSymbol: reserve.iconSymbol,
+        ...(reserve.isWrappedBaseAsset
+          ? fetchIconSymbolAndName({
+            symbol: baseAssetSymbol,
+            underlyingAsset: API_ETH_MOCK_ADDRESS.toLowerCase(),
+          })
+          : {}),
+      };
+    });
+
+  const maxBorrowAmount = valueToBigNumber(user?.totalBorrowsMarketReferenceCurrency || '0').plus(
+    user?.availableBorrowsMarketReferenceCurrency || '0'
+  );
+  const collateralUsagePercent = maxBorrowAmount.eq(0)
+    ? '0'
+    : valueToBigNumber(user?.totalBorrowsMarketReferenceCurrency || '0')
+      .div(maxBorrowAmount)
+      .toFixed();
+
+  const borrowReserves =
+    user?.totalCollateralMarketReferenceCurrency === '0' || +collateralUsagePercent >= 0.98
+      ? tokensToBorrow
+      : tokensToBorrow.filter(
+        ({ availableBorrowsInUSD, totalLiquidityUSD }) =>
+          availableBorrowsInUSD !== '0.00' && totalLiquidityUSD !== '0'
+      );
+
+  // <---End of BorrowedListItems --->
+
   const sortedSupplyReserves = tokensToSupply.sort((a, b) =>
     +a.walletBalanceUSD > +b.walletBalanceUSD ? -1 : 1
   );
@@ -154,17 +220,44 @@ export const SupplyAssetsList = () => {
   const supplyReserves = isShowZeroAssets
     ? sortedSupplyReserves
     : filteredSupplyReserves.length >= 1
-    ? filteredSupplyReserves
-    : sortedSupplyReserves;
+      ? filteredSupplyReserves
+      : sortedSupplyReserves;
+
+  const makeFinalReserves = (_supply: any[], _borrow: any[]) => {
+    var objFinalDataArr: any[] = [];
+    for (var i = 0; i < _supply.length; i++) {
+      var obj = _supply[i];
+      if (_borrow[i] && obj.symbol == _borrow[i].symbol) {
+        for (let key in _borrow[i]) {
+          obj[key] = _borrow[i][key];
+        }
+        objFinalDataArr.push(obj);
+      }
+      return objFinalDataArr;
+    };
+  }
+  const finalReserves: any = makeFinalReserves(supplyReserves, borrowReserves);
 
   const head = [
-    <Trans key="Balance">Balance</Trans>,
-    <Trans key="APY">APY</Trans>,
+    <Trans key="APY">Supply APY</Trans>,
     <Trans key="Can be collateral">Can be collateral</Trans>,
-    <Trans key="Supplied Balance">Supply Balance</Trans>,
-    <Trans key="Borrowed Balance">Borrow Balance</Trans>,
-    <Trans key="APY, variable">APY, variable</Trans>,
-    <Trans key="APY, stable">APY, stable</Trans>,
+    <VariableAPYTooltip
+      text={<Trans>Borrow APY, variable</Trans>}
+      key="APY_list_variable_type"
+      variant="subheader2"
+    />,
+    <StableAPYTooltip
+      text={<Trans>Borrow APY, stable</Trans>}
+      key="APY_list_stable_type"
+      variant="subheader2"
+    />,
+    <AvailableTooltip
+      capType={CapType.borrowCap}
+      text={<Trans>Available Lending</Trans>}
+      key="Available"
+      variant="subheader2"
+    />,
+    <Trans key="Balance">Wallet Balance</Trans>,
     <Trans key="Actions">Actions</Trans>,
   ];
 
@@ -205,15 +298,15 @@ export const SupplyAssetsList = () => {
     >
       <>
         {!downToXSM && <ListHeader head={head} />}
-        {supplyReserves
-          .filter((r) => r.symbol.toLowerCase().includes(search))
-          .map((item) =>
-          downToXSM ? (
-            <SupplyAssetsListMobileItem {...item} key={item.id} />
-          ) : (
-            <SupplyAssetsListItem {...item} key={item.id} />
-          )
-        )}
+        {finalReserves
+          .filter((r: any) => r.symbol.toLowerCase().includes(search))
+          .map((item: any) =>
+            downToXSM ? (
+              <SupplyAssetsListMobileItem {...item} key={item.id} />
+            ) : (
+              <SupplyAssetsListItem {...item} key={item.id} />
+            )
+          )}
       </>
     </ListWrapper>
   );

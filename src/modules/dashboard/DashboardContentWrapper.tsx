@@ -34,6 +34,7 @@ export const DashboardContentWrapper = ({ isBorrow }: DashboardContentWrapperPro
         </Box>
       </Box>
       <SupplyAssetsList />
+     
     </Box>
   );
 };

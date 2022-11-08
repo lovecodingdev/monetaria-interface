@@ -12,10 +12,13 @@ import { ListButtonsColumn } from '../ListButtonsColumn';
 import { ListItemCanBeCollateral } from '../ListItemCanBeCollateral';
 import { ListItemWrapper } from '../ListItemWrapper';
 import { ListValueColumn } from '../ListValueColumn';
+import { IncentivesCard } from '../../../../components/incentives/IncentivesCard';
 import { SupplyAssetsItem } from './types';
+import { BorrowAssetsItem } from './types';
 import { FormattedNumber } from '../../../../components/primitives/FormattedNumber';
 import { NoData } from '../../../../components/primitives/NoData';
 import { InterestRate } from '@monetaria/contract-helpers';
+
 
 export const SupplyAssetsListItem = ({
   symbol,
@@ -46,7 +49,11 @@ export const SupplyAssetsListItem = ({
   stableBorrowAPY,
   vIncentivesData,
   sIncentivesData,
-}: SupplyAssetsItem) => {
+  availableBorrows,
+  availableBorrowsInUSD,
+  borrowCap,
+  totalBorrows,
+}: any) => {
   const { currentMarket } = useProtocolDataContext();
   const { openActions } = useModalContext();
 
@@ -59,6 +66,31 @@ export const SupplyAssetsListItem = ({
       data-cy={`dashboardSupplyListItem_${symbol.toUpperCase()}`}
       currentMarket={currentMarket}
     >
+      <ListAPRColumn value={Number(supplyAPY)} incentives={aIncentivesData} symbol={symbol} />
+      <ListColumn>
+        <ListItemCanBeCollateral
+          isIsolated={isIsolated}
+          usageAsCollateralEnabled={usageAsCollateralEnabledOnUser}
+        />
+      </ListColumn>
+      <ListAPRColumn value={Number(variableBorrowAPY)} incentives={vIncentivesData} symbol={symbol} />
+
+      <ListAPRColumn value={Number(stableBorrowAPY)} incentives={sIncentivesData} symbol={symbol} />
+      <ListValueColumn
+        symbol={symbol}
+        value={Number(availableBorrows)}
+        subValue={Number(availableBorrowsInUSD)}
+        disabled={Number(availableBorrows) === 0}
+        withTooltip
+        capsComponent={
+          <CapsHint
+            capType={CapType.borrowCap}
+            capAmount={borrowCap}
+            totalAmount={totalBorrows}
+            withoutText
+          />
+        }
+      />
       <ListValueColumn
         symbol={symbol}
         value={Number(walletBalance)}
@@ -74,30 +106,6 @@ export const SupplyAssetsListItem = ({
           />
         }
       />
-      <ListAPRColumn value={Number(supplyAPY)} incentives={aIncentivesData} symbol={symbol} />
-
-      <ListColumn>
-        <ListItemCanBeCollateral
-          isIsolated={isIsolated}
-          usageAsCollateralEnabled={usageAsCollateralEnabledOnUser}
-        />
-      </ListColumn>
-      <ListValueColumn
-        value={Number(underlyingBalance)}
-        subValue={Number(underlyingBalanceUSD)}
-        disabled={Number(underlyingBalance) === 0}
-      />
-      <ListValueColumn
-        value={Number(borrowRateMode === InterestRate.Variable ? variableBorrows : stableBorrows)}
-        subValue={Number(
-          borrowRateMode === InterestRate.Variable ? variableBorrowsUSD : stableBorrowsUSD
-        )}
-      />
-
-      <ListAPRColumn value={Number(variableBorrowAPY)} incentives={vIncentivesData} symbol={symbol} />
-
-      <ListAPRColumn value={Number(stableBorrowAPY)} incentives={sIncentivesData} symbol={symbol} />
-
       <ListButtonsColumn>
         <Button
           // component={Link}
