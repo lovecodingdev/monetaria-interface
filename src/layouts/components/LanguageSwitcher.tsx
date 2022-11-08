@@ -28,46 +28,53 @@ interface LanguageListItemProps {
 
 export const LanguageListItem = ({ component = ListItem, onClick }: LanguageListItemProps) => {
   const { i18n } = useLingui();
-  console.log(i18n.locale)
+  console.log(i18n.locale);
   return (
     <Box
       component={component}
       onClick={onClick}
       sx={{
         color: { xs: '#080F26', md: 'text.primary' },
-        boxSizing: "border-box",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "16px",
-        margin: "16px 32px",
-        gap: "16px",
-        width: "304px",
-        height: "69.48px",
-        background: "#F3F8FF",
-        border: "1px solid rgba(21, 126, 255, 0.15)",
-        borderRadius: "12px",
-        flex: "none",
+        boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '16px',
+        gap: '16px',
+        width: '304px',
+        height: '69.48px',
+        background: '#F3F8FF',
+        border: '1px solid rgba(21, 126, 255, 0.15)',
+        borderRadius: '12px',
+        flex: 'none',
         order: 1,
         flexGrow: 0,
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "start" }}>
+      <Box sx={{ display: 'flex', alignItems: 'start' }}>
         <ListItemIcon
           sx={{ mr: 3, borderRadius: '2px', overflow: 'hidden', width: 24, height: 24 }}
         >
-          <img src={`/icons/flags/${i18n.locale}.svg`} width="100%" height="100%" alt={`${i18n.locale} icon`} />
+          <img
+            src={`/icons/flags/${i18n.locale}.svg`}
+            width="100%"
+            height="100%"
+            alt={`${i18n.locale} icon`}
+          />
         </ListItemIcon>
       </Box>
 
       <ListItemText>
-        <Trans><span style={{ fontSize: "16px" }}>{i18n._(langMap[i18n.locale as keyof typeof langMap])}</span></Trans>
-        <div style={{ color: "#7E8CA9", fontWeight: 400, fontSize: "12px" }}>Choose language</div>
+        <Trans>
+          <span style={{ fontSize: '16px' }}>
+            {i18n._(langMap[i18n.locale as keyof typeof langMap])}
+          </span>
+        </Trans>
+        <div style={{ color: '#7E8CA9', fontWeight: 400, fontSize: '12px' }}>Choose language</div>
       </ListItemText>
 
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-
         <SvgIcon fontSize="small" sx={{ color: { xs: '#A7BDD9', md: '#A7BDD9' }, ml: 1 }}>
           <ChevronRightIcon />
         </SvgIcon>

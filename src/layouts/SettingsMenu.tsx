@@ -60,22 +60,34 @@ export function SettingsMenu() {
         anchorEl={anchorEl}
         open={settingsOpen}
         onClose={handleClose}
-        sx={{ '.MuiMenuItem-root.Mui-disabled': { opacity: 1, padding: "16px 32px" } }}
+        sx={{ '.MuiMenuItem-root.Mui-disabled': { opacity: 1, padding: '16px 32px' } }}
         keepMounted={true}
       >
         <MenuItem disabled sx={{ mb: '4px' }}>
-          <Typography variant="subheader2" sx={{
-            color: "#080F26", fontWeight: 500,
-            fontSize: "20px"
-          }}>
+          <Typography
+            variant="subheader2"
+            sx={{
+              color: '#080F26',
+              fontWeight: 500,
+              fontSize: '20px',
+            }}
+          >
             <Trans>Settings</Trans>
           </Typography>
         </MenuItem>
-
-        {/* <DarkModeSwitcher component={MenuItem} /> */}
-        <LanguageListItem onClick={handleLanguageClick} component={MenuItem} />
-        {PROD_ENV && <TestNetModeSwitcher />}
-
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            padding: '24px 32px',
+            gap: '16px',
+          }}
+        >
+          {/* <DarkModeSwitcher component={MenuItem} /> */}
+          <LanguageListItem onClick={handleLanguageClick} component={MenuItem} />
+          {PROD_ENV && <TestNetModeSwitcher />}
+        </div>
       </Menu>
 
       <Menu
