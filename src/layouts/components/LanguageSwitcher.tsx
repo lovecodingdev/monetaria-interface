@@ -66,11 +66,9 @@ export const LanguageListItem = ({ component = ListItem, onClick }: LanguageList
       </Box>
 
       <ListItemText>
-        <Trans>
-          <span style={{ fontSize: '16px' }}>
-            {i18n._(langMap[i18n.locale as keyof typeof langMap])}
-          </span>
-        </Trans>
+        <span style={{ fontSize: '16px' }}>
+          {i18n._(langMap[i18n.locale as keyof typeof langMap])}
+        </span>
         <div style={{ color: '#7E8CA9', fontWeight: 400, fontSize: '12px' }}>Choose language</div>
       </ListItemText>
 
