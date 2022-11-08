@@ -25,8 +25,24 @@ export const TestNetModeSwitcher = ({ component = ListItem }: TestNetModeSwitche
       onClick={toggleTestnetsEnabled}
       sx={{
         cursor: 'pointer',
-        color: { xs: '#080F26', md: 'text.primary' },
         py: { xs: 1.5, md: 2 },
+        color: { xs: '#080F26', md: 'text.primary' },
+        boxSizing: "border-box",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "16px",
+        margin: "16px 32px",
+        gap: "16px",
+        width: "304px",
+        height: "69.48px",
+        background: "#F3F8FF",
+        border: "1px solid rgba(21, 126, 255, 0.15)",
+        borderRadius: "12px",
+        flex: "none",
+        order: 1,
+        flexGrow: 0,
       }}
     >
       <ListItemText>
@@ -39,7 +55,7 @@ export const TestNetModeSwitcher = ({ component = ListItem }: TestNetModeSwitche
           <Switch
             disableRipple
             checked={testnetsEnabled}
-            sx={{'.MuiSwitch-track': { bgcolor: 'primary.light' } }}
+            sx={{ '.MuiSwitch-track': { bgcolor: 'primary.light' } }}
           />
         }
         label={testnetsEnabled ? 'On' : 'Off'}

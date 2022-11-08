@@ -157,8 +157,8 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                 <MenuItemsWrapper title={<Trans>Global settings</Trans>}>
                   <List sx={{ pl: 4 }}>
                     {/* <DarkModeSwitcher /> */}
-                    {PROD_ENV && <TestNetModeSwitcher />}
                     <LanguageListItem onClick={() => setIsLanguagesListOpen(true)} />
+                    {PROD_ENV && <TestNetModeSwitcher />}
                   </List>
                 </MenuItemsWrapper>
               )}
