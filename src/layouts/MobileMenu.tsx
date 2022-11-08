@@ -1,4 +1,5 @@
 // import { MenuIcon } from '@heroicons/react/outline';
+import { CogIcon } from '@heroicons/react/solid';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import {
@@ -104,7 +105,7 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                       <ListItem
                         component={Link}
                         href={item.link}
-                        sx={{ 
+                        sx={{
                           color: '#080F26',
                           pl: 8,
                         }}
@@ -113,7 +114,7 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                         <ListItemIcon sx={{ minWidth: 'unset', mr: 3 }}>
                           <SvgIcon sx={{ fontSize: '20px', color: '#080F26' }}>{item.icon}</SvgIcon>
                         </ListItemIcon>
-    
+
                         <ListItemText>{i18n._(item.title)}</ListItemText>
                       </ListItem>
                     ))}
@@ -126,11 +127,13 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                   mr: { xs: 0, md: 2 },
                   textAlign: 'center',
                   cursor: 'pointer',
+                  alignContent: 'center'
                 }}
                 data-cy="more"
                 disablePadding
                 onClick={() => setIsOpenSettings(!isOpenSettings)}
               >
+
                 <Typography
                   variant="h2"
                   color="#080F26"
@@ -140,14 +143,19 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                     py: 4,
                     textAlign: 'start',
                     borderBottom: '1px solid rgba(8, 15, 38, 0.15)',
+                    display: "flex",
+                    alignItems: "center"
                   }}
                 >
-                  Settings
+                  <SvgIcon sx={{ color: '#A2B7D1' }} fontSize="large">
+                    <CogIcon />
+                  </SvgIcon>
+                  <span>&nbsp;Settings</span>
                 </Typography>
               </ListItem>
               {isOpenSettings && (
                 <MenuItemsWrapper title={<Trans>Global settings</Trans>}>
-                  <List sx={{pl: 4}}>
+                  <List sx={{ pl: 4 }}>
                     {/* <DarkModeSwitcher /> */}
                     {PROD_ENV && <TestNetModeSwitcher />}
                     <LanguageListItem onClick={() => setIsLanguagesListOpen(true)} />
