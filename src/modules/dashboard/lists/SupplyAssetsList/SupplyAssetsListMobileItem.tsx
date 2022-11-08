@@ -49,7 +49,7 @@ export const SupplyAssetsListMobileItem = ({
   availableBorrowsInUSD,
   borrowCap,
   totalBorrows,
-}: any) => {
+}: SupplyAssetsItem) => {
   const { currentMarket } = useProtocolDataContext();
   const { openActions } = useModalContext();
 
@@ -76,9 +76,7 @@ export const SupplyAssetsListMobileItem = ({
           position: 'relative',
         }}
       >
-        <Box
-          sx={{ display: 'flex', justifyContent: 'space-between' }}
-        >
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="description" noWrap>
             Supply APY
           </Typography>
@@ -86,22 +84,20 @@ export const SupplyAssetsListMobileItem = ({
             Borrow APY
           </Typography>
         </Box>
-        <Box
-          sx={{ display: 'flex', justifyContent: 'space-between' }}
-        >
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <FormattedNumber
             value={supplyAPY}
             percent
-            variant={"secondary14"}
-            symbolsVariant={"secondary14"}
+            variant={'secondary14'}
+            symbolsVariant={'secondary14'}
             sx={{ color: 'white' }}
             symbolsColor="white"
           />
           <FormattedNumber
             value={stableBorrowAPY}
             percent
-            variant={"secondary14"}
-            symbolsVariant={"secondary14"}
+            variant={'secondary14'}
+            symbolsVariant={'secondary14'}
             sx={{ color: 'white' }}
             symbolsColor="white"
           />
@@ -176,9 +172,6 @@ export const SupplyAssetsListMobileItem = ({
         }
       /> */}
 
-
-
-
       {/* <ListValueRow
         title={<Trans>Supply balance</Trans>}
         value={Number(underlyingBalance)}
@@ -193,9 +186,6 @@ export const SupplyAssetsListMobileItem = ({
         disabled={Number(underlyingBalance) === 0}
       />
 
-
-
-
       <Box
         sx={{
           display: 'flex',
@@ -203,7 +193,8 @@ export const SupplyAssetsListMobileItem = ({
           justifyContent: 'space-between',
           mt: 5,
           gap: 4,
-        }}>
+        }}
+      >
         {/* <Button
           disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
           variant="contained"

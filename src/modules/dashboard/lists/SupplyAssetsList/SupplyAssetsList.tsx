@@ -70,6 +70,16 @@ export const SupplyAssetsList = () => {
         .shiftedBy(-USD_DECIMALS)
         .toString();
 
+      const availableBorrows = user
+        ? getMaxAmountAvailableToBorrow(reserve, user, InterestRate.Variable).toNumber()
+        : 0;
+
+      const availableBorrowsInUSD = valueToBigNumber(availableBorrows)
+        .multipliedBy(reserve.formattedPriceInMarketReferenceCurrency)
+        .multipliedBy(marketReferencePriceInUsd)
+        .shiftedBy(-USD_DECIMALS)
+        .toFixed(2);
+
       const isIsolated = reserve.isIsolated;
       const hasDifferentCollateral = user?.userReservesData.find(
         (userRes) => userRes.usageAsCollateralEnabledOnUser && userRes.reserve.id !== reserve.id
@@ -77,10 +87,10 @@ export const SupplyAssetsList = () => {
 
       const usageAsCollateralEnabledOnUser = !user?.isInIsolationMode
         ? reserve.usageAsCollateralEnabled &&
-        (!isIsolated || (isIsolated && !hasDifferentCollateral))
+          (!isIsolated || (isIsolated && !hasDifferentCollateral))
         : !isIsolated
-          ? false
-          : !hasDifferentCollateral;
+        ? false
+        : !hasDifferentCollateral;
 
       const userRes = user?.userReservesData.find((userRes) => userRes.reserve.id === reserve.id);
       const userData = {
@@ -90,8 +100,9 @@ export const SupplyAssetsList = () => {
         variableBorrowsUSD: userRes?.variableBorrowsUSD || '0',
         stableBorrows: userRes?.stableBorrows || '0',
         stableBorrowsUSD: userRes?.stableBorrowsUSD || '0',
-        borrowRateMode: userRes?.variableBorrows !== '0' ? InterestRate.Variable : InterestRate.Stable,
-      }
+        borrowRateMode:
+          userRes?.variableBorrows !== '0' ? InterestRate.Variable : InterestRate.Stable,
+      };
 
       if (reserve.isWrappedBaseAsset) {
         let baseAvailableToDeposit = valueToBigNumber(
@@ -120,6 +131,9 @@ export const SupplyAssetsList = () => {
             walletBalanceUSD: walletBalances[API_ETH_MOCK_ADDRESS.toLowerCase()]?.amountUSD,
             availableToDeposit: baseAvailableToDeposit.toString(),
             availableToDepositUSD: baseAvailableToDepositUSD,
+            availableBorrows: availableBorrows,
+            availableBorrowsInUSD: availableBorrowsInUSD,
+            totalBorrows: reserve.totalDebt,
             usageAsCollateralEnabledOnUser,
             detailsAddress: reserve.underlyingAsset,
             id: reserve.id + 'base',
@@ -133,6 +147,9 @@ export const SupplyAssetsList = () => {
               availableToDeposit.toNumber() <= 0 ? '0' : availableToDeposit.toString(),
             availableToDepositUSD:
               Number(availableToDepositUSD) <= 0 ? '0' : availableToDepositUSD.toString(),
+            availableBorrows: availableBorrows,
+            availableBorrowsInUSD: availableBorrowsInUSD,
+            totalBorrows: reserve.totalDebt,
             usageAsCollateralEnabledOnUser,
             detailsAddress: reserve.underlyingAsset,
             ...userData,
@@ -148,67 +165,15 @@ export const SupplyAssetsList = () => {
           availableToDeposit.toNumber() <= 0 ? '0' : availableToDeposit.toString(),
         availableToDepositUSD:
           Number(availableToDepositUSD) <= 0 ? '0' : availableToDepositUSD.toString(),
+        availableBorrows: availableBorrows,
+        availableBorrowsInUSD: availableBorrowsInUSD,
+        totalBorrows: reserve.totalDebt,
         usageAsCollateralEnabledOnUser,
         detailsAddress: reserve.underlyingAsset,
         ...userData,
       };
     })
     .flat();
-
-
-  // BorrowAssetsItem
-
-  const tokensToBorrow: BorrowAssetsItem[] = reserves
-    .filter((reserve) => assetCanBeBorrowedByUser(reserve, user))
-    .map<BorrowAssetsItem>((reserve) => {
-      const availableBorrows = user
-        ? getMaxAmountAvailableToBorrow(reserve, user, InterestRate.Variable).toNumber()
-        : 0;
-
-      const availableBorrowsInUSD = valueToBigNumber(availableBorrows)
-        .multipliedBy(reserve.formattedPriceInMarketReferenceCurrency)
-        .multipliedBy(marketReferencePriceInUsd)
-        .shiftedBy(-USD_DECIMALS)
-        .toFixed(2);
-
-      return {
-        ...reserve,
-        totalBorrows: reserve.totalDebt,
-        availableBorrows,
-        availableBorrowsInUSD,
-        stableBorrowRate:
-          reserve.stableBorrowRateEnabled && reserve.borrowingEnabled
-            ? Number(reserve.stableBorrowAPY)
-            : -1,
-        variableBorrowRate: reserve.borrowingEnabled ? Number(reserve.variableBorrowAPY) : -1,
-        iconSymbol: reserve.iconSymbol,
-        ...(reserve.isWrappedBaseAsset
-          ? fetchIconSymbolAndName({
-            symbol: baseAssetSymbol,
-            underlyingAsset: API_ETH_MOCK_ADDRESS.toLowerCase(),
-          })
-          : {}),
-      };
-    });
-
-  const maxBorrowAmount = valueToBigNumber(user?.totalBorrowsMarketReferenceCurrency || '0').plus(
-    user?.availableBorrowsMarketReferenceCurrency || '0'
-  );
-  const collateralUsagePercent = maxBorrowAmount.eq(0)
-    ? '0'
-    : valueToBigNumber(user?.totalBorrowsMarketReferenceCurrency || '0')
-      .div(maxBorrowAmount)
-      .toFixed();
-
-  const borrowReserves =
-    user?.totalCollateralMarketReferenceCurrency === '0' || +collateralUsagePercent >= 0.98
-      ? tokensToBorrow
-      : tokensToBorrow.filter(
-        ({ availableBorrowsInUSD, totalLiquidityUSD }) =>
-          availableBorrowsInUSD !== '0.00' && totalLiquidityUSD !== '0'
-      );
-
-  // <---End of BorrowedListItems --->
 
   const sortedSupplyReserves = tokensToSupply.sort((a, b) =>
     +a.walletBalanceUSD > +b.walletBalanceUSD ? -1 : 1
@@ -220,23 +185,8 @@ export const SupplyAssetsList = () => {
   const supplyReserves = isShowZeroAssets
     ? sortedSupplyReserves
     : filteredSupplyReserves.length >= 1
-      ? filteredSupplyReserves
-      : sortedSupplyReserves;
-
-  const makeFinalReserves = (_supply: any[], _borrow: any[]) => {
-    var objFinalDataArr: any[] = [];
-    for (var i = 0; i < _supply.length; i++) {
-      var obj = _supply[i];
-      if (_borrow[i] && obj.symbol == _borrow[i].symbol) {
-        for (let key in _borrow[i]) {
-          obj[key] = _borrow[i][key];
-        }
-        objFinalDataArr.push(obj);
-      }
-      return objFinalDataArr;
-    };
-  }
-  const finalReserves: any = makeFinalReserves(supplyReserves, borrowReserves);
+    ? filteredSupplyReserves
+    : sortedSupplyReserves;
 
   const head = [
     <Trans key="APY">Supply APY</Trans>,
@@ -298,9 +248,9 @@ export const SupplyAssetsList = () => {
     >
       <>
         {!downToXSM && <ListHeader head={head} />}
-        {finalReserves
-          .filter((r: any) => r.symbol.toLowerCase().includes(search))
-          .map((item: any) =>
+        {supplyReserves
+          .filter((r) => r.symbol.toLowerCase().includes(search))
+          .map((item) =>
             downToXSM ? (
               <SupplyAssetsListMobileItem {...item} key={item.id} />
             ) : (

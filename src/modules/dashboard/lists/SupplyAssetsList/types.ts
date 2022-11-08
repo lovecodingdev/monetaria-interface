@@ -32,4 +32,8 @@ export type SupplyAssetsItem = {
   stableBorrowAPY: string;
   vIncentivesData?: ReserveIncentiveResponse[];
   sIncentivesData?: ReserveIncentiveResponse[];
+  availableBorrows: number | string,
+  availableBorrowsInUSD: number | string,
+  borrowCap: string,
+  totalBorrows: string,
 };

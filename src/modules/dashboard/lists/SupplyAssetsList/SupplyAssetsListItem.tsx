@@ -14,11 +14,9 @@ import { ListItemWrapper } from '../ListItemWrapper';
 import { ListValueColumn } from '../ListValueColumn';
 import { IncentivesCard } from '../../../../components/incentives/IncentivesCard';
 import { SupplyAssetsItem } from './types';
-import { BorrowAssetsItem } from './types';
 import { FormattedNumber } from '../../../../components/primitives/FormattedNumber';
 import { NoData } from '../../../../components/primitives/NoData';
 import { InterestRate } from '@monetaria/contract-helpers';
-
 
 export const SupplyAssetsListItem = ({
   symbol,
@@ -53,7 +51,7 @@ export const SupplyAssetsListItem = ({
   availableBorrowsInUSD,
   borrowCap,
   totalBorrows,
-}: any) => {
+}: SupplyAssetsItem) => {
   const { currentMarket } = useProtocolDataContext();
   const { openActions } = useModalContext();
 
@@ -73,7 +71,11 @@ export const SupplyAssetsListItem = ({
           usageAsCollateralEnabled={usageAsCollateralEnabledOnUser}
         />
       </ListColumn>
-      <ListAPRColumn value={Number(variableBorrowAPY)} incentives={vIncentivesData} symbol={symbol} />
+      <ListAPRColumn
+        value={Number(variableBorrowAPY)}
+        incentives={vIncentivesData}
+        symbol={symbol}
+      />
 
       <ListAPRColumn value={Number(stableBorrowAPY)} incentives={sIncentivesData} symbol={symbol} />
       <ListValueColumn
