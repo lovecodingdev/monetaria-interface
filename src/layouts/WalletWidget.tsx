@@ -307,7 +307,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
       ) : (
         <Button
           // variant={connected ? 'surface' : 'gradient'}
-          variant={"contained"}
+          variant={'contained'}
           aria-label="wallet"
           id="wallet-button"
           aria-controls={open ? 'wallet-button' : undefined}

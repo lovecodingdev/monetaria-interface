@@ -71,13 +71,13 @@ export const ListWrapper = ({
           </Typography>
           {subTitleComponent}
         </Box>
-        
+
         {onSearch &&
           <Box
             component="form"
-            sx={{ 
-              p: '2px', 
-              display: 'flex', 
+            sx={{
+              p: '2px',
+              display: 'flex',
               alignItems: 'center',
               background: '#F6F8F9',
               height: '32px',
@@ -94,7 +94,7 @@ export const ListWrapper = ({
             <IconButton type="button" aria-label="search">
               <SearchIcon />
             </IconButton>
-          </Box>      
+          </Box>
         }
 
         {/* {!!localStorageName && !noData && (

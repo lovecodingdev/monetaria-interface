@@ -45,6 +45,10 @@ export const SupplyAssetsListMobileItem = ({
   stableBorrowAPY,
   vIncentivesData,
   sIncentivesData,
+  availableBorrows,
+  availableBorrowsInUSD,
+  borrowCap,
+  totalBorrows,
 }: SupplyAssetsItem) => {
   const { currentMarket } = useProtocolDataContext();
   const { openActions } = useModalContext();
@@ -72,9 +76,7 @@ export const SupplyAssetsListMobileItem = ({
           position: 'relative',
         }}
       >
-        <Box
-          sx={{display: 'flex', justifyContent: 'space-between'}}
-        >
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="description" noWrap>
             Supply APY
           </Typography>
@@ -82,30 +84,28 @@ export const SupplyAssetsListMobileItem = ({
             Borrow APY
           </Typography>
         </Box>
-        <Box
-          sx={{display: 'flex', justifyContent: 'space-between'}}
-        >
-          <FormattedNumber 
-            value={supplyAPY} 
-            percent 
-            variant={"secondary14"} 
-            symbolsVariant={"secondary14"} 
-            sx={{color: 'white'}}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <FormattedNumber
+            value={supplyAPY}
+            percent
+            variant={'secondary14'}
+            symbolsVariant={'secondary14'}
+            sx={{ color: 'white' }}
             symbolsColor="white"
           />
-          <FormattedNumber 
-            value={stableBorrowAPY} 
-            percent 
-            variant={"secondary14"} 
-            symbolsVariant={"secondary14"} 
-            sx={{color: 'white'}}
+          <FormattedNumber
+            value={stableBorrowAPY}
+            percent
+            variant={'secondary14'}
+            symbolsVariant={'secondary14'}
+            sx={{ color: 'white' }}
             symbolsColor="white"
           />
         </Box>
-        <TokenIcon 
-          symbol={iconSymbol} 
+        <TokenIcon
+          symbol={iconSymbol}
           sx={{
-            width: '40px', 
+            width: '40px',
             height: '40px',
             position: 'absolute',
             bottom: '-20px',
@@ -117,33 +117,19 @@ export const SupplyAssetsListMobileItem = ({
       </Box>
 
       <ListValueRow
-        title={<Trans>Wallet balance</Trans>}
-        value={Number(walletBalance)}
-        subValue={walletBalanceUSD}
-        disabled={Number(walletBalance) === 0}
+        title={<Trans>Available Lending</Trans>}
+        value={Number(availableBorrows)}
+        subValue={Number(availableBorrowsInUSD)}
+        disabled={Number(availableBorrows) === 0}
         capsComponent={
           <CapsHint
-            capType={CapType.supplyCap}
-            capAmount={supplyCap}
-            totalAmount={totalLiquidity}
+            capType={CapType.borrowCap}
+            capAmount={borrowCap}
+            totalAmount={totalBorrows}
             withoutText
           />
         }
       />
-
-      {/* <Row
-        caption={<Trans>Supply APY</Trans>}
-        align="flex-start"
-        captionVariant="description"
-        mb={2}
-      >
-        <IncentivesCard
-          value={Number(supplyAPY)}
-          incentives={aIncentivesData}
-          symbol={symbol}
-          variant="secondary14"
-        />
-      </Row> */}
 
       <Row
         caption={<Trans>Can be collateral</Trans>}
@@ -156,20 +142,6 @@ export const SupplyAssetsListMobileItem = ({
           usageAsCollateralEnabled={usageAsCollateralEnabledOnUser}
         />
       </Row>
-
-      <ListValueRow
-        title={<Trans>Supply balance</Trans>}
-        value={Number(underlyingBalance)}
-        subValue={underlyingBalanceUSD}
-        disabled={Number(underlyingBalance) === 0}
-      />
-
-      <ListValueRow
-        title={<Trans>Borrow balance</Trans>}
-        value={Number(borrowRateMode === InterestRate.Variable ? variableBorrows : stableBorrows)}
-        subValue={borrowRateMode === InterestRate.Variable ? variableBorrowsUSD : stableBorrowsUSD}
-        disabled={Number(underlyingBalance) === 0}
-      />
 
       <Row
         caption={<Trans>APY, variable</Trans>}
@@ -184,28 +156,45 @@ export const SupplyAssetsListMobileItem = ({
           variant="secondary14"
         />
       </Row>
-      <Row
-        caption={<Trans>APY, stable</Trans>}
-        align="flex-start"
-        captionVariant="description"
-        mb={2}
-      >
-        <IncentivesCard
-          value={Number(stableBorrowAPY)}
-          incentives={sIncentivesData}
-          symbol={symbol}
-          variant="secondary14"
-        />
-      </Row>
 
-      <Box 
-        sx={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'space-between', 
+      {/* <ListValueRow
+        title={<Trans>Wallet balance</Trans>}
+        value={Number(walletBalance)}
+        subValue={walletBalanceUSD}
+        disabled={Number(walletBalance) === 0}
+        capsComponent={
+          <CapsHint
+            capType={CapType.supplyCap}
+            capAmount={supplyCap}
+            totalAmount={totalLiquidity}
+            withoutText
+          />
+        }
+      /> */}
+
+      {/* <ListValueRow
+        title={<Trans>Supply balance</Trans>}
+        value={Number(underlyingBalance)}
+        subValue={underlyingBalanceUSD}
+        disabled={Number(underlyingBalance) === 0}
+      /> */}
+
+      <ListValueRow
+        title={<Trans>Borrow balance</Trans>}
+        value={Number(borrowRateMode === InterestRate.Variable ? variableBorrows : stableBorrows)}
+        subValue={borrowRateMode === InterestRate.Variable ? variableBorrowsUSD : stableBorrowsUSD}
+        disabled={Number(underlyingBalance) === 0}
+      />
+
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           mt: 5,
           gap: 4,
-        }}>
+        }}
+      >
         {/* <Button
           disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
           variant="contained"
@@ -228,7 +217,7 @@ export const SupplyAssetsListMobileItem = ({
           variant="outlined"
           // component={Link}
           // href={ROUTES.actions(detailsAddress, currentMarket, "Borrow")}
-          sx={{flex: 1}}
+          sx={{ flex: 1 }}
           onClick={() => openActions(underlyingAsset, ModalType.Borrow)}
         >
           <Trans>Borrow</Trans>
@@ -238,7 +227,7 @@ export const SupplyAssetsListMobileItem = ({
           variant="contained"
           // component={Link}
           // href={ROUTES.actions(detailsAddress, currentMarket, "Supply")}
-          sx={{flex: 1}}
+          sx={{ flex: 1 }}
           onClick={() => openActions(underlyingAsset, ModalType.Supply)}
         >
           <Trans>Supply</Trans>

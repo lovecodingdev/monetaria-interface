@@ -1,4 +1,5 @@
 // import { MenuIcon } from '@heroicons/react/outline';
+import { CogIcon } from '@heroicons/react/solid';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import {
@@ -24,6 +25,7 @@ import { MobileCloseButton } from './components/MobileCloseButton';
 import { NavItems } from './components/NavItems';
 import { TestNetModeSwitcher } from './components/TestNetModeSwitcher';
 import MenuIcon from 'public/icons/menu.svg';
+import { BasicModal } from 'src/components/primitives/BasicModal';
 
 interface MobileMenuProps {
   open: boolean;
@@ -67,6 +69,43 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
         </Button>
       )}
 
+      <BasicModal open={isOpenSettings} setOpen={setIsOpenSettings}>
+        <div style={{ padding: '3px' }}>
+          <Typography
+            variant="subheader2"
+            sx={{
+              color: '#080F26',
+              fontWeight: 500,
+              fontSize: '20px',
+            }}
+          >
+            <Trans>
+              <span style={{ fontSize: '20px', fontWeight: 500, lineHeight: '23.54px' }}>
+                Settings
+              </span>
+            </Trans>
+          </Typography>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: '24px 32px',
+              gap: '16px',
+            }}
+          >
+            {/* <DarkModeSwitcher /> */}
+            <LanguageListItem
+              onClick={() => {
+                setIsOpenSettings(false);
+                setIsLanguagesListOpen(true);
+              }}
+            />
+            {PROD_ENV && <TestNetModeSwitcher />}
+          </div>
+        </div>
+      </BasicModal>
+
       <DrawerWrapper open={open} setOpen={setOpen} headerHeight={headerHeight}>
         {!isLanguagesListOpen ? (
           <>
@@ -104,7 +143,7 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                       <ListItem
                         component={Link}
                         href={item.link}
-                        sx={{ 
+                        sx={{
                           color: '#080F26',
                           pl: 8,
                         }}
@@ -113,7 +152,7 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                         <ListItemIcon sx={{ minWidth: 'unset', mr: 3 }}>
                           <SvgIcon sx={{ fontSize: '20px', color: '#080F26' }}>{item.icon}</SvgIcon>
                         </ListItemIcon>
-    
+
                         <ListItemText>{i18n._(item.title)}</ListItemText>
                       </ListItem>
                     ))}
@@ -126,6 +165,7 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                   mr: { xs: 0, md: 2 },
                   textAlign: 'center',
                   cursor: 'pointer',
+                  alignContent: 'center',
                 }}
                 data-cy="more"
                 disablePadding
@@ -140,20 +180,16 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                     py: 4,
                     textAlign: 'start',
                     borderBottom: '1px solid rgba(8, 15, 38, 0.15)',
+                    display: 'flex',
+                    alignItems: 'center',
                   }}
                 >
-                  Settings
+                  <SvgIcon sx={{ color: '#A2B7D1' }} fontSize="large">
+                    <CogIcon />
+                  </SvgIcon>
+                  <span>&nbsp;Settings</span>
                 </Typography>
               </ListItem>
-              {isOpenSettings && (
-                <MenuItemsWrapper title={<Trans>Global settings</Trans>}>
-                  <List sx={{pl: 4}}>
-                    {/* <DarkModeSwitcher /> */}
-                    {PROD_ENV && <TestNetModeSwitcher />}
-                    <LanguageListItem onClick={() => setIsLanguagesListOpen(true)} />
-                  </List>
-                </MenuItemsWrapper>
-              )}
             </MenuItemsWrapper>
           </>
         ) : (
