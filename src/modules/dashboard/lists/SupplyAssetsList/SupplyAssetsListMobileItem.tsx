@@ -84,6 +84,7 @@ export const SupplyAssetsListMobileItem = ({
             Borrow APY
           </Typography>
         </Box>
+
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <FormattedNumber
             value={supplyAPY}
@@ -115,6 +116,45 @@ export const SupplyAssetsListMobileItem = ({
           }}
         />
       </Box>
+      <Row
+        caption={<Trans>Can be collateral</Trans>}
+        align="flex-start"
+        captionVariant="description"
+        mb={2}
+      >
+        <ListItemCanBeCollateral
+          isIsolated={isIsolated}
+          usageAsCollateralEnabled={usageAsCollateralEnabledOnUser}
+        />
+      </Row>
+
+      <Row
+        caption={<Trans>Borrow APY , variable</Trans>}
+        align="flex-start"
+        captionVariant="description"
+        mb={2}
+      >
+        <IncentivesCard
+          value={Number(variableBorrowAPY)}
+          incentives={vIncentivesData}
+          symbol={symbol}
+          variant="secondary14"
+        />
+      </Row>
+
+      {/* <Row
+        caption={<Trans>Borrow APY, stable</Trans>}
+        align="flex-start"
+        captionVariant="description"
+        mb={2}
+      >
+        <IncentivesCard
+          value={Number(stableBorrowAPY)}
+          incentives={vIncentivesData}
+          symbol={symbol}
+          variant="secondary14"
+        />
+      </Row> */}
 
       <ListValueRow
         title={<Trans>Available Lending</Trans>}
@@ -131,33 +171,7 @@ export const SupplyAssetsListMobileItem = ({
         }
       />
 
-      <Row
-        caption={<Trans>Can be collateral</Trans>}
-        align="flex-start"
-        captionVariant="description"
-        mb={2}
-      >
-        <ListItemCanBeCollateral
-          isIsolated={isIsolated}
-          usageAsCollateralEnabled={usageAsCollateralEnabledOnUser}
-        />
-      </Row>
-
-      <Row
-        caption={<Trans>APY, variable</Trans>}
-        align="flex-start"
-        captionVariant="description"
-        mb={2}
-      >
-        <IncentivesCard
-          value={Number(variableBorrowAPY)}
-          incentives={vIncentivesData}
-          symbol={symbol}
-          variant="secondary14"
-        />
-      </Row>
-
-      {/* <ListValueRow
+      <ListValueRow
         title={<Trans>Wallet balance</Trans>}
         value={Number(walletBalance)}
         subValue={walletBalanceUSD}
@@ -170,7 +184,7 @@ export const SupplyAssetsListMobileItem = ({
             withoutText
           />
         }
-      /> */}
+      />
 
       {/* <ListValueRow
         title={<Trans>Supply balance</Trans>}
@@ -179,12 +193,12 @@ export const SupplyAssetsListMobileItem = ({
         disabled={Number(underlyingBalance) === 0}
       /> */}
 
-      <ListValueRow
+      {/* <ListValueRow
         title={<Trans>Borrow balance</Trans>}
         value={Number(borrowRateMode === InterestRate.Variable ? variableBorrows : stableBorrows)}
         subValue={borrowRateMode === InterestRate.Variable ? variableBorrowsUSD : stableBorrowsUSD}
         disabled={Number(underlyingBalance) === 0}
-      />
+      /> */}
 
       <Box
         sx={{
