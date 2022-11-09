@@ -25,14 +25,14 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
   const { currentMarketData } = useProtocolDataContext();
 
   const { breakpoints } = useTheme();
-  const md = useMediaQuery(breakpoints.down('md'));
+  const lg = useMediaQuery(breakpoints.down('lg'));
 
   return (
     <List
       sx={{
         display: 'flex',
-        alignItems: { xs: 'flex-start', md: 'center' },
-        flexDirection: { xs: 'column', md: 'row' },
+        alignItems: { xs: 'flex-start', lg: 'center' },
+        flexDirection: { xs: 'column', lg: 'row' },
       }}
       disablePadding
     >
@@ -41,15 +41,15 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
         .map((item, index) => (
           <ListItem
             sx={{
-              width: { xs: '100%', md: 'unset' },
-              mr: { xs: 0, md: 2 },
+              width: { xs: '100%', lg: 'unset' },
+              mr: { xs: 0, lg: 2 },
               textAlign: 'center',
             }}
             data-cy={item.dataCy}
             disablePadding
             key={index}
           >
-            {md ? (
+            {lg ? (
               <Typography
                 component={Link}
                 href={item.link}
@@ -72,8 +72,8 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                 href={item.link}
                 disableRipple={true}
                 sx={(theme) => ({
-                  color: { xs: '#F1F1F3', md: 'text.primary' },
-                  py: { xs: 1.5, md: 1 },
+                  color: { xs: '#F1F1F3', lg: 'text.primary' },
+                  py: { xs: 1.5, lg: 1 },
                   position: 'relative',
                   '&:hover': {
                     borderRadius: '100px',
@@ -92,7 +92,7 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
           </ListItem>
         ))}
 
-      <ListItem sx={{ display: { xs: 'none', md: 'flex' }, width: 'unset' }} disablePadding>
+      <ListItem sx={{ display: { xs: 'none', lg: 'flex' }, width: 'unset' }} disablePadding>
         <MoreMenu />
       </ListItem>
     </List>

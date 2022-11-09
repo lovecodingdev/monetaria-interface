@@ -39,21 +39,21 @@ function HideOnScroll({ children }: Props) {
 
 export function AppHeader() {
   const { breakpoints } = useTheme();
-  const md = useMediaQuery(breakpoints.down('md'));
+  const lg = useMediaQuery(breakpoints.down('lg'));
   const xsm = useMediaQuery(breakpoints.down('xsm'));
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [walletWidgetOpen, setWalletWidgetOpen] = useState(false);
 
   useEffect(() => {
-    if (mobileMenuOpen && !md) {
+    if (mobileMenuOpen && !lg) {
       setMobileMenuOpen(false);
     }
     if (walletWidgetOpen) {
       setWalletWidgetOpen(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [md]);
+  }, [lg]);
 
   const headerHeight = 82;
 
@@ -147,9 +147,9 @@ export function AppHeader() {
           )}
         </Box>
 
-        <Box 
-          sx={{ 
-            display: { xs: 'none', md: 'block' }, 
+        <Box
+          sx={{
+            display: { xs: 'none', lg: 'block' },
             background: '#F6F8F9',
             borderRadius: '100px',
             padding: '4px',
@@ -170,12 +170,12 @@ export function AppHeader() {
           />
         )}
 
-        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+        <Box sx={{ display: { xs: 'none', lg: 'block' } }}>
           <SettingsMenu />
         </Box>
 
         {!walletWidgetOpen && (
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ display: { xs: 'flex', lg: 'none' } }}>
             <MobileMenu
               open={mobileMenuOpen}
               setOpen={setMobileMenuOpen}
