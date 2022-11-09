@@ -135,20 +135,87 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
   }
 
   const Content = ({ component = ListItem }: { component?: typeof MenuItem | typeof ListItem }) => (
-    <>
+    <Box
+      sx={{
+        boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        padding: '16px',
+        gap: '16px',
+        backgroundColor: '#FFFFFF',
+        borderRadius: '16px',
+        margin: { xs: '0 auto', md: 'none' },
+        width: { xs: '380px', md: '415px' },
+        height: { xs: '212px', md: '168px' },
+        boxShadow: { xs: '4px 6px 4px rgba(163, 163, 163, 0.14)', md: 'none' },
+      }}
+    >
       <Typography
         variant="subheader2"
         sx={{
           display: { xs: 'block', md: 'none' },
-          color: '#A5A8B6',
-          px: 4,
+          color: '#000000',
           py: 2,
+          fontWeight: 400,
+          fontSize: '14px',
         }}
       >
-        <Trans>Account</Trans>
+        <Trans>Connected with Metamask</Trans>
       </Typography>
-
-      <Box component={component} disabled>
+      <Box
+        sx={{
+          color: { xs: '#000000', md: '#000000' },
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: '0.5em',
+          fontWeight: '400',
+          fontSize: '14px',
+        }}
+      >
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'start' }}>
+          Connected with Metamask
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'start' }}>
+          <Button
+            sx={{
+              width: '95.5px',
+              height: '32px',
+              backgroundColor: '#F3F8FF',
+              border: '1px solid rgba(21, 126, 255, 0.15)',
+              borderRadius: '12px',
+              cursor: 'pointer',
+              color: '#252C32',
+            }}
+            onClick={() => {
+              setOpen(false);
+              setWalletModalOpen(true);
+            }}
+          >
+            <Trans>Change</Trans>
+          </Button>
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'start' }}>
+          <Button
+            sx={{
+              width: '95.5px',
+              height: '32px',
+              backgroundColor: '#F3F8FF',
+              border: '1px solid rgba(21, 126, 255, 0.15)',
+              borderRadius: '12px',
+              cursor: 'pointer',
+              color: '#252C32',
+              fontWeight: '400',
+              fontSize: '14px',
+            }}
+            onClick={handleDisconnect}
+          >
+            <Trans>Disconnect</Trans>
+          </Button>
+        </Box>
+      </Box>
+      <Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Box
             sx={{
@@ -172,17 +239,15 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             {ensNameAbbreviated && (
-              <Typography variant="h4" color={{ xs: '#F1F1F3', md: 'text.primary' }}>
-                {ensNameAbbreviated}
-              </Typography>
+              <Typography color={{ xs: '#000000', md: '#000000' }}>{ensNameAbbreviated}</Typography>
             )}
 
             <Typography
               variant={ensNameAbbreviated ? 'caption' : 'h4'}
               color={
                 ensNameAbbreviated
-                  ? { xs: '#A5A8B6', md: 'text.secondary' }
-                  : { xs: '#F1F1F3', md: 'text.primary' }
+                  ? { xs: '#000000', md: 'text.secondary' }
+                  : { xs: '#000000', md: 'text.primary' }
               }
             >
               {textCenterEllipsis(currentAccount, ensNameAbbreviated ? 12 : 7, 4)}
@@ -190,112 +255,76 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
           </Box>
         </Box>
       </Box>
-      <Divider sx={{ my: { xs: 7, md: 0 }, borderColor: { xs: '#FFFFFF1F', md: 'divider' } }} />
-
-      <Box component={component} disabled>
-        <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-          <Box
+      <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5em' }}>
+        <Button
+          sx={{
+            display: 'flex',
+            justifyContent: 'start',
+            cursor: 'pointer',
+            fontWeight: 600,
+            color: '#0E73F6',
+            backgroundColor: '#F3F8FF',
+            borderRadius: '8px',
+            height: '32px',
+          }}
+          onClick={handleCopy}
+        >
+          <ListItemIcon
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              mb: 1,
+              color: {
+                xs: '#0E73F6',
+                md: '#0E73F6',
+                minWidth: 'unset',
+                marginRight: 12,
+              },
             }}
           >
-            <Typography variant="caption" color={{ xs: '#FFFFFFB2', md: 'text.secondary' }}>
-              <Trans>Network</Trans>
-            </Typography>
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <SvgIcon fontSize="small">
+              <DuplicateIcon />
+            </SvgIcon>
+          </ListItemIcon>
+          <ListItemText>
+            <Trans>Copy address</Trans>
+          </ListItemText>
+        </Button>
+        {networkConfig?.explorerLinkBuilder && (
+          <Link href={networkConfig.explorerLinkBuilder({ address: currentAccount })}>
             <Box
+              component={component}
               sx={{
-                bgcolor: networkColor,
-                width: 6,
-                height: 6,
-                mr: 2,
-                boxShadow: '0px 2px 1px rgba(0, 0, 0, 0.05), 0px 0px 1px rgba(0, 0, 0, 0.25)',
-                borderRadius: '50%',
+                display: 'flex',
+                justifyContent: 'start',
+                cursor: 'pointer',
+                fontWeight: 600,
+                color: '#0E73F6',
+                backgroundColor: '#F3F8FF',
+                borderRadius: '8px',
+                height: '32px',
               }}
-            />
-            <Typography color={{ xs: '#F1F1F3', md: 'text.primary' }} variant="subheader1">
-              {networkConfig.name}
-            </Typography>
-          </Box>
-        </Box>
-      </Box>
-      <Divider sx={{ my: { xs: 7, md: 0 }, borderColor: { xs: '#FFFFFF1F', md: 'divider' } }} />
-
-      <Box
-        component={component}
-        sx={{ color: { xs: '#F1F1F3', md: 'text.primary' } }}
-        onClick={handleCopy}
-      >
-        <ListItemIcon
-          sx={{
-            color: {
-              xs: '#F1F1F3',
-              md: 'primary.light',
-              minWidth: 'unset',
-              marginRight: 12,
-            },
-          }}
-        >
-          <SvgIcon fontSize="small">
-            <DuplicateIcon />
-          </SvgIcon>
-        </ListItemIcon>
-        <ListItemText>
-          <Trans>Copy address</Trans>
-        </ListItemText>
-      </Box>
-
-      {networkConfig?.explorerLinkBuilder && (
-        <Link href={networkConfig.explorerLinkBuilder({ address: currentAccount })}>
-          <Box
-            component={component}
-            sx={{ color: { xs: '#F1F1F3', md: 'text.primary' } }}
-            onClick={handleClose}
-          >
-            <ListItemIcon
-              sx={{
-                color: {
-                  xs: '#F1F1F3',
-                  md: 'primary.light',
-                  minWidth: 'unset',
-                  marginRight: 12,
-                },
-              }}
+              onClick={handleClose}
             >
-              <SvgIcon fontSize="small">
-                <ExternalLinkIcon />
-              </SvgIcon>
-            </ListItemIcon>
-            <ListItemText>
-              <Trans>View on Explorer</Trans>
-            </ListItemText>
-          </Box>
-        </Link>
-      )}
-
-      <Box
-        component={component}
-        sx={{ color: { xs: '#F1F1F3', md: 'text.primary' } }}
-        onClick={handleDisconnect}
-      >
-        <ListItemIcon
-          sx={{
-            color: { xs: '#F1F1F3', md: 'primary.light', minWidth: 'unset', marginRight: 12 },
-          }}
-        >
-          <SvgIcon fontSize="small">
-            <LogoutIcon />
-          </SvgIcon>
-        </ListItemIcon>
-        <ListItemText>
-          <Trans>Disconnect Wallet</Trans>
-        </ListItemText>
+              <ListItemIcon
+                sx={{
+                  color: {
+                    xs: '#0E73F6',
+                    md: '#0E73F6',
+                    minWidth: 'unset',
+                    marginRight: 12,
+                  },
+                }}
+              >
+                <SvgIcon fontSize="small">
+                  <ExternalLinkIcon />
+                </SvgIcon>
+              </ListItemIcon>
+              <ListItemText>
+                <Trans>View on Explorer</Trans>
+              </ListItemText>
+            </Box>
+          </Link>
+        )}
       </Box>
-    </>
+    </Box>
   );
 
   return (
@@ -343,9 +372,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
 
       {md ? (
         <DrawerWrapper open={open} setOpen={setOpen} headerHeight={headerHeight}>
-          <List sx={{ px: 2, '.MuiListItem-root.Mui-disabled': { opacity: 1 } }}>
-            <Content />
-          </List>
+          <Content component={ListItem} />
         </DrawerWrapper>
       ) : (
         <Menu
