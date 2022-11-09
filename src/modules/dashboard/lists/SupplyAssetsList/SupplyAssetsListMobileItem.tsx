@@ -16,6 +16,11 @@ import { InterestRate } from '@monetaria/contract-helpers';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 
+// Tooltips components
+import { AvailableTooltip } from 'src/components/infoTooltips/AvailableTooltip';
+import { StableAPYTooltip } from 'src/components/infoTooltips/StableAPYTooltip';
+import { VariableAPYTooltip } from 'src/components/infoTooltips/VariableAPYTooltip';
+
 export const SupplyAssetsListMobileItem = ({
   symbol,
   iconSymbol,
@@ -81,7 +86,11 @@ export const SupplyAssetsListMobileItem = ({
             Supply APY
           </Typography>
           <Typography variant="description" noWrap>
-            Borrow APY
+            <StableAPYTooltip
+              text={<Trans>Borrow APY, stable</Trans>}
+              key="APY_list_stable_type"
+              variant="subheader2"
+            />
           </Typography>
         </Box>
 
@@ -129,7 +138,13 @@ export const SupplyAssetsListMobileItem = ({
       </Row>
 
       <Row
-        caption={<Trans>Borrow APY , variable</Trans>}
+        caption={
+          <VariableAPYTooltip
+            text={<Trans>Borrow APY, variable</Trans>}
+            key="APY_list_variable_type"
+            variant="subheader2"
+          />
+        }
         align="flex-start"
         captionVariant="description"
         mb={2}
@@ -157,7 +172,14 @@ export const SupplyAssetsListMobileItem = ({
       </Row> */}
 
       <ListValueRow
-        title={<Trans>Available Lending</Trans>}
+        title={
+          <AvailableTooltip
+            capType={CapType.borrowCap}
+            text={<Trans>Available Lending</Trans>}
+            key="Available"
+            variant="subheader2"
+          />
+        }
         value={Number(availableBorrows)}
         subValue={Number(availableBorrowsInUSD)}
         disabled={Number(availableBorrows) === 0}

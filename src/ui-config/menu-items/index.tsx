@@ -20,7 +20,7 @@ interface Navigation {
 export const navigation: Navigation[] = [
   {
     link: ROUTES.dashboard,
-    title: t`Dashboard`,
+    title: t`Pools`,
     dataCy: 'menuDashboard',
   },
   {
