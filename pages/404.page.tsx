@@ -1,11 +1,5 @@
-import { Trans } from '@lingui/macro';
 import { Box, Button, useMediaQuery, useTheme } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { usePermissions } from 'src/hooks/usePermissions';
 import { MainLayout } from '../src/layouts/MainLayout';
-import { useWeb3Context } from '../src/libs/hooks/useWeb3Context';
-import { DashboardContentWrapper } from '../src/modules/dashboard/DashboardContentWrapper';
-import { DashboardTopPanel } from '../src/modules/dashboard/DashboardTopPanel';
 import ErrorImg from 'public/404_white.svg';
 
 export default function Custom404() {
@@ -13,16 +7,6 @@ export default function Custom404() {
   const lg = useMediaQuery(breakpoints.up('lg'));
   const xsm = useMediaQuery(breakpoints.down('xsm'));
   const md = useMediaQuery(breakpoints.down('md'));
-
-  const { currentAccount, loading: web3Loading } = useWeb3Context();
-  const { isPermissionsLoading } = usePermissions();
-
-  const [mode, setMode] = useState<'supply' | 'borrow' | ''>('');
-
-  useEffect(() => {
-    if (!mode) setMode('supply');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lg]);
 
   return (
     <>
