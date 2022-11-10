@@ -61,6 +61,7 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                   py: 4,
                   textAlign: 'start',
                   borderBottom: '1px solid rgba(8, 15, 38, 0.15)',
+                  fontSize: '16px',
                 }}
                 onClick={() => (setOpen ? setOpen(false) : undefined)}
               >
