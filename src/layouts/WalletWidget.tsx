@@ -1,4 +1,4 @@
-import { DuplicateIcon, LogoutIcon } from '@heroicons/react/outline';
+import { DuplicateIcon } from '@heroicons/react/outline';
 import { ChevronDownIcon, ChevronUpIcon, ExternalLinkIcon } from '@heroicons/react/solid';
 import AccountBalanceWalletIcon from '../../public/icons/markets/account-icon.svg';
 
