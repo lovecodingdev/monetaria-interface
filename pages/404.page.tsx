@@ -69,6 +69,10 @@ export default function Custom404() {
                 backgroundColor: '#074592',
                 color: 'white',
                 borderRadius: '8px',
+                '&:hover': {
+                  border: '1px solid #074592',
+                  color: '#074592',
+                },
               }}
               href="/"
             >

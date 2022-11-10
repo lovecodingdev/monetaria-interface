@@ -41,7 +41,7 @@ export function AppHeader() {
   const { breakpoints } = useTheme();
   const lg = useMediaQuery(breakpoints.down('lg'));
   const xsm = useMediaQuery(breakpoints.down('xsm'));
-
+  const md = useMediaQuery(breakpoints.down('md'));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [walletWidgetOpen, setWalletWidgetOpen] = useState(false);
 
@@ -136,6 +136,7 @@ export function AppHeader() {
                 sx={{
                   backgroundColor: '#B6509E',
                   '&:hover, &.Mui-focusVisible': { backgroundColor: 'rgba(182, 80, 158, 0.7)' },
+                  display: xsm ? 'none' : 'flex',
                 }}
               >
                 TESTNET
