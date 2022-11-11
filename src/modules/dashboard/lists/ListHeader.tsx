@@ -26,7 +26,7 @@ export const ListHeader = ({ head }: ListHeaderProps) => {
           <ListColumn key={i} align={isAction ? 'right' : 'center'} minWidth={isAction ? 170 : 0}>
             <ListHeaderTitle>{title}</ListHeaderTitle>
           </ListColumn>
-        )
+        );
       })}
 
       {/* <ListButtonsColumn /> */}

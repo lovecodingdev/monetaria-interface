@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Button, Box } from '@mui/material';
+import { Button, Box, useMediaQuery, useTheme } from '@mui/material';
 import { useModalContext, ModalType } from 'src/hooks/useModal';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 
@@ -54,7 +54,10 @@ export const SupplyAssetsListItem = ({
 }: SupplyAssetsItem) => {
   const { currentMarket } = useProtocolDataContext();
   const { openActions } = useModalContext();
-
+  const theme = useTheme();
+  const downToLG = useMediaQuery(theme.breakpoints.down('lg'));
+  const downToMD = useMediaQuery(theme.breakpoints.down('md'));
+  const downToSM = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <ListItemWrapper
       symbol={symbol}
@@ -64,13 +67,19 @@ export const SupplyAssetsListItem = ({
       data-cy={`dashboardSupplyListItem_${symbol.toUpperCase()}`}
       currentMarket={currentMarket}
     >
-      <ListAPRColumn value={Number(supplyAPY)} incentives={aIncentivesData} symbol={symbol} />
-      <ListColumn>
-        <ListItemCanBeCollateral
-          isIsolated={isIsolated}
-          usageAsCollateralEnabled={usageAsCollateralEnabledOnUser}
-        />
-      </ListColumn>
+      {!downToSM && (
+        <ListAPRColumn value={Number(supplyAPY)} incentives={aIncentivesData} symbol={symbol} />
+      )}
+
+      {!downToLG && (
+        <ListColumn>
+          <ListItemCanBeCollateral
+            isIsolated={isIsolated}
+            usageAsCollateralEnabled={usageAsCollateralEnabledOnUser}
+          />
+        </ListColumn>
+      )}
+
       <ListAPRColumn
         value={Number(variableBorrowAPY)}
         incentives={vIncentivesData}
@@ -93,21 +102,24 @@ export const SupplyAssetsListItem = ({
           />
         }
       />
-      <ListValueColumn
-        symbol={symbol}
-        value={Number(walletBalance)}
-        subValue={walletBalanceUSD}
-        withTooltip
-        disabled={Number(walletBalance) === 0}
-        capsComponent={
-          <CapsHint
-            capType={CapType.supplyCap}
-            capAmount={supplyCap}
-            totalAmount={totalLiquidity}
-            withoutText
-          />
-        }
-      />
+      {!downToMD && (
+        <ListValueColumn
+          symbol={symbol}
+          value={Number(walletBalance)}
+          subValue={walletBalanceUSD}
+          withTooltip
+          disabled={Number(walletBalance) === 0}
+          capsComponent={
+            <CapsHint
+              capType={CapType.supplyCap}
+              capAmount={supplyCap}
+              totalAmount={totalLiquidity}
+              withoutText
+            />
+          }
+        />
+      )}
+
       <ListButtonsColumn>
         <Button
           // component={Link}

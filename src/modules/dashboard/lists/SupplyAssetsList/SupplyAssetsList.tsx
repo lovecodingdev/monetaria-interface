@@ -41,6 +41,9 @@ export const SupplyAssetsList = () => {
   } = useAppDataContext();
   const { walletBalances, loading } = useWalletBalances();
   const theme = useTheme();
+  const downToLG = useMediaQuery(theme.breakpoints.down('lg'));
+  const downToMD = useMediaQuery(theme.breakpoints.down('md'));
+  const downToSM = useMediaQuery(theme.breakpoints.down('sm'));
   const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));
 
   const { bridge, isTestnet, baseAssetSymbol, name: networkName } = currentNetworkConfig;
@@ -210,6 +213,16 @@ export const SupplyAssetsList = () => {
     <Trans key="Balance">Wallet Balance</Trans>,
     <Trans key="Actions">Actions</Trans>,
   ];
+
+  if (downToLG) {
+    head.splice(1, 1); // Remove "Can be collateral" columns
+  }
+  if (downToMD) {
+    head.splice(4, 1); // Remove "Wallet Balance"
+  }
+  if (downToSM) {
+    head.splice(0, 1); // Remove "Supply APY"
+  }
 
   if (loadingReserves || loading)
     return <ListLoader title={<Trans>Assets to supply</Trans>} head={head} withTopMargin />;
