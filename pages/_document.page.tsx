@@ -10,8 +10,8 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           {/* PWA primary color */}
-          <meta name="theme-color" content="#00244D" />
-          <link rel="icon" href="/monetaria-brand.svg" type="image/svg+xml"/>
+          <meta name="theme-color" content="#E9E9E9" />
+          <link rel="icon" href="/monetaria-brand.svg" type="image/svg+xml" />
           <link rel="manifest" href="/manifest.json" />
           {
             // Inject MUI styles first to match with the prepend: true configuration.

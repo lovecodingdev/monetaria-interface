@@ -1,4 +1,4 @@
-import { DuplicateIcon, LogoutIcon } from '@heroicons/react/outline';
+import { DuplicateIcon } from '@heroicons/react/outline';
 import { ChevronDownIcon, ChevronUpIcon, ExternalLinkIcon } from '@heroicons/react/solid';
 import AccountBalanceWalletIcon from '../../public/icons/markets/account-icon.svg';
 
@@ -131,7 +131,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
       buttonContent = <>{ensNameAbbreviated ?? textCenterEllipsis(currentAccount, 4, 4)}</>;
     }
   } else {
-    buttonContent = <Trans>Connect wallet</Trans>;
+    buttonContent = <Trans>{xsm ? `` : 'Connect wallet'}</Trans>;
   }
 
   const Content = ({ component = ListItem }: { component?: typeof MenuItem | typeof ListItem }) => (
@@ -349,6 +349,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
             // backgroundColor: '#074592',
             '& .MuiButton-startIcon': {
               marginLeft: 0,
+              marginRight: { xs: 0, xsm: '8px' },
             },
           }}
           // startIcon={connected && !hideWalletAccountText && accountAvatar}

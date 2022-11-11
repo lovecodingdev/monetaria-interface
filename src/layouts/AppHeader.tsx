@@ -136,7 +136,6 @@ export function AppHeader() {
                 sx={{
                   backgroundColor: '#B6509E',
                   '&:hover, &.Mui-focusVisible': { backgroundColor: 'rgba(182, 80, 158, 0.7)' },
-                  display: xsm ? 'none' : 'flex',
                 }}
               >
                 TESTNET

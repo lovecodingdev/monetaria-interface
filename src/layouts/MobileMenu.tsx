@@ -131,6 +131,7 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                     py: 4,
                     textAlign: 'start',
                     borderBottom: '1px solid rgba(8, 15, 38, 0.15)',
+                    fontSize: '16px',
                   }}
                 >
                   More
@@ -182,9 +183,10 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                     borderBottom: '1px solid rgba(8, 15, 38, 0.15)',
                     display: 'flex',
                     alignItems: 'center',
+                    fontSize: '16px',
                   }}
                 >
-                  <SvgIcon sx={{ color: '#A2B7D1' }} fontSize="large">
+                  <SvgIcon sx={{ color: '#A2B7D1' }} fontSize="medium">
                     <CogIcon />
                   </SvgIcon>
                   <span>&nbsp;Settings</span>
