@@ -67,9 +67,7 @@ export const SupplyAssetsListItem = ({
       data-cy={`dashboardSupplyListItem_${symbol.toUpperCase()}`}
       currentMarket={currentMarket}
     >
-      {!downToSM && (
-        <ListAPRColumn value={Number(supplyAPY)} incentives={aIncentivesData} symbol={symbol} />
-      )}
+      <ListAPRColumn value={Number(supplyAPY)} incentives={aIncentivesData} symbol={symbol} />
 
       {!downToLG && (
         <ListColumn>
