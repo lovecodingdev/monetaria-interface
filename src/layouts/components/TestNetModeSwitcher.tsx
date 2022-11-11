@@ -1,5 +1,13 @@
 import { Trans } from '@lingui/macro';
-import { Box, FormControlLabel, ListItem, ListItemText, MenuItem, Switch } from '@mui/material';
+import {
+  Box,
+  FormControlLabel,
+  ListItem,
+  ListItemText,
+  MenuItem,
+  Switch,
+  ListItemIcon,
+} from '@mui/material';
 import React, { useState } from 'react';
 
 interface TestNetModeSwitcherProps {
@@ -44,8 +52,19 @@ export const TestNetModeSwitcher = ({ component = ListItem }: TestNetModeSwitche
         flexGrow: 0,
       }}
     >
+      <Box sx={{ display: 'flex', alignItems: 'start' }}>
+        <ListItemIcon
+          sx={{ mr: 3, borderRadius: '2px', overflow: 'hidden', width: 24, height: 24 }}
+        >
+          <img src={`/icons/testnet.svg`} width="100%" height="100%" alt={`testnet mode icon`} />
+        </ListItemIcon>
+      </Box>
+
       <ListItemText>
-        <Trans>Testnet mode</Trans>
+        <span style={{ fontSize: '16px' }}>
+          <Trans>Testnet mode</Trans>
+          <div style={{ color: '#7E8CA9', fontWeight: 400, fontSize: '12px' }}>Try now</div>
+        </span>
       </ListItemText>
       <FormControlLabel
         sx={{ mr: 0 }}
