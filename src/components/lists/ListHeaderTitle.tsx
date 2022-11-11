@@ -31,7 +31,6 @@ export const ListHeaderTitle = ({
       component="div"
       variant="subheader2"
       color="text.secondary"
-      noWrap
       onClick={() => !!sortKey && handleSorting(sortKey)}
       sx={{
         cursor: !!sortKey ? 'pointer' : 'default',
@@ -56,6 +55,7 @@ export const ListHeaderTitle = ({
                   : theme.palette.divider
               } transparent`,
               mb: 0.5,
+              alignItems: 'flex-end',
             })}
           />
           <Box
