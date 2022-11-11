@@ -50,10 +50,10 @@ export const ContentWithTooltip = ({
 
   return (
     <Tooltip
-      open={formattedOpen}
-      onClose={handleClose}
+      // open={formattedOpen}
+      // onClose={handleClose}
       disableFocusListener
-      disableHoverListener
+      // disableHoverListener
       disableTouchListener
       placement={placement}
       PopperComponent={PopperComponent}

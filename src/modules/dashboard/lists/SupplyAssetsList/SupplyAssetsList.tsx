@@ -220,9 +220,6 @@ export const SupplyAssetsList = () => {
   if (downToMD) {
     head.splice(4, 1); // Remove "Wallet Balance"
   }
-  if (downToSM) {
-    head.splice(0, 1); // Remove "Supply APY"
-  }
 
   if (loadingReserves || loading)
     return <ListLoader title={<Trans>Assets to supply</Trans>} head={head} withTopMargin />;
