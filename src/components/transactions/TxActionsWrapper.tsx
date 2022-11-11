@@ -99,7 +99,11 @@ export const TxActionsWrapper = ({
           disabled={approvalParams.disabled || blocked}
           onClick={approvalParams.handleClick}
           size="large"
-          sx={{ minHeight: '44px' }}
+          sx={{
+            minHeight: '44px',
+            backgroundImage: 'linear-gradient(270deg, #393DFF 0%, #9582FF 100%)',
+            color: 'white',
+          }}
           data-cy="approvalButton"
         >
           {approvalParams.loading && (
@@ -110,11 +114,15 @@ export const TxActionsWrapper = ({
       )}
 
       <Button
-        variant="contained"
         disabled={disabled || blocked}
         onClick={handleClick}
         size="large"
-        sx={{ minHeight: '44px', ...(approvalParams ? { mt: 2 } : {}) }}
+        sx={{
+          minHeight: '44px',
+          ...(approvalParams ? { mt: 2 } : {}),
+          backgroundImage: 'linear-gradient(270deg, #393DFF 0%, #9582FF 100%)',
+          color: 'white',
+        }}
         data-cy="actionButton"
       >
         {loading && <CircularProgress color="inherit" size="16px" sx={{ mr: 2 }} />}

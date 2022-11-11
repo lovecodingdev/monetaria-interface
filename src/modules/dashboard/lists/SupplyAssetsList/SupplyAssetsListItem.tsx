@@ -114,7 +114,9 @@ export const SupplyAssetsListItem = ({
           // href={ROUTES.actions(detailsAddress, currentMarket, "Borrow")}
           // disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
           variant="outlined"
-          onClick={() => openActions(underlyingAsset, ModalType.Borrow)}
+          onClick={() => {
+            openActions(underlyingAsset, ModalType.Borrow);
+          }}
         >
           <Trans>Borrow</Trans>
         </Button>
@@ -123,7 +125,9 @@ export const SupplyAssetsListItem = ({
           // href={ROUTES.actions(detailsAddress, currentMarket, "Supply")}
           // disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
           variant="contained"
-          onClick={() => openActions(underlyingAsset, ModalType.Supply)}
+          onClick={() => {
+            openActions(underlyingAsset, ModalType.Supply);
+          }}
         >
           <Trans>Supply</Trans>
         </Button>
