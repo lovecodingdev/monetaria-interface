@@ -81,7 +81,7 @@ export const TopInfoPanelItem = ({
           {titleIcon && titleIcon}
         </Box>
 
-        {loading ? <Skeleton height={upToSM ? 28 : 24} sx={{ background: '#074592' }} /> : children}
+        {loading ? <Skeleton height={upToSM ? 28 : 24} sx={{ background: '#F1F1F3' }} /> : children}
       </Box>
     </Box>
   );
