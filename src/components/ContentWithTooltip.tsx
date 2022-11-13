@@ -54,9 +54,10 @@ export const ContentWithTooltip = ({
       // onClose={handleClose}
       disableFocusListener
       // disableHoverListener
-      disableTouchListener
+      // disableTouchListener
       placement={placement}
       PopperComponent={PopperComponent}
+      enterTouchDelay={0}
       componentsProps={{
         popper: {
           modifiers: [
