@@ -271,7 +271,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
                   }
                   sx={{ fontWeight: 400, fontSize: '14px' }}
                 >
-                  0.5
+                  0.5 BTC
                 </Typography>
               </Box>
             </Box>
@@ -357,41 +357,49 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
       ) : loading ? (
         <Skeleton height={36} width={126} sx={{ background: '#074592' }} />
       ) : (
-        <Button
-          // variant={connected ? 'surface' : 'gradient'}
-          variant={'contained'}
-          aria-label="wallet"
-          id="wallet-button"
-          aria-controls={open ? 'wallet-button' : undefined}
-          aria-expanded={open ? 'true' : undefined}
-          aria-haspopup="true"
-          onClick={handleClick}
+        <Box
           sx={{
-            p: connected ? '5px 8px' : undefined,
-            minWidth: hideWalletAccountText ? 'unset' : undefined,
-            // backgroundColor: '#074592',
-            '& .MuiButton-startIcon': {
-              marginLeft: 0,
-              marginRight: { xs: 0, xsm: '8px' },
-            },
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: '0.6em',
+            borderRadius: 4,
+            backgroundColor: '#E7F2FF',
+            paddingLeft: '10px',
           }}
-          // startIcon={connected && !hideWalletAccountText && accountAvatar}
-          startIcon={<AccountBalanceWalletIcon />}
-          endIcon={
-            connected &&
-            !hideWalletAccountText && (
-              <SvgIcon
-                sx={{
-                  display: { xs: 'none', md: 'block' },
-                }}
-              >
-                {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
-              </SvgIcon>
-            )
-          }
         >
-          {buttonContent}
-        </Button>
+          <Box>
+            <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: 600 }}>0</Typography>
+          </Box>
+          <Box>
+            {' '}
+            <Button
+              // variant={connected ? 'surface' : 'gradient'}
+              variant={'contained'}
+              aria-label="wallet"
+              id="wallet-button"
+              aria-controls={open ? 'wallet-button' : undefined}
+              aria-expanded={open ? 'true' : undefined}
+              aria-haspopup="true"
+              onClick={handleClick}
+              sx={{
+                p: connected ? '5px 8px' : undefined,
+                minWidth: hideWalletAccountText ? 'unset' : undefined,
+                // backgroundColor: '#074592',
+                '& .MuiButton-startIcon': {
+                  marginLeft: 0,
+                  marginRight: { xs: 0, xsm: '8px' },
+                },
+                backgroundColor: '#074592',
+                borderRadius: 4,
+              }}
+              startIcon={!connected && <AccountBalanceWalletIcon />}
+              endIcon={connected && <img src="/icons/tokens/btc.svg" width="24px" />}
+            >
+              {buttonContent}
+            </Button>
+          </Box>
+        </Box>
       )}
 
       {md ? (
