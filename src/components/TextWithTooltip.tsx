@@ -23,35 +23,37 @@ export const TextWithTooltip = ({
   const [open, setOpen] = useState(false);
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      {text && <Typography {...rest}>{text}</Typography>}
-
-      <ContentWithTooltip tooltipContent={<>{children}</>} open={open} setOpen={setOpen}>
-        <IconButton
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: iconSize,
-            height: iconSize,
-            borderRadius: '50%',
-            p: 0,
-            minWidth: 0,
-            ml: 0.5,
-          }}
-        >
-          <SvgIcon
+    <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: '0.5em' }}>
+      <Box>
+        <ContentWithTooltip tooltipContent={<>{children}</>} open={open} setOpen={setOpen}>
+          <IconButton
             sx={{
-              fontSize: iconSize,
-              color: open ? 'info.main' : 'text.muted',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: iconSize,
+              height: iconSize,
               borderRadius: '50%',
-              '&:hover': { color: 'info.main' },
+              p: 0,
+              minWidth: 0,
+              ml: 0.5,
             }}
           >
-            {icon || <InformationCircleIcon />}
-          </SvgIcon>
-        </IconButton>
-      </ContentWithTooltip>
+            <SvgIcon
+              sx={{
+                fontSize: iconSize,
+                color: open ? 'info.main' : 'text.muted',
+                borderRadius: '50%',
+                '&:hover': { color: 'info.main' },
+              }}
+            >
+              {icon || <InformationCircleIcon />}
+            </SvgIcon>
+          </IconButton>
+        </ContentWithTooltip>
+      </Box>
+
+      <Box>{text && <Typography {...rest}>{text}</Typography>}</Box>
     </Box>
   );
 };
