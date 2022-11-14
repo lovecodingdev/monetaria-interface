@@ -238,20 +238,43 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
             />
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            {ensNameAbbreviated && (
-              <Typography color={{ xs: '#000000', md: '#000000' }}>{ensNameAbbreviated}</Typography>
-            )}
+            <Box>
+              {ensNameAbbreviated && (
+                <Typography color={{ xs: '#000000', md: '#000000' }}>
+                  {ensNameAbbreviated}
+                </Typography>
+              )}
 
-            <Typography
-              variant={ensNameAbbreviated ? 'caption' : 'h4'}
-              color={
-                ensNameAbbreviated
-                  ? { xs: '#000000', md: 'text.secondary' }
-                  : { xs: '#000000', md: 'text.primary' }
-              }
-            >
-              {textCenterEllipsis(currentAccount, ensNameAbbreviated ? 12 : 7, 4)}
-            </Typography>
+              <Typography
+                variant={ensNameAbbreviated ? 'caption' : 'h4'}
+                color={
+                  ensNameAbbreviated
+                    ? { xs: '#000000', md: 'text.secondary' }
+                    : { xs: '#000000', md: 'text.primary' }
+                }
+              >
+                {textCenterEllipsis(currentAccount, ensNameAbbreviated ? 12 : 7, 4)}
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5em' }}>
+              <Box sx={{}}>
+                <img src="/icons/tokens/btc.svg" width="16px" />
+              </Box>
+              <Box>
+                {' '}
+                <Typography
+                  variant={ensNameAbbreviated ? 'caption' : 'h4'}
+                  color={
+                    ensNameAbbreviated
+                      ? { xs: '#000000', md: 'text.secondary' }
+                      : { xs: '#000000', md: 'text.primary' }
+                  }
+                  sx={{ fontWeight: 400, fontSize: '14px' }}
+                >
+                  0.5
+                </Typography>
+              </Box>
+            </Box>
           </Box>
         </Box>
       </Box>
