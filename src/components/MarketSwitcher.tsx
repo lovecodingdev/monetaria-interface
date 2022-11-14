@@ -135,25 +135,38 @@ export const MarketSwitcher = () => {
         renderValue: (marketId) => {
           const { market, network } = getMarketInfoById(marketId as CustomMarket);
           return (
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
               <MarketLogo
                 size={28}
                 logo={network.networkLogoPath}
                 testChainName={getMarketHelpData(market.marketTitle).testChainName}
               />
-              {!downToXSM &&
-                <Box sx={{ mr: 1, display: 'inline-flex', alignItems: 'flex-start' }}>
+              {!downToXSM && (
+                <Box
+                  sx={{
+                    mr: 1,
+                    display: 'inline-flex',
+                    alignItems: 'flex-start',
+                    border: 'none',
+                    borderRadius: '8px',
+                  }}
+                >
                   <Typography
                     variant={upToLG ? 'display1' : 'h1'}
                     sx={{
                       fontSize: '16px',
-                      color: '#074592',
                       lineHeight: '1.55rem',
+                      color: '#074592',
                       mr: 1,
                     }}
                   >
                     {getMarketHelpData(market.marketTitle).name} {market.isFork ? 'Fork' : ''}
-                    {upToLG && ' Market'}
+                    {upToLG && ' '}
                   </Typography>
                   {/* {market.v3 && (
                     <Box
@@ -168,7 +181,7 @@ export const MarketSwitcher = () => {
                     </Box>
                   )} */}
                 </Box>
-              }
+              )}
             </Box>
           );
         },
@@ -195,8 +208,12 @@ export const MarketSwitcher = () => {
       }}
     >
       <Box>
-        <Typography variant="subheader2" color="text.secondary" sx={{ px: 4, pt: 4  }}>
-          Select Market
+        <Typography
+          variant="subheader2"
+          color="black"
+          sx={{ px: 4, pt: 4, fontSize: '14px', fontWeight: 400 }}
+        >
+          Select Network
         </Typography>
       </Box>
 
@@ -298,11 +315,13 @@ export const MarketSwitcher = () => {
                   ? 'none'
                   : 'flex',
               margin: '16px',
-              border: '1px solid rgba(21, 126, 255, 0.15)',
+              border: 'none',
               borderRadius: '8px',
+              width: '213px',
+              height: '48px',
               '&.Mui-selected': {
-                background: '#F3F8FF',
-              }
+                background: '#F6F8F9',
+              },
             }}
           >
             <MarketLogo
