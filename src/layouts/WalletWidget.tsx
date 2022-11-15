@@ -375,10 +375,10 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
             gap: '0.6em',
             borderRadius: 4,
             backgroundColor: '#E7F2FF',
-            paddingLeft: '10px',
+            paddingLeft: { xs: 0, sm: '10px' },
           }}
         >
-          <Box>
+          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: 600 }}>
               {nativeBalance > 0 ? nativeBalance.toFixed(4) : 0}
             </Typography>
