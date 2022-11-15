@@ -123,7 +123,7 @@ export function AppHeader() {
           }}
           onClick={() => setMobileMenuOpen(false)}
         >
-          <img src={uiConfig.appLogo} alt="An SVG of an eye" />
+          <img src={uiConfig.appLogo} alt="An SVG of an eye" width="48" />
           {!xsm && <img src={uiConfig.monetariaText} alt="An SVG of an eye" />}
         </Box>
         <Box sx={{ mr: xsm ? 1 : 3 }}>

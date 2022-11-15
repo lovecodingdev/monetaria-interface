@@ -1,4 +1,4 @@
 export const uiConfig = {
-  appLogo: '/monetaria-brand.svg',
+  appLogo: '/monetaria-brand.png',
   monetariaText: '/monetaria-text.svg',
 };
