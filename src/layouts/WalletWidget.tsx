@@ -1,7 +1,8 @@
 import { DuplicateIcon } from '@heroicons/react/outline';
 import { ChevronDownIcon, ChevronUpIcon, ExternalLinkIcon } from '@heroicons/react/solid';
 import AccountBalanceWalletIcon from '../../public/icons/markets/account-icon.svg';
-
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
+import { ethers } from 'ethers';
 import { Trans } from '@lingui/macro';
 import {
   Box,
@@ -41,10 +42,14 @@ interface WalletWidgetProps {
 }
 
 export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidgetProps) {
-  const { disconnectWallet, currentAccount, connected, chainId, loading } = useWeb3Context();
-
+  const { disconnectWallet, currentAccount, connected, chainId, loading, provider } =
+    useWeb3Context();
+  const [nativeBalance, setNativeBalance] = useState(0);
+  provider?.getBalance(currentAccount).then((_balance) => {
+    const balanceInEth = ethers.utils.formatEther(_balance);
+    setNativeBalance(Number(balanceInEth));
+  });
   const { setWalletModalOpen } = useWalletModalContext();
-
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.down('xsm'));
   const md = useMediaQuery(breakpoints.down('md'));
@@ -66,6 +71,8 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
   }, [ensAvatar]);
 
   const networkConfig = getNetworkConfig(chainId);
+  const baseAssetSymbol = networkConfig.baseAssetSymbol;
+
   let networkColor = '';
   if (networkConfig?.isFork) {
     networkColor = '#ff4a8d';
@@ -238,20 +245,46 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
             />
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            {ensNameAbbreviated && (
-              <Typography color={{ xs: '#000000', md: '#000000' }}>{ensNameAbbreviated}</Typography>
-            )}
+            <Box>
+              {ensNameAbbreviated && (
+                <Typography color={{ xs: '#000000', md: '#000000' }}>
+                  {ensNameAbbreviated}
+                </Typography>
+              )}
 
-            <Typography
-              variant={ensNameAbbreviated ? 'caption' : 'h4'}
-              color={
-                ensNameAbbreviated
-                  ? { xs: '#000000', md: 'text.secondary' }
-                  : { xs: '#000000', md: 'text.primary' }
-              }
-            >
-              {textCenterEllipsis(currentAccount, ensNameAbbreviated ? 12 : 7, 4)}
-            </Typography>
+              <Typography
+                variant={ensNameAbbreviated ? 'caption' : 'h4'}
+                color={
+                  ensNameAbbreviated
+                    ? { xs: '#000000', md: 'text.secondary' }
+                    : { xs: '#000000', md: 'text.primary' }
+                }
+              >
+                {textCenterEllipsis(currentAccount, ensNameAbbreviated ? 12 : 7, 4)}
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5em' }}>
+              <Box sx={{}}>
+                <TokenIcon
+                  symbol={baseAssetSymbol ? baseAssetSymbol.toLowerCase() : 'ETH'}
+                  sx={{ fontSize: '16px', mr: 1 }}
+                />
+              </Box>
+              <Box>
+                {' '}
+                <Typography
+                  variant={ensNameAbbreviated ? 'caption' : 'h4'}
+                  color={
+                    ensNameAbbreviated
+                      ? { xs: '#000000', md: 'text.secondary' }
+                      : { xs: '#000000', md: 'text.primary' }
+                  }
+                  sx={{ fontWeight: 400, fontSize: '14px' }}
+                >
+                  {nativeBalance > 0 ? nativeBalance.toFixed(4) : 0} {baseAssetSymbol}
+                </Typography>
+              </Box>
+            </Box>
           </Box>
         </Box>
       </Box>
@@ -334,41 +367,58 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
       ) : loading ? (
         <Skeleton height={36} width={126} sx={{ background: '#074592' }} />
       ) : (
-        <Button
-          // variant={connected ? 'surface' : 'gradient'}
-          variant={'contained'}
-          aria-label="wallet"
-          id="wallet-button"
-          aria-controls={open ? 'wallet-button' : undefined}
-          aria-expanded={open ? 'true' : undefined}
-          aria-haspopup="true"
-          onClick={handleClick}
+        <Box
           sx={{
-            p: connected ? '5px 8px' : undefined,
-            minWidth: hideWalletAccountText ? 'unset' : undefined,
-            // backgroundColor: '#074592',
-            '& .MuiButton-startIcon': {
-              marginLeft: 0,
-              marginRight: { xs: 0, xsm: '8px' },
-            },
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: '0.6em',
+            borderRadius: 4,
+            backgroundColor: '#E7F2FF',
+            paddingLeft: '10px',
           }}
-          // startIcon={connected && !hideWalletAccountText && accountAvatar}
-          startIcon={<AccountBalanceWalletIcon />}
-          endIcon={
-            connected &&
-            !hideWalletAccountText && (
-              <SvgIcon
-                sx={{
-                  display: { xs: 'none', md: 'block' },
-                }}
-              >
-                {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
-              </SvgIcon>
-            )
-          }
         >
-          {buttonContent}
-        </Button>
+          <Box>
+            <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: 600 }}>
+              {nativeBalance > 0 ? nativeBalance.toFixed(4) : 0}
+            </Typography>
+          </Box>
+          <Box>
+            {' '}
+            <Button
+              // variant={connected ? 'surface' : 'gradient'}
+              variant={'contained'}
+              aria-label="wallet"
+              id="wallet-button"
+              aria-controls={open ? 'wallet-button' : undefined}
+              aria-expanded={open ? 'true' : undefined}
+              aria-haspopup="true"
+              onClick={handleClick}
+              sx={{
+                p: connected ? '5px 8px' : undefined,
+                minWidth: hideWalletAccountText ? 'unset' : undefined,
+                // backgroundColor: '#074592',
+                '& .MuiButton-startIcon': {
+                  marginLeft: 0,
+                  marginRight: { xs: 0, xsm: '8px' },
+                },
+                backgroundColor: '#074592',
+                borderRadius: 4,
+              }}
+              startIcon={!connected && <AccountBalanceWalletIcon />}
+              endIcon={
+                connected && (
+                  <TokenIcon
+                    symbol={baseAssetSymbol ? baseAssetSymbol.toLowerCase() : 'ETH'}
+                    sx={{ fontSize: '24px', mr: 1 }}
+                  />
+                )
+              }
+            >
+              {buttonContent}
+            </Button>
+          </Box>
+        </Box>
       )}
 
       {md ? (
