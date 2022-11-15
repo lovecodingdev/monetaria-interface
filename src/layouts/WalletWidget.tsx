@@ -281,7 +281,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
                   }
                   sx={{ fontWeight: 400, fontSize: '14px' }}
                 >
-                  {nativeBalance.toFixed(4)} {baseAssetSymbol}
+                  {nativeBalance > 0 ? nativeBalance.toFixed(4) : 0} {baseAssetSymbol}
                 </Typography>
               </Box>
             </Box>
@@ -380,7 +380,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
         >
           <Box>
             <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: 600 }}>
-              {nativeBalance.toFixed(4)}
+              {nativeBalance > 0 ? nativeBalance.toFixed(4) : 0}
             </Typography>
           </Box>
           <Box>
