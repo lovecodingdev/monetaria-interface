@@ -1,7 +1,8 @@
 import { DuplicateIcon } from '@heroicons/react/outline';
 import { ChevronDownIcon, ChevronUpIcon, ExternalLinkIcon } from '@heroicons/react/solid';
 import AccountBalanceWalletIcon from '../../public/icons/markets/account-icon.svg';
-
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
+import { ethers } from 'ethers';
 import { Trans } from '@lingui/macro';
 import {
   Box,
@@ -41,10 +42,14 @@ interface WalletWidgetProps {
 }
 
 export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidgetProps) {
-  const { disconnectWallet, currentAccount, connected, chainId, loading } = useWeb3Context();
-
+  const { disconnectWallet, currentAccount, connected, chainId, loading, provider } =
+    useWeb3Context();
+  const [nativeBalance, setNativeBalance] = useState(0);
+  provider?.getBalance(currentAccount).then((_balance) => {
+    const balanceInEth = ethers.utils.formatEther(_balance);
+    setNativeBalance(Number(balanceInEth));
+  });
   const { setWalletModalOpen } = useWalletModalContext();
-
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.down('xsm'));
   const md = useMediaQuery(breakpoints.down('md'));
@@ -66,6 +71,8 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
   }, [ensAvatar]);
 
   const networkConfig = getNetworkConfig(chainId);
+  const baseAssetSymbol = networkConfig.baseAssetSymbol;
+
   let networkColor = '';
   if (networkConfig?.isFork) {
     networkColor = '#ff4a8d';
@@ -258,7 +265,10 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5em' }}>
               <Box sx={{}}>
-                <img src="/icons/tokens/btc.svg" width="16px" />
+                <TokenIcon
+                  symbol={baseAssetSymbol ? baseAssetSymbol.toLowerCase() : 'ETH'}
+                  sx={{ fontSize: '16px', mr: 1 }}
+                />
               </Box>
               <Box>
                 {' '}
@@ -271,7 +281,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
                   }
                   sx={{ fontWeight: 400, fontSize: '14px' }}
                 >
-                  0.5 BTC
+                  {nativeBalance.toFixed(4)} {baseAssetSymbol}
                 </Typography>
               </Box>
             </Box>
@@ -369,7 +379,9 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
           }}
         >
           <Box>
-            <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: 600 }}>0</Typography>
+            <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: 600 }}>
+              {nativeBalance.toFixed(4)}
+            </Typography>
           </Box>
           <Box>
             {' '}
@@ -394,7 +406,14 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
                 borderRadius: 4,
               }}
               startIcon={!connected && <AccountBalanceWalletIcon />}
-              endIcon={connected && <img src="/icons/tokens/btc.svg" width="24px" />}
+              endIcon={
+                connected && (
+                  <TokenIcon
+                    symbol={baseAssetSymbol ? baseAssetSymbol.toLowerCase() : 'ETH'}
+                    sx={{ fontSize: '24px', mr: 1 }}
+                  />
+                )
+              }
             >
               {buttonContent}
             </Button>
