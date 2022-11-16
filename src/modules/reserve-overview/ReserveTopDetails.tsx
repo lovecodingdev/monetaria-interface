@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { ExternalLinkIcon } from '@heroicons/react/outline';
 import { Trans } from '@lingui/macro';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackOutlined';
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import {
   Box,
   Paper,
   Button,
   Divider,
+  Select,
   Skeleton,
   SvgIcon,
   Typography,
