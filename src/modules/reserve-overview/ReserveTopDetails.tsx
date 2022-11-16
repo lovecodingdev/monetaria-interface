@@ -4,7 +4,7 @@ import { Trans } from '@lingui/macro';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackOutlined';
 import {
   Box,
-  Paper, 
+  Paper,
   Button,
   Divider,
   Skeleton,
@@ -31,8 +31,8 @@ import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
 import { CircleIcon } from 'src/components/CircleIcon';
 import { AddTokenDropdown } from './AddTokenDropdown';
 import { TokenLinkDropdown } from './TokenLinkDropdown';
-import borderGradient from "src/layouts/borderGradient";
-import { ReserveNormalPaper } from "./ReserveNormalPaper"
+import borderGradient from 'src/layouts/borderGradient';
+import { ReserveNormalPaper } from './ReserveNormalPaper';
 
 interface ReserveTopDetailsProps {
   underlyingAsset: string;
@@ -59,7 +59,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
     return (
       <Box mr={3} sx={{ mr: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {loading ? (
-          <Skeleton variant="circular" width={40} height={40} sx={{ background: '#074592' }} />
+          <Skeleton variant="circular" width={40} height={40} sx={{ background: '#F1F1F3' }} />
         ) : (
           <img
             src={`/icons/tokens/${poolReserve.iconSymbol.toLowerCase()}.svg`}
@@ -82,9 +82,11 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
 
   const ReserveName = () => {
     return loading ? (
-      <Skeleton width={60} height={28} sx={{ background: '#074592' }} />
+      <Skeleton width={60} height={28} sx={{ background: '#F1F1F3' }} />
     ) : (
-      <Typography variant={valueTypographyVariant} sx={{ color: '#000' }}>{poolReserve.name}</Typography>
+      <Typography variant={valueTypographyVariant} sx={{ color: '#000' }}>
+        {poolReserve.name}
+      </Typography>
     );
   };
 
@@ -127,21 +129,21 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
         sx={{
           p: 4,
           color: '#F1F1F3',
-          ...borderGradient
+          ...borderGradient,
         }}
       >
         <Box>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <ReserveIcon />
             <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
-              <ReserveName /> 
+              <ReserveName />
               {!loading && (
                 <Typography sx={{ color: '#A5A8B6' }} variant={symbolsTypographyVariant}>
                   ({poolReserve.symbol})
                 </Typography>
               )}
               {loading ? (
-                <Skeleton width={16} height={16} sx={{ ml: 1, background: '#074592' }} />
+                <Skeleton width={16} height={16} sx={{ ml: 1, background: '#F1F1F3' }} />
               ) : (
                 <Box sx={{ display: 'flex' }}>
                   <TokenLinkDropdown poolReserve={poolReserve} downToSM={downToSM} />
