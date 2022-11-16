@@ -83,17 +83,20 @@ export const AddTokenDropdown = ({
               display: 'inline-flex',
               alignItems: 'center',
               '&:hover': {
-                '.Wallet__icon': { opacity: '0 !important' },
-                '.Wallet__iconHover': { opacity: '1 !important' },
+                border: '1px solid #080F26',
               },
               cursor: 'pointer',
               color: '#080F26',
+              background: '#F6F8F9',
+              borderRadius: '12px',
+              padding: '4px 0px',
+              marginLeft: '5px',
             }}
           >
             <img
               src="/icons/wallets/walletIcon.svg"
-              width="16px"
-              height="16px"
+              width="18px"
+              height="18px"
               alt="wallet icon"
               className="Wallet__icon"
               style={{
