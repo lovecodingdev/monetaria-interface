@@ -365,7 +365,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
       {md && connected && open ? (
         <MobileCloseButton setOpen={setOpen} />
       ) : loading ? (
-        <Skeleton height={36} width={126} sx={{ background: '#074592' }} />
+        <Skeleton height={36} width={126} sx={{ background: '#F1F1F3' }} />
       ) : (
         <Box
           sx={{
