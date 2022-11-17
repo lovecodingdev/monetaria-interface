@@ -15,11 +15,13 @@ import {
   useMediaQuery,
   useTheme,
   Container,
+  MenuItem,
+  FormControl,
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import { getMarketInfoById, MarketLogo } from 'src/components/MarketSwitcher';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
-import { Link } from 'src/components/primitives/Link';
+import { Link, ROUTES } from 'src/components/primitives/Link';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 
 import { TopInfoPanel } from '../../components/TopInfoPanel/TopInfoPanel';
@@ -46,10 +48,10 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
   const { currentMarket, currentNetworkConfig, currentChainId } = useProtocolDataContext();
   // const { market, network } = getMarketInfoById(currentMarket);
   const { addERC20Token, switchNetwork, chainId: connectedChainId, connected } = useWeb3Context();
+  const [curCoin, setCurCoin] = useState(underlyingAsset);
 
   const theme = useTheme();
   const downToSM = useMediaQuery(theme.breakpoints.down('sm'));
-
   const poolReserve = reserves.find(
     (reserve) => reserve.underlyingAsset === underlyingAsset
   ) as ComputedReserveData;
@@ -57,14 +59,19 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
   const valueTypographyVariant = downToSM ? 'main14' : 'main16';
   const symbolsTypographyVariant = downToSM ? 'secondary14' : 'secondary16';
 
-  const ReserveIcon = () => {
+  const handleCoins = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCurCoin(e.target.value);
+    router.push(ROUTES.reserveOverview(e.target.value, currentMarket));
+  };
+
+  const ReserveIcon = ({ asset }) => {
     return (
       <Box mr={3} sx={{ mr: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {loading ? (
           <Skeleton variant="circular" width={40} height={40} sx={{ background: '#F1F1F3' }} />
         ) : (
           <img
-            src={`/icons/tokens/${poolReserve.iconSymbol.toLowerCase()}.svg`}
+            src={`/icons/tokens/${asset.iconSymbol.toLowerCase()}.svg`}
             width="40px"
             height="40px"
             alt=""
@@ -82,12 +89,12 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
     cursor: 'pointer',
   };
 
-  const ReserveName = () => {
+  const ReserveName = ({ asset }) => {
     return loading ? (
       <Skeleton width={60} height={28} sx={{ background: '#F1F1F3' }} />
     ) : (
       <Typography variant={valueTypographyVariant} sx={{ color: '#000' }}>
-        {poolReserve.name}
+        {asset.name}
       </Typography>
     );
   };
@@ -136,14 +143,62 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
       >
         <Box>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <ReserveIcon />
+            <FormControl>
+              <Select
+                value={curCoin}
+                onChange={handleCoins}
+                label="coin"
+                variant="outlined"
+                className="AssetInput__select"
+                sx={{
+                  p: 0,
+                  '&.AssetInput__select .MuiOutlinedInput-input': {
+                    p: 0,
+                    backgroundColor: 'transparent',
+                    pr: '24px !important',
+                  },
+                  '&.AssetInput__select .MuiOutlinedInput-notchedOutline': { display: 'none' },
+                  '&.AssetInput__select .MuiSelect-icon': {
+                    color: '#B0BABF',
+                  },
+                  border: '1px solid #E5E9EB',
+                  padding: '1px 8px',
+                  width: '215px',
+                  height: '50px',
+                }}
+                MenuProps={{
+                  PaperProps: {
+                    style: {
+                      marginTop: '18px',
+                      width: '215px',
+                    },
+                  },
+                }}
+              >
+                {reserves?.map((reserve: ComputedReserveData) => (
+                  <MenuItem value={reserve.underlyingAsset} key={reserve.underlyingAsset}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        gap: '0.5em',
+                      }}
+                    >
+                      <ReserveIcon asset={reserve} />
+                      <ReserveName asset={reserve} />
+                      {!loading && (
+                        <Typography sx={{ color: '#A5A8B6' }} variant={symbolsTypographyVariant}>
+                          ({reserve.symbol})
+                        </Typography>
+                      )}
+                    </Box>
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
             <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
-              <ReserveName />
-              {!loading && (
-                <Typography sx={{ color: '#A5A8B6' }} variant={symbolsTypographyVariant}>
-                  ({poolReserve.symbol})
-                </Typography>
-              )}
               {loading ? (
                 <Skeleton width={16} height={16} sx={{ ml: 1, background: '#F1F1F3' }} />
               ) : (
@@ -171,6 +226,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
             justifyContent: 'space-between',
             gap: 4,
             flexWrap: 'wrap',
+            marginTop: '15px',
           }}
         >
           <TopInfoPanelItem title={<Trans>Reserve Size</Trans>} loading={loading} hideIcon>
