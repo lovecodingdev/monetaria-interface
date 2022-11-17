@@ -1,5 +1,5 @@
-import react from "react";
-import { Box, Typography } from "@mui/material";
+import react from 'react';
+import { Box, Typography } from '@mui/material';
 import { TokenIcon } from '../../components/primitives/TokenIcon';
 import { ComputedReserveData } from '../../hooks/app-data-provider/useAppDataProvider';
 import { IncentivesCard } from '../../components/incentives/IncentivesCard';
@@ -12,15 +12,18 @@ export const CauroselItem = (props: ComputedReserveData) => {
   const { currentMarket } = useProtocolDataContext();
 
   return (
-    <Box 
+    <Box
       sx={{
         cursor: 'pointer',
-        padding: "8px 16px",
-        display: "flex",
-        alignItems: "center",
-        borderRadius: "8px",
-        border: '1px solid #719aad38', 
-        background: "linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.609) 100%)",
+        padding: '8px 16px',
+        display: 'flex',
+        alignItems: 'center',
+        borderRadius: '8px',
+        border: '1px solid #719aad38',
+        background:
+          'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.609) 100%)',
+        width: '162px',
+        height: '48px',
       }}
       onClick={() => router.push(ROUTES.reserveOverview(props.underlyingAsset, currentMarket))}
     >
@@ -47,9 +50,10 @@ export const CauroselItem = (props: ComputedReserveData) => {
             incentives={props.aIncentivesData || []}
             symbol={props.symbol}
             variant="secondary14"
-            symbolsVariant="secondary14" />
+            symbolsVariant="secondary14"
+          />
         </Typography>
       </Box>
     </Box>
-  )
-}
+  );
+};

@@ -35,11 +35,14 @@ export const TokenLinkDropdown = ({ poolReserve, downToSM }: TokenLinkDropdownPr
               display: 'inline-flex',
               alignItems: 'center',
               color: '#080F26',
-              '&:hover': { color: '#F1F1F3' },
+              '&:hover': { border: '1px solid #080F26' },
               cursor: 'pointer',
+              background: '#F6F8F9',
+              padding: '4px 6px',
+              borderRadius: '12px',
             }}
           >
-            <SvgIcon sx={{ fontSize: '14px' }}>
+            <SvgIcon sx={{ fontSize: '18px' }}>
               <ExternalLinkIcon />
             </SvgIcon>
           </Box>

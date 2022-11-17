@@ -7,6 +7,7 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
+  Button,
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -23,6 +24,7 @@ import { ReserveBorrowInfo } from 'src/modules/reserve-overview/ReserveBorrowInf
 import { ReserveEModeInfo } from 'src/modules/reserve-overview/ReserveEModeInfo';
 import { ReserveInterestRateModel } from 'src/modules/reserve-overview/ReserveInterestRateModel';
 import { InfoTabs } from 'src/modules/reserve-overview/InfoTabs';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 import { ContentContainer } from '../src/components/ContentContainer';
 
@@ -44,38 +46,39 @@ export default function ReserveOverview() {
     (reserve) => reserve.underlyingAsset === underlyingAsset
   ) as ComputedReserveData;
 
+  const goPrevPage = () => {
+    router.back();
+  };
+
   const isOverview = mode === 'overview';
 
   return (
     <>
-
       <ContentContainer>
-        {/* <Box
+        <Box
           sx={{
-            display: { xs: 'flex', lg: 'none' },
-            justifyContent: { xs: 'center', xsm: 'flex-start' },
+            display: { xsm: 'none', md: 'flex' },
+            justifyContent: 'flex-start',
             mb: { xs: 3, xsm: 4 },
           }}
         >
-          <ToggleButtonGroup
-            color="primary"
-            value={mode}
-            exclusive
-            onChange={(_, value) => setMode(value)}
-            sx={{ width: { xs: '100%', xsm: '359px' }, height: '44px' }}
+          <Button
+            startIcon={<KeyboardArrowLeftIcon />}
+            sx={{
+              width: '89px',
+              height: '32px',
+              background: 'white',
+              color: '#252C32',
+              fontWeight: 400,
+              fontSize: '14px',
+              border: '1px solid #DDE2E4',
+              borderRadius: '8px',
+            }}
+            onClick={goPrevPage}
           >
-            <ToggleButton value="overview" disabled={mode === 'overview'}>
-              <Typography variant="subheader1">
-                <Trans>Overview</Trans>
-              </Typography>
-            </ToggleButton>
-            <ToggleButton value="actions" disabled={mode === 'actions'}>
-              <Typography variant="subheader1">
-                <Trans>Your info</Trans>
-              </Typography>
-            </ToggleButton>
-          </ToggleButtonGroup>
-        </Box> */}
+            Back
+          </Button>
+        </Box>
 
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
           {/* * Main status and configuration panel */}
@@ -86,12 +89,12 @@ export default function ReserveOverview() {
               width: { xs: '100%', lg: 'calc(44% - 20px)' },
             }}
           >
-            {reserve && 
+            {reserve && (
               <>
                 <ReserveTopDetails underlyingAsset={underlyingAsset} />
                 <ReserveActions underlyingAsset={underlyingAsset} />
               </>
-            }
+            )}
           </Stack>
 
           {/* * Right panel with actions */}
