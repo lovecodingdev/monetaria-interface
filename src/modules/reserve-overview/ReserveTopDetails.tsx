@@ -52,6 +52,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
 
   const theme = useTheme();
   const downToSM = useMediaQuery(theme.breakpoints.down('sm'));
+  const reserveData = reserves.filter((reserve: ComputedReserveData) => !reserve.isFrozen);
   const poolReserve = reserves.find(
     (reserve) => reserve.underlyingAsset === underlyingAsset
   ) as ComputedReserveData;
@@ -175,7 +176,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
                   },
                 }}
               >
-                {reserves?.map((reserve: ComputedReserveData) => (
+                {reserveData?.map((reserve: ComputedReserveData) => (
                   <MenuItem value={reserve.underlyingAsset} key={reserve.underlyingAsset}>
                     <Box
                       sx={{
