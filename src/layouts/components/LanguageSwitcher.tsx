@@ -9,10 +9,13 @@ import {
   MenuItem,
   SvgIcon,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { dynamicActivateLanguage } from '../../libs/LanguageProvider';
+import { BasicModal } from 'src/components/primitives/BasicModal';
 
 const langMap = {
   en: t`English`,
@@ -28,11 +31,20 @@ interface LanguageListItemProps {
 
 export const LanguageListItem = ({ component = ListItem, onClick }: LanguageListItemProps) => {
   const { i18n } = useLingui();
-  console.log(i18n);
+  const [isOpenSettings, setIsOpenSettings] = useState(false);
+  const theme = useTheme();
+  const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));
+
   return (
     <Box
       component={component}
-      onClick={onClick}
+      onClick={() => {
+        if (downToXSM) {
+          setIsOpenSettings(true);
+        } else {
+          onClick();
+        }
+      }}
       sx={{
         color: { xs: '#080F26', md: 'text.primary' },
         boxSizing: 'border-box',
@@ -52,6 +64,75 @@ export const LanguageListItem = ({ component = ListItem, onClick }: LanguageList
         flexGrow: 0,
       }}
     >
+      <BasicModal open={isOpenSettings} setOpen={setIsOpenSettings} withCloseButton={false}>
+        <Box
+          component={component}
+          sx={{
+            cursor: 'pointer',
+            color: { xs: '#080F26', md: 'text.primary' },
+            mb: '4px',
+            display: 'flex',
+            alignItems: 'center',
+            minHeight: '50px',
+          }}
+          onClick={() => {
+            setIsOpenSettings(!isOpenSettings);
+          }}
+        >
+          <ListItemIcon
+            sx={{
+              minWidth: 'unset !important',
+              mr: 2,
+              color: { xs: '#080F26', md: 'primary.light' },
+            }}
+          >
+            <SvgIcon fontSize="small">
+              <ChevronLeftIcon />
+            </SvgIcon>
+          </ListItemIcon>
+          <ListItemText disableTypography>
+            <Typography
+              variant="subheader2"
+              sx={{ fontWeight: 400, fontSize: '14px', textAlign: 'center' }}
+            >
+              <Trans>Select language</Trans>
+            </Typography>
+          </ListItemText>
+        </Box>
+
+        {Object.keys(langMap).map((lang) => (
+          <Box
+            component={component}
+            key={lang}
+            onClick={() => dynamicActivateLanguage(lang)}
+            sx={{
+              cursor: 'pointer',
+              color: { xs: '#080F26', md: 'text.primary' },
+              '.MuiListItemIcon-root': { minWidth: 'unset' },
+              '.MuiMenuItemIcon-root': { minWidth: 'unset' },
+            }}
+          >
+            <ListItemIcon
+              sx={{ mr: 3, borderRadius: '2px', overflow: 'hidden', width: 20, height: 14 }}
+            >
+              <img
+                src={`/icons/flags/${lang}.svg`}
+                width="100%"
+                height="100%"
+                alt={`${lang} icon`}
+              />
+            </ListItemIcon>
+            <ListItemText>{i18n._(langMap[lang as keyof typeof langMap])}</ListItemText>
+            {lang === i18n.locale && (
+              <ListItemIcon sx={{ m: 0 }}>
+                <SvgIcon fontSize="small" sx={{ color: { xs: '#080F26', md: 'text.primary' } }}>
+                  <CheckIcon />
+                </SvgIcon>
+              </ListItemIcon>
+            )}
+          </Box>
+        ))}
+      </BasicModal>
       <Box sx={{ display: 'flex', alignItems: 'start' }}>
         <ListItemIcon
           sx={{ mr: 3, borderRadius: '2px', overflow: 'hidden', width: 24, height: 24 }}
@@ -91,7 +172,6 @@ export const LanguagesList = ({ component = ListItem, onClick }: LanguageListIte
         flexDirection: 'column',
         width: { md: '444px' },
         borderRadius: { xs: '16px', md: 'none' },
-        border: '1px solid red',
       }}
     >
       <Box
