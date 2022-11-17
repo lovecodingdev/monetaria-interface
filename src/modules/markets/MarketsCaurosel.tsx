@@ -37,10 +37,22 @@ export default function MarketsCaurosel() {
         : {}),
     }));
   const breakpoint = {
-    340: {
+    375: {
       slidesPerView: 2,
     },
+    414: {
+      slidesPerView: 2,
+    },
+    640: {
+      slidesPerView: 3,
+    },
     768: {
+      slidesPerView: 3,
+    },
+    900: {
+      slidesPerView: 4,
+    },
+    960: {
       slidesPerView: 3,
     },
     1080: {

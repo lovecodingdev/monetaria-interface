@@ -85,7 +85,15 @@ export const LanguagesList = ({ component = ListItem, onClick }: LanguageListIte
   const { i18n } = useLingui();
 
   return (
-    <Box sx={{ width: { md: '444px' } }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: { md: '444px' },
+        borderRadius: { xs: '16px', md: 'none' },
+        border: '1px solid red',
+      }}
+    >
       <Box
         component={component}
         sx={{ cursor: 'pointer', color: { xs: '#080F26', md: 'text.primary' }, mb: '4px' }}
