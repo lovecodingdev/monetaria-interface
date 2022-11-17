@@ -164,14 +164,14 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
                   },
                   border: '1px solid #E5E9EB',
                   padding: '1px 8px',
-                  width: '275px',
+                  width: '260px',
                   height: '50px',
                 }}
                 MenuProps={{
                   PaperProps: {
                     style: {
                       marginTop: '18px',
-                      width: '275px',
+                      width: '260px',
                     },
                   },
                 }}

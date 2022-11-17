@@ -28,7 +28,7 @@ interface LanguageListItemProps {
 
 export const LanguageListItem = ({ component = ListItem, onClick }: LanguageListItemProps) => {
   const { i18n } = useLingui();
-  console.log(i18n.locale);
+  console.log(i18n);
   return (
     <Box
       component={component}
@@ -85,7 +85,7 @@ export const LanguagesList = ({ component = ListItem, onClick }: LanguageListIte
   const { i18n } = useLingui();
 
   return (
-    <>
+    <Box sx={{ width: { md: '444px' } }}>
       <Box
         component={component}
         sx={{ cursor: 'pointer', color: { xs: '#080F26', md: 'text.primary' }, mb: '4px' }}
@@ -103,7 +103,10 @@ export const LanguagesList = ({ component = ListItem, onClick }: LanguageListIte
           </SvgIcon>
         </ListItemIcon>
         <ListItemText disableTypography>
-          <Typography variant="subheader2">
+          <Typography
+            variant="subheader2"
+            sx={{ fontWeight: 400, fontSize: '14px', textAlign: 'center' }}
+          >
             <Trans>Select language</Trans>
           </Typography>
         </ListItemText>
@@ -136,6 +139,6 @@ export const LanguagesList = ({ component = ListItem, onClick }: LanguageListIte
           )}
         </Box>
       ))}
-    </>
+    </Box>
   );
 };
