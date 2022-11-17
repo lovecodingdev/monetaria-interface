@@ -57,7 +57,7 @@ export default function ReserveOverview() {
       <ContentContainer>
         <Box
           sx={{
-            display: { xsm: 'none', md: 'flex' },
+            display: { xs: 'none', md: 'flex' },
             justifyContent: 'flex-start',
             mb: { xs: 3, xsm: 4 },
           }}
