@@ -91,6 +91,7 @@ export function AppHeader() {
       // @ts-ignore
       sx={(theme) => ({
         height: headerHeight,
+        width: '100%',
         position: { xs: 'fixed', md: 'sticky' },
         top: 0,
         transition: theme.transitions.create('top'),
