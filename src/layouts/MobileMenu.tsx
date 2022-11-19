@@ -167,6 +167,7 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                   textAlign: 'center',
                   cursor: 'pointer',
                   alignContent: 'center',
+                  display: { xs: 'block', xsm: 'none' },
                 }}
                 data-cy="more"
                 disablePadding
