@@ -35,12 +35,11 @@ import { Link, ROUTES } from '../../components/primitives/Link';
 import { getEmodeMessage } from '../../components/transactions/Emode/EmodeNaming';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { ConnectWalletButton } from 'src/components/WalletConnection/ConnectWalletButton';
-import borderGradient from "src/layouts/borderGradient";
-
+import borderGradient from 'src/layouts/borderGradient';
 
 const PaperWrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <Paper sx={{ p: 4, ...borderGradient}}>
+    <Paper sx={{ p: 4, ...borderGradient }}>
       {/* <Typography variant="h3" sx={{ mb: { xs: 6, xsm: 10 } }}>
         <Trans>Your info</Trans>
       </Typography> */}
@@ -276,11 +275,11 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
       <Box
         sx={{
           display: 'flex',
-          flexDirection: { xs: 'column'},
+          flexDirection: { xs: 'column' },
           gap: 2,
         }}
       >
-        <Box 
+        <Box
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
@@ -311,14 +310,21 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
             }}
           >
             <Typography variant={'secondary12'}>Available to supply</Typography>
-            <FormattedNumber 
+            <FormattedNumber
               value={maxAmountToSupply}
               variant="main14"
               symbol={poolReserve.symbol}
             />
           </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: "10px" }}>
-            <Typography variant={"secondary12"}>Available to borrow</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              marginRight: '10px',
+            }}
+          >
+            <Typography variant={'secondary12'}>Available to borrow</Typography>
             <FormattedNumber
               value={canBorrow ? maxAmountToBorrow : '0'}
               variant="main14"
@@ -332,7 +338,15 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
             disabled={!canBorrow || user?.totalCollateralMarketReferenceCurrency === '0'}
             variant="outlined"
             onClick={() => openBorrow(underlyingAsset)}
-            sx={{flex: 1}}
+            sx={{
+              flex: 1,
+              backgroundColor: 'rgba(21, 126, 255, 0.05)',
+              color: '#074592',
+              border: '1px solid rgba(21, 126, 255, 0.2)',
+              borderRadius: '8px',
+              fontWeight: 600,
+              fontSize: '16px',
+            }}
           >
             <Trans>Borrow</Trans> {downToXSM && poolReserve.symbol}
           </Button>
@@ -340,7 +354,13 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
             variant="contained"
             disabled={balance?.amount === '0'}
             onClick={() => openSupply(underlyingAsset)}
-            sx={{flex: 1}}
+            sx={{
+              flex: 1,
+              backgroundColor: '#074592',
+              borderRadius: '8px',
+              fontWeight: 600,
+              fontSize: '16px',
+            }}
           >
             <Trans>Supply</Trans> {downToXSM && poolReserve.symbol}
           </Button>

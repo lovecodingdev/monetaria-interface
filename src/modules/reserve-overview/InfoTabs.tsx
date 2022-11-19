@@ -180,7 +180,7 @@ export const InfoTabs = ({ reserve }: { reserve: ComputedReserveData }) => {
         padding: { xs: '16px', md: '24px' },
       })}
     >
-      <Box>
+      <Box sx={{ border: '1px solid red' }}>
         <NewTabs
           value={selectedTab}
           onChange={handleChange}

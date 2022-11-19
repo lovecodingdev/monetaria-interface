@@ -76,7 +76,7 @@ export default function MarketsCaurosel() {
         background: 'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.87) 100%)',
         borderRadius: '16px',
         border: '1px solid #E5E9EB',
-        display: { xs: 'none', md: 'block' },
+        display: { xs: 'none', xsm: 'block' },
       }}
     >
       <Box>
