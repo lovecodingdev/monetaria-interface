@@ -22,7 +22,6 @@ export const CauroselItem = (props: ComputedReserveData) => {
         border: '1px solid #719aad38',
         background:
           'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.609) 100%)',
-        width: { xs: '112px', sm: '132px', md: '162px' },
         height: '48px',
       }}
       onClick={() => router.push(ROUTES.reserveOverview(props.underlyingAsset, currentMarket))}

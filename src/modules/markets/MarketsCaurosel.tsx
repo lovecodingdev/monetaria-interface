@@ -47,26 +47,21 @@ export default function MarketsCaurosel() {
       slidesPerView: 3,
     },
     768: {
-      slidesPerView: 3,
+      slidesPerView: 4,
     },
     900: {
-      slidesPerView: 4,
-    },
-    960: {
-      slidesPerView: 3,
-    },
-    1080: {
-      slidesPerView: 4,
-    },
-    1300: {
       slidesPerView: 5,
     },
-    1500: {
+    960: {
+      slidesPerView: 4,
+    },
+    1080: {
+      slidesPerView: 5,
+    },
+    1300: {
       slidesPerView: 6,
     },
-    1700: {
-      slidesPerView: 6,
-    },
+
     //   slidesPerView: 7,
     // },
     //   slidesPerView: 8,
@@ -81,6 +76,7 @@ export default function MarketsCaurosel() {
         background: 'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.87) 100%)',
         borderRadius: '16px',
         border: '1px solid #E5E9EB',
+        display: { xs: 'none', md: 'block' },
       }}
     >
       <Box>
