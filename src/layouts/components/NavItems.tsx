@@ -25,14 +25,14 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
   const { currentMarketData } = useProtocolDataContext();
 
   const { breakpoints } = useTheme();
-  const lg = useMediaQuery(breakpoints.down('lg'));
+  const mmd = useMediaQuery(breakpoints.down('mmd'));
 
   return (
     <List
       sx={{
         display: 'flex',
-        alignItems: { xs: 'flex-start', lg: 'center' },
-        flexDirection: { xs: 'column', lg: 'row' },
+        alignItems: { xs: 'flex-start', mmd: 'center' },
+        flexDirection: { xs: 'column', mmd: 'row' },
       }}
       disablePadding
     >
@@ -41,15 +41,15 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
         .map((item, index) => (
           <ListItem
             sx={{
-              width: { xs: '100%', lg: 'unset' },
-              mr: { xs: 0, lg: 2 },
+              width: { xs: '100%', mmd: 'unset' },
+              mr: { xs: 0, mmd: 2 },
               textAlign: 'center',
             }}
             data-cy={item.dataCy}
             disablePadding
             key={index}
           >
-            {lg ? (
+            {mmd ? (
               <Typography
                 component={Link}
                 href={item.link}
@@ -73,8 +73,8 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                 href={item.link}
                 disableRipple={true}
                 sx={(theme) => ({
-                  color: { xs: '#F1F1F3', lg: 'text.primary' },
-                  py: { xs: 1.5, lg: 1 },
+                  color: { xs: '#F1F1F3', mmd: 'text.primary' },
+                  py: { xs: 1.5, mmd: 1 },
                   position: 'relative',
                   '&:hover': {
                     borderRadius: '100px',
@@ -93,7 +93,7 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
           </ListItem>
         ))}
 
-      <ListItem sx={{ display: { xs: 'none', lg: 'flex' }, width: 'unset' }} disablePadding>
+      <ListItem sx={{ display: { xs: 'none', mmd: 'flex' }, width: 'unset' }} disablePadding>
         <MoreMenu />
       </ListItem>
     </List>

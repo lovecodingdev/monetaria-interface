@@ -42,6 +42,7 @@ export function AppHeader() {
   const lg = useMediaQuery(breakpoints.down('lg'));
   const xsm = useMediaQuery(breakpoints.down('xsm'));
   const md = useMediaQuery(breakpoints.down('md'));
+  const mmd = useMediaQuery(breakpoints.down('mmd'));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [walletWidgetOpen, setWalletWidgetOpen] = useState(false);
 
@@ -148,16 +149,18 @@ export function AppHeader() {
         )}
       </Box>
 
-      <Box
-        sx={{
-          display: { xs: 'none', lg: 'block' },
-          background: '#F6F8F9',
-          borderRadius: '100px',
-          padding: '4px',
-        }}
-      >
-        <NavItems />
-      </Box>
+      {!mmd && (
+        <Box
+          sx={{
+            display: 'block',
+            background: '#F6F8F9',
+            borderRadius: '100px',
+            padding: '4px',
+          }}
+        >
+          <NavItems />
+        </Box>
+      )}
 
       <Box sx={{ flexGrow: 1 }} />
 
@@ -171,12 +174,12 @@ export function AppHeader() {
         />
       )}
 
-      <Box sx={{ display: { xs: 'none', lg: 'block' } }}>
+      <Box sx={{ display: { xs: 'none', xsm: 'block' } }}>
         <SettingsMenu />
       </Box>
 
       {!walletWidgetOpen && (
-        <Box sx={{ display: { xs: 'flex', lg: 'none' } }}>
+        <Box sx={{ display: { xs: 'flex', mmd: 'none' } }}>
           <MobileMenu
             open={mobileMenuOpen}
             setOpen={setMobileMenuOpen}
