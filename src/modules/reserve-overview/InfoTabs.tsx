@@ -39,7 +39,11 @@ import { ReserveSubheader } from 'src/components/ReserveSubheader';
 import { frozenProposalMap } from 'src/utils/marketsAndNetworksConfig';
 
 const NewTabs = styled(Tabs)({
+  width: '390px',
   minHeight: '24px',
+  padding: '2px',
+  border: '1px solid #F6F8F9',
+  borderRadius: '100px',
   '& .MuiTabs-flexContainer': {
     justifyContent: 'start',
     gap: 2,
@@ -52,6 +56,9 @@ const NewTabs = styled(Tabs)({
 const NewTab = styled(Tab)`
   margin: 0px;
   min-height: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
   height: 24px;
   color: #b0babf;
   &.Mui-selected,
@@ -180,7 +187,7 @@ export const InfoTabs = ({ reserve }: { reserve: ComputedReserveData }) => {
         padding: { xs: '16px', md: '24px' },
       })}
     >
-      <Box sx={{ border: '1px solid red' }}>
+      <Box>
         <NewTabs
           value={selectedTab}
           onChange={handleChange}

@@ -145,7 +145,7 @@ export const InterestRateModelChart = withTooltip<AreaProps, TooltipData>(
 
     const data = useMemo(() => getRates(reserve), [JSON.stringify(reserve)]);
 
-    const utilizationColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
+    const utilizationColor = theme.palette.mode === 'dark' ? '#157EFF' : '#157EFF';
 
     // bounds
     const innerWidth = width - margin.left - margin.right;
@@ -212,9 +212,9 @@ export const InterestRateModelChart = withTooltip<AreaProps, TooltipData>(
         <ChartLegend
           labels={[
             { text: 'Utilization rate', color: utilizationColor },
-            { text: 'Borrow APR, variable', color: '#B6509E' },
+            { text: 'Borrow APR, variable', color: '#06D8B7' },
             ...(reserve.stableBorrowRateEnabled
-              ? ([{ text: 'Borrow APR, stable', color: '#0062D2' }] as const)
+              ? ([{ text: 'Borrow APR, stable', color: '#914795' }] as const)
               : []),
           ]}
         />
@@ -267,7 +267,7 @@ export const InterestRateModelChart = withTooltip<AreaProps, TooltipData>(
             <Line
               from={{ x: dateScale(ticks[1].value), y: innerHeight / 4 - 5 }}
               to={{ x: dateScale(ticks[1].value), y: innerHeight / 4 + 5 }}
-              stroke={utilizationColor}
+              stroke={'#000'}
               strokeWidth={2}
               pointerEvents="none"
             />
@@ -278,14 +278,14 @@ export const InterestRateModelChart = withTooltip<AreaProps, TooltipData>(
               textAnchor="middle"
               verticalAnchor="middle"
               fontSize="10px"
-              fill={utilizationColor}
+              fill={'#000'}
             >
               Current
             </Text>
             <Line
               from={{ x: dateScale(ticks[0].value), y: innerHeight / 4 + 5 }}
               to={{ x: dateScale(ticks[0].value), y: innerHeight / 4 - 5 }}
-              stroke={utilizationColor}
+              stroke={'#000'}
               strokeWidth={2}
               pointerEvents="none"
             />
@@ -296,7 +296,7 @@ export const InterestRateModelChart = withTooltip<AreaProps, TooltipData>(
               textAnchor="middle"
               verticalAnchor="middle"
               fontSize="10px"
-              fill={utilizationColor}
+              fill={'#000'}
             >
               Optimal
             </Text>
