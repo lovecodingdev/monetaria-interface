@@ -39,14 +39,12 @@ import { ReserveSubheader } from 'src/components/ReserveSubheader';
 import { frozenProposalMap } from 'src/utils/marketsAndNetworksConfig';
 
 const NewTabs = styled(Tabs)({
-  width: '390px',
   minHeight: '24px',
   padding: '2px',
   border: '1px solid #F6F8F9',
   borderRadius: '100px',
   '& .MuiTabs-flexContainer': {
     justifyContent: 'start',
-    gap: 2,
   },
   '& .MuiTabs-indicator': {
     display: 'none',
@@ -193,12 +191,14 @@ export const InfoTabs = ({ reserve }: { reserve: ComputedReserveData }) => {
           onChange={handleChange}
           sx={{
             mb: 2,
+            width: { xs: '100%', md: '390px' },
+            gap: { xs: 0, md: 2 },
           }}
         >
           <NewTab label="Interest Rate Model" />
           <NewTab label="Supply Info" />
           <NewTab label="Borrow Info" />
-          <NewTab label="E-Mode Info" />
+          {/* <NewTab label="E-Mode Info" /> */}
         </NewTabs>
       </Box>
       {selectedTab == 0 && <ReserveInterestRateModel reserve={reserve} />}
