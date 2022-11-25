@@ -96,6 +96,7 @@ enum SelectedMarketVersion {
 }
 export const MarketSwitcher = () => {
   const { currentMarket, setCurrentMarket } = useProtocolDataContext();
+  const { market } = getMarketInfoById(currentMarket as unknown as CustomMarket);
   const [selectedMarketVersion, setSelectedMarketVersion] = useState<SelectedMarketVersion>(
     SelectedMarketVersion.V3
   );
@@ -117,7 +118,9 @@ export const MarketSwitcher = () => {
       aria-label="select market"
       data-cy="marketSelector"
       value={currentMarket}
-      onChange={(e) => setCurrentMarket(e.target.value as unknown as CustomMarket)}
+      onChange={(e) => {
+        setCurrentMarket(e.target.value as unknown as CustomMarket);
+      }}
       sx={{
         mr: 2,
         '& .MuiOutlinedInput-notchedOutline': {
@@ -134,11 +137,13 @@ export const MarketSwitcher = () => {
         ),
         renderValue: (marketId) => {
           const { market, network } = getMarketInfoById(marketId as CustomMarket);
+
           return (
             <Box
               sx={{
                 display: 'flex',
                 alignItems: 'center',
+                border: `none`,
               }}
             >
               <MarketLogo
@@ -161,7 +166,7 @@ export const MarketSwitcher = () => {
                     sx={{
                       fontSize: '16px',
                       lineHeight: '1.55rem',
-                      color: '#074592',
+                      color: '#fff',
                       mr: 1,
                     }}
                   >
@@ -188,9 +193,13 @@ export const MarketSwitcher = () => {
         sx: {
           '&.MarketSwitcher__select .MuiSelect-outlined': {
             p: 0,
-            backgroundColor: 'transparent !important',
           },
-          '.MuiSelect-icon': { color: '#074592' },
+          '.MuiSelect-icon': { color: '#fff' },
+          '.MuiSelect-select': {
+            background: `${market.bgColor}`,
+            paddingRight: '32px !important',
+            border: 'none !important',
+          },
         },
         MenuProps: {
           anchorOrigin: {

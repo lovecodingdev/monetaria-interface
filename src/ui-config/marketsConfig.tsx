@@ -44,6 +44,7 @@ export type MarketDataType = {
     URL: string;
     marketName: string;
   };
+  bgColor?: string;
 };
 
 export enum CustomMarket {
@@ -102,6 +103,7 @@ export const marketsData: {
       URL: 'https://app.hal.xyz/recipes/aave-track-your-health-factor',
       marketName: 'aavev2',
     },
+    bgColor: 'linear-gradient(90deg, rgba(73,91,252,1) 0%, rgba(63,133,238,1) 100%)',
   },
   // [CustomMarket.permissioned_market]: {
   //   marketTitle: 'Ethereum Permissioned Market example',
@@ -165,6 +167,7 @@ export const marketsData: {
       URL: 'https://app.hal.xyz/recipes/aave-track-your-health-factor',
       marketName: 'aavepolygon',
     },
+    bgColor: '#7A3FDC',
   },
   [CustomMarket.proto_avalanche]: {
     marketTitle: 'Avalanche',
@@ -191,6 +194,8 @@ export const marketsData: {
       URL: 'https://app.hal.xyz/recipes/aave-track-your-health-factor',
       marketName: 'aaveavalanche',
     },
+    bgColor:
+      'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 37%, rgba(0,212,255,1) 100%)',
   },
   // v3
   [CustomMarket.proto_goerli_v3]: {
@@ -222,6 +227,7 @@ export const marketsData: {
       UI_INCENTIVE_DATA_PROVIDER: '0x25c5Fa5e212bd834eC3839ac2c451Ed3927c8363',
       FAUCET: '0x681860075529352da2C94082Eb66c59dF958e89C',
     },
+    bgColor: 'linear-gradient(90deg, rgba(73,91,252,1) 0%, rgba(63,133,238,1) 100%)',
   },
   [CustomMarket.proto_arbitrum_v3]: {
     marketTitle: 'Arbitrum',
@@ -249,6 +255,7 @@ export const marketsData: {
       URL: 'https://app.hal.xyz/recipes/aave-v3-track-health-factor',
       marketName: 'arbitrum',
     },
+    bgColor: 'linear-gradient(90deg, rgba(40,160,240,1) 0%, rgba(8,122,198,1) 100%)',
   },
   [CustomMarket.proto_arbitrum_goerli_v3]: {
     marketTitle: 'Arbitrum Görli',
@@ -269,6 +276,7 @@ export const marketsData: {
       UI_INCENTIVE_DATA_PROVIDER: '0xcBc599F81ece6C3f60907400A142459596898DAD',
       L2_ENCODER: '0xBFB521464727c3B31A6D9183413cc2B66f4F6686',
     },
+    bgColor: 'linear-gradient(90deg, rgba(40,160,240,1) 0%, rgba(8,122,198,1) 100%)',
   },
   [CustomMarket.proto_avalanche_v3]: {
     marketTitle: 'Avalanche',
@@ -295,6 +303,7 @@ export const marketsData: {
       URL: 'https://app.hal.xyz/recipes/aave-v3-track-health-factor',
       marketName: 'avalanche',
     },
+    bgColor: 'linear-gradient(90deg, rgba(245,73,66,1) 0%, rgba(180,45,40,1) 100%)',
   },
   [CustomMarket.proto_fuji_v3]: {
     marketTitle: 'Avalanche Fuji',
@@ -314,6 +323,7 @@ export const marketsData: {
       UI_POOL_DATA_PROVIDER: '0x88138CA1e9E485A1E688b030F85Bb79d63f156BA',
       UI_INCENTIVE_DATA_PROVIDER: '0x7eEB186F13538e6795a0823e2D7283FEeD2738f5',
     },
+    bgColor: 'linear-gradient(90deg, rgba(245,73,66,1) 0%, rgba(180,45,40,1) 100%)',
   },
   [CustomMarket.proto_optimism_goerli_v3]: {
     marketTitle: 'Optimism Görli',
@@ -333,6 +343,7 @@ export const marketsData: {
       UI_POOL_DATA_PROVIDER: '0x7F2CEE177943bBa0C27e77C8F7893A27B4E0F740',
       UI_INCENTIVE_DATA_PROVIDER: '0x596b5804E1f541baC5f265aF7C4bcc5077522876',
     },
+    bgColor: 'linear-gradient(90deg, rgba(255,4,32,1) 0%, rgba(193,10,31,1) 100%)',
   },
   [CustomMarket.proto_fantom_v3]: {
     marketTitle: 'Fantom',
@@ -359,6 +370,7 @@ export const marketsData: {
       URL: 'https://app.hal.xyz/recipes/aave-v3-track-health-factor',
       marketName: 'fantom',
     },
+    bgColor: 'linear-gradient(90deg, rgba(38,183,234,1) 0%, rgba(0,191,211,1) 100%)',
   },
   [CustomMarket.proto_fantom_testnet_v3]: {
     marketTitle: 'Fantom Testnet',
@@ -378,6 +390,7 @@ export const marketsData: {
       UI_POOL_DATA_PROVIDER: '0xBCb61ecc7997cc736E4802de2D5ce76D0908C97c',
       UI_INCENTIVE_DATA_PROVIDER: '0xe2E3a30E77469397dc3CF74f1Fa35f39493207C2',
     },
+    bgColor: 'linear-gradient(90deg, rgba(38,183,234,1) 0%, rgba(0,191,211,1) 100%)',
   },
   [CustomMarket.proto_harmony_v3]: {
     marketTitle: 'Harmony',
@@ -396,6 +409,7 @@ export const marketsData: {
       UI_INCENTIVE_DATA_PROVIDER: '0x027f58ea3B4c81c1ceeFAdE9c56375545a6E75F4',
       COLLECTOR: '0x8A020d92D6B119978582BE4d3EdFdC9F7b28BF31',
     },
+    bgColor: 'linear-gradient(90deg, rgba(0,196,203,1) 0%, rgba(0,221,174,1) 100%)',
   },
   [CustomMarket.proto_optimism_v3]: {
     marketTitle: 'Optimism',
@@ -419,6 +433,7 @@ export const marketsData: {
       SWAP_COLLATERAL_ADAPTER: '0xC7524B08101dBe695d7ad671a332760b5d967Cbd',
       REPAY_WITH_COLLATERAL_ADAPTER: '0x70371a494f73A8Df658C5cd29E2C1601787e1009',
     },
+    bgColor: 'linear-gradient(90deg, rgba(255,4,32,1) 0%, rgba(193,10,31,1) 100%)',
   },
   [CustomMarket.proto_polygon_v3]: {
     marketTitle: 'Polygon',
@@ -445,6 +460,7 @@ export const marketsData: {
       URL: 'https://app.hal.xyz/recipes/aave-v3-track-health-factor',
       marketName: 'polygon',
     },
+    bgColor: 'linear-gradient(90deg, rgba(130,71,229,1) 0%, rgba(96,39,192,1) 100%)',
   },
   [CustomMarket.proto_mumbai_v3]: {
     marketTitle: 'Polygon Mumbai',
@@ -464,6 +480,7 @@ export const marketsData: {
       UI_INCENTIVE_DATA_PROVIDER: '0x26C3249723F2b98be57F49a1a31A9243a4B2cd88',
     },
     v3: true,
+    bgColor: 'linear-gradient(90deg, rgba(130,71,229,1) 0%, rgba(96,39,192,1) 100%)',
   },
   [CustomMarket.proto_goerli]: {
     marketTitle: 'Ethereum Görli',
