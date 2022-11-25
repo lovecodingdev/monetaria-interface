@@ -45,11 +45,11 @@ export const navigation: Navigation[] = [
     dataCy: 'menuGovernance',
     isVisible: () => process.env.NEXT_PUBLIC_ENABLE_GOVERNANCE === 'true' && !ENABLE_TESTNET,
   },
-  {
-    link: ROUTES.referral,
-    title: t`Referral`,
-    dataCy: 'menuReferral',
-  },
+  // {
+  //   link: ROUTES.referral,
+  //   title: t`Referral`,
+  //   dataCy: 'menuReferral',
+  // },
   {
     link: ROUTES.faucet,
     title: t`Faucet`,
