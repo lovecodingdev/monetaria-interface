@@ -143,7 +143,7 @@ export const MarketSwitcher = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                border: `none`,
+                border: `none !important`,
               }}
             >
               <MarketLogo
