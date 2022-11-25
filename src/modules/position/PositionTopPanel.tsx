@@ -26,7 +26,7 @@ import NetAPYIcon from '../../../public/icons/markets/net-apy-icon.svg';
 import EmptyHeartIcon from '../../../public/icons/markets/empty-heart-icon.svg';
 import ClaimGiftIcon from '../../../public/icons/markets/claim-gift-icon.svg';
 import { NetAPYTooltip } from 'src/components/infoTooltips/NetAPYTooltip';
-import borderGradient from "src/layouts/borderGradient";
+import borderGradient from 'src/layouts/borderGradient';
 import { ContentWithTooltip } from 'src/components/ContentWithTooltip';
 
 export const PositionTopPanel = () => {
@@ -81,8 +81,8 @@ export const PositionTopPanel = () => {
     user?.totalCollateralMarketReferenceCurrency === '0'
       ? '0'
       : valueToBigNumber(user?.totalBorrowsMarketReferenceCurrency || '0')
-        .dividedBy(user?.totalCollateralMarketReferenceCurrency || '1')
-        .toFixed();
+          .dividedBy(user?.totalCollateralMarketReferenceCurrency || '1')
+          .toFixed();
 
   const valueTypographyVariant = downToSM ? 'main16' : 'main21';
   const noDataTypographyVariant = downToSM ? 'secondary16' : 'secondary21';
@@ -93,14 +93,15 @@ export const PositionTopPanel = () => {
   const collateralUsagePercent = maxBorrowAmount.eq(0)
     ? valueToBigNumber('0')
     : valueToBigNumber(user?.totalBorrowsMarketReferenceCurrency || '0')
-        .div(maxBorrowAmount).multipliedBy(100);
+        .div(maxBorrowAmount)
+        .multipliedBy(100);
 
   return (
     <>
       <Paper
         sx={{
           p: 4,
-          ...borderGradient
+          ...borderGradient,
         }}
       >
         <Box
@@ -131,12 +132,11 @@ export const PositionTopPanel = () => {
           </TopInfoPanelItem>
 
           <TopInfoPanelItem
-            hideIcon 
+            hideIcon
             icon={<NetAPYIcon />}
             title={
               <div style={{ display: 'flex' }}>
                 <Trans>Net APY</Trans>
-                <NetAPYTooltip />
               </div>
             }
             loading={loading}
@@ -156,7 +156,7 @@ export const PositionTopPanel = () => {
 
           {currentAccount && user?.healthFactor !== '-1' && (
             <TopInfoPanelItem
-              hideIcon 
+              hideIcon
               icon={<EmptyHeartIcon />}
               title={
                 <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
@@ -176,6 +176,7 @@ export const PositionTopPanel = () => {
             >
               <HealthFactorNumber
                 value={user?.healthFactor || '-1'}
+                sx={{ color: '#000' }}
                 variant={valueTypographyVariant}
                 onInfoClick={() => setOpen(true)}
                 // HALIntegrationComponent={
@@ -214,7 +215,7 @@ export const PositionTopPanel = () => {
               <CircularProgress
                 variant="determinate"
                 sx={{
-                  color: (theme) => theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+                  color: '#F76A5D',
                   position: 'absolute',
                   left: 0,
                   top: 0,
@@ -225,10 +226,9 @@ export const PositionTopPanel = () => {
               />
               <CircularProgress
                 variant="determinate"
-                color={'error'}
                 sx={{
-                  [`& .${circularProgressClasses.circle}`]: {
-                  },
+                  [`& .${circularProgressClasses.circle}`]: {},
+                  color: '#2580F7',
                 }}
                 size={172}
                 thickness={8}
@@ -258,7 +258,7 @@ export const PositionTopPanel = () => {
             <TopInfoPanelItem
               hideIcon
               icon={<WalletIcon />}
-              title={<Trans>Total Supplies</Trans>}
+              title={<Trans>Total Deposit</Trans>}
               loading={loading}
             >
               {currentAccount ? (
@@ -297,7 +297,7 @@ export const PositionTopPanel = () => {
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
           <TopInfoPanelItem
-            title={<Trans>Available rewards</Trans>}
+            title={<Trans>MNT earned:</Trans>}
             hideIcon
             icon={<ClaimGiftIcon />}
             loading={loading}
