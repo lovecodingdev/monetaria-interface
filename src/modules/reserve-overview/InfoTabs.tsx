@@ -54,7 +54,6 @@ const NewTabs = styled(Tabs)({
 const NewTab = styled(Tab)`
   margin: 0px;
   min-height: 24px;
-  font-size: 14px;
   font-weight: 600;
   padding: 8px 16px;
   height: 24px;
@@ -195,9 +194,9 @@ export const InfoTabs = ({ reserve }: { reserve: ComputedReserveData }) => {
             gap: { xs: 0, md: 2 },
           }}
         >
-          <NewTab label="Interest Rate Model" />
-          <NewTab label="Supply Info" />
-          <NewTab label="Borrow Info" />
+          <NewTab label="Interest Rate Model" sx={{ fontSize: { xs: '10px', md: '14px' } }} />
+          <NewTab label="Supply Info" sx={{ fontSize: { xs: '10px', md: '14px' } }} />
+          <NewTab label="Borrow Info" sx={{ fontSize: { xs: '10px', md: '14px' } }} />
           {/* <NewTab label="E-Mode Info" /> */}
         </NewTabs>
       </Box>
