@@ -109,6 +109,7 @@ export const PositionTopPanel = () => {
             display: 'flex',
             gap: 2,
             justifyContent: 'space-between',
+            flexWrap: { xs: 'wrap', md: 'nowrap' },
           }}
         >
           <TopInfoPanelItem
@@ -163,15 +164,6 @@ export const PositionTopPanel = () => {
                   <Trans>Health factor</Trans>
                 </Box>
               }
-              // TODO: need change icon
-              // icon={
-              //   <SvgIcon sx={{ fontSize: '24px' }}>
-              //     {+user.healthFactor >= 10 && <HfFull />}
-              //     {+user.healthFactor < 10 && +user.healthFactor >= 3 && <HfMiddle />}
-              //     {+user.healthFactor < 3 && +user.healthFactor >= 1 && <HfLow />}
-              //     {+user.healthFactor < 1 && <HfEmpty />}
-              //   </SvgIcon>
-              // }
               loading={loading}
             >
               <HealthFactorNumber
@@ -179,15 +171,6 @@ export const PositionTopPanel = () => {
                 sx={{ color: '#000' }}
                 variant={valueTypographyVariant}
                 onInfoClick={() => setOpen(true)}
-                // HALIntegrationComponent={
-                //   currentMarketData.halIntegration && (
-                //     <HALLink
-                //       healthFactor={user?.healthFactor || '-1'}
-                //       marketName={currentMarketData.halIntegration.marketName}
-                //       integrationURL={currentMarketData.halIntegration.URL}
-                //     />
-                //   )
-                // }
               />
             </TopInfoPanelItem>
           )}
@@ -255,44 +238,58 @@ export const PositionTopPanel = () => {
             </Box>
           </ContentWithTooltip>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-            <TopInfoPanelItem
-              hideIcon
-              icon={<WalletIcon />}
-              title={<Trans>Total Deposit</Trans>}
-              loading={loading}
-            >
-              {currentAccount ? (
-                <FormattedNumber
-                  value={Number(user?.totalLiquidityUSD || 0)}
-                  symbol="USD"
-                  variant={valueTypographyVariant}
-                  visibleDecimals={2}
-                  compact
-                  symbolsVariant={noDataTypographyVariant}
-                />
-              ) : (
-                <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
-              )}
-            </TopInfoPanelItem>
-            <TopInfoPanelItem
-              hideIcon
-              icon={<WalletIcon />}
-              title={<Trans>Total Borrows</Trans>}
-              loading={loading}
-            >
-              {currentAccount ? (
-                <FormattedNumber
-                  value={Number(user?.totalBorrowsUSD || 0)}
-                  symbol="USD"
-                  variant={valueTypographyVariant}
-                  visibleDecimals={2}
-                  compact
-                  symbolsVariant={noDataTypographyVariant}
-                />
-              ) : (
-                <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
-              )}
-            </TopInfoPanelItem>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'top' }}>
+              <div style={{ paddingRight: '5px' }}>
+                <svg width={'6px'} height={'6px'} style={{ margin: '5px 0' }}>
+                  <circle fill={'#F76659'} r={6 / 2} cx={6 / 2} cy={6 / 2} />
+                </svg>
+              </div>
+              <TopInfoPanelItem
+                hideIcon
+                icon={<WalletIcon />}
+                title={<Trans>Total Deposit</Trans>}
+                loading={loading}
+              >
+                {currentAccount ? (
+                  <FormattedNumber
+                    value={Number(user?.totalLiquidityUSD || 0)}
+                    symbol="USD"
+                    variant={valueTypographyVariant}
+                    visibleDecimals={2}
+                    compact
+                    symbolsVariant={noDataTypographyVariant}
+                  />
+                ) : (
+                  <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
+                )}
+              </TopInfoPanelItem>
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'top' }}>
+              <div style={{ paddingRight: '5px' }}>
+                <svg width={'6px'} height={'6px'} style={{ margin: '5px 0' }}>
+                  <circle fill={'#1A93EA'} r={6 / 2} cx={6 / 2} cy={6 / 2} />
+                </svg>
+              </div>
+              <TopInfoPanelItem
+                hideIcon
+                icon={<WalletIcon />}
+                title={<Trans>Total Borrows</Trans>}
+                loading={loading}
+              >
+                {currentAccount ? (
+                  <FormattedNumber
+                    value={Number(user?.totalBorrowsUSD || 0)}
+                    symbol="USD"
+                    variant={valueTypographyVariant}
+                    visibleDecimals={2}
+                    compact
+                    symbolsVariant={noDataTypographyVariant}
+                  />
+                ) : (
+                  <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
+                )}
+              </TopInfoPanelItem>
+            </Box>
           </Box>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>

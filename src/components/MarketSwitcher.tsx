@@ -201,7 +201,7 @@ export const MarketSwitcher = () => {
             border: 'none !important',
             borderRadius: '10px',
           },
-          '.MuiSelect-select:hover': {
+          '.MuiSelect-select:hover, .MuiSelect-select:active, .MuiSelect-select:focus': {
             border: 'none !important',
             borderRadius: '10px',
           },
