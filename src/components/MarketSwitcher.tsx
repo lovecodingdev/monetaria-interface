@@ -199,6 +199,11 @@ export const MarketSwitcher = () => {
             background: `${market.bgColor}`,
             paddingRight: '32px !important',
             border: 'none !important',
+            borderRadius: '10px',
+          },
+          '.MuiSelect-select:hover': {
+            border: 'none !important',
+            borderRadius: '10px',
           },
         },
         MenuProps: {
