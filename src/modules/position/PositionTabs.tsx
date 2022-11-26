@@ -166,7 +166,7 @@ export const PositionTabs = () => {
             width: { xs: '100%', sm: '482px' },
           }}
         >
-          <NewTab label="Deposit" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
+          <NewTab label="Deposits" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
           <NewTab label="Borrows" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
           {/* <NewTab label="Transactions" sx={{ fontSize: { xs: '9px', md: '14px' } }} />
           <NewTab label="Liquidation History" sx={{ fontSize: { xs: '9px', md: '14px' } }} /> */}

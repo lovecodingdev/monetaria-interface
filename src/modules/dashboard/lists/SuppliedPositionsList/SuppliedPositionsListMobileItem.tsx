@@ -81,9 +81,14 @@ export const SuppliedPositionsListMobileItem = ({
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 5 }}>
         <Button
           disabled={!isActive}
-          variant="contained"
+          variant="outlined"
           onClick={() => openWithdraw(underlyingAsset)}
-          sx={{ mr: 1.5 }}
+          sx={{
+            mr: 1.5,
+            fontWeight: 600,
+            fontSize: '16px',
+            backgroundColor: 'rgba(21, 126, 255, 0.05)',
+          }}
           fullWidth
         >
           <Trans>Withdraw</Trans>
@@ -101,11 +106,12 @@ export const SuppliedPositionsListMobileItem = ({
         ) : (
           <Button
             disabled={!isActive || isFrozen}
-            variant="outlined"
+            variant="contained"
             onClick={() => openSupply(underlyingAsset)}
             fullWidth
+            sx={{ fontWeight: 600, fontSize: '16px' }}
           >
-            <Trans>Supply</Trans>
+            <Trans>Deposit</Trans>
           </Button>
         )}
       </Box>
