@@ -22,22 +22,27 @@ const NewTabs = styled(Tabs)({
   minHeight: '24px',
   '& .MuiTabs-flexContainer': {
     justifyContent: 'center',
-    gap: 2,
+    gap: 4,
   },
   '& .MuiTabs-indicator': {
     display: 'none',
   },
+  border: '1px solid #F6F8F9',
+  padding: '2px',
+  borderRadius: '100px',
 });
 
 const NewTab = styled(Tab)`
   margin: 0px;
+  fontweight: 600;
   min-height: 24px;
   height: 24px;
-  color: #B0BABF;
-  &.Mui-selected, &:hover {
-    background: #EEF0F2;
-    border-radius: 100px;  
-    color: #080F26;
+  color: #b0babf;
+  &.Mui-selected,
+  &:hover {
+    background: #eef0f2;
+    border-radius: 100px;
+    color: #080f26;
     font-weight: bold;
   }
 `;
@@ -145,35 +150,32 @@ export const PositionTabs = () => {
     <Paper
       sx={(theme) => ({
         border: `1px solid ${theme.palette.divider}`,
-        width: '100%', 
-        bgcolor: 'background.paper', 
-        my: {xs: '16px', md: '24px'},
+        width: '100%',
+        bgcolor: 'background.paper',
+        my: { xs: '16px', md: '24px' },
         mx: 'auto',
-        padding: {xs: '16px', md: '24px'},
+        padding: { xs: '16px', md: '24px' },
       })}
     >
-      <Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <NewTabs
           value={selectedTab}
           onChange={handleChange}
           sx={{
             mb: 2,
+            width: { xs: '100%', sm: '482px' },
           }}
         >
-          <NewTab label="Supplies"/>
-          <NewTab label="Borrows" />
-          {/* <NewTab label="Transactions" />
-          <NewTab label="Liquidation History" /> */}
+          <NewTab label="Deposit" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
+          <NewTab label="Borrows" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
+          {/* <NewTab label="Transactions" sx={{ fontSize: { xs: '9px', md: '14px' } }} />
+          <NewTab label="Liquidation History" sx={{ fontSize: { xs: '9px', md: '14px' } }} /> */}
         </NewTabs>
       </Box>
       {selectedTab == 0 && <SuppliedPositionsList />}
       {selectedTab == 1 && <BorrowedPositionsList />}
-      {selectedTab == 2 && 
-        <></>
-      }
-      {selectedTab == 3 && 
-        <></>
-      }
+      {selectedTab == 2 && <></>}
+      {selectedTab == 3 && <></>}
     </Paper>
   );
-}
+};
