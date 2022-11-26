@@ -89,14 +89,14 @@ export const BorrowedPositionsList = () => {
     <Box>
       <>
         {!!borrowPositions.length && (
-          <Box sx={{display: 'flex', my: 4, gap: 4}}>
+          <Box sx={{ display: 'flex', my: 4, gap: 4, flexDirection: 'row', flexWrap: 'wrap' }}>
             <ListTopInfoItem
               icon={<WalletIcon />}
               title={<Trans>Balance</Trans>}
               value={user?.totalBorrowsUSD || 0}
             />
             <ListTopInfoItem
-              icon={<NetAPYIcon />}              
+              icon={<NetAPYIcon />}
               title={<Trans>APY</Trans>}
               value={user?.debtAPY || 0}
               percent
@@ -112,7 +112,7 @@ export const BorrowedPositionsList = () => {
           </Box>
         )}
       </>
-    
+
       {borrowPositions.length ? (
         <>
           {!downToXSM && <ListHeader head={head} />}

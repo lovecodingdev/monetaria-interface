@@ -60,7 +60,7 @@ export const SuppliedPositionsList = () => {
     <Box>
       <>
         {!!suppliedPosition.length && (
-          <Box sx={{ display: 'flex', my: 4, gap: 4 }}>
+          <Box sx={{ display: 'flex', my: 4, gap: 4, flexDirection: 'row', flexWrap: 'wrap' }}>
             <ListTopInfoItem
               icon={<WalletIcon />}
               title={<Trans>Balance</Trans>}
