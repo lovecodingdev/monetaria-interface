@@ -25,6 +25,7 @@ function TransactionListHeader() {
         alignItems: 'flex-start',
         flexWrap: 'wrap',
         paddingBottom: '20px',
+        justifyContent: { xs: 'center', sm: 'flex-start' },
       }}
     >
       <Box>

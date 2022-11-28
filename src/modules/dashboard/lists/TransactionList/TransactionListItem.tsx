@@ -27,7 +27,7 @@ const data = [
   },
 ];
 
-export const TransactionListItem = () => {
+const TransactionListItem = () => {
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();
   const [loading, setLoading] = useState(false);
@@ -81,7 +81,7 @@ export const TransactionListItem = () => {
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
-                gap: 2,
+                gap: 4,
                 justifyContent: 'start',
                 alignItems: 'center',
               }}
