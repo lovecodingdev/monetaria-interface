@@ -36,6 +36,8 @@ const NewTabs = styled(Tabs)({
 const NewTab = styled(Tab)`
   margin: 0px;
   fontweight: 600;
+  fontfamily: Inter !important;
+  fontstyle: normal !important;
   min-height: 24px;
   height: 24px;
   color: #b0babf;
@@ -167,9 +169,30 @@ export const PositionTabs = () => {
             width: { xs: '100%', sm: '482px' },
           }}
         >
-          <NewTab label="Deposits" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
-          <NewTab label="Borrows" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
-          <NewTab label="Transactions" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
+          <NewTab
+            label="Deposits"
+            sx={{
+              fontSize: { xs: '14px', md: '14px' },
+              fontFamily: 'Inter !important',
+              fontStyle: 'normal',
+            }}
+          />
+          <NewTab
+            label="Borrows"
+            sx={{
+              fontSize: { xs: '14px', md: '14px' },
+              fontFamily: 'Inter !important',
+              fontStyle: 'normal',
+            }}
+          />
+          <NewTab
+            label="Transactions"
+            sx={{
+              fontSize: { xs: '14px', md: '14px' },
+              fontFamily: 'Inter !important',
+              fontStyle: 'normal',
+            }}
+          />
           {/* <NewTab label="Liquidation History" sx={{ fontSize: { xs: '14px', md: '14px' } }} /> */}
         </NewTabs>
       </Box>
