@@ -36,7 +36,7 @@ const NewTabs = styled(Tabs)({
 const NewTab = styled(Tab)`
   margin: 0px;
   fontweight: 600;
-  fontfamily: Inter !important;
+  fontfamily: Gilroy, Arial !important;
   fontstyle: normal !important;
   min-height: 24px;
   height: 24px;
@@ -173,7 +173,7 @@ export const PositionTabs = () => {
             label="Deposits"
             sx={{
               fontSize: { xs: '14px', md: '14px' },
-              fontFamily: 'Inter !important',
+              fontFamily: 'Gilroy,Arial !important',
               fontStyle: 'normal',
             }}
           />
@@ -181,7 +181,7 @@ export const PositionTabs = () => {
             label="Borrows"
             sx={{
               fontSize: { xs: '14px', md: '14px' },
-              fontFamily: 'Inter !important',
+              fontFamily: 'Gilroy,Arial !important',
               fontStyle: 'normal',
             }}
           />
@@ -189,7 +189,7 @@ export const PositionTabs = () => {
             label="Transactions"
             sx={{
               fontSize: { xs: '14px', md: '14px' },
-              fontFamily: 'Inter !important',
+              fontFamily: 'Gilroy,Arial !important',
               fontStyle: 'normal',
             }}
           />

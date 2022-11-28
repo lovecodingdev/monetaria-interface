@@ -82,7 +82,7 @@ export const TransactionListItem = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 gap: 2,
-                justifyContent: 'left',
+                justifyContent: 'start',
                 alignItems: 'center',
               }}
             >
@@ -91,9 +91,20 @@ export const TransactionListItem = () => {
                 sx={{ fontSize: `24px`, ml: -1 }}
                 key={rowData.symbol}
               />
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.05em' }}>
-                <Box sx={{ fontSize: '14px', fontWeight: 400 }}>{rowData.asset}</Box>
-                <Box sx={{ fontSize: '12px', fontWeight: 400, color: '#84919A' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.05em',
+                  justifyContent: 'start',
+                }}
+              >
+                <Box sx={{ fontSize: '14px', fontWeight: 400, textAlign: 'left' }}>
+                  {rowData.asset}
+                </Box>
+                <Box
+                  sx={{ fontSize: '12px', fontWeight: 400, color: '#84919A', textAlign: 'left' }}
+                >
                   {rowData.network}
                 </Box>
               </Box>
