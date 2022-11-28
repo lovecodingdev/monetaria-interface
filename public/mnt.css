@@ -28,3 +28,9 @@
   overflow: hidden;
   position: relative;
 }
+
+@media screen and (max-width : 639px) {
+  .rs-picker-daterange-content {
+    width: 305px
+  }
+}
