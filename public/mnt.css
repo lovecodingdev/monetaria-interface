@@ -34,3 +34,12 @@
     width: 305px
   }
 }
+
+.rs-table-cell-header-sort-wrapper svg {
+  color: #6E7C87 !important
+}
+
+.rs-table {
+  font-family: Inter !important;
+  font-style: normal;
+}
