@@ -18,6 +18,7 @@ import { styled } from '@mui/system';
 import { BorrowedPositionsList } from '../dashboard/lists/BorrowedPositionsList/BorrowedPositionsList';
 import { SuppliedPositionsList } from '../dashboard/lists/SuppliedPositionsList/SuppliedPositionsList';
 import TransactionList from '../dashboard/lists/TransactionList/TransactionList';
+import LiquidationHistoryList from '../dashboard/lists/LiquidationHistoryList/LiquidationHistoryList';
 
 const NewTabs = styled(Tabs)({
   minHeight: '24px',
@@ -193,13 +194,20 @@ export const PositionTabs = () => {
               fontStyle: 'normal',
             }}
           />
-          {/* <NewTab label="Liquidation History" sx={{ fontSize: { xs: '14px', md: '14px' } }} /> */}
+          <NewTab
+            label="Liquidation History"
+            sx={{
+              fontSize: { xs: '14px', md: '14px' },
+              fontFamily: 'Gilroy,Arial !important',
+              fontStyle: 'normal',
+            }}
+          />
         </NewTabs>
       </Box>
       {selectedTab == 0 && <SuppliedPositionsList />}
       {selectedTab == 1 && <BorrowedPositionsList />}
       {selectedTab == 2 && <TransactionList />}
-      {selectedTab == 3 && <></>}
+      {selectedTab == 3 && <LiquidationHistoryList />}
     </Paper>
   );
 };
