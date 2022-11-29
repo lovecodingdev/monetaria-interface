@@ -23,7 +23,6 @@ import LiquidationHistoryList from '../dashboard/lists/LiquidationHistoryList/Li
 const NewTabs = styled(Tabs)({
   minHeight: '24px',
   '& .MuiTabs-flexContainer': {
-    justifyContent: 'center',
     gap: 4,
   },
   '& .MuiTabs-indicator': {
@@ -167,8 +166,11 @@ export const PositionTabs = () => {
           onChange={handleChange}
           sx={{
             mb: 2,
-            width: { xs: '100%', sm: '482px' },
           }}
+          variant="scrollable"
+          scrollButtons="auto"
+          allowScrollButtonsMobile
+          selectionFollowsFocus={true}
         >
           <NewTab
             label="Deposits"
