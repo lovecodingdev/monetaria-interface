@@ -2,14 +2,15 @@ import { Trans } from '@lingui/macro';
 import { Box, Typography } from '@mui/material';
 import { Row } from '../../../../components/primitives/Row';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
+import { TransactionListValidator } from './type';
 
-const data = [
+const data: TransactionListValidator[] = [
   {
     asset: 'ETH',
     symbol: 'eth',
     network: 'Ethereum',
     type: 'ETH borrow',
-    amount: 237.5,
+    amount: 2374.5,
     block: 'YES',
     hash_id: '2342342342342',
     date: '16/12/2022',

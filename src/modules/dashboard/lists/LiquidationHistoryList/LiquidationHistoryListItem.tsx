@@ -2,20 +2,22 @@ import { useState } from 'react';
 import { Button, Box, useMediaQuery, useTheme } from '@mui/material';
 import { Table } from 'rsuite';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
+import { LiquidationHistoryListValidator } from './type';
 
 const { Column, HeaderCell, Cell } = Table;
-const data = [
+
+const data: LiquidationHistoryListValidator[] = [
   {
     date: '16/12/2022',
-    dept_repaid: '234',
-    remaining_dept: '234',
-    collateral_lost: '500',
+    dept_repaid: 234,
+    remaining_dept: 234,
+    collateral_lost: 500,
   },
   {
     date: '16/12/2022',
-    dept_repaid: '234',
-    remaining_dept: '234',
-    collateral_lost: '500',
+    dept_repaid: 2324,
+    remaining_dept: 2134,
+    collateral_lost: 5200,
   },
 ];
 
