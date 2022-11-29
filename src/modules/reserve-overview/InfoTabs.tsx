@@ -191,12 +191,16 @@ export const InfoTabs = ({ reserve }: { reserve: ComputedReserveData }) => {
           sx={{
             mb: 2,
             width: { xs: '100%', md: '390px' },
-            gap: { xs: 0, md: 2 },
+            gap: { xs: 2, md: 2 },
           }}
+          variant="scrollable"
+          scrollButtons="auto"
+          allowScrollButtonsMobile
+          selectionFollowsFocus={true}
         >
-          <NewTab label="Interest Rate Model" sx={{ fontSize: { xs: '10px', md: '14px' } }} />
-          <NewTab label="Supply Info" sx={{ fontSize: { xs: '10px', md: '14px' } }} />
-          <NewTab label="Borrow Info" sx={{ fontSize: { xs: '10px', md: '14px' } }} />
+          <NewTab label="Interest Rate Model" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
+          <NewTab label="Supply Info" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
+          <NewTab label="Borrow Info" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
           {/* <NewTab label="E-Mode Info" /> */}
         </NewTabs>
       </Box>
