@@ -19,6 +19,7 @@ import { BorrowedPositionsList } from '../dashboard/lists/BorrowedPositionsList/
 import { SuppliedPositionsList } from '../dashboard/lists/SuppliedPositionsList/SuppliedPositionsList';
 import TransactionList from '../dashboard/lists/TransactionList/TransactionList';
 import LiquidationHistoryList from '../dashboard/lists/LiquidationHistoryList/LiquidationHistoryList';
+import { Dashboard } from './Dashboard';
 
 const NewTabs = styled(Tabs)({
   minHeight: '24px',
@@ -204,12 +205,21 @@ export const PositionTabs = () => {
               fontStyle: 'normal',
             }}
           />
+          <NewTab
+            label="Dashboard"
+            sx={{
+              fontSize: { xs: '14px', md: '14px' },
+              fontFamily: 'Gilroy,Arial !important',
+              fontStyle: 'normal',
+            }}
+          />
         </NewTabs>
       </Box>
       {selectedTab == 0 && <SuppliedPositionsList />}
       {selectedTab == 1 && <BorrowedPositionsList />}
       {selectedTab == 2 && <TransactionList />}
       {selectedTab == 3 && <LiquidationHistoryList />}
+      {selectedTab == 4 && <Dashboard />}
     </Paper>
   );
 };
