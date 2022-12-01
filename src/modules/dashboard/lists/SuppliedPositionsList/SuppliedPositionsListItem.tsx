@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Button } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import {
   ComputedUserReserveData,
   ExtendedFormattedUser,
@@ -26,7 +26,8 @@ export const SuppliedPositionsListItem = ({
 }: ComputedUserReserveData & { user: ExtendedFormattedUser }) => {
   const { isIsolated, aIncentivesData, isFrozen, isActive } = reserve;
   const { currentMarketData, currentMarket } = useProtocolDataContext();
-  const { openActions, openSupply, openWithdraw, openCollateralChange, openSwap } = useModalContext();
+  const { openActions, openSupply, openWithdraw, openCollateralChange, openSwap } =
+    useModalContext();
   const isSwapButton = isFeatureEnabled.liquiditySwap(currentMarketData);
 
   const canBeEnabledAsCollateral =
@@ -70,12 +71,31 @@ export const SuppliedPositionsListItem = ({
         />
       </ListColumn>
 
+      <ListColumn>
+        <Box>23.45%</Box>
+      </ListColumn>
+
+      <ListColumn>
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Box>5300</Box>
+          <Box sx={{ color: '#84919A', fontWeight: 400, fontSize: '12px' }}>100.93$</Box>
+        </Box>
+      </ListColumn>
+
       <ListButtonsColumn>
-        <Button variant="outlined" onClick={() => openActions(underlyingAsset, ModalType.Withdraw)}>
+        <Button
+          variant="outlined"
+          onClick={() => openActions(underlyingAsset, ModalType.Withdraw)}
+          sx={{
+            backgroundColor: 'rgba(21, 126, 255, 0.05)',
+            border: '1px solid rgba(21, 126, 255, 0.2)',
+            borderRadius: '8px',
+          }}
+        >
           <Trans>Withdraw</Trans>
         </Button>
         <Button variant="contained" onClick={() => openActions(underlyingAsset, ModalType.Supply)}>
-          <Trans>Supply</Trans>
+          <Trans>Deposit</Trans>
         </Button>
       </ListButtonsColumn>
     </ListItemWrapper>

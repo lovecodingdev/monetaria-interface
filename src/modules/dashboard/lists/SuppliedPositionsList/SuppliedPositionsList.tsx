@@ -51,6 +51,8 @@ export const SuppliedPositionsList = () => {
       key="Collateral"
       variant="subheader2"
     />,
+    'Reward APY',
+    'Reward Amount',
     <Trans key="Actions">Actions</Trans>,
   ];
 

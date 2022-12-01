@@ -65,7 +65,25 @@ export const SuppliedPositionsListMobileItem = ({
       </Row>
 
       <Row
-        caption={<Trans>Used as collateral</Trans>}
+        caption={<Trans>Reward APY</Trans>}
+        align="flex-start"
+        captionVariant="description"
+        mb={2}
+      >
+        <span style={{ fontSize: '14px', color: '#252C32', fontWeight: 400 }}>2.08%</span>
+      </Row>
+
+      <Row
+        caption={<Trans>Reward Amount</Trans>}
+        align="flex-start"
+        captionVariant="description"
+        mb={2}
+      >
+        <span style={{ fontSize: '14px', color: '#252C32', fontWeight: 400 }}>10(10.93$)</span>
+      </Row>
+
+      <Row
+        caption={<Trans>Collateral</Trans>}
         align={isIsolated ? 'flex-start' : 'center'}
         captionVariant="description"
         mb={2}
