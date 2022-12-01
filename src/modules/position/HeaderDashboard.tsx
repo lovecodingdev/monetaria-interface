@@ -1,60 +1,76 @@
 import React from 'react';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 function HeaderDashboard() {
   return (
     <Box
       sx={{
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: { xs: 'column', sm: 'row' },
         gap: '40px',
         fontFamily: 'Gilroy,Arial !important',
-        padding: '20px',
-        alignItems: 'start',
+        padding: { xs: '20px 0px', sm: '20px' },
+        alignItems: { xs: 'center', sm: 'start' },
+        flexWrap: 'wrap',
+        justifyContent: 'center',
       }}
     >
-      <Box sx={{ display: 'flex', flexDirection: 'row', gap: '40px', alignItems: 'center' }}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            borderRight: '1px solid #E5E9EB',
-            gap: '40px',
-            alignItems: 'center',
-          }}
-        >
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Box
-              sx={{ color: '#080F26 !important', fontSize: '14px', fontWeight: 400, opacity: 0.4 }}
-            >
-              Total Balances
-            </Box>
-            <Box sx={{ color: '#080F26 !important', fontWeight: 500, fontSize: '20px' }}>
-              $ 56,560.02
-            </Box>
-          </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column', paddingRight: '40px' }}>
-            <Box
-              sx={{ color: '#080F26 !important', fontSize: '14px', fontWeight: 400, opacity: 0.4 }}
-            >
-              Total veCRV
-            </Box>
-            <Box sx={{ color: '#080F26 !important', fontWeight: 500, fontSize: '16px' }}>
-              veCRV-0
-            </Box>
-            <Box sx={{ color: '#080F26 !important', fontWeight: 500, fontSize: '16px' }}>
-              Locked for 0 days
-            </Box>
-          </Box>
-        </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          gap: '40px',
+          alignItems: 'center',
+          flexWrap: { xs: 'nowrap', sm: 'wrap' },
+          width: { xs: '300px', sm: 'auto' },
+        }}
+      >
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignSelf: 'start' }}>
           <Box
             sx={{ color: '#080F26 !important', fontSize: '14px', fontWeight: 400, opacity: 0.4 }}
           >
-            Rewards
+            Total Balances
+          </Box>
+          <Box sx={{ color: '#080F26 !important', fontWeight: 500, fontSize: '20px' }}>
+            $ 56,560.02
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'row', sm: 'column' },
+            justifyContent: { xs: 'space-between' },
+            paddingRight: { xs: '0px', sm: '40px' },
+            borderRight: { xs: 'none', sm: '1px solid #E5E9EB' },
+            alignSelf: 'stretch',
+          }}
+        >
+          <Box
+            sx={{ color: '#080F26 !important', fontSize: '14px', fontWeight: 400, opacity: 0.4 }}
+          >
+            Total veCRV
           </Box>
           <Box sx={{ color: '#080F26 !important', fontWeight: 500, fontSize: '16px' }}>
-            0.003 crv
+            veCRV-0
+            <br />
+            Locked for 0 days
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'row', sm: 'column' },
+            alignSelf: 'stretch',
+            justifyContent: { xs: 'space-between' },
+          }}
+        >
+          <Box sx={{ color: '#080F26 !important' }}>
+            <Typography sx={{ fontSize: '14px', fontWeight: 400, opacity: 0.4 }}>
+              Rewards
+            </Typography>
+            <Typography sx={{ fontWeight: 500, fontSize: '16px' }}>0.003 crv</Typography>
           </Box>
           <Box>
             <Button
