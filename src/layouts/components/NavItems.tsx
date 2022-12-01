@@ -78,10 +78,12 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                   position: 'relative',
                   '&:hover': {
                     borderRadius: '100px',
+                    textDecoration: 'none',
                   },
                   '&.active': {
                     background: '#FFFFFF',
                     borderRadius: '100px',
+                    textDecoration: 'none',
                   },
                 })}
               >
