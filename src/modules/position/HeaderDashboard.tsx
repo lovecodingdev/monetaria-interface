@@ -19,7 +19,7 @@ function HeaderDashboard() {
         sx={{
           display: 'flex',
           flexDirection: { xs: 'column', sm: 'row' },
-          gap: '40px',
+          gap: { xs: '20px', sm: '40px' },
           alignItems: 'center',
           flexWrap: { xs: 'nowrap', sm: 'wrap' },
           width: { xs: '300px', sm: 'auto' },
