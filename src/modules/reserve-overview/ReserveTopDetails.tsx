@@ -164,7 +164,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
                   },
                   border: '1px solid #E5E9EB',
                   padding: '1px 8px',
-                  width: { xs: '244px', md: '260px' },
+                  width: { xs: '250px', md: '260px' },
                   height: '50px',
                 }}
                 MenuProps={{
@@ -172,6 +172,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
                     style: {
                       marginTop: '18px',
                       width: '260px',
+                      height: '440px',
                     },
                   },
                 }}
