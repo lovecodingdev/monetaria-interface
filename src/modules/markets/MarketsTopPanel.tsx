@@ -61,18 +61,14 @@ export const MarketsTopPanel = () => {
         title={<Trans>Total market size</Trans>}
         loading={loading}
       >
-        {currentAccount ? (
-          <FormattedNumber
-            value={aggregatedStats.totalLiquidity.toString()}
-            symbol="USD"
-            variant={valueTypographyVariant}
-            visibleDecimals={2}
-            compact
-            symbolsVariant={symbolsVariant}
-          />
-        ) : (
-          <NoData variant={symbolsVariant} sx={{ opacity: '0.7' }} />
-        )}
+        <FormattedNumber
+          value={aggregatedStats.totalLiquidity.toString()}
+          symbol="USD"
+          variant={valueTypographyVariant}
+          visibleDecimals={2}
+          compact
+          symbolsVariant={symbolsVariant}
+        />
       </TopInfoPanelItem>
       <TopInfoPanelItem
         icon={<TotalSupplyIcon />}
@@ -80,18 +76,14 @@ export const MarketsTopPanel = () => {
         title={<Trans>Total available</Trans>}
         loading={loading}
       >
-        {currentAccount ? (
-          <FormattedNumber
-            value={aggregatedStats.totalLiquidity.minus(aggregatedStats.totalDebt).toString()}
-            symbol="USD"
-            variant={valueTypographyVariant}
-            visibleDecimals={2}
-            compact
-            symbolsVariant={symbolsVariant}
-          />
-        ) : (
-          <NoData variant={symbolsVariant} sx={{ opacity: '0.7' }} />
-        )}
+        <FormattedNumber
+          value={aggregatedStats.totalLiquidity.minus(aggregatedStats.totalDebt).toString()}
+          symbol="USD"
+          variant={valueTypographyVariant}
+          visibleDecimals={2}
+          compact
+          symbolsVariant={symbolsVariant}
+        />
       </TopInfoPanelItem>
       <TopInfoPanelItem
         icon={<TotalBorrowIcon />}
@@ -99,18 +91,14 @@ export const MarketsTopPanel = () => {
         title={<Trans>Total borrows</Trans>}
         loading={loading}
       >
-        {currentAccount ? (
-          <FormattedNumber
-            value={aggregatedStats.totalDebt.toString()}
-            symbol="USD"
-            variant={valueTypographyVariant}
-            visibleDecimals={2}
-            compact
-            symbolsVariant={symbolsVariant}
-          />
-        ) : (
-          <NoData variant={symbolsVariant} sx={{ opacity: '0.7' }} />
-        )}
+        <FormattedNumber
+          value={aggregatedStats.totalDebt.toString()}
+          symbol="USD"
+          variant={valueTypographyVariant}
+          visibleDecimals={2}
+          compact
+          symbolsVariant={symbolsVariant}
+        />
       </TopInfoPanelItem>
     </TopInfoPanel>
   );
