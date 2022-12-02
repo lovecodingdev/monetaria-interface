@@ -375,14 +375,17 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
             gap: '0.6em',
             borderRadius: 4,
             backgroundColor: '#E7F2FF',
-            paddingLeft: { xs: 0, sm: '10px' },
+            paddingLeft: { xs: 0, sm: currentAccount ? '10px' : '0px' },
           }}
         >
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: 600 }}>
-              {nativeBalance > 0 ? nativeBalance.toFixed(4) : 0}
-            </Typography>
-          </Box>
+          {currentAccount && (
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: 600 }}>
+                {nativeBalance > 0 ? nativeBalance.toFixed(4) : 0}
+              </Typography>
+            </Box>
+          )}
+
           <Box>
             {' '}
             <Button
