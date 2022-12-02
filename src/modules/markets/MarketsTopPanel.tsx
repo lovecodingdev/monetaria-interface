@@ -40,8 +40,9 @@ export const MarketsTopPanel = () => {
   const symbolsVariant = downToSM ? 'secondary16' : 'secondary21';
 
   return (
-    <TopInfoPanel pageTitle={
-        <Box 
+    <TopInfoPanel
+      pageTitle={
+        <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -54,7 +55,7 @@ export const MarketsTopPanel = () => {
         </Box>
       }
     >
-      <TopInfoPanelItem
+      {/* <TopInfoPanelItem
         icon={<PieIcon />}
         hideIcon
         title={<Trans>Total market size</Trans>}
@@ -110,7 +111,7 @@ export const MarketsTopPanel = () => {
         ) : (
           <NoData variant={symbolsVariant} sx={{ opacity: '0.7' }} />
         )}
-      </TopInfoPanelItem>
+      </TopInfoPanelItem> */}
     </TopInfoPanel>
   );
 };
