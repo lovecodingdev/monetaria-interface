@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Box, Paper} from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
@@ -39,9 +39,10 @@ const NewTab = styled(Tab)`
     min-width: 60px;
     padding: 4px 12px;
   }
-  &.Mui-selected, &:hover {
-    background: #EEF0F2;
-    border-radius: 100px;  
+  &.Mui-selected,
+  &:hover {
+    background: #eef0f2;
+    border-radius: 100px;
   }
 `;
 
@@ -53,14 +54,19 @@ export const ActionTabsModal = () => {
   }>;
 
   const [selectedTab, setSelectedTab] = useState(0);
+  const [isDone, setIsDone] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     setSelectedTab(
-      args.actionTab === ModalType.Supply ? 0 : 
-      args.actionTab === ModalType.Borrow ? 1 :
-      args.actionTab === ModalType.Repay ? 2 : 3
-    )
-  }, [args.actionTab])
+      args.actionTab === ModalType.Supply
+        ? 0
+        : args.actionTab === ModalType.Borrow
+        ? 1
+        : args.actionTab === ModalType.Repay
+        ? 2
+        : 3
+    );
+  }, [args.actionTab]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
@@ -81,9 +87,9 @@ export const ActionTabsModal = () => {
     isFeatureEnabled.collateralRepay(currentMarketData) &&
     userReserves.some(
       (userReserve) =>
-        userReserve.scaledMTokenBalance !== '0' && userReserve.underlyingAsset !== args.underlyingAsset
+        userReserve.scaledMTokenBalance !== '0' &&
+        userReserve.underlyingAsset !== args.underlyingAsset
     );
-
 
   //Withdraw
   const [withdrawUnWrapped, setWithdrawUnWrapped] = useState(true);
@@ -92,7 +98,7 @@ export const ActionTabsModal = () => {
 
   return (
     <BasicModal open={type === ModalType.Actions} setOpen={close} withCloseButton={false}>
-    {/* <Paper
+      {/* <Paper
       sx={(theme) => ({
         border: `1px solid ${theme.palette.divider}`,
         width: '100%', 
@@ -102,39 +108,52 @@ export const ActionTabsModal = () => {
         padding: {xs: '16px', md: '24px'},
       })}
     > */}
-      <Box>
-        <NewTabs
-          value={selectedTab}
-          onChange={handleChange}
-          centered
-          sx={{
-            mb: 4,
-          }}
+      {!mainTxState?.success && (
+        <Box>
+          <NewTabs
+            value={selectedTab}
+            onChange={handleChange}
+            centered
+            sx={{
+              mb: 4,
+            }}
+          >
+            <NewTab label="Supply" />
+            <NewTab label="Borrow" />
+            <NewTab label="Repay" />
+            <NewTab label="Withdraw" />
+          </NewTabs>
+        </Box>
+      )}
+
+      {selectedTab == 0 && (
+        <ModalWrapper
+          underlyingAsset={args.underlyingAsset}
+          requiredPermission={PERMISSION.DEPOSITOR}
         >
-          <NewTab label="Supply"/>
-          <NewTab label="Borrow" />
-          <NewTab label="Repay" />
-          <NewTab label="Withdraw" />
-        </NewTabs>
-      </Box>
-      {selectedTab == 0 &&
-        <ModalWrapper underlyingAsset={args.underlyingAsset} requiredPermission={PERMISSION.DEPOSITOR}>
           {(params) => <SupplyModalContent {...params} />}
         </ModalWrapper>
-      }
-      {selectedTab == 1 &&
+      )}
+      {selectedTab == 1 && (
         <ModalWrapper
           underlyingAsset={args.underlyingAsset}
           keepWrappedSymbol={!borrowUnWrapped}
           requiredPermission={PERMISSION.BORROWER}
         >
           {(params) => (
-            <BorrowModalContent {...params} unwrap={borrowUnWrapped} setUnwrap={setBorrowUnWrapped} />
+            <BorrowModalContent
+              {...params}
+              unwrap={borrowUnWrapped}
+              setUnwrap={setBorrowUnWrapped}
+            />
           )}
         </ModalWrapper>
-      }
-      {selectedTab == 2 &&
-        <ModalWrapper underlyingAsset={args.underlyingAsset} requiredPermission={PERMISSION.BORROWER}>
+      )}
+      {selectedTab == 2 && (
+        <ModalWrapper
+          underlyingAsset={args.underlyingAsset}
+          requiredPermission={PERMISSION.BORROWER}
+        >
           {(params) => {
             return (
               <>
@@ -151,8 +170,8 @@ export const ActionTabsModal = () => {
             );
           }}
         </ModalWrapper>
-      }
-      {selectedTab == 3 &&
+      )}
+      {selectedTab == 3 && (
         <ModalWrapper
           underlyingAsset={args.underlyingAsset}
           keepWrappedSymbol={!withdrawUnWrapped}
@@ -166,7 +185,7 @@ export const ActionTabsModal = () => {
             />
           )}
         </ModalWrapper>
-      }
+      )}
     </BasicModal>
   );
-}
+};
