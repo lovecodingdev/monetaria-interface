@@ -54,8 +54,12 @@ export type BaseNetworkConfig = Omit<NetworkConfig, 'explorerLinkBuilder'>;
 export const networkConfigs: Record<string, BaseNetworkConfig> = {
   [ChainId.goerli]: {
     name: 'Ethereum Görli',
-    publicJsonRPCUrl: ['https://eth-goerli.alchemyapi.io/v2/demo', 'https://goerli.prylabs.net'],
-    publicJsonRPCWSUrl: 'wss://eth-goerli.alchemyapi.io/v2/demo',
+    publicJsonRPCUrl: [
+      'https://eth-goerli.public.blastapi.io',
+      'https://rpc.ankr.com/eth_goerli',
+      'https://goerli.prylabs.net',
+    ],
+    publicJsonRPCWSUrl: 'wss://eth-goerli.public.blastapi.io',
     // protocolDataUrl: '',
     baseUniswapAdapter: '0x0',
     baseAssetSymbol: 'ETH',
