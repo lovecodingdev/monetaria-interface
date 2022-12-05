@@ -54,7 +54,7 @@ export const TxSuccessView = ({
           sx={{
             width: '48px',
             height: '48px',
-            bgcolor: 'success.200',
+            backgroundColor: '#47D16C',
             borderRadius: '50%',
             mt: 14,
             mx: 'auto',
@@ -63,12 +63,15 @@ export const TxSuccessView = ({
             justifyContent: 'center',
           }}
         >
-          <SvgIcon sx={{ color: 'success.main', fontSize: '32px' }}>
+          <SvgIcon sx={{ color: 'white', fontSize: '32px' }}>
             <CheckIcon />
           </SvgIcon>
         </Box>
 
-        <Typography sx={{ mt: 4 }} variant="h2">
+        <Typography
+          sx={{ mt: 4, color: '#080F26', fontWeight: 500, fontSize: '20px' }}
+          variant="h2"
+        >
           <Trans>All done!</Trans>
         </Typography>
 
@@ -83,7 +86,7 @@ export const TxSuccessView = ({
           }}
         >
           {action && amount && symbol && (
-            <Typography>
+            <Typography sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
               <Trans>
                 You {action}{' '}
                 <FormattedNumber value={Number(amount)} compact variant="secondary14" /> {symbol}
@@ -117,46 +120,64 @@ export const TxSuccessView = ({
                 alignItems: 'center',
                 justifyContent: 'center',
                 mt: '24px',
+                padding: '16px',
               })}
             >
-              <TokenIcon
-                symbol={symbol}
-                mToken={true}
-                sx={{ fontSize: '32px', mt: '12px', mb: '8px' }}
-              />
-              <Typography variant="description" color="text.primary" sx={{ mx: '24px' }}>
-                <Trans>Add mToken to the wallet to track your supply balance.</Trans>
-              </Typography>
-              <Button
-                onClick={() => {
-                  addERC20Token({
-                    address: addToken.address,
-                    decimals: addToken.decimals,
-                    symbol: addToken.mToken ? `a${addToken.symbol}` : addToken.symbol,
-                    image: !/_/.test(addToken.symbol) ? base64 : undefined,
-                  });
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'start',
+                  justifyContent: 'space-between',
+                  gap: 2,
                 }}
-                variant={theme.palette.mode === 'dark' ? 'outlined' : 'contained'}
-                size="medium"
-                sx={{ mt: '8px', mb: '12px' }}
               >
-                {addToken.symbol && !/_/.test(addToken.symbol) && (
-                  <Base64Token
-                    symbol={addToken.symbol}
-                    onImageGenerated={setBase64}
-                    mToken={addToken.mToken}
-                  />
-                )}
-                <img
-                  src="/icons/wallets/walletIcon.svg"
-                  width="24px"
-                  height="24px"
-                  alt="wallet icon"
-                />
-                <Typography variant="buttonM" color="white" ml="4px">
-                  <Trans>Add to wallet</Trans>
-                </Typography>
-              </Button>
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'start', gap: 2 }}>
+                  {' '}
+                  <Box>
+                    {' '}
+                    <TokenIcon symbol={symbol} mToken={true} sx={{ fontSize: '32px' }} />
+                  </Box>
+                  <Box>
+                    {' '}
+                    <Typography
+                      variant="description"
+                      color="#1A2024"
+                      sx={{ fontWeight: 400, fontSize: '14px' }}
+                    >
+                      <Trans>Add mToken to the wallet to track your supply balance.</Trans>
+                    </Typography>
+                  </Box>
+                </Box>
+                <Box>
+                  {' '}
+                  <Button
+                    onClick={() => {
+                      addERC20Token({
+                        address: addToken.address,
+                        decimals: addToken.decimals,
+                        symbol: addToken.mToken ? `a${addToken.symbol}` : addToken.symbol,
+                        image: !/_/.test(addToken.symbol) ? base64 : undefined,
+                      });
+                    }}
+                    variant={theme.palette.mode === 'dark' ? 'outlined' : 'contained'}
+                    size="medium"
+                    sx={{ mt: '8px', mb: '12px', padding: '7px 12px' }}
+                  >
+                    {addToken.symbol && !/_/.test(addToken.symbol) && (
+                      <Base64Token
+                        symbol={addToken.symbol}
+                        onImageGenerated={setBase64}
+                        mToken={addToken.mToken}
+                      />
+                    )}
+
+                    <Typography variant="buttonM" color="white">
+                      <Trans>Add</Trans>
+                    </Typography>
+                  </Button>
+                </Box>
+              </Box>
             </Box>
           )}
         </Box>
@@ -172,6 +193,9 @@ export const TxSuccessView = ({
             justifyContent: 'right',
             mt: 6,
             mb: 3,
+            color: '#59729D',
+            fontWeight: 400,
+            fontSize: '12px',
           }}
           underline="hover"
           target="_blank"
@@ -182,9 +206,17 @@ export const TxSuccessView = ({
         </Link>
         <Button
           onClick={close}
-          variant="contained"
+          variant="outlined"
           size="large"
-          sx={{ minHeight: '44px' }}
+          sx={{
+            minHeight: '44px',
+            color: '#074592',
+            fontWeight: 600,
+            fontSize: '16px',
+            backgroundColor: 'rgba(21, 126, 255, 0.05)',
+            border: '1px solid rgba(21, 126, 255, 0.2)',
+            borderRadius: '8px',
+          }}
           data-cy="closeButton"
         >
           <Trans>Ok, Close</Trans>
