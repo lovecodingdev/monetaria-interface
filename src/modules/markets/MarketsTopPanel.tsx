@@ -55,51 +55,54 @@ export const MarketsTopPanel = () => {
         </Box>
       }
     >
-      <TopInfoPanelItem
-        icon={<PieIcon />}
-        hideIcon
-        title={<Trans>Total market size</Trans>}
-        loading={loading}
-      >
-        <FormattedNumber
-          value={aggregatedStats.totalLiquidity.toString()}
-          symbol="USD"
-          variant={valueTypographyVariant}
-          visibleDecimals={2}
-          compact
-          symbolsVariant={symbolsVariant}
-        />
-      </TopInfoPanelItem>
-      <TopInfoPanelItem
-        icon={<TotalSupplyIcon />}
-        hideIcon
-        title={<Trans>Total available</Trans>}
-        loading={loading}
-      >
-        <FormattedNumber
-          value={aggregatedStats.totalLiquidity.minus(aggregatedStats.totalDebt).toString()}
-          symbol="USD"
-          variant={valueTypographyVariant}
-          visibleDecimals={2}
-          compact
-          symbolsVariant={symbolsVariant}
-        />
-      </TopInfoPanelItem>
-      <TopInfoPanelItem
-        icon={<TotalBorrowIcon />}
-        hideIcon
-        title={<Trans>Total borrows</Trans>}
-        loading={loading}
-      >
-        <FormattedNumber
-          value={aggregatedStats.totalDebt.toString()}
-          symbol="USD"
-          variant={valueTypographyVariant}
-          visibleDecimals={2}
-          compact
-          symbolsVariant={symbolsVariant}
-        />
-      </TopInfoPanelItem>
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: '24px' }}>
+        {' '}
+        <TopInfoPanelItem
+          icon={<PieIcon />}
+          hideIcon
+          title={<Trans>Total market size</Trans>}
+          loading={loading}
+        >
+          <FormattedNumber
+            value={aggregatedStats.totalLiquidity.toString()}
+            symbol="USD"
+            variant={valueTypographyVariant}
+            visibleDecimals={2}
+            compact
+            symbolsVariant={symbolsVariant}
+          />
+        </TopInfoPanelItem>
+        <TopInfoPanelItem
+          icon={<TotalSupplyIcon />}
+          hideIcon
+          title={<Trans>Total available</Trans>}
+          loading={loading}
+        >
+          <FormattedNumber
+            value={aggregatedStats.totalLiquidity.minus(aggregatedStats.totalDebt).toString()}
+            symbol="USD"
+            variant={valueTypographyVariant}
+            visibleDecimals={2}
+            compact
+            symbolsVariant={symbolsVariant}
+          />
+        </TopInfoPanelItem>
+        <TopInfoPanelItem
+          icon={<TotalBorrowIcon />}
+          hideIcon
+          title={<Trans>Total borrows</Trans>}
+          loading={loading}
+        >
+          <FormattedNumber
+            value={aggregatedStats.totalDebt.toString()}
+            symbol="USD"
+            variant={valueTypographyVariant}
+            visibleDecimals={2}
+            compact
+            symbolsVariant={symbolsVariant}
+          />
+        </TopInfoPanelItem>
+      </Box>
     </TopInfoPanel>
   );
 };
