@@ -21,7 +21,7 @@ export interface TxModalDetailsProps {
 export const TxModalDetails: React.FC<TxModalDetailsProps> = ({ gasLimit, children }) => {
   return (
     <Box sx={{ pt: 5 }}>
-      <Typography sx={{ mb: 1 }} color="text.secondary">
+      <Typography sx={{ mb: 1, fontWeight: 500, fontSize: '14px' }} color="#59729D">
         <Trans>Transaction overview</Trans>
       </Typography>
 

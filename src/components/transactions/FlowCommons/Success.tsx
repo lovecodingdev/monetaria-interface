@@ -52,8 +52,8 @@ export const TxSuccessView = ({
       >
         <Box
           sx={{
-            width: '48px',
-            height: '48px',
+            width: '27px',
+            height: '27px',
             backgroundColor: '#47D16C',
             borderRadius: '50%',
             mt: 14,
@@ -63,7 +63,7 @@ export const TxSuccessView = ({
             justifyContent: 'center',
           }}
         >
-          <SvgIcon sx={{ color: 'white', fontSize: '32px' }}>
+          <SvgIcon sx={{ color: 'white', fontSize: '23px' }}>
             <CheckIcon />
           </SvgIcon>
         </Box>
