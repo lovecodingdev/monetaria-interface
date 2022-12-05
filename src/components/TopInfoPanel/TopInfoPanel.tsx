@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 import { PageTitle, PageTitleProps } from './PageTitle';
 
-import borderGradient from "src/layouts/borderGradient";
+import borderGradient from 'src/layouts/borderGradient';
 
 interface TopInfoPanelProps extends PageTitleProps {
   children?: ReactNode;
@@ -25,19 +25,22 @@ export const TopInfoPanel = ({
           py: { xs: 9, md: 10, lg: '20px', xl: '20px', xxl: '20px' },
           mt: { xs: '16px', md: '24px' },
           color: '#F1F1F3',
-          ...borderGradient
+          ...borderGradient,
         }}
       >
-        <Box sx={{
-          px: { xs: 4, xsm: 6 },
-          display: 'flex',
-          flexDirection: {
-            lg: 'row',
-            md: 'row',
-            xs: 'column',
-            xsm: 'column',
-          }, justifyContent: 'space-between'
-        }}>
+        <Box
+          sx={{
+            px: { xs: 4, xsm: 6 },
+            display: 'flex',
+            flexDirection: {
+              lg: 'row',
+              md: 'row',
+              xs: 'column',
+              xsm: 'column',
+            },
+            justifyContent: 'space-between',
+          }}
+        >
           {!titleComponent && (
             <PageTitle
               pageTitle={pageTitle}
@@ -45,9 +48,7 @@ export const TopInfoPanel = ({
               bridge={bridge}
             />
           )}
-          <Box sx={{ marginBottom: '10px' }}>
-            {titleComponent && titleComponent}
-          </Box>
+          <Box sx={{ marginBottom: '10px' }}>{titleComponent && titleComponent}</Box>
 
           <Box
             sx={{
@@ -60,7 +61,7 @@ export const TopInfoPanel = ({
             {children}
           </Box>
         </Box>
-      </Paper >
+      </Paper>
     </Container>
   );
 };

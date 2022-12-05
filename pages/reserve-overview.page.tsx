@@ -46,16 +46,16 @@ export default function ReserveOverview() {
     (reserve) => reserve.underlyingAsset === underlyingAsset
   ) as ComputedReserveData;
 
-  const goPrevPage = () => {
-    router.back();
-  };
+  // const goPrevPage = () => {
+  //   router.back();
+  // };
 
   const isOverview = mode === 'overview';
 
   return (
     <>
       <ContentContainer>
-        <Box
+        {/* <Box
           sx={{
             display: { xs: 'none', md: 'flex' },
             justifyContent: 'flex-start',
@@ -78,7 +78,7 @@ export default function ReserveOverview() {
           >
             Back
           </Button>
-        </Box>
+        </Box> */}
 
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
           {/* * Main status and configuration panel */}

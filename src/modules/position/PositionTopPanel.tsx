@@ -26,7 +26,7 @@ import NetAPYIcon from '../../../public/icons/markets/net-apy-icon.svg';
 import EmptyHeartIcon from '../../../public/icons/markets/empty-heart-icon.svg';
 import ClaimGiftIcon from '../../../public/icons/markets/claim-gift-icon.svg';
 import { NetAPYTooltip } from 'src/components/infoTooltips/NetAPYTooltip';
-import borderGradient from "src/layouts/borderGradient";
+import borderGradient from 'src/layouts/borderGradient';
 import { ContentWithTooltip } from 'src/components/ContentWithTooltip';
 
 export const PositionTopPanel = () => {
@@ -81,8 +81,8 @@ export const PositionTopPanel = () => {
     user?.totalCollateralMarketReferenceCurrency === '0'
       ? '0'
       : valueToBigNumber(user?.totalBorrowsMarketReferenceCurrency || '0')
-        .dividedBy(user?.totalCollateralMarketReferenceCurrency || '1')
-        .toFixed();
+          .dividedBy(user?.totalCollateralMarketReferenceCurrency || '1')
+          .toFixed();
 
   const valueTypographyVariant = downToSM ? 'main16' : 'main21';
   const noDataTypographyVariant = downToSM ? 'secondary16' : 'secondary21';
@@ -93,14 +93,15 @@ export const PositionTopPanel = () => {
   const collateralUsagePercent = maxBorrowAmount.eq(0)
     ? valueToBigNumber('0')
     : valueToBigNumber(user?.totalBorrowsMarketReferenceCurrency || '0')
-        .div(maxBorrowAmount).multipliedBy(100);
+        .div(maxBorrowAmount)
+        .multipliedBy(100);
 
   return (
     <>
       <Paper
         sx={{
           p: 4,
-          ...borderGradient
+          ...borderGradient,
         }}
       >
         <Box
@@ -108,6 +109,7 @@ export const PositionTopPanel = () => {
             display: 'flex',
             gap: 2,
             justifyContent: 'space-between',
+            flexWrap: { xs: 'wrap', md: 'nowrap' },
           }}
         >
           <TopInfoPanelItem
@@ -131,12 +133,11 @@ export const PositionTopPanel = () => {
           </TopInfoPanelItem>
 
           <TopInfoPanelItem
-            hideIcon 
+            hideIcon
             icon={<NetAPYIcon />}
             title={
               <div style={{ display: 'flex' }}>
                 <Trans>Net APY</Trans>
-                <NetAPYTooltip />
               </div>
             }
             loading={loading}
@@ -156,37 +157,20 @@ export const PositionTopPanel = () => {
 
           {currentAccount && user?.healthFactor !== '-1' && (
             <TopInfoPanelItem
-              hideIcon 
+              hideIcon
               icon={<EmptyHeartIcon />}
               title={
                 <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
                   <Trans>Health factor</Trans>
                 </Box>
               }
-              // TODO: need change icon
-              // icon={
-              //   <SvgIcon sx={{ fontSize: '24px' }}>
-              //     {+user.healthFactor >= 10 && <HfFull />}
-              //     {+user.healthFactor < 10 && +user.healthFactor >= 3 && <HfMiddle />}
-              //     {+user.healthFactor < 3 && +user.healthFactor >= 1 && <HfLow />}
-              //     {+user.healthFactor < 1 && <HfEmpty />}
-              //   </SvgIcon>
-              // }
               loading={loading}
             >
               <HealthFactorNumber
                 value={user?.healthFactor || '-1'}
+                sx={{ color: '#000' }}
                 variant={valueTypographyVariant}
                 onInfoClick={() => setOpen(true)}
-                // HALIntegrationComponent={
-                //   currentMarketData.halIntegration && (
-                //     <HALLink
-                //       healthFactor={user?.healthFactor || '-1'}
-                //       marketName={currentMarketData.halIntegration.marketName}
-                //       integrationURL={currentMarketData.halIntegration.URL}
-                //     />
-                //   )
-                // }
               />
             </TopInfoPanelItem>
           )}
@@ -214,7 +198,7 @@ export const PositionTopPanel = () => {
               <CircularProgress
                 variant="determinate"
                 sx={{
-                  color: (theme) => theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+                  color: '#F76A5D',
                   position: 'absolute',
                   left: 0,
                   top: 0,
@@ -225,10 +209,9 @@ export const PositionTopPanel = () => {
               />
               <CircularProgress
                 variant="determinate"
-                color={'error'}
                 sx={{
-                  [`& .${circularProgressClasses.circle}`]: {
-                  },
+                  [`& .${circularProgressClasses.circle}`]: {},
+                  color: '#2580F7',
                 }}
                 size={172}
                 thickness={8}
@@ -255,49 +238,63 @@ export const PositionTopPanel = () => {
             </Box>
           </ContentWithTooltip>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-            <TopInfoPanelItem
-              hideIcon
-              icon={<WalletIcon />}
-              title={<Trans>Total Supplies</Trans>}
-              loading={loading}
-            >
-              {currentAccount ? (
-                <FormattedNumber
-                  value={Number(user?.totalLiquidityUSD || 0)}
-                  symbol="USD"
-                  variant={valueTypographyVariant}
-                  visibleDecimals={2}
-                  compact
-                  symbolsVariant={noDataTypographyVariant}
-                />
-              ) : (
-                <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
-              )}
-            </TopInfoPanelItem>
-            <TopInfoPanelItem
-              hideIcon
-              icon={<WalletIcon />}
-              title={<Trans>Total Borrows</Trans>}
-              loading={loading}
-            >
-              {currentAccount ? (
-                <FormattedNumber
-                  value={Number(user?.totalBorrowsUSD || 0)}
-                  symbol="USD"
-                  variant={valueTypographyVariant}
-                  visibleDecimals={2}
-                  compact
-                  symbolsVariant={noDataTypographyVariant}
-                />
-              ) : (
-                <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
-              )}
-            </TopInfoPanelItem>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'top' }}>
+              <div style={{ paddingRight: '5px' }}>
+                <svg width={'6px'} height={'6px'} style={{ margin: '5px 0' }}>
+                  <circle fill={'#F76659'} r={6 / 2} cx={6 / 2} cy={6 / 2} />
+                </svg>
+              </div>
+              <TopInfoPanelItem
+                hideIcon
+                icon={<WalletIcon />}
+                title={<Trans>Total Deposit</Trans>}
+                loading={loading}
+              >
+                {currentAccount ? (
+                  <FormattedNumber
+                    value={Number(user?.totalLiquidityUSD || 0)}
+                    symbol="USD"
+                    variant={valueTypographyVariant}
+                    visibleDecimals={2}
+                    compact
+                    symbolsVariant={noDataTypographyVariant}
+                  />
+                ) : (
+                  <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
+                )}
+              </TopInfoPanelItem>
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'top' }}>
+              <div style={{ paddingRight: '5px' }}>
+                <svg width={'6px'} height={'6px'} style={{ margin: '5px 0' }}>
+                  <circle fill={'#1A93EA'} r={6 / 2} cx={6 / 2} cy={6 / 2} />
+                </svg>
+              </div>
+              <TopInfoPanelItem
+                hideIcon
+                icon={<WalletIcon />}
+                title={<Trans>Total Borrows</Trans>}
+                loading={loading}
+              >
+                {currentAccount ? (
+                  <FormattedNumber
+                    value={Number(user?.totalBorrowsUSD || 0)}
+                    symbol="USD"
+                    variant={valueTypographyVariant}
+                    visibleDecimals={2}
+                    compact
+                    symbolsVariant={noDataTypographyVariant}
+                  />
+                ) : (
+                  <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
+                )}
+              </TopInfoPanelItem>
+            </Box>
           </Box>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
           <TopInfoPanelItem
-            title={<Trans>Available rewards</Trans>}
+            title={<Trans>MNT earned:</Trans>}
             hideIcon
             icon={<ClaimGiftIcon />}
             loading={loading}

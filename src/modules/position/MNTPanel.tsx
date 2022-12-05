@@ -9,23 +9,24 @@ import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
 import { TopInfoPanelItem } from '../../components/TopInfoPanel/TopInfoPanelItem';
 import { FormattedNumber } from '../../components/primitives/FormattedNumber';
 
-import borderGradient from "src/layouts/borderGradient";
+import borderGradient from 'src/layouts/borderGradient';
 
 export const MNTPanel = () => {
-
   return (
     <Paper
       sx={{
         p: 4,
         height: '100%',
-        ...borderGradient
+        ...borderGradient,
       }}
     >
-      <Typography variant='h2'>MNT</Typography>
-      <Box 
+      <Typography variant="h2">MNT</Typography>
+      <Box
         sx={{
           display: 'flex',
-          gap: 4,
+          flexDirection: 'row',
+          flexWrap: { xs: 'wrap', md: 'nowrap' },
+          gap: { sm: 4, md: 8 },
           my: 2,
         }}
       >
@@ -59,7 +60,7 @@ export const MNTPanel = () => {
             symbolsVariant={'secondary21'}
           />
         </TopInfoPanelItem>
-        <Box sx={{ flex: 1 }} />
+        <Box sx={{ flex: { md: 1 } }} />
         <TopInfoPanelItem hideIcon title={<Trans>Liquidity Mining Reserve</Trans>}>
           <FormattedNumber
             value={Number(5656002.2)}

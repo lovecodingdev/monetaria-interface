@@ -40,9 +40,11 @@ import { frozenProposalMap } from 'src/utils/marketsAndNetworksConfig';
 
 const NewTabs = styled(Tabs)({
   minHeight: '24px',
+  padding: '2px',
+  border: '1px solid #F6F8F9',
+  borderRadius: '100px',
   '& .MuiTabs-flexContainer': {
     justifyContent: 'start',
-    gap: 2,
   },
   '& .MuiTabs-indicator': {
     display: 'none',
@@ -52,6 +54,8 @@ const NewTabs = styled(Tabs)({
 const NewTab = styled(Tab)`
   margin: 0px;
   min-height: 24px;
+  font-weight: 600;
+  padding: 8px 16px;
   height: 24px;
   color: #b0babf;
   &.Mui-selected,
@@ -186,12 +190,18 @@ export const InfoTabs = ({ reserve }: { reserve: ComputedReserveData }) => {
           onChange={handleChange}
           sx={{
             mb: 2,
+            width: { xs: '100%', md: '390px' },
+            gap: { xs: 2, md: 2 },
           }}
+          variant="scrollable"
+          scrollButtons="auto"
+          allowScrollButtonsMobile
+          selectionFollowsFocus={true}
         >
-          <NewTab label="Interest Rate Model" />
-          <NewTab label="Supply Info" />
-          <NewTab label="Borrow Info" />
-          <NewTab label="E-Mode Info" />
+          <NewTab label="Interest Rate Model" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
+          <NewTab label="Supply Info" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
+          <NewTab label="Borrow Info" sx={{ fontSize: { xs: '14px', md: '14px' } }} />
+          {/* <NewTab label="E-Mode Info" /> */}
         </NewTabs>
       </Box>
       {selectedTab == 0 && <ReserveInterestRateModel reserve={reserve} />}

@@ -143,7 +143,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
         }}
       >
         <Box>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
             <FormControl>
               <Select
                 value={curCoin}
@@ -164,7 +164,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
                   },
                   border: '1px solid #E5E9EB',
                   padding: '1px 8px',
-                  width: '260px',
+                  width: { xs: '250px', md: '260px' },
                   height: '50px',
                 }}
                 MenuProps={{
@@ -172,6 +172,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
                     style: {
                       marginTop: '18px',
                       width: '260px',
+                      height: '440px',
                     },
                   },
                 }}
@@ -199,12 +200,13 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
               </Select>
             </FormControl>
 
-            <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
               {loading ? (
                 <Skeleton width={16} height={16} sx={{ ml: 1, background: '#F1F1F3' }} />
               ) : (
-                <Box sx={{ display: 'flex' }}>
-                  <TokenLinkDropdown poolReserve={poolReserve} downToSM={downToSM} />
+                <Box
+                  sx={{ display: 'flex', flexDirection: 'row', gap: '0.5em', alignItems: 'center' }}
+                >
                   {connected && (
                     <AddTokenDropdown
                       poolReserve={poolReserve}
@@ -215,6 +217,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
                       connectedChainId={connectedChainId}
                     />
                   )}
+                  <TokenLinkDropdown poolReserve={poolReserve} downToSM={downToSM} />
                 </Box>
               )}
             </Box>
@@ -230,33 +233,6 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
             marginTop: '15px',
           }}
         >
-          <TopInfoPanelItem title={<Trans>Reserve Size</Trans>} loading={loading} hideIcon>
-            <FormattedNumber
-              value={poolReserve?.totalLiquidityUSD}
-              symbol="USD"
-              variant={valueTypographyVariant}
-              symbolsVariant={symbolsTypographyVariant}
-            />
-          </TopInfoPanelItem>
-
-          <TopInfoPanelItem title={<Trans>Available liquidity</Trans>} loading={loading} hideIcon>
-            <FormattedNumber
-              value={poolReserve?.availableLiquidityUSD}
-              symbol="USD"
-              variant={valueTypographyVariant}
-              symbolsVariant={symbolsTypographyVariant}
-            />
-          </TopInfoPanelItem>
-
-          <TopInfoPanelItem title={<Trans>Utilization Rate</Trans>} loading={loading} hideIcon>
-            <FormattedNumber
-              value={poolReserve?.borrowUsageRatio}
-              percent
-              variant={valueTypographyVariant}
-              symbolsVariant={symbolsTypographyVariant}
-            />
-          </TopInfoPanelItem>
-
           <TopInfoPanelItem title={<Trans>Oracle price</Trans>} loading={loading} hideIcon>
             <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
               <FormattedNumber
@@ -282,6 +258,32 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
                 </CircleIcon>
               )}
             </Box>
+          </TopInfoPanelItem>
+          <TopInfoPanelItem title={<Trans>Reserve Size</Trans>} loading={loading} hideIcon>
+            <FormattedNumber
+              value={poolReserve?.totalLiquidityUSD}
+              symbol="USD"
+              variant={valueTypographyVariant}
+              symbolsVariant={symbolsTypographyVariant}
+            />
+          </TopInfoPanelItem>
+
+          <TopInfoPanelItem title={<Trans>Available liquidity</Trans>} loading={loading} hideIcon>
+            <FormattedNumber
+              value={poolReserve?.availableLiquidityUSD}
+              symbol="USD"
+              variant={valueTypographyVariant}
+              symbolsVariant={symbolsTypographyVariant}
+            />
+          </TopInfoPanelItem>
+
+          <TopInfoPanelItem title={<Trans>Utilization Rate</Trans>} loading={loading} hideIcon>
+            <FormattedNumber
+              value={poolReserve?.borrowUsageRatio}
+              percent
+              variant={valueTypographyVariant}
+              symbolsVariant={symbolsTypographyVariant}
+            />
           </TopInfoPanelItem>
         </Box>
       </Paper>

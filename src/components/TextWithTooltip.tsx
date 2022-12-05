@@ -23,7 +23,8 @@ export const TextWithTooltip = ({
   const [open, setOpen] = useState(false);
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: '0.5em' }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: '0.2em' }}>
+      <Box>{text && <Typography {...rest}>{text}</Typography>}</Box>
       <Box>
         <ContentWithTooltip tooltipContent={<>{children}</>} open={open} setOpen={setOpen}>
           <IconButton
@@ -52,8 +53,6 @@ export const TextWithTooltip = ({
           </IconButton>
         </ContentWithTooltip>
       </Box>
-
-      <Box>{text && <Typography {...rest}>{text}</Typography>}</Box>
     </Box>
   );
 };

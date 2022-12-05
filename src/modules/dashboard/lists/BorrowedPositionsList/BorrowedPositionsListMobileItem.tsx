@@ -83,21 +83,27 @@ export const BorrowedPositionsListMobileItem = ({
 
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 5 }}>
         <Button
-          disabled={!isActive}
-          variant="contained"
-          onClick={() => openRepay(underlyingAsset, borrowRateMode)}
-          sx={{ mr: 1.5 }}
-          fullWidth
-        >
-          <Trans>Repay</Trans>
-        </Button>
-        <Button
           disabled={!isActive || !borrowingEnabled || isFrozen}
           variant="outlined"
           onClick={() => openBorrow(underlyingAsset)}
           fullWidth
+          sx={{
+            mr: 1.5,
+            backgroundColor: 'rgba(21, 126, 255, 0.05)',
+            fontWeight: 600,
+            fontSize: '16px',
+          }}
         >
           <Trans>Borrow</Trans>
+        </Button>
+        <Button
+          disabled={!isActive}
+          variant="contained"
+          onClick={() => openRepay(underlyingAsset, borrowRateMode)}
+          fullWidth
+          sx={{ fontWeight: 600, fontSize: '16px' }}
+        >
+          <Trans>Repay</Trans>
         </Button>
       </Box>
     </ListMobileItemWrapper>

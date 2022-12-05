@@ -34,6 +34,7 @@ export const ListColumn = ({
         maxWidth,
         overflow: 'hidden',
         p: 1,
+        wordBreak: 'break-all',
       }}
     >
       {children}

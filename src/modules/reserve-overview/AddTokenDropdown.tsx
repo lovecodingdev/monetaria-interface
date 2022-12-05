@@ -89,8 +89,7 @@ export const AddTokenDropdown = ({
               color: '#080F26',
               background: '#F6F8F9',
               borderRadius: '12px',
-              padding: '4px 0px',
-              marginLeft: '5px',
+              height: '32px',
             }}
           >
             <img

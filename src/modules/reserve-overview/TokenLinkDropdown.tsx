@@ -38,8 +38,10 @@ export const TokenLinkDropdown = ({ poolReserve, downToSM }: TokenLinkDropdownPr
               '&:hover': { border: '1px solid #080F26' },
               cursor: 'pointer',
               background: '#F6F8F9',
-              padding: '4px 6px',
+              padding: '4px 8px',
               borderRadius: '12px',
+              marginLeft: '5px',
+              height: '32px',
             }}
           >
             <SvgIcon sx={{ fontSize: '18px' }}>

@@ -24,7 +24,7 @@ export default function Custom404() {
             width: { xs: '80%', md: '60%', lg: '50%' },
           }}
         >
-          <Box sx={{ display: 'flex', justifyContent: 'center', padding: '25px' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', padding: { xs: 0, md: '25px' } }}>
             <ErrorImg />
           </Box>
           <Box
@@ -32,9 +32,10 @@ export default function Custom404() {
               display: 'flex',
               justifyContent: 'start',
               color: '#28464D',
-              fontSize: { xs: '22px', md: '32px', lg: '42px' },
+              fontSize: { xs: '24px', md: '32px', lg: '42px' },
               fontWeight: 800,
               padding: '15px',
+              textAlign: { xs: 'center', sm: 'left' },
             }}
           >
             Oops, We can seem to find
@@ -46,10 +47,11 @@ export default function Custom404() {
               display: 'flex',
               justifyContent: 'start',
               color: '#436972',
-              fontSize: '18px',
+              fontSize: { xs: '14px', md: '18px' },
               fontWeight: 500,
               padding: '15px',
               lineHeight: '28px',
+              textAlign: { xs: 'center', sm: 'left' },
             }}
           >
             The page you are looking for might have been removed, had its name changed, or is
@@ -58,7 +60,7 @@ export default function Custom404() {
           <Box
             sx={{
               display: 'flex',
-              justifyContent: 'flex-start',
+              justifyContent: { xs: 'center', md: 'flex-start' },
               padding: '15px',
             }}
           >

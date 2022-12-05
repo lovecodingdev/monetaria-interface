@@ -28,3 +28,18 @@
   overflow: hidden;
   position: relative;
 }
+
+@media screen and (max-width : 639px) {
+  .rs-picker-daterange-content {
+    width: 305px
+  }
+}
+
+.rs-table-cell-header-sort-wrapper svg {
+  color: #6E7C87 !important
+}
+
+.rs-table {
+  font-family: Gilroy, Arial !important;
+  font-style: normal;
+}
