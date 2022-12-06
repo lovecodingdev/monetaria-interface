@@ -172,7 +172,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
                     style: {
                       marginTop: '18px',
                       width: '260px',
-                      height: '440px',
+                      maxHeight: '440px',
                     },
                   },
                 }}

@@ -53,7 +53,11 @@ const BorrowModeSwitch = ({
     <Row
       caption={
         <APYTypeTooltip
-          text={<Trans>Borrow APY rate</Trans>}
+          text={
+            <Typography sx={{ color: '#000', fontSize: '14px', fontWeight: 500 }}>
+              <Trans>Borrow APY rate</Trans>
+            </Typography>
+          }
           key="APY type_modal"
           variant="description"
         />
@@ -70,8 +74,8 @@ const BorrowModeSwitch = ({
         value={interestRateMode}
         exclusive
         onChange={(_, value) => setInterestRateMode(value)}
-        sx={{ 
-          width: '100%', 
+        sx={{
+          width: '100%',
           mt: 0.5,
         }}
       >
@@ -121,12 +125,14 @@ export const BorrowModalContent = ({
   const formattedMaxAmountToBorrow = maxAmountToBorrow.toString(10);
 
   const isMaxSelected = _amount === '-1';
-  const amount = Number(_amount) < 0 ? maxAmountToBorrow.multipliedBy(-Number(_amount)).toString(10) : _amount;
+  const amount =
+    Number(_amount) < 0 ? maxAmountToBorrow.multipliedBy(-Number(_amount)).toString(10) : _amount;
 
   // We set this in a useEffect, so it doesnt constantly change when
   // max amount selected
   const handleChange = (_value: string) => {
-    const value = Number(_value) < 0 ? maxAmountToBorrow.multipliedBy(-Number(_value)).toString(10) : _value;
+    const value =
+      Number(_value) < 0 ? maxAmountToBorrow.multipliedBy(-Number(_value)).toString(10) : _value;
     amountRef.current = value;
     setAmount(value);
   };

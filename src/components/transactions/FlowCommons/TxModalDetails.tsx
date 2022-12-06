@@ -20,16 +20,14 @@ export interface TxModalDetailsProps {
 
 export const TxModalDetails: React.FC<TxModalDetailsProps> = ({ gasLimit, children }) => {
   return (
-    <Box sx={{ pt: 5 }}>
+    <Box sx={{ mt: 5, border: '1px solid #EBF7FF', borderRadius: '8px', padding: '8px 16px' }}>
       <Typography sx={{ mb: 1, fontWeight: 500, fontSize: '14px' }} color="#59729D">
         <Trans>Transaction overview</Trans>
       </Typography>
 
       <Box
         sx={(theme) => ({
-          p: 3,
-          border: `1px solid ${theme.palette.divider}`,
-          borderRadius: '4px',
+          pt: '10px',
           '.MuiBox-root:last-of-type': {
             mb: 0,
           },
@@ -60,7 +58,12 @@ export const DetailsNumberLine = ({
   ...rest
 }: DetailsNumberLineProps) => {
   return (
-    <Row caption={description} captionVariant="description" mb={4}>
+    <Row
+      caption={description}
+      captionVariant="description"
+      mb={4}
+      sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}
+    >
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         {iconSymbol && <TokenIcon symbol={iconSymbol} sx={{ mr: 1, fontSize: '16px' }} />}
         {numberPrefix && <Typography sx={{ mr: 1 }}>{numberPrefix}</Typography>}
@@ -145,7 +148,12 @@ export interface DetailsCollateralLine {
 
 export const DetailsCollateralLine = ({ collateralType }: DetailsCollateralLine) => {
   return (
-    <Row caption={<Trans>Collateralization</Trans>} captionVariant="description" mb={4}>
+    <Row
+      caption={<Trans>Collateralization</Trans>}
+      captionVariant="description"
+      mb={4}
+      sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}
+    >
       <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
         {collateralType === CollateralType.ENABLED && (
           <>
@@ -230,6 +238,7 @@ export const DetailsHFLine = ({
       captionVariant="description"
       mb={4}
       align="flex-start"
+      sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}
     >
       <Box sx={{ textAlign: 'right' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
