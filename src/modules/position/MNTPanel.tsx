@@ -38,6 +38,8 @@ export const MNTPanel = () => {
             visibleDecimals={2}
             compact
             symbolsVariant={'secondary21'}
+            color="#080F26"
+            symbolsColor="#080F26"
           />
         </TopInfoPanelItem>
         <TopInfoPanelItem hideIcon title={<Trans>Buyback(72hr)</Trans>}>
@@ -48,6 +50,8 @@ export const MNTPanel = () => {
             visibleDecimals={2}
             compact
             symbolsVariant={'secondary21'}
+            color="#080F26"
+            symbolsColor="#080F26"
           />
         </TopInfoPanelItem>
         <TopInfoPanelItem hideIcon title={<Trans>Buyback(Total)</Trans>}>
@@ -58,6 +62,8 @@ export const MNTPanel = () => {
             visibleDecimals={2}
             compact
             symbolsVariant={'secondary21'}
+            color="#080F26"
+            symbolsColor="#080F26"
           />
         </TopInfoPanelItem>
         <Box sx={{ flex: { md: 1 } }} />
@@ -69,6 +75,8 @@ export const MNTPanel = () => {
             visibleDecimals={2}
             compact
             symbolsVariant={'secondary21'}
+            color="#080F26"
+            symbolsColor="#080F26"
           />
         </TopInfoPanelItem>
       </Box>

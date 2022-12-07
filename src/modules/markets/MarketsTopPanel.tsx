@@ -70,6 +70,8 @@ export const MarketsTopPanel = () => {
             visibleDecimals={2}
             compact
             symbolsVariant={symbolsVariant}
+            color="#080F26"
+            symbolsColor="#080F26"
           />
         </TopInfoPanelItem>
         <TopInfoPanelItem
@@ -85,6 +87,8 @@ export const MarketsTopPanel = () => {
             visibleDecimals={2}
             compact
             symbolsVariant={symbolsVariant}
+            color="#080F26"
+            symbolsColor="#080F26"
           />
         </TopInfoPanelItem>
         <TopInfoPanelItem
@@ -100,6 +104,8 @@ export const MarketsTopPanel = () => {
             visibleDecimals={2}
             compact
             symbolsVariant={symbolsVariant}
+            color="#080F26"
+            symbolsColor="#080F26"
           />
         </TopInfoPanelItem>
       </Box>

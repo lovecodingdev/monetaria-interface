@@ -126,6 +126,8 @@ export const PositionTopPanel = () => {
                 visibleDecimals={2}
                 compact
                 symbolsVariant={noDataTypographyVariant}
+                color="#080F26"
+                symbolsColor="#080F26"
               />
             ) : (
               <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
@@ -149,6 +151,8 @@ export const PositionTopPanel = () => {
                 visibleDecimals={2}
                 percent
                 symbolsVariant={noDataTypographyVariant}
+                color="#080F26"
+                symbolsColor="#080F26"
               />
             ) : (
               <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
@@ -258,6 +262,8 @@ export const PositionTopPanel = () => {
                     visibleDecimals={2}
                     compact
                     symbolsVariant={noDataTypographyVariant}
+                    color="#080F26"
+                    symbolsColor="#080F26"
                   />
                 ) : (
                   <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
@@ -284,6 +290,8 @@ export const PositionTopPanel = () => {
                     visibleDecimals={2}
                     compact
                     symbolsVariant={noDataTypographyVariant}
+                    color="#080F26"
+                    symbolsColor="#080F26"
                   />
                 ) : (
                   <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
@@ -307,6 +315,8 @@ export const PositionTopPanel = () => {
               symbol="USD"
               symbolsVariant={noDataTypographyVariant}
               data-cy={'Claim_Value'}
+              color="#080F26"
+              symbolsColor="#080F26"
             />
           </TopInfoPanelItem>
           <Button
