@@ -89,10 +89,19 @@ const moreMenuItems: MoreMenuItem[] = [
   // },
 ];
 
+const DaoMenuItems: MoreMenuItem[] = [
+  {
+    link: '/calc',
+    title: t`Calculator`,
+    icon: <></>,
+  },
+];
+
 export const moreMenuExtraItems: MoreMenuItem[] = [];
 export const moreMenuMobileOnlyItems: MoreMenuItem[] = [];
 
 export const moreNavigation: MoreMenuItem[] = [...moreMenuItems, ...moreMenuExtraItems];
+export const DaoMenuList: MoreMenuItem[] = [...DaoMenuItems];
 
 export const mobileNavigation: Navigation[] = [
   ...navigation,

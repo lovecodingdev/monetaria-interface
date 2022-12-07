@@ -15,7 +15,7 @@ import { Link } from '../../components/primitives/Link';
 import { useProtocolDataContext } from '../../hooks/useProtocolDataContext';
 import { navigation } from '../../ui-config/menu-items';
 import { MoreMenu } from '../MoreMenu';
-
+import { DaoMenu } from '../DaoMenu';
 interface NavItemsProps {
   setOpen?: (value: boolean) => void;
 }
@@ -95,6 +95,9 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
           </ListItem>
         ))}
 
+      <ListItem sx={{ display: { xs: 'none', mmd: 'flex' }, width: 'unset' }} disablePadding>
+        <DaoMenu />
+      </ListItem>
       <ListItem sx={{ display: { xs: 'none', mmd: 'flex' }, width: 'unset' }} disablePadding>
         <MoreMenu />
       </ListItem>
