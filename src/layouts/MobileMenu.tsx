@@ -17,7 +17,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { PROD_ENV } from 'src/utils/marketsAndNetworksConfig';
 
 import { Link } from '../components/primitives/Link';
-import { moreNavigation } from '../ui-config/menu-items';
+import { moreNavigation, DaoMenuList } from '../ui-config/menu-items';
 import { DarkModeSwitcher } from './components/DarkModeSwitcher';
 import { DrawerWrapper } from './components/DrawerWrapper';
 import { LanguageListItem, LanguagesList } from './components/LanguageSwitcher';
@@ -51,6 +51,7 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
   const { i18n } = useLingui();
   const [isLanguagesListOpen, setIsLanguagesListOpen] = useState(false);
   const [isOpenMore, setIsOpenMore] = useState(false);
+  const [isDaoOpen, setIsDapOpen] = useState(false);
   const [isOpenSettings, setIsOpenSettings] = useState(false);
 
   useEffect(() => setIsLanguagesListOpen(false), [open]);
@@ -120,6 +121,55 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                 }}
                 data-cy="more"
                 disablePadding
+                onClick={() => setIsDapOpen(!isDaoOpen)}
+              >
+                <Typography
+                  variant="h2"
+                  color="#080F26"
+                  sx={{
+                    width: '100%',
+                    mx: 4,
+                    py: 4,
+                    textAlign: 'start',
+                    borderBottom: '1px solid rgba(8, 15, 38, 0.15)',
+                    fontSize: '16px',
+                  }}
+                >
+                  DAO
+                </Typography>
+              </ListItem>
+              {isDaoOpen && (
+                <MenuItemsWrapper title={<Trans>DAO</Trans>}>
+                  <List>
+                    {DaoMenuList.map((item, index) => (
+                      <ListItem
+                        component={Link}
+                        href={item.link}
+                        sx={{
+                          color: '#080F26',
+                          pl: 1,
+                        }}
+                        key={index}
+                      >
+                        <ListItemIcon sx={{ minWidth: 'unset', mr: 3 }}>
+                          <SvgIcon sx={{ fontSize: '20px', color: '#080F26' }}>{item.icon}</SvgIcon>
+                        </ListItemIcon>
+
+                        <ListItemText>{i18n._(item.title)}</ListItemText>
+                      </ListItem>
+                    ))}
+                  </List>
+                </MenuItemsWrapper>
+              )}
+              <ListItem
+                sx={{
+                  width: { xs: '100%', md: 'unset' },
+                  mr: { xs: 0, md: 2 },
+                  textAlign: 'center',
+                  cursor: 'pointer',
+                }}
+                data-cy="more"
+                disablePadding
                 onClick={() => setIsOpenMore(!isOpenMore)}
               >
                 <Typography
@@ -137,6 +187,7 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
                   More
                 </Typography>
               </ListItem>
+
               {isOpenMore && (
                 <MenuItemsWrapper title={<Trans>More</Trans>}>
                   <List>
