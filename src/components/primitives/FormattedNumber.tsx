@@ -37,6 +37,7 @@ function CompactNumber({ value, visibleDecimals = 2 }: CompactNumberProps) {
 export interface FormattedNumberProps extends TypographyProps {
   value: string | number;
   symbol?: string;
+  color?: string;
   visibleDecimals?: number;
   compact?: boolean;
   percent?: boolean;
@@ -47,11 +48,12 @@ export interface FormattedNumberProps extends TypographyProps {
 export function FormattedNumber({
   value,
   symbol,
+  color,
   visibleDecimals,
   compact,
   percent,
   symbolsVariant,
-  symbolsColor = '#59729D',
+  symbolsColor,
   ...rest
 }: FormattedNumberProps) {
   const number = percent ? Number(value) * 100 : Number(value);
@@ -81,7 +83,7 @@ export function FormattedNumber({
         flexDirection: 'row',
         alignItems: 'center',
         position: 'relative',
-        color: '#59729D',
+        color: color,
         fontWeight: 600,
         ...rest.sx,
       }}
