@@ -11,7 +11,7 @@ interface ListTopInfoItemProps {
   tooltip?: ReactNode;
 }
 
-export const ListTopInfoItem = ({icon, title, value, percent, tooltip }: ListTopInfoItemProps) => {
+export const ListTopInfoItem = ({ icon, title, value, percent, tooltip }: ListTopInfoItemProps) => {
   return (
     <Box
       sx={{
@@ -19,7 +19,7 @@ export const ListTopInfoItem = ({icon, title, value, percent, tooltip }: ListTop
         alignItems: 'center',
       }}
     >
-      {icon && 
+      {icon && (
         <Box
           sx={{
             display: 'flex',
@@ -36,7 +36,7 @@ export const ListTopInfoItem = ({icon, title, value, percent, tooltip }: ListTop
         >
           {icon && icon}
         </Box>
-      }
+      )}
       <Box
         sx={{
           mr: 2,
@@ -47,7 +47,7 @@ export const ListTopInfoItem = ({icon, title, value, percent, tooltip }: ListTop
           flexDirection: 'column',
         }}
       >
-        <Box 
+        <Box
           sx={{
             display: 'flex',
           }}
@@ -57,9 +57,15 @@ export const ListTopInfoItem = ({icon, title, value, percent, tooltip }: ListTop
           </Typography>
           {tooltip}
         </Box>
-        <FormattedNumber value={value} percent={percent} variant="h3" symbol="USD" />
+        <FormattedNumber
+          value={value}
+          percent={percent}
+          variant="h3"
+          symbol="USD"
+          color="#080F26"
+          symbolsColor="#080F26"
+        />
       </Box>
-
     </Box>
   );
 };
