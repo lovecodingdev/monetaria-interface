@@ -25,7 +25,7 @@ export const HealthFactorNumber = ({
   if (formattedHealthFactor >= 3) {
     healthFactorColor = palette.success.main;
   } else if (formattedHealthFactor < 1.1) {
-    healthFactorColor = palette.error.main;
+    healthFactorColor = '#080F26';
   } else {
     healthFactorColor = palette.warning.main;
   }

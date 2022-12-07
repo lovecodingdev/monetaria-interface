@@ -78,8 +78,8 @@ export const DashboardTopPanel = () => {
     user?.totalCollateralMarketReferenceCurrency === '0'
       ? '0'
       : valueToBigNumber(user?.totalBorrowsMarketReferenceCurrency || '0')
-        .dividedBy(user?.totalCollateralMarketReferenceCurrency || '1')
-        .toFixed();
+          .dividedBy(user?.totalCollateralMarketReferenceCurrency || '1')
+          .toFixed();
 
   const valueTypographyVariant = downToSM ? 'main16' : 'main21';
   const noDataTypographyVariant = downToSM ? 'secondary16' : 'secondary21';
@@ -88,7 +88,7 @@ export const DashboardTopPanel = () => {
     <>
       <TopInfoPanel
         pageTitle={
-          <Box 
+          <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -111,6 +111,8 @@ export const DashboardTopPanel = () => {
               visibleDecimals={2}
               compact
               symbolsVariant={noDataTypographyVariant}
+              color="#080F26"
+              symbolsColor="#080F26"
             />
           ) : (
             <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
@@ -134,6 +136,8 @@ export const DashboardTopPanel = () => {
               visibleDecimals={2}
               percent
               symbolsVariant={noDataTypographyVariant}
+              color="#080F26"
+              symbolsColor="#080F26"
             />
           ) : (
             <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
