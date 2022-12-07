@@ -141,10 +141,12 @@ export const AssetInput = <T extends Asset = Asset>({
             inputProps={{
               'aria-label': 'amount input',
               style: {
-                fontSize: '21px',
                 lineHeight: '28,01px',
                 padding: 0,
                 height: '28px',
+                fontWeight: 500,
+                color: '#000',
+                fontSize: '24px',
               },
             }}
             // eslint-disable-next-line
@@ -244,26 +246,33 @@ export const AssetInput = <T extends Asset = Asset>({
             compact
             symbol="USD"
             variant="secondary12"
-            color="text.disabled"
-            symbolsColor="text.disabled"
+            color="#9AA6AC"
+            symbolsColor="#9AA6AC"
             flexGrow={1}
           />
 
           {asset.balance && onChange && (
             <>
-              <Typography component="div" variant="secondary12" color="text.secondary">
+              <Typography component="div" variant="secondary12" color="#9AA6AC">
                 <Trans>Balance</Trans>{' '}
                 <FormattedNumber
                   value={asset.balance}
                   compact
                   variant="secondary12"
-                  color="text.secondary"
-                  symbolsColor="text.disabled"
+                  color="#9AA6AC"
+                  symbolsColor="#9AA6AC"
                 />
               </Typography>
               <Button
                 size="small"
-                sx={{ minWidth: 0, ml: '7px', p: 0 }}
+                sx={{
+                  minWidth: 0,
+                  ml: '7px',
+                  p: 1,
+                  color: '#9AA6AC',
+                  fontSize: '12px',
+                  fontWeight: 400,
+                }}
                 onClick={() => onChange('-1')}
                 disabled={disabled || isMaxSelected}
               >
@@ -286,6 +295,9 @@ export const AssetInput = <T extends Asset = Asset>({
               padding: '8px',
               background: '#EEF0F2',
               borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: 600,
+              color: '#000',
             }}
             onClick={() => onChange('-0.25')}
           >
@@ -297,6 +309,9 @@ export const AssetInput = <T extends Asset = Asset>({
               padding: '8px',
               background: '#EEF0F2',
               borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: 600,
+              color: '#000',
             }}
             onClick={() => onChange('-0.5')}
           >
@@ -308,6 +323,9 @@ export const AssetInput = <T extends Asset = Asset>({
               padding: '8px',
               background: '#EEF0F2',
               borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: 600,
+              color: '#000',
             }}
             onClick={() => onChange('-0.75')}
           >
@@ -319,6 +337,9 @@ export const AssetInput = <T extends Asset = Asset>({
               padding: '8px',
               background: '#EEF0F2',
               borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: 600,
+              color: '#000',
             }}
             onClick={() => onChange('-1')}
           >

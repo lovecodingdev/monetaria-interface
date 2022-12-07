@@ -33,7 +33,14 @@ export const IncentivesCard = ({
       }}
     >
       {value.toString() !== '-1' ? (
-        <FormattedNumber value={value} percent variant={variant} symbolsVariant={symbolsVariant} />
+        <FormattedNumber
+          value={value}
+          percent
+          variant={variant}
+          symbolsVariant={symbolsVariant}
+          color="#252C32"
+          symbolsColor="#252C32"
+        />
       ) : (
         <NoData variant={variant} color="text.secondary" />
       )}

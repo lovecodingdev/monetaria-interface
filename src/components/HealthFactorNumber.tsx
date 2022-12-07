@@ -60,7 +60,7 @@ export const HealthFactorNumber = ({
           size="small"
           sx={{
             minWidth: 'unset',
-            ml: { xs: 2, xsm: 2 },
+            ml: { xs: 4, xsm: 2 },
             background: 'rgba(21, 126, 255, 0.05)',
             border: '1px solid rgba(21, 126, 255, 0.2)',
             color: '#074592',

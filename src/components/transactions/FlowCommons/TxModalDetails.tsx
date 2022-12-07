@@ -67,7 +67,7 @@ export const DetailsNumberLine = ({
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         {iconSymbol && <TokenIcon symbol={iconSymbol} sx={{ mr: 1, fontSize: '16px' }} />}
         {numberPrefix && <Typography sx={{ mr: 1 }}>{numberPrefix}</Typography>}
-        <FormattedNumber value={value} variant="secondary14" {...rest} />
+        <FormattedNumber value={value} variant="secondary14" {...rest} symbolsColor="#59729D" />
         {futureValue && (
           <>
             <SvgIcon color="primary" sx={{ fontSize: '14px', mx: 1 }}>
