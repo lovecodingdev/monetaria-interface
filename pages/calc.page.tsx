@@ -197,16 +197,17 @@ export default function Calc() {
             </ButtonToolbar>
           </Box>
           {!isVe && (
-            <Box>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <Box
                 sx={{
                   display: 'flex',
                   flexDirection: 'row',
                   gap: '24px',
                   flexWrap: 'wrap',
+                  alignItems: 'start',
                 }}
               >
-                <Box>
+                <Box sx={{ width: { xs: '100%', sm: '30%' } }}>
                   {' '}
                   <label
                     style={{
@@ -233,56 +234,56 @@ export default function Calc() {
                   >
                     Locked for
                   </label>{' '}
-                  <Slider
-                    defaultValue={60}
-                    step={20}
-                    graduated
-                    progress
-                    min={0}
-                    max={120}
-                    style={{ width: downToXSM ? '300px' : '230px' }}
-                    renderMark={(mark) => {
-                      if ([0, 20, 40, 60, 80, 100, 120].includes(mark)) {
-                        let strMark = '';
-                        if (mark == 0) {
-                          strMark = '1 week';
+                  <Box sx={{ padding: '5px 15px', display: 'flex', justifyContent: 'center' }}>
+                    <Slider
+                      defaultValue={60}
+                      step={20}
+                      graduated
+                      progress
+                      min={0}
+                      max={120}
+                      style={{ width: downToXSM ? '280px' : '250px' }}
+                      renderMark={(mark) => {
+                        if ([0, 20, 40, 60, 80, 100, 120].includes(mark)) {
+                          let strMark = '';
+                          if (mark == 0) {
+                            strMark = '1 week';
+                          }
+                          if (mark == 20) {
+                            strMark = '1 month';
+                          }
+                          if (mark == 40) {
+                            strMark = '3 month';
+                          }
+                          if (mark == 60) {
+                            strMark = '6 month';
+                          }
+                          if (mark == 80) {
+                            strMark = '1 year';
+                          }
+                          if (mark == 100) {
+                            strMark = '2 year';
+                          }
+                          if (mark == 120) {
+                            strMark = '4 year';
+                          }
+                          return (
+                            <span style={{ color: '#5B6871', fontSize: '10px', fontWeight: 400 }}>
+                              {strMark}
+                            </span>
+                          );
                         }
-                        if (mark == 20) {
-                          strMark = '1 month';
-                        }
-                        if (mark == 40) {
-                          strMark = '3 month';
-                        }
-                        if (mark == 60) {
-                          strMark = '6 month';
-                        }
-                        if (mark == 80) {
-                          strMark = '1 year';
-                        }
-                        if (mark == 100) {
-                          strMark = '2 year';
-                        }
-                        if (mark == 120) {
-                          strMark = '4 year';
-                        }
-                        return (
-                          <span style={{ color: '#5B6871', fontSize: '10px', fontWeight: 400 }}>
-                            {strMark}
-                          </span>
-                        );
-                      }
-                      return null;
-                    }}
-                  />
+                        return null;
+                      }}
+                    />
+                  </Box>
                 </Box>
-                <Box sx={{ width: '100%' }}>
-                  <Typography sx={{ fontWeight: 400, fontSize: '14px', color: '#1A2024' }}>
-                    veMNT:{' '}
-                    <span style={{ fontWeight: 600, fontSize: '14px', color: 'black' }}>
-                      834.75
-                    </span>
-                  </Typography>
-                </Box>
+              </Box>
+              <Box sx={{ width: '100%' }}>
+                <Typography sx={{ fontWeight: 400, fontSize: '14px', color: '#1A2024' }}>
+                  veMNT:{' '}
+                  <span style={{ fontWeight: 600, fontSize: '14px', color: 'black' }}>834.75</span>
+                </Typography>
               </Box>
             </Box>
           )}
