@@ -115,12 +115,14 @@ export default function Calc() {
               <ButtonGroup justified>
                 <Button
                   style={{
-                    backgroundColor: '#074592',
+                    backgroundColor: !isVe ? '#074592' : '#FFFFFF',
+                    border: '1px solid #DDE2E4',
                     padding: '4px 12px',
                     borderRadius: '6px 0px 0px 6px',
-                    color: 'white',
+                    color: !isVe ? 'white' : '#252C32',
                     fontWeight: 400,
                     fontSize: '14px',
+                    height: '32px',
                   }}
                   onClick={() => setIsVe(false)}
                 >
@@ -128,13 +130,14 @@ export default function Calc() {
                 </Button>
                 <Button
                   style={{
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: isVe ? '#074592' : '#FFFFFF',
                     border: '1px solid #DDE2E4',
                     padding: '4px 12px',
                     borderRadius: '0px 6px 6px 0px',
-                    color: '#252C32',
+                    color: isVe ? 'white' : '#252C32',
                     fontWeight: 400,
                     fontSize: '14px',
+                    height: '32px',
                   }}
                   onClick={() => setIsVe(true)}
                 >
