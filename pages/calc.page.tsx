@@ -206,6 +206,7 @@ export default function Calc() {
                   gap: '24px',
                   flexWrap: 'wrap',
                   alignItems: 'start',
+                  justifyContent: 'space-between',
                 }}
               >
                 <Box sx={{ width: { xs: '100%', sm: '30%' } }}>
@@ -235,7 +236,7 @@ export default function Calc() {
                   >
                     Locked for
                   </label>{' '}
-                  <Box sx={{ padding: '5px 15px', display: 'flex', justifyContent: 'center' }}>
+                  <Box sx={{ padding: '5px 10px', display: 'flex', justifyContent: 'center' }}>
                     <Slider
                       defaultValue={60}
                       step={20}
