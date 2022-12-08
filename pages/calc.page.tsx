@@ -4,17 +4,26 @@ import { MainLayout } from '../src/layouts/MainLayout';
 import borderGradient from 'src/layouts/borderGradient';
 import { SelectPicker, InputNumber, Button, ButtonToolbar, ButtonGroup, Slider } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
+import { textCenterEllipsis } from 'src/helpers/text-center-ellipsis';
 import Rocket from '/public/icons/rocket.svg';
 
-const gaugeData = ['All', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
-  (item) => ({ label: item, value: item })
-);
+const gaugeTempData = [
+  {
+    label: 'mnt',
+    value: '0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1',
+  },
+  {
+    label: 'btc',
+    value: '0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e600b1',
+  },
+];
 
 export default function Calc() {
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.up('xsm'));
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
-  const [curGauge, setCurGause] = useState('All');
+  const [curGauge, setCurGause] = useState('0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1');
   const [depositValue, setDepositValue] = useState(0);
   const [liquidityValue, setLiquidityValue] = useState(0);
   const [mntAmount, setMntAmount] = useState(0);
@@ -55,11 +64,52 @@ export default function Calc() {
               Select a gauge
             </label>
             <SelectPicker
-              data={gaugeData}
+              data={gaugeTempData}
               style={{ width: '100%' }}
               value={curGauge}
               onChange={setCurGause}
+              placeholder="Select a gauge"
               searchable={false}
+              renderMenuItem={(label, item) => {
+                return (
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: 2,
+                      alignItems: 'center',
+                      fontFamily: 'Gilroy, Arial !important',
+                    }}
+                  >
+                    <Box>
+                      {' '}
+                      <TokenIcon symbol={label} sx={{ fontSize: '24px', mr: 1 }} />{' '}
+                    </Box>
+                    <Box>
+                      {' '}
+                      <span style={{ fontWeight: 500, fontSize: '18px', color: '#5B6871' }}>
+                        {label.toUpperCase()} ({textCenterEllipsis(item.value, 5, 4)})
+                      </span>
+                    </Box>
+                  </Box>
+                );
+              }}
+              renderValue={(value, item) => {
+                return (
+                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center' }}>
+                    <Box>
+                      {' '}
+                      <TokenIcon symbol={item.label} sx={{ fontSize: '24px', mr: 1 }} />{' '}
+                    </Box>
+                    <Box>
+                      {' '}
+                      <span style={{ fontWeight: 500, fontSize: '18px', color: '#5B6871' }}>
+                        {item.label.toUpperCase()} ({textCenterEllipsis(value, 5, 4)})
+                      </span>
+                    </Box>
+                  </Box>
+                );
+              }}
             />
           </Box>
           <Box
