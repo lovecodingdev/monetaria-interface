@@ -118,6 +118,7 @@ export default function Calc() {
               flexDirection: 'row',
               gap: 2,
               alignItems: 'end',
+              justifyContent: 'space-between',
             }}
           >
             <Box>
