@@ -240,6 +240,8 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
                 symbol="USD"
                 variant={valueTypographyVariant}
                 symbolsVariant={symbolsTypographyVariant}
+                color="#080F26"
+                symbolsColor="#080F26"
               />
               {loading ? (
                 <Skeleton width={16} height={16} sx={{ ml: 1, background: '#074592' }} />
@@ -265,6 +267,8 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
               symbol="USD"
               variant={valueTypographyVariant}
               symbolsVariant={symbolsTypographyVariant}
+              color="#080F26"
+              symbolsColor="#080F26"
             />
           </TopInfoPanelItem>
 
@@ -274,6 +278,8 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
               symbol="USD"
               variant={valueTypographyVariant}
               symbolsVariant={symbolsTypographyVariant}
+              color="#080F26"
+              symbolsColor="#080F26"
             />
           </TopInfoPanelItem>
 
@@ -283,6 +289,8 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
               percent
               variant={valueTypographyVariant}
               symbolsVariant={symbolsTypographyVariant}
+              color="#080F26"
+              symbolsColor="#080F26"
             />
           </TopInfoPanelItem>
         </Box>

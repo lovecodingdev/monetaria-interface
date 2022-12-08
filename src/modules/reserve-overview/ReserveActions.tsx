@@ -150,13 +150,15 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
                 value={balance?.amount || 0}
                 variant="secondary14"
                 symbol={poolReserve.symbol}
+                color="#080F26"
+                symbolsColor="#080F26"
               />
               <FormattedNumber
                 value={balance?.amountUSD || '0'}
                 variant="helperText"
-                color="text.muted"
-                symbolsColor="text.muted"
                 symbol="USD"
+                color="#080F26"
+                symbolsColor="#080F26"
               />
             </Box>
           </Row>
@@ -299,6 +301,8 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
               value={balance?.amount || 0}
               variant="main14"
               symbol={poolReserve.symbol}
+              color="#080F26"
+              symbolsColor="#080F26"
             />
           </Box>
           <Box
@@ -314,6 +318,8 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
               value={maxAmountToSupply}
               variant="main14"
               symbol={poolReserve.symbol}
+              color="#080F26"
+              symbolsColor="#080F26"
             />
           </Box>
           <Box
@@ -329,6 +335,8 @@ export const ReserveActions = ({ underlyingAsset }: ReserveActionsProps) => {
               value={canBorrow ? maxAmountToBorrow : '0'}
               variant="main14"
               symbol={poolReserve.symbol}
+              color="#080F26"
+              symbolsColor="#080F26"
             />
           </Box>
         </Box>
