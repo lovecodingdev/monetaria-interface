@@ -3,8 +3,9 @@ import { Box, Container, Paper, Typography, useMediaQuery, useTheme } from '@mui
 import { useEffect, useState } from 'react';
 import { MainLayout } from '../src/layouts/MainLayout';
 import borderGradient from 'src/layouts/borderGradient';
-import { SelectPicker, InputNumber, Button, ButtonToolbar, ButtonGroup } from 'rsuite';
+import { SelectPicker, InputNumber, Button, ButtonToolbar, ButtonGroup, Slider } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
+import { stringToObject } from 'rsuite/esm/utils';
 
 const gaugeData = ['All', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
   (item) => ({ label: item, value: item })
@@ -17,13 +18,16 @@ export default function Calc() {
   const [curGauge, setCurGause] = useState('All');
   const [depositValue, setDepositValue] = useState(0);
   const [liquidityValue, setLiquidityValue] = useState(0);
+  const [mntAmount, setMntAmount] = useState(0);
+  const [veAmount, setVeAmount] = useState(0);
+  const [isVe, setIsVe] = useState(false);
 
   return (
     <Container
       sx={{
         pb: 0,
         flexGrow: 0,
-        width: { xs: '100%', xsm: '650px' },
+        width: { xs: '100%', xsm: '700px' },
         fontFamily: 'Gilroy, Arial !important',
         fontStyle: 'normal',
       }}
@@ -119,6 +123,7 @@ export default function Calc() {
                     fontWeight: 400,
                     fontSize: '14px',
                   }}
+                  onClick={() => setIsVe(false)}
                 >
                   MNT
                 </Button>
@@ -132,12 +137,133 @@ export default function Calc() {
                     fontWeight: 400,
                     fontSize: '14px',
                   }}
+                  onClick={() => setIsVe(true)}
                 >
                   veMNT
                 </Button>
               </ButtonGroup>
             </ButtonToolbar>
           </Box>
+          {!isVe && (
+            <Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  gap: '24px',
+                  flexWrap: 'wrap',
+                }}
+              >
+                <Box>
+                  {' '}
+                  <label
+                    style={{
+                      display: 'block',
+                      color: '#252C32',
+                      fontWeight: 400,
+                      fontSize: '14px',
+                      paddingBottom: '5px',
+                    }}
+                  >
+                    My MNT
+                  </label>
+                  <InputNumber value={mntAmount} onChange={setMntAmount} min={0} />
+                </Box>
+                <Box>
+                  <label
+                    style={{
+                      display: 'block',
+                      color: '#252C32',
+                      fontWeight: 400,
+                      fontSize: '14px',
+                      paddingBottom: '5px',
+                    }}
+                  >
+                    Locked for
+                  </label>{' '}
+                  <Slider
+                    defaultValue={60}
+                    step={20}
+                    graduated
+                    progress
+                    min={0}
+                    max={120}
+                    style={{ width: downToXSM ? '295px' : '230px' }}
+                    renderMark={(mark) => {
+                      if ([0, 20, 40, 60, 80, 100, 120].includes(mark)) {
+                        let strMark = '';
+                        if (mark == 0) {
+                          strMark = '1 week';
+                        }
+                        if (mark == 20) {
+                          strMark = '1 month';
+                        }
+                        if (mark == 40) {
+                          strMark = '3 month';
+                        }
+                        if (mark == 60) {
+                          strMark = '6 month';
+                        }
+                        if (mark == 80) {
+                          strMark = '1 year';
+                        }
+                        if (mark == 100) {
+                          strMark = '2 year';
+                        }
+                        if (mark == 120) {
+                          strMark = '4 year';
+                        }
+                        return (
+                          <span style={{ color: '#5B6871', fontSize: '10px', fontWeight: 400 }}>
+                            {strMark}
+                          </span>
+                        );
+                      }
+                      return null;
+                    }}
+                  />
+                </Box>
+                <Box>
+                  <Typography sx={{ fontWeight: 400, fontSize: '14px', color: '#1A2024' }}>
+                    veMNT:{' '}
+                    <span style={{ fontWeight: 600, fontSize: '14px', color: 'black' }}>
+                      834.75
+                    </span>
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          )}
+          {isVe && (
+            <Box>
+              {' '}
+              <label
+                style={{
+                  display: 'block',
+                  color: '#252C32',
+                  fontWeight: 400,
+                  fontSize: '14px',
+                  paddingBottom: '5px',
+                }}
+              >
+                My veMNT
+              </label>
+              <InputNumber value={veAmount} onChange={setVeAmount} min={0} />
+            </Box>
+          )}
+          <Button
+            style={{
+              padding: '8px 16px',
+              borderRadius: '8px',
+              backgroundImage: 'linear-gradient(#A439FF, #9582FF)',
+              height: '40px',
+              color: '#F6F8F9',
+              fontWeight: 600,
+              fontSize: '14px',
+            }}
+          >
+            Calculate
+          </Button>
         </Box>
       </Paper>
     </Container>
