@@ -1,11 +1,10 @@
-import { Trans } from '@lingui/macro';
 import { Box, Container, Paper, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { MainLayout } from '../src/layouts/MainLayout';
 import borderGradient from 'src/layouts/borderGradient';
 import { SelectPicker, InputNumber, Button, ButtonToolbar, ButtonGroup, Slider } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
-import { stringToObject } from 'rsuite/esm/utils';
+import Rocket from '/public/icons/rocket.svg';
 
 const gaugeData = ['All', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
   (item) => ({ label: item, value: item })
@@ -264,6 +263,62 @@ export default function Calc() {
           >
             Calculate
           </Button>
+        </Box>
+      </Paper>
+      <Paper
+        sx={{
+          bgcolor: 'background.header',
+          padding: '24px',
+          mt: { xs: '16px', md: '24px' },
+          color: '#F1F1F3',
+          ...borderGradient,
+        }}
+      >
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          {' '}
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              gap: 4,
+              justifyContent: 'start',
+            }}
+          >
+            <Box sx={{ width: '220px' }}>
+              <Typography sx={{ color: '#1A2024', fontWeight: 400, fontSize: '14px' }}>
+                Total MNT:
+              </Typography>
+              <Typography sx={{ color: 'black', fontWeight: 600, fontSize: '24px' }}>
+                559695.73
+              </Typography>
+            </Box>
+            <Box sx={{ width: '220px' }}>
+              <Typography sx={{ color: '#1A2024', fontWeight: 400, fontSize: '14px' }}>
+                Boost:
+              </Typography>
+              <Typography sx={{ color: 'black', fontWeight: 600, fontSize: '24px' }}>
+                <Rocket /> 2.50x
+              </Typography>
+            </Box>
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 2 }}>
+            <Box sx={{ width: '230px' }}>
+              <Typography sx={{ color: '#1A2024', fontWeight: 400, fontSize: '14px' }}>
+                Max deposit to have max boost:
+                <span style={{ fontWeight: 600, color: 'black' }}>0</span>
+              </Typography>
+              <Typography sx={{ color: 'black', fontWeight: 600, fontSize: '14px' }}>
+                cDAI+cUSDC (0xA2B4…7A56)
+              </Typography>
+            </Box>
+            <Box sx={{ width: { xs: '100%', sm: '220px' } }}>
+              <Typography sx={{ color: '#1A2024', fontWeight: 400, fontSize: '14px' }}>
+                Max deposit per veMNT to have max boost:{' '}
+                <span style={{ fontWeight: 600, color: 'black' }}>0.07</span>
+              </Typography>
+            </Box>
+          </Box>
         </Box>
       </Paper>
     </Container>
