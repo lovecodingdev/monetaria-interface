@@ -26,7 +26,7 @@ export default function Calc() {
       sx={{
         pb: 0,
         flexGrow: 0,
-        width: { xs: '100%', xsm: '700px' },
+        width: { xs: '100%', sm: '700px' },
         fontFamily: 'Gilroy, Arial !important',
         fontStyle: 'normal',
       }}
@@ -190,7 +190,7 @@ export default function Calc() {
                     progress
                     min={0}
                     max={120}
-                    style={{ width: downToXSM ? '295px' : '230px' }}
+                    style={{ width: downToXSM ? '300px' : '230px' }}
                     renderMark={(mark) => {
                       if ([0, 20, 40, 60, 80, 100, 120].includes(mark)) {
                         let strMark = '';
