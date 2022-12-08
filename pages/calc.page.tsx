@@ -275,7 +275,7 @@ export default function Calc() {
                     }}
                   />
                 </Box>
-                <Box>
+                <Box sx={{ width: '100%' }}>
                   <Typography sx={{ fontWeight: 400, fontSize: '14px', color: '#1A2024' }}>
                     veMNT:{' '}
                     <span style={{ fontWeight: 600, fontSize: '14px', color: 'black' }}>
