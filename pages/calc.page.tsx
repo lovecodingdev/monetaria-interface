@@ -44,7 +44,7 @@ export default function Calc() {
         sx={{
           bgcolor: 'background.header',
           padding: '24px',
-          mt: { xs: '16px', md: '24px' },
+          mt: { xs: '8px', md: '12px' },
           color: '#F1F1F3',
           ...borderGradient,
         }}
