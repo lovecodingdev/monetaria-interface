@@ -323,11 +323,12 @@ export default function Calc() {
           bgcolor: 'background.header',
           padding: '24px',
           mt: { xs: '16px', md: '24px' },
+          mb: { xs: '16px' },
           color: '#F1F1F3',
           ...borderGradient,
         }}
       >
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           {' '}
           <Box
             sx={{
