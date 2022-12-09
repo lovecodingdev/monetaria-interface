@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Box, Paper, Typography, useMediaQuery, useTheme, Button } from '@mui/material';
+import { Box, Paper, Typography, useMediaQuery, useTheme, Button, Tab, Tabs } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { usePermissions } from 'src/hooks/usePermissions';
 import { ConnectWalletPaper } from '../src/components/ConnectWalletPaper';
@@ -9,7 +9,8 @@ import { useWeb3Context } from '../src/libs/hooks/useWeb3Context';
 import borderGradient from 'src/layouts/borderGradient';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import PlaceholderImage from '/public/icons/placeholder.svg';
-import { Panel } from 'rsuite';
+import { styled } from '@mui/system';
+import { ButtonToolbar, ButtonGroup, Slider } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
 
 interface DescriptionData {
@@ -46,10 +47,47 @@ const descriptions: DescriptionData[] = [
   },
 ];
 
+const NewTabs = styled(Tabs)({
+  minHeight: '24px',
+  '& .MuiTabs-flexContainer': {
+    gap: 4,
+  },
+  '& .MuiTabs-indicator': {
+    display: 'none',
+  },
+  border: '1px solid #F6F8F9',
+  padding: '2px',
+  borderRadius: '100px',
+});
+
+const NewTab = styled(Tab)`
+  margin: 0px;
+  fontweight: 600;
+  fontfamily: Gilroy, Arial !important;
+  fontstyle: normal !important;
+  min-height: 24px;
+  border-radius: 100px;
+  height: 40px;
+  width: 49%;
+  color: #b0babf;
+  &.Mui-selected,
+  &:hover {
+    background: #eef0f2;
+    border-radius: 100px;
+    color: #000000;
+    font-weight: bold;
+  }
+`;
+
 export default function Staking() {
   const { currentAccount, loading: web3Loading } = useWeb3Context();
   const { isPermissionsLoading } = usePermissions();
   const [data, setData] = useState(descriptions);
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setSelectedTab(newValue);
+  };
 
   const toggleReadMore = (index: number) => {
     data.forEach((description, idx) => {
@@ -71,11 +109,11 @@ export default function Staking() {
             <Box
               sx={{
                 display: 'flex',
-                flexDirection: { xs: 'column', sm: 'row' },
+                flexDirection: { xs: 'column', md: 'row' },
                 gap: 4,
               }}
             >
-              <Box sx={{ flex: 2, order: { xs: 2, sm: 1 } }}>
+              <Box sx={{ flex: 2, order: { xs: 2, md: 1 } }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
                   <Box>
                     <Paper
@@ -289,7 +327,7 @@ export default function Staking() {
                   </Box>
                 </Box>
               </Box>
-              <Box sx={{ flex: 1, order: { xs: 1, sm: 2 } }}>
+              <Box sx={{ flex: 1, order: { xs: 1, md: 2 } }}>
                 <Paper
                   sx={{
                     bgcolor: 'background.header',
@@ -299,7 +337,51 @@ export default function Staking() {
                     ...borderGradient,
                   }}
                 >
-                  Stakiong
+                  <Box style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+                    <Box>
+                      <NewTabs
+                        value={selectedTab}
+                        onChange={handleChange}
+                        sx={{
+                          mb: 2,
+                        }}
+                      >
+                        <NewTab
+                          label="Stake"
+                          sx={{
+                            fontSize: { xs: '14px', md: '14px' },
+                            fontFamily: 'Gilroy,Arial !important',
+                            fontStyle: 'normal',
+                          }}
+                        />
+                        <NewTab
+                          label="Unstake"
+                          sx={{
+                            fontSize: { xs: '14px', md: '14px' },
+                            fontFamily: 'Gilroy,Arial !important',
+                            fontStyle: 'normal',
+                          }}
+                        />
+                      </NewTabs>
+                    </Box>
+                    <Box>
+                      {selectedTab == 0 && <>first</>}
+                      {selectedTab == 1 && <>sec</>}
+                    </Box>
+                    <Button
+                      sx={{
+                        padding: '8px 16px',
+                        borderRadius: '8px',
+                        backgroundImage: 'linear-gradient(#A439FF, #9582FF)',
+                        height: '40px',
+                        color: '#F6F8F9',
+                        fontWeight: 600,
+                        fontSize: '14px',
+                      }}
+                    >
+                      Create Lock
+                    </Button>
+                  </Box>
                 </Paper>
               </Box>
             </Box>
