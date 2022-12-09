@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Box, Paper, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Paper, Typography, useMediaQuery, useTheme, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { usePermissions } from 'src/hooks/usePermissions';
 import { ConnectWalletPaper } from '../src/components/ConnectWalletPaper';
@@ -7,13 +7,58 @@ import { ContentContainer } from '../src/components/ContentContainer';
 import { MainLayout } from '../src/layouts/MainLayout';
 import { useWeb3Context } from '../src/libs/hooks/useWeb3Context';
 import borderGradient from 'src/layouts/borderGradient';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
+import PlaceholderImage from '/public/icons/placeholder.svg';
+import { Panel } from 'rsuite';
+import 'rsuite/dist/rsuite.min.css';
 
-export default function Position() {
-  const { breakpoints } = useTheme();
-  const lg = useMediaQuery(breakpoints.up('lg'));
+interface DescriptionData {
+  image: string;
+  title: string;
+  description: string;
+  expanded: boolean;
+}
 
+const descriptions: DescriptionData[] = [
+  {
+    image: '',
+    title: 'GAS REFUND',
+    description: `Get up to 95% of gas expenses refunded, depending on your stake size
+    Under this program, 1INCH tokens are distributed as gas refund to
+    Ethereum users who stake 1INCH tokens through the 1inch dApp.`,
+    expanded: false,
+  },
+  {
+    image: '',
+    title: 'GAS REFUND',
+    description: `Get up to 95% of gas expenses refunded, depending on your stake size
+    Under this program, 1INCH tokens are distributed as gas refund to
+    Ethereum users who stake 1INCH tokens through the 1inch dApp.`,
+    expanded: false,
+  },
+  {
+    image: '',
+    title: 'GAS REFUND',
+    description: `Get up to 95% of gas expenses refunded, depending on your stake size
+    Under this program, 1INCH tokens are distributed as gas refund to
+    Ethereum users who stake 1INCH tokens through the 1inch dApp.`,
+    expanded: false,
+  },
+];
+
+export default function Staking() {
   const { currentAccount, loading: web3Loading } = useWeb3Context();
   const { isPermissionsLoading } = usePermissions();
+  const [data, setData] = useState(descriptions);
+
+  const toggleReadMore = (index: number) => {
+    data.forEach((description, idx) => {
+      if (idx == index) {
+        description.expanded = !description.expanded;
+      }
+    });
+    setData([...data]);
+  };
 
   return (
     <>
@@ -178,9 +223,68 @@ export default function Position() {
                         mt: { xs: '8px', md: '12px' },
                         color: '#F1F1F3',
                         ...borderGradient,
+                        position: 'relative',
                       }}
                     >
-                      Stakiong
+                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                        {data.map((description: DescriptionData, idx) => (
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: { xs: 'column', sm: 'row' },
+                              gap: '4px',
+                              flexWrap: 'wrap',
+                            }}
+                            key={idx}
+                          >
+                            <Box sx={{ flex: 2, order: { xs: 1, sm: 1 } }}>
+                              <PlaceholderImage />
+                            </Box>
+                            <Box sx={{ flex: 10, padding: '5px', order: { xs: 3, sm: 2 } }}>
+                              <Typography
+                                sx={{ color: '#080F26', fontWeight: 600, fontSize: '14px' }}
+                              >
+                                {description.title}
+                              </Typography>
+                              <Typography
+                                sx={{
+                                  color: '#5B6871',
+                                  fontWeight: 400,
+                                  fontSize: '14px',
+                                }}
+                              >
+                                {!description.expanded
+                                  ? description.description.slice(0, 110) + '...'
+                                  : description.description}
+                              </Typography>
+                            </Box>
+
+                            {!description.expanded ? (
+                              <ChevronDownIcon
+                                style={{
+                                  color: '#252C32',
+                                  width: '20px',
+                                  position: 'absolute',
+                                  right: '20px',
+                                  cursor: 'pointer',
+                                }}
+                                onClick={() => toggleReadMore(idx)}
+                              />
+                            ) : (
+                              <ChevronUpIcon
+                                style={{
+                                  color: '#252C32',
+                                  width: '20px',
+                                  position: 'absolute',
+                                  right: '20px',
+                                  cursor: 'pointer',
+                                }}
+                                onClick={() => toggleReadMore(idx)}
+                              />
+                            )}
+                          </Box>
+                        ))}
+                      </Box>
                     </Paper>
                   </Box>
                 </Box>
@@ -208,6 +312,6 @@ export default function Position() {
   );
 }
 
-Position.getLayout = function getLayout(page: React.ReactElement) {
+Staking.getLayout = function getLayout(page: React.ReactElement) {
   return <MainLayout>{page}</MainLayout>;
 };
