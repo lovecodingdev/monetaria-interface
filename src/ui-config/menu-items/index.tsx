@@ -95,6 +95,11 @@ const DaoMenuItems: MoreMenuItem[] = [
     title: t`Calculator`,
     icon: <></>,
   },
+  {
+    link: '/staking',
+    title: t`Staking`,
+    icon: <></>,
+  },
 ];
 
 export const moreMenuExtraItems: MoreMenuItem[] = [];
