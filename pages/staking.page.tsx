@@ -10,7 +10,7 @@ import borderGradient from 'src/layouts/borderGradient';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import PlaceholderImage from '/public/icons/placeholder.svg';
 import { styled } from '@mui/system';
-import { ButtonToolbar, ButtonGroup, Slider } from 'rsuite';
+import { ButtonToolbar, DatePicker, Slider } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
 
 interface DescriptionData {
@@ -84,6 +84,9 @@ export default function Staking() {
   const { isPermissionsLoading } = usePermissions();
   const [data, setData] = useState(descriptions);
   const [selectedTab, setSelectedTab] = useState(0);
+  const { breakpoints } = useTheme();
+  const xsm = useMediaQuery(breakpoints.up('xsm'));
+  const downToXSM = useMediaQuery(breakpoints.down('xsm'));
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
@@ -102,7 +105,7 @@ export default function Staking() {
     <>
       <ContentContainer>
         {currentAccount && !isPermissionsLoading ? (
-          <Box>
+          <Box sx={{ fontFamily: 'Gilroy, Arial !important', fontStyle: 'normal' }}>
             <Typography sx={{ color: '#080F26', fontWeight: 700, fontSize: '24px' }}>
               Staking
             </Typography>
@@ -365,22 +368,232 @@ export default function Staking() {
                       </NewTabs>
                     </Box>
                     <Box>
-                      {selectedTab == 0 && <>first</>}
-                      {selectedTab == 1 && <>sec</>}
+                      {selectedTab == 0 && (
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                              justifyContent: 'space-between',
+                              backgroundColor: '#EEF0F2',
+                              borderRadius: '16px',
+                              padding: '12px 20px',
+                            }}
+                          >
+                            <Box>
+                              <Box>
+                                <input
+                                  value={12.4}
+                                  style={{
+                                    border: 'none',
+                                    background: 'transparent',
+                                    color: 'black',
+                                    fontSize: '28px',
+                                    fontWeight: 500,
+                                  }}
+                                />
+                              </Box>
+                              <Box>$179,721,98</Box>
+                            </Box>
+                            <Box></Box>
+                          </Box>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <Box sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}>
+                              Choose lock time
+                            </Box>
+                            <Box>
+                              <DatePicker placeholder="Choose Lock time" />
+                            </Box>
+                          </Box>
+                          <Box sx={{ padding: '10px' }}>
+                            {' '}
+                            <Slider
+                              defaultValue={60}
+                              step={20}
+                              graduated
+                              progress
+                              min={0}
+                              max={120}
+                              renderMark={(mark) => {
+                                if ([0, 20, 40, 60, 80, 100, 120].includes(mark)) {
+                                  let strMark = '';
+                                  if (mark == 0) {
+                                    strMark = '1 week';
+                                  }
+                                  if (mark == 20) {
+                                    strMark = '1 month';
+                                  }
+                                  if (mark == 40) {
+                                    strMark = '3 month';
+                                  }
+                                  if (mark == 60) {
+                                    strMark = '6 month';
+                                  }
+                                  if (mark == 80) {
+                                    strMark = '1 year';
+                                  }
+                                  if (mark == 100) {
+                                    strMark = '2 year';
+                                  }
+                                  if (mark == 120) {
+                                    strMark = '4 year';
+                                  }
+                                  return (
+                                    <span
+                                      style={{
+                                        color: '#5B6871',
+                                        fontSize: '10px',
+                                        fontWeight: 400,
+                                      }}
+                                    >
+                                      {strMark}
+                                    </span>
+                                  );
+                                }
+                                return null;
+                              }}
+                            />
+                          </Box>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: 'column',
+                              gap: '8px',
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                              }}
+                            >
+                              <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                                Staking APY
+                              </Box>
+                              <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                                15%
+                              </Box>
+                            </Box>
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                              }}
+                            >
+                              <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                                My MNT balance:
+                              </Box>
+                              <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                                622,572.00
+                              </Box>
+                            </Box>
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                              }}
+                            >
+                              <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                                veMNT balance:
+                              </Box>
+                              <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                                62,572.00
+                              </Box>
+                            </Box>
+                          </Box>
+                          <Button
+                            sx={{
+                              padding: '8px 16px',
+                              borderRadius: '8px',
+                              backgroundImage: 'linear-gradient(#A439FF, #9582FF)',
+                              height: '40px',
+                              color: '#F6F8F9',
+                              fontWeight: 600,
+                              fontSize: '14px',
+                            }}
+                          >
+                            Create Lock
+                          </Button>
+                        </Box>
+                      )}
+                      {selectedTab == 1 && (
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                              justifyContent: 'space-between',
+                              backgroundColor: '#EEF0F2',
+                              borderRadius: '16px',
+                              padding: '12px 20px',
+                            }}
+                          >
+                            <Box>
+                              <Box>
+                                <input
+                                  value={12.4}
+                                  style={{
+                                    border: 'none',
+                                    background: 'transparent',
+                                    color: 'black',
+                                    fontSize: '28px',
+                                    fontWeight: 500,
+                                  }}
+                                />
+                              </Box>
+                              <Box>$179,721,98</Box>
+                            </Box>
+                            <Box></Box>
+                          </Box>
+
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: 'column',
+                              gap: '8px',
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                              }}
+                            >
+                              <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                                Staked balance
+                              </Box>
+                              <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                                572.00
+                              </Box>
+                            </Box>
+                          </Box>
+                          <Button
+                            sx={{
+                              padding: '8px 16px',
+                              borderRadius: '8px',
+                              backgroundImage: 'linear-gradient(#A439FF, #9582FF)',
+                              height: '40px',
+                              color: '#F6F8F9',
+                              fontWeight: 600,
+                              fontSize: '14px',
+                            }}
+                          >
+                            Unstake
+                          </Button>
+                        </Box>
+                      )}
                     </Box>
-                    <Button
-                      sx={{
-                        padding: '8px 16px',
-                        borderRadius: '8px',
-                        backgroundImage: 'linear-gradient(#A439FF, #9582FF)',
-                        height: '40px',
-                        color: '#F6F8F9',
-                        fontWeight: 600,
-                        fontSize: '14px',
-                      }}
-                    >
-                      Create Lock
-                    </Button>
                   </Box>
                 </Paper>
               </Box>
