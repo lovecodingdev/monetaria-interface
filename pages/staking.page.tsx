@@ -46,6 +46,9 @@ export default function Position() {
                     </Paper>
                   </Box>
                   <Box>
+                    <Typography sx={{ color: '#080F26', fontWeight: 700, fontSize: '24px' }}>
+                      How do I benefit from staking?
+                    </Typography>
                     <Paper
                       sx={{
                         bgcolor: 'background.header',
