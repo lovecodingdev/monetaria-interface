@@ -43,3 +43,14 @@
   font-family: Gilroy, Arial !important;
   font-style: normal;
 }
+
+.stake-input {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.stake-input::-webkit-inner-spin-button,
+.stake-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}

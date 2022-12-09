@@ -10,7 +10,8 @@ import borderGradient from 'src/layouts/borderGradient';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import PlaceholderImage from '/public/icons/placeholder.svg';
 import { styled } from '@mui/system';
-import { ButtonToolbar, DatePicker, Slider } from 'rsuite';
+import { DatePicker, Slider, SelectPicker } from 'rsuite';
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import 'rsuite/dist/rsuite.min.css';
 
 interface DescriptionData {
@@ -44,6 +45,17 @@ const descriptions: DescriptionData[] = [
     Under this program, 1INCH tokens are distributed as gas refund to
     Ethereum users who stake 1INCH tokens through the 1inch dApp.`,
     expanded: false,
+  },
+];
+
+const tokenData = [
+  {
+    label: 'mnt',
+    value: '0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1',
+  },
+  {
+    label: 'btc',
+    value: '0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e600b1',
   },
 ];
 
@@ -84,6 +96,9 @@ export default function Staking() {
   const { isPermissionsLoading } = usePermissions();
   const [data, setData] = useState(descriptions);
   const [selectedTab, setSelectedTab] = useState(0);
+  const [stakeAmount, setStakeAmount] = useState(12.4);
+  const [unStakeAmount, setUnstakeAmount] = useState(12.4);
+  const [curToken, setCurToken] = useState('0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1');
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.up('xsm'));
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
@@ -378,24 +393,112 @@ export default function Staking() {
                               backgroundColor: '#EEF0F2',
                               borderRadius: '16px',
                               padding: '12px 20px',
+                              alignItems: 'center',
                             }}
                           >
                             <Box>
-                              <Box>
-                                <input
-                                  value={12.4}
-                                  style={{
-                                    border: 'none',
-                                    background: 'transparent',
-                                    color: 'black',
-                                    fontSize: '28px',
-                                    fontWeight: 500,
-                                  }}
-                                />
+                              <input
+                                value={stakeAmount}
+                                className="stake-input"
+                                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                // @ts-ignore
+                                onChange={(e) => setStakeAmount(e.target.value)}
+                                type="number"
+                                onKeyDown={(e) => {
+                                  if (e.code === 'ArrowUp' || e.code === 'ArrowDown') {
+                                    e.preventDefault();
+                                  }
+                                }}
+                                style={{
+                                  border: 'none',
+                                  background: 'transparent',
+                                  color: 'black',
+                                  fontSize: '28px',
+                                  outline: 'none',
+                                  fontWeight: 500,
+                                  width: '170px',
+                                }}
+                              />
+                              <Box sx={{ color: '#9AA6AC', fontSize: '12px', fontWeight: 400 }}>
+                                $179,721,98
                               </Box>
-                              <Box>$179,721,98</Box>
                             </Box>
-                            <Box></Box>
+                            <Box>
+                              <SelectPicker
+                                data={tokenData}
+                                style={{ width: '100%' }}
+                                value={curToken}
+                                onChange={setCurToken}
+                                placeholder="Select a token"
+                                searchable={false}
+                                renderMenuItem={(label, item) => {
+                                  return (
+                                    <Box
+                                      sx={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        gap: 2,
+                                        alignItems: 'center',
+                                        fontFamily: 'Gilroy, Arial !important',
+                                      }}
+                                    >
+                                      <Box>
+                                        {' '}
+                                        <TokenIcon
+                                          symbol={label}
+                                          sx={{ fontSize: '14px', mr: 1 }}
+                                        />{' '}
+                                      </Box>
+                                      <Box>
+                                        {' '}
+                                        <span
+                                          style={{
+                                            fontWeight: 400,
+                                            fontSize: '14px',
+                                            color: '#5B6871',
+                                          }}
+                                        >
+                                          {' '}
+                                          {item.label.toUpperCase()}
+                                        </span>
+                                      </Box>
+                                    </Box>
+                                  );
+                                }}
+                                renderValue={(value, item) => {
+                                  return (
+                                    <Box
+                                      sx={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        gap: 2,
+                                        alignItems: 'center',
+                                      }}
+                                    >
+                                      <Box>
+                                        {' '}
+                                        <TokenIcon
+                                          symbol={item.label}
+                                          sx={{ fontSize: '14px', mr: 1 }}
+                                        />{' '}
+                                      </Box>
+                                      <Box>
+                                        {' '}
+                                        <span
+                                          style={{
+                                            fontWeight: 400,
+                                            fontSize: '14px',
+                                            color: '#5B6871',
+                                          }}
+                                        >
+                                          {item.label.toUpperCase()}
+                                        </span>
+                                      </Box>
+                                    </Box>
+                                  );
+                                }}
+                              />
+                            </Box>
                           </Box>
                           <Box
                             sx={{
@@ -536,24 +639,112 @@ export default function Staking() {
                               backgroundColor: '#EEF0F2',
                               borderRadius: '16px',
                               padding: '12px 20px',
+                              alignItems: 'center',
                             }}
                           >
                             <Box>
-                              <Box>
-                                <input
-                                  value={12.4}
-                                  style={{
-                                    border: 'none',
-                                    background: 'transparent',
-                                    color: 'black',
-                                    fontSize: '28px',
-                                    fontWeight: 500,
-                                  }}
-                                />
+                              <input
+                                value={unStakeAmount}
+                                className="stake-input"
+                                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                // @ts-ignore
+                                onChange={(e) => setUnstakeAmount(e.target.value)}
+                                type="number"
+                                onKeyDown={(e) => {
+                                  if (e.code === 'ArrowUp' || e.code === 'ArrowDown') {
+                                    e.preventDefault();
+                                  }
+                                }}
+                                style={{
+                                  border: 'none',
+                                  background: 'transparent',
+                                  color: 'black',
+                                  fontSize: '28px',
+                                  outline: 'none',
+                                  fontWeight: 500,
+                                  width: '170px',
+                                }}
+                              />
+                              <Box sx={{ color: '#9AA6AC', fontSize: '12px', fontWeight: 400 }}>
+                                $179,721,98
                               </Box>
-                              <Box>$179,721,98</Box>
                             </Box>
-                            <Box></Box>
+                            <Box>
+                              <SelectPicker
+                                data={tokenData}
+                                style={{ width: '100%' }}
+                                value={curToken}
+                                onChange={setCurToken}
+                                placeholder="Select a token"
+                                searchable={false}
+                                renderMenuItem={(label, item) => {
+                                  return (
+                                    <Box
+                                      sx={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        gap: 2,
+                                        alignItems: 'center',
+                                        fontFamily: 'Gilroy, Arial !important',
+                                      }}
+                                    >
+                                      <Box>
+                                        {' '}
+                                        <TokenIcon
+                                          symbol={label}
+                                          sx={{ fontSize: '14px', mr: 1 }}
+                                        />{' '}
+                                      </Box>
+                                      <Box>
+                                        {' '}
+                                        <span
+                                          style={{
+                                            fontWeight: 400,
+                                            fontSize: '14px',
+                                            color: '#5B6871',
+                                          }}
+                                        >
+                                          {' '}
+                                          {item.label.toUpperCase()}
+                                        </span>
+                                      </Box>
+                                    </Box>
+                                  );
+                                }}
+                                renderValue={(value, item) => {
+                                  return (
+                                    <Box
+                                      sx={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        gap: 2,
+                                        alignItems: 'center',
+                                      }}
+                                    >
+                                      <Box>
+                                        {' '}
+                                        <TokenIcon
+                                          symbol={item.label}
+                                          sx={{ fontSize: '14px', mr: 1 }}
+                                        />{' '}
+                                      </Box>
+                                      <Box>
+                                        {' '}
+                                        <span
+                                          style={{
+                                            fontWeight: 400,
+                                            fontSize: '14px',
+                                            color: '#5B6871',
+                                          }}
+                                        >
+                                          {item.label.toUpperCase()}
+                                        </span>
+                                      </Box>
+                                    </Box>
+                                  );
+                                }}
+                              />
+                            </Box>
                           </Box>
 
                           <Box
