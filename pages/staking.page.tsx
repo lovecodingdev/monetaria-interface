@@ -26,11 +26,11 @@ export default function Position() {
             <Box
               sx={{
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: { xs: 'column', sm: 'row' },
                 gap: 4,
               }}
             >
-              <Box sx={{ flex: 2 }}>
+              <Box sx={{ flex: 2, order: { xs: 2, sm: 1 } }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
                   <Box>
                     <Paper
@@ -42,7 +42,129 @@ export default function Position() {
                         ...borderGradient,
                       }}
                     >
-                      Stakiong
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: { xs: 'column', sm: 'row' },
+                          gap: '32.8px',
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: { xs: 'row', sm: 'column' },
+                            justifyContent: { xs: 'space-between', sm: 'start' },
+                            gap: { xs: '8px', sm: '0px' },
+                          }}
+                        >
+                          <Box sx={{ order: { xs: 2, sm: 1 } }}>
+                            <Typography
+                              sx={{ color: '#080F26', fontWeight: 600, fontSize: '14px' }}
+                            >
+                              622,572,572.00
+                            </Typography>
+                          </Box>
+                          <Box sx={{ order: { xs: 1, sm: 2 } }}>
+                            <Typography
+                              sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '12px' }}
+                            >
+                              Total MNT vote-locked
+                            </Typography>
+                          </Box>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: { xs: 'row', sm: 'column' },
+                            justifyContent: { xs: 'space-between', sm: 'start' },
+                            gap: { xs: '8px', sm: '0px' },
+                          }}
+                        >
+                          <Box sx={{ order: { xs: 2, sm: 1 } }}>
+                            <Typography
+                              sx={{ color: '#080F26', fontWeight: 600, fontSize: '14px' }}
+                            >
+                              95.73%
+                            </Typography>
+                          </Box>
+                          <Box sx={{ order: { xs: 1, sm: 2 } }}>
+                            <Typography
+                              sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '12px' }}
+                            >
+                              Percentage of total MNT Locked excluding voting escrow:
+                            </Typography>
+                          </Box>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: { xs: 'row', sm: 'column' },
+                            justifyContent: { xs: 'space-between', sm: 'start' },
+                            gap: { xs: '8px', sm: '0px' },
+                          }}
+                        >
+                          <Box sx={{ order: { xs: 2, sm: 1 } }}>
+                            <Typography
+                              sx={{ color: '#080F26', fontWeight: 600, fontSize: '14px' }}
+                            >
+                              48.91%
+                            </Typography>
+                          </Box>
+                          <Box sx={{ order: { xs: 1, sm: 2 } }}>
+                            <Typography
+                              sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '12px' }}
+                            >
+                              Percentage of total MNT Locked:
+                            </Typography>
+                          </Box>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: { xs: 'row', sm: 'column' },
+                            justifyContent: { xs: 'space-between', sm: 'start' },
+                            gap: { xs: '8px', sm: '0px' },
+                          }}
+                        >
+                          <Box sx={{ order: { xs: 2, sm: 1 } }}>
+                            <Typography
+                              sx={{ color: '#080F26', fontWeight: 600, fontSize: '14px' }}
+                            >
+                              560,131,773.03
+                            </Typography>
+                          </Box>
+                          <Box sx={{ order: { xs: 1, sm: 2 } }}>
+                            <Typography
+                              sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '12px' }}
+                            >
+                              Total veMNT:
+                            </Typography>
+                          </Box>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: { xs: 'row', sm: 'column' },
+                            justifyContent: { xs: 'space-between', sm: 'start' },
+                            gap: { xs: '8px', sm: '0px' },
+                          }}
+                        >
+                          <Box sx={{ order: { xs: 2, sm: 1 } }}>
+                            <Typography
+                              sx={{ color: '#080F26', fontWeight: 600, fontSize: '14px' }}
+                            >
+                              3.60 YEARS
+                            </Typography>
+                          </Box>
+                          <Box sx={{ order: { xs: 1, sm: 2 } }}>
+                            <Typography
+                              sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '12px' }}
+                            >
+                              Average lock time:
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </Box>
                     </Paper>
                   </Box>
                   <Box>
@@ -63,7 +185,7 @@ export default function Position() {
                   </Box>
                 </Box>
               </Box>
-              <Box sx={{ flex: 1 }}>
+              <Box sx={{ flex: 1, order: { xs: 1, sm: 2 } }}>
                 <Paper
                   sx={{
                     bgcolor: 'background.header',
