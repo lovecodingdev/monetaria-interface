@@ -478,7 +478,7 @@ export default function Staking() {
                               <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
                                 Staking APY
                               </Box>
-                              <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                              <Box sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}>
                                 15%
                               </Box>
                             </Box>
@@ -492,7 +492,7 @@ export default function Staking() {
                               <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
                                 My MNT balance:
                               </Box>
-                              <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                              <Box sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}>
                                 622,572.00
                               </Box>
                             </Box>
@@ -506,7 +506,7 @@ export default function Staking() {
                               <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
                                 veMNT balance:
                               </Box>
-                              <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                              <Box sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}>
                                 62,572.00
                               </Box>
                             </Box>
@@ -573,7 +573,7 @@ export default function Staking() {
                               <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
                                 Staked balance
                               </Box>
-                              <Box sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                              <Box sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}>
                                 572.00
                               </Box>
                             </Box>
