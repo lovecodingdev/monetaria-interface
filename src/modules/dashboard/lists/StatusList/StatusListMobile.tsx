@@ -2,98 +2,73 @@ import { Trans } from '@lingui/macro';
 import { Box, Typography } from '@mui/material';
 import { Row } from '../../../../components/primitives/Row';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import { TransactionListValidator } from './type';
+import { StatusListDataValidator } from './type';
 
-const data: TransactionListValidator[] = [
+const data: StatusListDataValidator[] = [
   {
-    asset: 'ETH',
-    symbol: 'eth',
-    network: 'Ethereum',
-    type: 'ETH borrow',
-    amount: 2374.5,
-    block: 'YES',
-    hash_id: '2342342342342',
-    date: '16/12/2022',
+    no: 1,
+    name: 'Ramp gamma from 0.000145 to 0.0002 9 and A from 10 * (4*1e4) to 20 (4*1e4) for bLUSD pool',
+    status: 'Executed',
+    bgColor: '#EBFFF1',
+    color: '#119C2B',
   },
   {
-    asset: 'BTC',
-    symbol: 'btc',
-    network: 'BTC',
-    type: 'ETH borrow',
-    amount: 237.5,
-    block: 'YES',
-    hash_id: '2342342342342',
-    date: '16/12/2022',
+    no: 2,
+    name: 'Ramp gamma from 0.000145 to 0.0002 9 and A from 10 * (4*1e4) to 20 (4*1e4) for bLUSD pool',
+    status: 'Canceled',
+    bgColor: '#EEF0F2',
+    color: '#252C32',
+  },
+  {
+    no: 3,
+    name: 'Ramp gamma from 0.000145 to 0.0002 9 and A from 10 * (4*1e4) to 20 (4*1e4) for bLUSD pool',
+    status: 'Failed',
+    bgColor: '#FFEFEB',
+    color: '#CC0905',
+  },
+  {
+    no: 4,
+    name: 'Ramp gamma from 0.000145 to 0.0002 9 and A from 10 * (4*1e4) to 20 (4*1e4) for bLUSD pool',
+    status: 'Failed',
+    bgColor: '#FFEFEB',
+    color: '#CC0905',
+  },
+  {
+    no: 5,
+    name: 'Ramp gamma from 0.000145 to 0.0002 9 and A from 10 * (4*1e4) to 20 (4*1e4) for bLUSD pool',
+    status: 'Failed',
+    bgColor: '#FFEFEB',
+    color: '#CC0905',
+  },
+  {
+    no: 6,
+    name: 'Ramp gamma from 0.000145 to 0.0002 9 and A from 10 * (4*1e4) to 20 (4*1e4) for bLUSD pool',
+    status: 'Failed',
+    bgColor: '#FFEFEB',
+    color: '#CC0905',
+  },
+  {
+    no: 7,
+    name: 'Ramp gamma from 0.000145 to 0.0002 9 and A from 10 * (4*1e4) to 20 (4*1e4) for bLUSD pool',
+    status: 'Failed',
+    bgColor: '#FFEFEB',
+    color: '#CC0905',
   },
 ];
 
 export const StatusListMobile = () => {
   return data.map((asset) => (
-    <Box className="card-border" sx={{ my: 4, padding: 4 }} key={asset.symbol}>
-      <Box
-        sx={{
-          position: 'relative',
-        }}
-      >
-        <Box
-          sx={{
-            padding: 1.5,
-            color: 'white',
-            backgroundColor: 'transparent',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 1,
-            mb: 4,
-          }}
-        >
-          <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
-            <TokenIcon symbol={asset.symbol} sx={{ fontSize: `32px`, ml: -1 }} />
-            <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-              <Box>
-                {' '}
-                <Typography
-                  variant="description"
-                  noWrap
-                  sx={{ fontSize: '14px', fontWeight: 400, color: 'black' }}
-                >
-                  {asset.symbol}
-                </Typography>
-              </Box>
-              <Box>
-                {' '}
-                <Typography
-                  variant="description"
-                  noWrap
-                  sx={{ fontSize: '12px', fontWeight: 400, color: '#84919A' }}
-                >
-                  {asset.network}
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
+    <Box className="card-border" sx={{ padding: 4 }} key={asset.symbol}>
       <Box sx={{ paddingTop: '20px' }}>
-        <Row caption={<Trans>Type</Trans>} align="flex-start" captionVariant="description" mb={2}>
-          <div>{asset.type}</div>
+        <Row caption={<Trans>No</Trans>} align="flex-start" captionVariant="description" mb={2}>
+          <div>{asset.no}</div>
         </Row>
 
-        <Row caption={<Trans>Amount</Trans>} align="flex-start" captionVariant="description" mb={2}>
-          <Box>{asset.amount}</Box>
+        <Row caption={<Trans>Name</Trans>} align="flex-start" captionVariant="description" mb={2}>
+          <Box>{asset.name}</Box>
         </Row>
-        <Row caption={<Trans>Block</Trans>} align="flex-start" captionVariant="description" mb={2}>
-          <Box>{asset.block}</Box>
-        </Row>
-        <Row
-          caption={<Trans>Hash Id</Trans>}
-          align="flex-start"
-          captionVariant="description"
-          mb={2}
-        >
-          <Box>{asset.hash_id}</Box>
-        </Row>
-        <Row caption={<Trans>Date</Trans>} align="flex-start" captionVariant="description" mb={2}>
-          <Box>{asset.date}</Box>
+        <Row caption={<Trans>Status</Trans>} align="flex-start" captionVariant="description" mb={2}>
+          <Box>{asset.status}</Box>
         </Row>
       </Box>
     </Box>

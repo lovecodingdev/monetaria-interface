@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Box, Paper, Typography, useMediaQuery, useTheme, Button, Chip } from '@mui/material';
+import { Chip } from '@mui/material';
 import { Table } from 'rsuite';
-import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { StatusListDataValidator } from './type';
 
 const { Column, HeaderCell, Cell } = Table;
@@ -134,6 +133,7 @@ const StatusList = () => {
                 backgroundColor: `${rowData.bgColor}`,
                 fontWeight: 600,
                 fontSize: '14px',
+                borderRadius: '6px',
               }}
             />
           )}
