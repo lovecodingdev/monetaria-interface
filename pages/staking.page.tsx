@@ -423,81 +423,23 @@ export default function Staking() {
                                 $179,721,98
                               </Box>
                             </Box>
-                            <Box>
-                              <SelectPicker
-                                data={tokenData}
-                                style={{ width: '100%' }}
-                                value={curToken}
-                                onChange={setCurToken}
-                                placeholder="Select a token"
-                                searchable={false}
-                                renderMenuItem={(label, item) => {
-                                  return (
-                                    <Box
-                                      sx={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        gap: 2,
-                                        alignItems: 'center',
-                                        fontFamily: 'Gilroy, Arial !important',
-                                      }}
-                                    >
-                                      <Box>
-                                        {' '}
-                                        <TokenIcon
-                                          symbol={label}
-                                          sx={{ fontSize: '14px', mr: 1 }}
-                                        />{' '}
-                                      </Box>
-                                      <Box>
-                                        {' '}
-                                        <span
-                                          style={{
-                                            fontWeight: 400,
-                                            fontSize: '14px',
-                                            color: '#5B6871',
-                                          }}
-                                        >
-                                          {' '}
-                                          {item.label.toUpperCase()}
-                                        </span>
-                                      </Box>
-                                    </Box>
-                                  );
-                                }}
-                                renderValue={(value, item) => {
-                                  return (
-                                    <Box
-                                      sx={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        gap: 2,
-                                        alignItems: 'center',
-                                      }}
-                                    >
-                                      <Box>
-                                        {' '}
-                                        <TokenIcon
-                                          symbol={item.label}
-                                          sx={{ fontSize: '14px', mr: 1 }}
-                                        />{' '}
-                                      </Box>
-                                      <Box>
-                                        {' '}
-                                        <span
-                                          style={{
-                                            fontWeight: 400,
-                                            fontSize: '14px',
-                                            color: '#5B6871',
-                                          }}
-                                        >
-                                          {item.label.toUpperCase()}
-                                        </span>
-                                      </Box>
-                                    </Box>
-                                  );
-                                }}
-                              />
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                gap: '8px',
+                                alignItems: 'center',
+                                borderRadius: '12px',
+                                backgroundColor: 'white',
+                                padding: '10px 10px',
+                              }}
+                            >
+                              <TokenIcon symbol={'eth'} sx={{ fontSize: '24px', mr: 1 }} />{' '}
+                              <Typography
+                                sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}
+                              >
+                                MNT
+                              </Typography>
                             </Box>
                           </Box>
                           <Box
@@ -669,81 +611,23 @@ export default function Staking() {
                                 $179,721,98
                               </Box>
                             </Box>
-                            <Box>
-                              <SelectPicker
-                                data={tokenData}
-                                style={{ width: '100%' }}
-                                value={curToken}
-                                onChange={setCurToken}
-                                placeholder="Select a token"
-                                searchable={false}
-                                renderMenuItem={(label, item) => {
-                                  return (
-                                    <Box
-                                      sx={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        gap: 2,
-                                        alignItems: 'center',
-                                        fontFamily: 'Gilroy, Arial !important',
-                                      }}
-                                    >
-                                      <Box>
-                                        {' '}
-                                        <TokenIcon
-                                          symbol={label}
-                                          sx={{ fontSize: '14px', mr: 1 }}
-                                        />{' '}
-                                      </Box>
-                                      <Box>
-                                        {' '}
-                                        <span
-                                          style={{
-                                            fontWeight: 400,
-                                            fontSize: '14px',
-                                            color: '#5B6871',
-                                          }}
-                                        >
-                                          {' '}
-                                          {item.label.toUpperCase()}
-                                        </span>
-                                      </Box>
-                                    </Box>
-                                  );
-                                }}
-                                renderValue={(value, item) => {
-                                  return (
-                                    <Box
-                                      sx={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        gap: 2,
-                                        alignItems: 'center',
-                                      }}
-                                    >
-                                      <Box>
-                                        {' '}
-                                        <TokenIcon
-                                          symbol={item.label}
-                                          sx={{ fontSize: '14px', mr: 1 }}
-                                        />{' '}
-                                      </Box>
-                                      <Box>
-                                        {' '}
-                                        <span
-                                          style={{
-                                            fontWeight: 400,
-                                            fontSize: '14px',
-                                            color: '#5B6871',
-                                          }}
-                                        >
-                                          {item.label.toUpperCase()}
-                                        </span>
-                                      </Box>
-                                    </Box>
-                                  );
-                                }}
-                              />
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                gap: '8px',
+                                alignItems: 'center',
+                                borderRadius: '12px',
+                                backgroundColor: 'white',
+                                padding: '10px 10px',
+                              }}
+                            >
+                              <TokenIcon symbol={'eth'} sx={{ fontSize: '24px', mr: 1 }} />{' '}
+                              <Typography
+                                sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}
+                              >
+                                MNT
+                              </Typography>
                             </Box>
                           </Box>
 
