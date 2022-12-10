@@ -93,7 +93,7 @@ const StatusList = () => {
 
   return (
     <Table
-      height={420}
+      height={445}
       data={getData()}
       sortColumn={sortColumn}
       sortType={sortType}
