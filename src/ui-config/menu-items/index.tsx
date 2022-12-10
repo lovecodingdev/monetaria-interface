@@ -33,18 +33,18 @@ export const navigation: Navigation[] = [
     title: t`Markets`,
     dataCy: 'menuMarkets',
   },
-  {
-    link: ROUTES.staking,
-    title: t`Stake`,
-    dataCy: 'menuStake',
-    isVisible: () => process.env.NEXT_PUBLIC_ENABLE_STAKING === 'true' && !ENABLE_TESTNET,
-  },
-  {
-    link: ROUTES.governance,
-    title: t`Vote`,
-    dataCy: 'menuGovernance',
-    isVisible: () => process.env.NEXT_PUBLIC_ENABLE_GOVERNANCE === 'true' && !ENABLE_TESTNET,
-  },
+  // {
+  //   link: ROUTES.staking,
+  //   title: t`Stake`,
+  //   dataCy: 'menuStake',
+  //   isVisible: () => process.env.NEXT_PUBLIC_ENABLE_STAKING === 'true' && !ENABLE_TESTNET,
+  // },
+  // {
+  //   link: ROUTES.governance,
+  //   title: t`Vote`,
+  //   dataCy: 'menuGovernance',
+  //   isVisible: () => process.env.NEXT_PUBLIC_ENABLE_GOVERNANCE === 'true' && !ENABLE_TESTNET,
+  // },
   // {
   //   link: ROUTES.referral,
   //   title: t`Referral`,
@@ -98,6 +98,11 @@ const DaoMenuItems: MoreMenuItem[] = [
   {
     link: '/staking',
     title: t`Staking`,
+    icon: <></>,
+  },
+  {
+    link: '/vote',
+    title: t`Vote`,
     icon: <></>,
   },
 ];
