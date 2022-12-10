@@ -10,7 +10,7 @@ import borderGradient from 'src/layouts/borderGradient';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import PlaceholderImage from '/public/icons/placeholder.svg';
 import { styled } from '@mui/system';
-import { DatePicker, Slider, SelectPicker } from 'rsuite';
+import { DatePicker, Slider } from 'rsuite';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import 'rsuite/dist/rsuite.min.css';
 
