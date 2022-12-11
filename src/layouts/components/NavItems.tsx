@@ -79,11 +79,13 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                   '&:hover': {
                     borderRadius: '100px',
                     textDecoration: 'none',
+                    color: '#080F26',
                   },
                   '&.active': {
                     background: '#FFFFFF',
                     borderRadius: '100px',
                     textDecoration: 'none',
+                    color: '#080F26',
                   },
                 })}
               >
