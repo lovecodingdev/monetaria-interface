@@ -54,6 +54,13 @@ const data: StatusListDataValidator[] = [
     bgColor: '#FFEFEB',
     color: '#CC0905',
   },
+  {
+    no: 8,
+    name: 'Ramp gamma from 0.000145 to 0.0002 9 and A from 10 * (4*1e4) to 20 (4*1e4) for bLUSD pool',
+    status: 'Failed',
+    bgColor: '#FFEFEB',
+    color: '#CC0905',
+  },
 ];
 
 const StatusList = () => {
@@ -93,7 +100,7 @@ const StatusList = () => {
 
   return (
     <Table
-      height={445}
+      autoHeight={true}
       data={getData()}
       sortColumn={sortColumn}
       sortType={sortType}
