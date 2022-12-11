@@ -10,7 +10,8 @@ import borderGradient from 'src/layouts/borderGradient';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import PlaceholderImage from '/public/icons/placeholder.svg';
 import { styled } from '@mui/system';
-import { DatePicker, Slider } from 'rsuite';
+import { DatePicker } from 'rsuite';
+import Slider from '@mui/material/Slider';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import 'rsuite/dist/rsuite.min.css';
 
@@ -47,6 +48,41 @@ const descriptions: DescriptionData[] = [
     expanded: false,
   },
 ];
+
+const marks = [
+  {
+    value: 0,
+    label: '1 week',
+  },
+  {
+    value: 1,
+    label: '1 month',
+  },
+  {
+    value: 2,
+    label: '3 month',
+  },
+  {
+    value: 3,
+    label: '6 month',
+  },
+  {
+    value: 4,
+    label: '1 year',
+  },
+  {
+    value: 5,
+    label: '2 years',
+  },
+  {
+    value: 6,
+    label: '4 years',
+  },
+];
+
+function valuetext(value: number) {
+  return `${value}`;
+}
 
 const tokenData = [
   {
@@ -460,49 +496,41 @@ export default function Staking() {
                           <Box sx={{ padding: '10px' }}>
                             {' '}
                             <Slider
-                              defaultValue={60}
-                              step={20}
-                              graduated
-                              progress
+                              aria-label="Custom marks"
+                              defaultValue={3}
+                              getAriaValueText={valuetext}
+                              step={1}
+                              valueLabelDisplay="auto"
+                              marks={marks}
                               min={0}
-                              max={120}
-                              renderMark={(mark) => {
-                                if ([0, 20, 40, 60, 80, 100, 120].includes(mark)) {
-                                  let strMark = '';
-                                  if (mark == 0) {
-                                    strMark = '1 week';
-                                  }
-                                  if (mark == 20) {
-                                    strMark = '1 month';
-                                  }
-                                  if (mark == 40) {
-                                    strMark = '3 month';
-                                  }
-                                  if (mark == 60) {
-                                    strMark = '6 month';
-                                  }
-                                  if (mark == 80) {
-                                    strMark = '1 year';
-                                  }
-                                  if (mark == 100) {
-                                    strMark = '2 year';
-                                  }
-                                  if (mark == 120) {
-                                    strMark = '4 year';
-                                  }
-                                  return (
-                                    <span
-                                      style={{
-                                        color: '#5B6871',
-                                        fontSize: '10px',
-                                        fontWeight: 400,
-                                      }}
-                                    >
-                                      {strMark}
-                                    </span>
-                                  );
-                                }
-                                return null;
+                              max={6}
+                              sx={{
+                                '& .MuiSlider-thumb': {
+                                  backgroundColor: '#F6F8F9',
+                                  border: '1px solid #B0BABF',
+                                  opacity: 1,
+                                  '&:focus, &:hover, &.Mui-active': {
+                                    boxShadow:
+                                      '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+                                    // Reset on touch devices, it doesn't add specificity
+                                  },
+                                },
+                                '& .MuiSlider-track': {
+                                  border: 'none',
+                                  backgroundColor: '#074592',
+                                },
+                                '& .MuiSlider-rail': {
+                                  opacity: 1,
+                                  backgroundColor: '#DDE2E4',
+                                },
+                                '& .MuiSlider-mark': {
+                                  backgroundColor: '#bfbfbf',
+                                  height: '2px',
+                                  '&.MuiSlider-markActive': {
+                                    opacity: 1,
+                                    backgroundColor: '#F6F8F9',
+                                  },
+                                },
                               }}
                             />
                           </Box>
