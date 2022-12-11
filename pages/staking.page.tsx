@@ -60,7 +60,7 @@ const marks = [
   },
   {
     value: 2,
-    label: '3 month',
+    label: '3',
   },
   {
     value: 3,
@@ -72,7 +72,7 @@ const marks = [
   },
   {
     value: 5,
-    label: '2 years',
+    label: '2',
   },
   {
     value: 6,
