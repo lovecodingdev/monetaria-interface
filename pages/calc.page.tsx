@@ -2,11 +2,12 @@ import { Box, Container, Paper, Typography, useMediaQuery, useTheme } from '@mui
 import { useEffect, useState } from 'react';
 import { MainLayout } from '../src/layouts/MainLayout';
 import borderGradient from 'src/layouts/borderGradient';
-import { SelectPicker, InputNumber, Button, ButtonToolbar, ButtonGroup, Slider } from 'rsuite';
+import { SelectPicker, InputNumber, Button, ButtonToolbar, ButtonGroup } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { textCenterEllipsis } from 'src/helpers/text-center-ellipsis';
 import Rocket from '/public/icons/rocket.svg';
+import Slider from '@mui/material/Slider';
 
 const gaugeTempData = [
   {
@@ -18,6 +19,41 @@ const gaugeTempData = [
     value: '0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e600b1',
   },
 ];
+
+const marks = [
+  {
+    value: 0,
+    label: '1 week',
+  },
+  {
+    value: 1,
+    label: '1 month',
+  },
+  {
+    value: 2,
+    label: '3',
+  },
+  {
+    value: 3,
+    label: '6 month',
+  },
+  {
+    value: 4,
+    label: '1 year',
+  },
+  {
+    value: 5,
+    label: '2',
+  },
+  {
+    value: 6,
+    label: '4 years',
+  },
+];
+
+function valuetext(value: number) {
+  return `${value}`;
+}
 
 export default function Calc() {
   const { breakpoints } = useTheme();
@@ -236,46 +272,50 @@ export default function Calc() {
                   >
                     Locked for
                   </label>{' '}
-                  <Box sx={{ padding: '5px 10px', display: 'flex', justifyContent: 'center' }}>
+                  <Box
+                    sx={{
+                      padding: '5px 10px',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      width: { xs: 330, md: 295 },
+                    }}
+                  >
                     <Slider
-                      defaultValue={60}
-                      step={20}
-                      graduated
-                      progress
+                      aria-label="Custom marks"
+                      defaultValue={3}
+                      getAriaValueText={valuetext}
+                      step={1}
+                      valueLabelDisplay="auto"
+                      marks={marks}
                       min={0}
-                      max={120}
-                      style={{ width: downToXSM ? '280px' : '250px' }}
-                      renderMark={(mark) => {
-                        if ([0, 20, 40, 60, 80, 100, 120].includes(mark)) {
-                          let strMark = '';
-                          if (mark == 0) {
-                            strMark = '1 week';
-                          }
-                          if (mark == 20) {
-                            strMark = '1 month';
-                          }
-                          if (mark == 40) {
-                            strMark = '3 month';
-                          }
-                          if (mark == 60) {
-                            strMark = '6 month';
-                          }
-                          if (mark == 80) {
-                            strMark = '1 year';
-                          }
-                          if (mark == 100) {
-                            strMark = '2 year';
-                          }
-                          if (mark == 120) {
-                            strMark = '4 year';
-                          }
-                          return (
-                            <span style={{ color: '#5B6871', fontSize: '10px', fontWeight: 400 }}>
-                              {strMark}
-                            </span>
-                          );
-                        }
-                        return null;
+                      max={6}
+                      sx={{
+                        '& .MuiSlider-thumb': {
+                          backgroundColor: '#F6F8F9',
+                          border: '1px solid #B0BABF',
+                          opacity: 1,
+                          '&:focus, &:hover, &.Mui-active': {
+                            boxShadow:
+                              '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+                            // Reset on touch devices, it doesn't add specificity
+                          },
+                        },
+                        '& .MuiSlider-track': {
+                          border: 'none',
+                          backgroundColor: '#074592',
+                        },
+                        '& .MuiSlider-rail': {
+                          opacity: 1,
+                          backgroundColor: '#DDE2E4',
+                        },
+                        '& .MuiSlider-mark': {
+                          backgroundColor: '#bfbfbf',
+                          height: '2px',
+                          '&.MuiSlider-markActive': {
+                            opacity: 1,
+                            backgroundColor: '#F6F8F9',
+                          },
+                        },
                       }}
                     />
                   </Box>
