@@ -84,17 +84,6 @@ function valuetext(value: number) {
   return `${value}`;
 }
 
-const tokenData = [
-  {
-    label: 'mnt',
-    value: '0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1',
-  },
-  {
-    label: 'btc',
-    value: '0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e600b1',
-  },
-];
-
 const NewTabs = styled(Tabs)({
   minHeight: '24px',
   '& .MuiTabs-flexContainer': {
