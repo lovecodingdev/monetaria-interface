@@ -54,3 +54,7 @@
 .stake-input::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
+
+.rs-pagination-group-total span {
+  color: #252C32 !important
+}

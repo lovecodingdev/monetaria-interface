@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Chip } from '@mui/material';
-import { Table } from 'rsuite';
+import { Table, Pagination } from 'rsuite';
 import { StatusListDataValidator } from './type';
 
 const { Column, HeaderCell, Cell } = Table;
@@ -67,10 +67,12 @@ const StatusList = () => {
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();
   const [loading, setLoading] = useState(false);
+  const [limit, setLimit] = useState(6);
+  const [page, setPage] = useState(1);
 
   const getData = () => {
     if (sortColumn && sortType) {
-      return data.sort((a, b) => {
+      return datas.sort((a, b) => {
         let x = a[sortColumn];
         let y = b[sortColumn];
         if (typeof x === 'string') {
@@ -86,8 +88,19 @@ const StatusList = () => {
         }
       });
     }
-    return data;
+    return datas;
   };
+
+  const handleChangeLimit = (dataKey) => {
+    setPage(1);
+    setLimit(dataKey);
+  };
+
+  const datas = data.filter((v, i) => {
+    const start = limit * (page - 1);
+    const end = start + limit;
+    return i >= start && i < end;
+  });
 
   const handleSortColumn = (sortColumn, sortType) => {
     setLoading(true);
@@ -99,54 +112,75 @@ const StatusList = () => {
   };
 
   return (
-    <Table
-      autoHeight={true}
-      data={getData()}
-      sortColumn={sortColumn}
-      sortType={sortType}
-      onSortColumn={handleSortColumn}
-      loading={loading}
-      cellBordered={false}
-      rowHeight={60}
-    >
-      <Column width={72} align="left" sortable verticalAlign="middle" fixed="left">
-        <HeaderCell>No</HeaderCell>
-        <Cell dataKey="no" style={{ fontWeight: 400, fontSize: '14px', color: '#252C32' }} />
-      </Column>
+    <div>
+      <Table
+        autoHeight={true}
+        data={getData()}
+        sortColumn={sortColumn}
+        sortType={sortType}
+        onSortColumn={handleSortColumn}
+        loading={loading}
+        cellBordered={false}
+        rowHeight={60}
+      >
+        <Column width={72} align="left" sortable verticalAlign="middle" fixed="left">
+          <HeaderCell>No</HeaderCell>
+          <Cell dataKey="no" style={{ fontWeight: 400, fontSize: '14px', color: '#252C32' }} />
+        </Column>
 
-      <Column width={560} align="left" sortable verticalAlign="middle">
-        <HeaderCell>Name</HeaderCell>
-        <Cell
-          dataKey="name"
-          style={{
-            fontWeight: 600,
-            fontSize: '14px',
-            color: '#252C32',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            maxWidth: '560px',
-          }}
+        <Column width={560} align="left" sortable verticalAlign="middle">
+          <HeaderCell>Name</HeaderCell>
+          <Cell
+            dataKey="name"
+            style={{
+              fontWeight: 600,
+              fontSize: '14px',
+              color: '#252C32',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              maxWidth: '560px',
+            }}
+          />
+        </Column>
+
+        <Column width={121} align="left" sortable verticalAlign="middle" fixed="right">
+          <HeaderCell>Status</HeaderCell>
+          <Cell>
+            {(rowData) => (
+              <Chip
+                label={rowData.status}
+                sx={{
+                  color: `${rowData.color}`,
+                  backgroundColor: `${rowData.bgColor}`,
+                  fontWeight: 600,
+                  fontSize: '14px',
+                  borderRadius: '6px',
+                }}
+              />
+            )}
+          </Cell>
+        </Column>
+      </Table>
+      <div style={{ padding: 20 }}>
+        <Pagination
+          prev
+          next
+          first
+          last
+          ellipsis
+          boundaryLinks
+          maxButtons={5}
+          size="xs"
+          layout={['total', '-', 'pager', '-', 'limit']}
+          total={data.length}
+          limitOptions={[6, 20, 50]}
+          limit={limit}
+          activePage={page}
+          onChangePage={setPage}
+          onChangeLimit={handleChangeLimit}
         />
-      </Column>
-
-      <Column width={121} align="left" sortable verticalAlign="middle" fixed="right">
-        <HeaderCell>Status</HeaderCell>
-        <Cell>
-          {(rowData) => (
-            <Chip
-              label={rowData.status}
-              sx={{
-                color: `${rowData.color}`,
-                backgroundColor: `${rowData.bgColor}`,
-                fontWeight: 600,
-                fontSize: '14px',
-                borderRadius: '6px',
-              }}
-            />
-          )}
-        </Cell>
-      </Column>
-    </Table>
+      </div>
+    </div>
   );
 };
 export default StatusList;
