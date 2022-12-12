@@ -228,7 +228,7 @@ export default function Staking() {
                             <Typography
                               sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '12px' }}
                             >
-                              Percentage of total MNT Locked excluding voting escrow:
+                              Percentage of total MNT Locked excluding voting escrow
                             </Typography>
                           </Box>
                         </Box>
