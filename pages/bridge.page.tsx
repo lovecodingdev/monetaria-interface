@@ -346,63 +346,6 @@ export default function Calc() {
           </Button>
         </Box>
       </Paper>
-      <Paper
-        sx={{
-          bgcolor: 'background.header',
-          padding: '24px',
-          mt: { xs: '8px', md: '12px' },
-          mb: { xs: '16px' },
-          color: '#F1F1F3',
-          ...borderGradient,
-        }}
-      >
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          {' '}
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              gap: 4,
-              justifyContent: 'start',
-            }}
-          >
-            <Box sx={{ width: '220px' }}>
-              <Typography sx={{ color: '#1A2024', fontWeight: 400, fontSize: '14px' }}>
-                Total MNT:
-              </Typography>
-              <Typography sx={{ color: 'black', fontWeight: 600, fontSize: '24px' }}>
-                559695.73
-              </Typography>
-            </Box>
-            <Box sx={{ width: '220px' }}>
-              <Typography sx={{ color: '#1A2024', fontWeight: 400, fontSize: '14px' }}>
-                Boost:
-              </Typography>
-              <Typography sx={{ color: 'black', fontWeight: 600, fontSize: '24px' }}>
-                <Rocket /> 2.50x
-              </Typography>
-            </Box>
-          </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 2 }}>
-            <Box sx={{ width: '230px' }}>
-              <Typography sx={{ color: '#1A2024', fontWeight: 400, fontSize: '14px' }}>
-                Max deposit to have max boost:
-                <span style={{ fontWeight: 600, color: 'black' }}>0</span>
-              </Typography>
-              <Typography sx={{ color: 'black', fontWeight: 600, fontSize: '14px' }}>
-                cDAI+cUSDC (0xA2B4…7A56)
-              </Typography>
-            </Box>
-            <Box sx={{ width: { xs: '100%', sm: '220px' } }}>
-              <Typography sx={{ color: '#1A2024', fontWeight: 400, fontSize: '14px' }}>
-                Max deposit per veMNT to have max boost:{' '}
-                <span style={{ fontWeight: 600, color: 'black' }}>0.07</span>
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-      </Paper>
     </Container>
   );
 }

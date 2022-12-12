@@ -116,6 +116,7 @@ export const ROUTES = {
   position: '/position',
   markets: '/markets',
   staking: '/staking',
+  bridge: '/bridge',
   governance: '/governance',
   referral: '/referral',
   faucet: '/faucet',

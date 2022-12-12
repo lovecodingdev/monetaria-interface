@@ -33,6 +33,11 @@ export const navigation: Navigation[] = [
     title: t`Markets`,
     dataCy: 'menuMarkets',
   },
+  {
+    link: ROUTES.bridge,
+    title: t`Bridge`,
+    dataCy: 'menuBridge',
+  },
   // {
   //   link: ROUTES.staking,
   //   title: t`Stake`,
