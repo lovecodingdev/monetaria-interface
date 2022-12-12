@@ -1,24 +1,65 @@
-import { Box, Container, Paper, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Box,
+  Container,
+  Paper,
+  Typography,
+  useMediaQuery,
+  useTheme,
+  IconButton,
+  Button,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import { MainLayout } from '../src/layouts/MainLayout';
 import borderGradient from 'src/layouts/borderGradient';
-import { SelectPicker, InputNumber, Button, ButtonToolbar, ButtonGroup } from 'rsuite';
+import { SelectPicker, InputNumber, ButtonToolbar, ButtonGroup } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
-import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import { textCenterEllipsis } from 'src/helpers/text-center-ellipsis';
-import Rocket from '/public/icons/rocket.svg';
-import Slider from '@mui/material/Slider';
+import SyncIcon from '@mui/icons-material/Sync';
+import Logo from '/public/logo_green.svg';
+import Cup from '/public/icons/cup.svg';
+import { BaseNetworkConfig } from 'src/ui-config/networksConfig';
+import {
+  availableMarkets,
+  CustomMarket,
+  MarketDataType,
+  marketsData,
+  networkConfigs,
+} from 'src/utils/marketsAndNetworksConfig';
 
-const gaugeTempData = [
-  {
-    label: 'mnt',
-    value: '0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1',
-  },
-  {
-    label: 'btc',
-    value: '0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e600b1',
-  },
-];
+export const getMarketInfoById = (marketId: CustomMarket) => {
+  const market: MarketDataType = marketsData[marketId as CustomMarket];
+  const network: BaseNetworkConfig = networkConfigs[market.chainId];
+
+  return { market, network };
+};
+
+const getMarketHelpData = (marketName: string) => {
+  const testChains = ['Görli', 'Ropsten', 'Mumbai', 'Fuji', 'Testnet', 'Kovan', 'Rinkeby'];
+  const arrayName = marketName.split(' ');
+  const testChainName = arrayName.filter((el) => testChains.indexOf(el) > -1);
+  const marketTitle = arrayName.filter((el) => !testChainName.includes(el)).join(' ');
+  return {
+    name: marketTitle,
+    testChainName: testChainName[0],
+  };
+};
+
+interface Network {
+  label: string;
+  value: string;
+  img: string;
+}
+
+const all_networks: Network[] = [];
+
+availableMarkets.map((marketId: CustomMarket) => {
+  const { market, network } = getMarketInfoById(marketId);
+  const marketNaming = getMarketHelpData(market.marketTitle);
+  all_networks.push({
+    label: `${marketNaming.name}`,
+    value: market.marketTitle,
+    img: network.networkLogoPath,
+  });
+});
 
 export default function Calc() {
   const { breakpoints } = useTheme();
@@ -27,14 +68,24 @@ export default function Calc() {
   const [curGauge, setCurGause] = useState('0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1');
   const [depositValue, setDepositValue] = useState(0);
   const [liquidityValue, setLiquidityValue] = useState(0);
-  const [mntAmount, setMntAmount] = useState(0);
+  const [approveAmt, setApproveAmt] = useState(12.4);
   const [veAmount, setVeAmount] = useState(0);
   const [isVe, setIsVe] = useState(false);
   const [lockPeriod, setLockPeriod] = useState(26);
+  const [networks, setNetworks] = useState([]);
+  const [firstNetwork, setFirstNetwork] = useState('Ethereum');
+  const [secondNetwork, setSecondNetwork] = useState('Polygon');
 
   const valuetext = (value: number) => {
     setLockPeriod(value);
     return `${value} Week(s)`;
+  };
+
+  const exchangeNetwork = () => {
+    const first = firstNetwork;
+    const second = secondNetwork;
+    setFirstNetwork(second);
+    setSecondNetwork(first);
   };
 
   return (
@@ -58,66 +109,23 @@ export default function Calc() {
       >
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
           {' '}
-          <Box>
-            <label
-              style={{
-                display: 'block',
-                color: '#252C32',
-                fontWeight: 400,
-                fontSize: '14px',
-                paddingBottom: '5px',
-              }}
-            >
-              Select a gauge
-            </label>
-            <SelectPicker
-              data={gaugeTempData}
-              style={{ width: '100%' }}
-              value={curGauge}
-              onChange={setCurGause}
-              placeholder="Select a gauge"
-              searchable={false}
-              renderMenuItem={(label, item) => {
-                return (
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      gap: 2,
-                      alignItems: 'center',
-                      fontFamily: 'Gilroy, Arial !important',
-                    }}
-                  >
-                    <Box>
-                      {' '}
-                      <TokenIcon symbol={label} sx={{ fontSize: '24px', mr: 1 }} />{' '}
-                    </Box>
-                    <Box>
-                      {' '}
-                      <span style={{ fontWeight: 500, fontSize: '18px', color: '#5B6871' }}>
-                        {label.toUpperCase()} ({textCenterEllipsis(item.value, 5, 4)})
-                      </span>
-                    </Box>
-                  </Box>
-                );
-              }}
-              renderValue={(value, item) => {
-                return (
-                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center' }}>
-                    <Box>
-                      {' '}
-                      <TokenIcon symbol={item.label} sx={{ fontSize: '24px', mr: 1 }} />{' '}
-                    </Box>
-                    <Box>
-                      {' '}
-                      <span style={{ fontWeight: 500, fontSize: '18px', color: '#5B6871' }}>
-                        {item.label.toUpperCase()} ({textCenterEllipsis(value, 5, 4)})
-                      </span>
-                    </Box>
-                  </Box>
-                );
-              }}
-            />
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: 2,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Box>
+              <Logo />
+            </Box>
+            <Box>
+              <Typography sx={{ color: '#252C32', fontSize: '20px', fontWeight: 600 }}>
+                MNT
+              </Typography>
+            </Box>{' '}
           </Box>
           <Box
             sx={{
@@ -133,217 +141,295 @@ export default function Calc() {
                 style={{
                   display: 'block',
                   color: '#252C32',
-                  fontWeight: 400,
+                  fontWeight: 600,
                   fontSize: '14px',
                   paddingBottom: '5px',
                 }}
               >
-                Deposit: Use existing deposit
+                From
               </label>
-              <InputNumber value={depositValue} onChange={setDepositValue} min={0} />
-            </Box>
-            <Box>
-              <label
-                style={{
-                  display: 'block',
-                  color: '#252C32',
-                  fontWeight: 400,
-                  fontSize: '14px',
-                  paddingBottom: '5px',
-                }}
-              >
-                Pool liquidity
-              </label>
-              <InputNumber value={liquidityValue} onChange={setLiquidityValue} min={0} />
-            </Box>
-          </Box>
-          <Box>
-            <label
-              style={{
-                display: 'block',
-                color: '#252C32',
-                fontWeight: 400,
-                fontSize: '14px',
-                paddingBottom: '5px',
-              }}
-            >
-              Select
-            </label>
-            <ButtonToolbar>
-              <ButtonGroup justified>
-                <Button
-                  style={{
-                    backgroundColor: !isVe ? '#074592' : '#FFFFFF',
-                    border: '1px solid #DDE2E4',
-                    padding: '4px 12px',
-                    borderRadius: '6px 0px 0px 6px',
-                    color: !isVe ? 'white' : '#252C32',
-                    fontWeight: 400,
-                    fontSize: '14px',
-                    height: '32px',
-                  }}
-                  onClick={() => setIsVe(false)}
-                >
-                  MNT
-                </Button>
-                <Button
-                  style={{
-                    backgroundColor: isVe ? '#074592' : '#FFFFFF',
-                    border: '1px solid #DDE2E4',
-                    padding: '4px 12px',
-                    borderRadius: '0px 6px 6px 0px',
-                    color: isVe ? 'white' : '#252C32',
-                    fontWeight: 400,
-                    fontSize: '14px',
-                    height: '32px',
-                  }}
-                  onClick={() => setIsVe(true)}
-                >
-                  veMNT
-                </Button>
-              </ButtonGroup>
-            </ButtonToolbar>
-          </Box>
-          {!isVe && (
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  gap: '24px',
-                  flexWrap: 'wrap',
-                  alignItems: 'start',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <Box sx={{ width: { xs: '100%', sm: '30%' } }}>
-                  {' '}
-                  <label
-                    style={{
-                      display: 'block',
-                      color: '#252C32',
-                      fontWeight: 400,
-                      fontSize: '14px',
-                      paddingBottom: '5px',
-                    }}
-                  >
-                    My MNT
-                  </label>
-                  <InputNumber value={mntAmount} onChange={setMntAmount} min={0} />
-                </Box>
-                <Box>
-                  <label
-                    style={{
-                      display: 'block',
-                      color: '#252C32',
-                      fontWeight: 400,
-                      fontSize: '14px',
-                      paddingBottom: '5px',
-                    }}
-                  >
-                    Locked for
-                  </label>{' '}
-                  <Box
-                    sx={{
-                      padding: '5px 10px',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      width: { xs: 330, md: 295 },
-                      flexDirection: 'column',
-                    }}
-                  >
-                    {' '}
+
+              <SelectPicker
+                data={all_networks}
+                style={{ width: !downToXSM ? '200px' : '150px' }}
+                value={firstNetwork}
+                onChange={setFirstNetwork}
+                cleanable={false}
+                placeholder="Select a gauge"
+                searchable={false}
+                renderMenuItem={(label, item) => {
+                  return (
                     <Box
                       sx={{
                         display: 'flex',
-                        justifyContent: 'end',
-                        color: '#252C32',
-                        fontWeight: 400,
-                        fontSize: '14px',
+                        flexDirection: 'row',
+                        gap: 2,
+                        alignItems: 'center',
+                        fontFamily: 'Gilroy, Arial !important',
                       }}
                     >
-                      {lockPeriod} Week(s)
-                    </Box>{' '}
-                    <Box>
-                      <Slider
-                        aria-label="Custom marks"
-                        defaultValue={26}
-                        getAriaValueText={valuetext}
-                        step={1}
-                        valueLabelDisplay="auto"
-                        min={1}
-                        max={52}
-                        sx={{
-                          '& .MuiSlider-thumb': {
-                            backgroundColor: '#F6F8F9',
-                            border: '1px solid #B0BABF',
-                            opacity: 1,
-                            '&:focus, &:hover, &.Mui-active': {
-                              boxShadow:
-                                '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
-                              // Reset on touch devices, it doesn't add specificity
-                            },
-                          },
-                          '& .MuiSlider-track': {
-                            border: 'none',
-                            backgroundColor: '#074592',
-                          },
-                          '& .MuiSlider-rail': {
-                            opacity: 1,
-                            backgroundColor: '#DDE2E4',
-                          },
-                          '& .MuiSlider-mark': {
-                            backgroundColor: '#bfbfbf',
-                            height: '2px',
-                            '&.MuiSlider-markActive': {
-                              opacity: 1,
-                              backgroundColor: '#F6F8F9',
-                            },
-                          },
-                        }}
-                      />
+                      <Box>
+                        <img src={item.img} width="24" height="24" />
+                      </Box>
+                      <Box>{item.label}</Box>
                     </Box>
-                  </Box>
-                </Box>
-              </Box>
-              <Box sx={{ width: '100%' }}>
-                <Typography sx={{ fontWeight: 400, fontSize: '14px', color: '#1A2024' }}>
-                  veMNT:{' '}
-                  <span style={{ fontWeight: 600, fontSize: '14px', color: 'black' }}>834.75</span>
-                </Typography>
-              </Box>
+                  );
+                }}
+                renderValue={(value, item) => {
+                  return (
+                    <Box
+                      sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center' }}
+                    >
+                      <Box>
+                        <img src={item.img} width="24" height="24" />
+                      </Box>
+                      <Box sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}>
+                        {item.label}
+                      </Box>
+                    </Box>
+                  );
+                }}
+              />
             </Box>
-          )}
-          {isVe && (
             <Box>
-              {' '}
+              <IconButton onClick={exchangeNetwork}>
+                <SyncIcon sx={{ color: '#6E7C87' }} />
+              </IconButton>
+            </Box>
+            <Box>
               <label
                 style={{
                   display: 'block',
                   color: '#252C32',
-                  fontWeight: 400,
+                  fontWeight: 600,
                   fontSize: '14px',
                   paddingBottom: '5px',
                 }}
               >
-                My veMNT
+                To
               </label>
-              <InputNumber value={veAmount} onChange={setVeAmount} min={0} />
+              <SelectPicker
+                data={all_networks}
+                style={{ width: !downToXSM ? '200px' : '150px' }}
+                value={secondNetwork}
+                onChange={setSecondNetwork}
+                cleanable={false}
+                placeholder="Select a gauge"
+                searchable={false}
+                renderMenuItem={(label, item) => {
+                  return (
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: 2,
+                        alignItems: 'center',
+                        fontFamily: 'Gilroy, Arial !important',
+                      }}
+                    >
+                      <Box>
+                        <img src={item.img} width="24" height="24" />
+                      </Box>
+                      <Box>{item.label}</Box>
+                    </Box>
+                  );
+                }}
+                renderValue={(value, item) => {
+                  return (
+                    <Box
+                      sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center' }}
+                    >
+                      <Box>
+                        <img src={item.img} width="24" height="24" />
+                      </Box>
+                      <Box sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}>
+                        {item.label}
+                      </Box>
+                    </Box>
+                  );
+                }}
+              />
             </Box>
-          )}
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              backgroundColor: '#EEF0F2',
+              borderRadius: '16px',
+              padding: '12px 20px',
+              alignItems: 'center',
+            }}
+          >
+            <Box>
+              <input
+                value={approveAmt}
+                className="stake-input"
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                onChange={(e) => setApproveAmt(e.target.value)}
+                type="number"
+                onKeyDown={(e) => {
+                  if (e.code === 'ArrowUp' || e.code === 'ArrowDown') {
+                    e.preventDefault();
+                  }
+                }}
+                style={{
+                  border: 'none',
+                  background: 'transparent',
+                  color: 'black',
+                  fontSize: '28px',
+                  outline: 'none',
+                  fontWeight: 500,
+                  width: '170px',
+                }}
+              />
+              <Box sx={{ color: '#9AA6AC', fontSize: '12px', fontWeight: 400 }}>$179,721,98</Box>
+            </Box>
+
+            <Button
+              sx={{
+                color: '#074592',
+                fontWeight: 600,
+                fontSize: '14px',
+                backgroundColor: 'rgba(21, 126, 255, 0.05)',
+                border: '1px solid rgba(21, 126, 255, 0.2)',
+              }}
+            >
+              {' '}
+              Max
+            </Button>
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Cup />
+            </Box>
+            <Box>
+              <Typography sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                $0.18
+              </Typography>
+            </Box>
+          </Box>
           <Button
             style={{
               padding: '8px 16px',
               borderRadius: '8px',
-              backgroundImage: 'linear-gradient(#A439FF, #9582FF)',
+              backgroundImage: 'linear-gradient(270deg, #393DFF 0%, #9582FF 100%)',
               height: '40px',
               color: '#F6F8F9',
               fontWeight: 600,
               fontSize: '14px',
             }}
           >
-            Calculate
+            Approve
           </Button>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <Box>
+              <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                Wallet Balance
+              </Typography>
+            </Box>
+            <Box>
+              <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                0 USDT
+              </Typography>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '8px',
+              border: '1px solid #EBF7FF',
+              borderRadius: '8px',
+              padding: '8px 16px',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <Box>
+                <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                  Daily Quota of Current Network
+                </Typography>
+              </Box>
+              <Box>
+                <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                  0 / 60000 USDT
+                </Typography>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <Box>
+                <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                  Minimum Amount
+                </Typography>
+              </Box>
+              <Box>
+                <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                  60 USDT
+                </Typography>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <Box>
+                <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                  Maximum Amount
+                </Typography>
+              </Box>
+              <Box>
+                <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                  10000 USDT
+                </Typography>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <Box>
+                <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                  Est. Time Required
+                </Typography>
+              </Box>
+              <Box>
+                <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                  10min ～ 3h
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
         </Box>
       </Paper>
     </Container>
