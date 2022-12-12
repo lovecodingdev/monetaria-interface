@@ -251,7 +251,7 @@ export default function Staking() {
                             <Typography
                               sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '12px' }}
                             >
-                              Percentage of total MNT Locked:
+                              Percentage of total MNT Locked
                             </Typography>
                           </Box>
                         </Box>
@@ -274,7 +274,7 @@ export default function Staking() {
                             <Typography
                               sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '12px' }}
                             >
-                              Total veMNT:
+                              Total veMNT
                             </Typography>
                           </Box>
                         </Box>
@@ -297,7 +297,7 @@ export default function Staking() {
                             <Typography
                               sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '12px' }}
                             >
-                              Average lock time:
+                              Average lock time
                             </Typography>
                           </Box>
                         </Box>
