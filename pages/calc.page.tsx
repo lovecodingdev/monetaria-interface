@@ -65,6 +65,12 @@ export default function Calc() {
   const [mntAmount, setMntAmount] = useState(0);
   const [veAmount, setVeAmount] = useState(0);
   const [isVe, setIsVe] = useState(false);
+  const [lockPeriod, setLockPeriod] = useState(26);
+
+  const valuetext = (value: number) => {
+    setLockPeriod(value);
+    return `${value} Week(s)`;
+  };
 
   return (
     <Container
@@ -278,46 +284,60 @@ export default function Calc() {
                       display: 'flex',
                       justifyContent: 'center',
                       width: { xs: 330, md: 295 },
+                      flexDirection: 'column',
                     }}
                   >
-                    <Slider
-                      aria-label="Custom marks"
-                      defaultValue={3}
-                      getAriaValueText={valuetext}
-                      step={1}
-                      valueLabelDisplay="auto"
-                      marks={marks}
-                      min={0}
-                      max={6}
+                    {' '}
+                    <Box
                       sx={{
-                        '& .MuiSlider-thumb': {
-                          backgroundColor: '#F6F8F9',
-                          border: '1px solid #B0BABF',
-                          opacity: 1,
-                          '&:focus, &:hover, &.Mui-active': {
-                            boxShadow:
-                              '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
-                            // Reset on touch devices, it doesn't add specificity
-                          },
-                        },
-                        '& .MuiSlider-track': {
-                          border: 'none',
-                          backgroundColor: '#074592',
-                        },
-                        '& .MuiSlider-rail': {
-                          opacity: 1,
-                          backgroundColor: '#DDE2E4',
-                        },
-                        '& .MuiSlider-mark': {
-                          backgroundColor: '#bfbfbf',
-                          height: '2px',
-                          '&.MuiSlider-markActive': {
-                            opacity: 1,
-                            backgroundColor: '#F6F8F9',
-                          },
-                        },
+                        display: 'flex',
+                        justifyContent: 'end',
+                        color: '#252C32',
+                        fontWeight: 400,
+                        fontSize: '14px',
                       }}
-                    />
+                    >
+                      {lockPeriod} Week(s)
+                    </Box>{' '}
+                    <Box>
+                      <Slider
+                        aria-label="Custom marks"
+                        defaultValue={26}
+                        getAriaValueText={valuetext}
+                        step={1}
+                        valueLabelDisplay="auto"
+                        min={1}
+                        max={52}
+                        sx={{
+                          '& .MuiSlider-thumb': {
+                            backgroundColor: '#F6F8F9',
+                            border: '1px solid #B0BABF',
+                            opacity: 1,
+                            '&:focus, &:hover, &.Mui-active': {
+                              boxShadow:
+                                '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+                              // Reset on touch devices, it doesn't add specificity
+                            },
+                          },
+                          '& .MuiSlider-track': {
+                            border: 'none',
+                            backgroundColor: '#074592',
+                          },
+                          '& .MuiSlider-rail': {
+                            opacity: 1,
+                            backgroundColor: '#DDE2E4',
+                          },
+                          '& .MuiSlider-mark': {
+                            backgroundColor: '#bfbfbf',
+                            height: '2px',
+                            '&.MuiSlider-markActive': {
+                              opacity: 1,
+                              backgroundColor: '#F6F8F9',
+                            },
+                          },
+                        }}
+                      />
+                    </Box>
                   </Box>
                 </Box>
               </Box>

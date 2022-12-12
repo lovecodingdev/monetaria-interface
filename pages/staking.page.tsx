@@ -49,41 +49,6 @@ const descriptions: DescriptionData[] = [
   },
 ];
 
-const marks = [
-  {
-    value: 0,
-    label: '1 week',
-  },
-  {
-    value: 1,
-    label: '1 month',
-  },
-  {
-    value: 2,
-    label: '3',
-  },
-  {
-    value: 3,
-    label: '6 month',
-  },
-  {
-    value: 4,
-    label: '1 year',
-  },
-  {
-    value: 5,
-    label: '2',
-  },
-  {
-    value: 6,
-    label: '4 years',
-  },
-];
-
-function valuetext(value: number) {
-  return `${value}`;
-}
-
 const NewTabs = styled(Tabs)({
   minHeight: '24px',
   '& .MuiTabs-flexContainer': {
@@ -123,7 +88,7 @@ export default function Staking() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [stakeAmount, setStakeAmount] = useState(12.4);
   const [unStakeAmount, setUnstakeAmount] = useState(12.4);
-  const [curToken, setCurToken] = useState('0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1');
+  const [lockPeriod, setLockPeriod] = useState(26);
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.up('xsm'));
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
@@ -139,6 +104,11 @@ export default function Staking() {
       }
     });
     setData([...data]);
+  };
+
+  const valuetext = (value: number) => {
+    setLockPeriod(value);
+    return `${value} Week(s)`;
   };
 
   return (
@@ -479,49 +449,67 @@ export default function Staking() {
                               Choose lock time
                             </Box>
                             <Box>
+                              {' '}
                               <DatePicker placeholder="Choose Lock time" />
                             </Box>
                           </Box>
-                          <Box sx={{ padding: '10px' }}>
-                            {' '}
-                            <Slider
-                              aria-label="Custom marks"
-                              defaultValue={3}
-                              getAriaValueText={valuetext}
-                              step={1}
-                              valueLabelDisplay="auto"
-                              marks={marks}
-                              min={0}
-                              max={6}
+                          <Box
+                            sx={{
+                              padding: '10px',
+                              display: 'flex',
+                              flexDirection: 'column',
+                            }}
+                          >
+                            <Box
                               sx={{
-                                '& .MuiSlider-thumb': {
-                                  backgroundColor: '#F6F8F9',
-                                  border: '1px solid #B0BABF',
-                                  opacity: 1,
-                                  '&:focus, &:hover, &.Mui-active': {
-                                    boxShadow:
-                                      '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
-                                    // Reset on touch devices, it doesn't add specificity
-                                  },
-                                },
-                                '& .MuiSlider-track': {
-                                  border: 'none',
-                                  backgroundColor: '#074592',
-                                },
-                                '& .MuiSlider-rail': {
-                                  opacity: 1,
-                                  backgroundColor: '#DDE2E4',
-                                },
-                                '& .MuiSlider-mark': {
-                                  backgroundColor: '#bfbfbf',
-                                  height: '2px',
-                                  '&.MuiSlider-markActive': {
-                                    opacity: 1,
-                                    backgroundColor: '#F6F8F9',
-                                  },
-                                },
+                                display: 'flex',
+                                justifyContent: 'end',
+                                color: '#252C32',
+                                fontWeight: 400,
+                                fontSize: '14px',
                               }}
-                            />
+                            >
+                              {lockPeriod} Week(s)
+                            </Box>{' '}
+                            <Box>
+                              <Slider
+                                aria-label="Custom marks"
+                                defaultValue={26}
+                                getAriaValueText={valuetext}
+                                step={1}
+                                valueLabelDisplay="auto"
+                                min={1}
+                                max={52}
+                                sx={{
+                                  '& .MuiSlider-thumb': {
+                                    backgroundColor: '#F6F8F9',
+                                    border: '1px solid #B0BABF',
+                                    opacity: 1,
+                                    '&:focus, &:hover, &.Mui-active': {
+                                      boxShadow:
+                                        '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+                                      // Reset on touch devices, it doesn't add specificity
+                                    },
+                                  },
+                                  '& .MuiSlider-track': {
+                                    border: 'none',
+                                    backgroundColor: '#074592',
+                                  },
+                                  '& .MuiSlider-rail': {
+                                    opacity: 1,
+                                    backgroundColor: '#DDE2E4',
+                                  },
+                                  '& .MuiSlider-mark': {
+                                    backgroundColor: '#bfbfbf',
+                                    height: '2px',
+                                    '&.MuiSlider-markActive': {
+                                      opacity: 1,
+                                      backgroundColor: '#F6F8F9',
+                                    },
+                                  },
+                                }}
+                              />
+                            </Box>
                           </Box>
                           <Box
                             sx={{
