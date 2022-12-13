@@ -219,7 +219,7 @@ export default function Calc() {
                       <Box>
                         <img src={item?.img} width="24" height="24" />
                       </Box>
-                      <Box>{item?.label}</Box>
+                      <Box>{label}</Box>
                     </Box>
                   );
                 }}
@@ -232,7 +232,7 @@ export default function Calc() {
                         <img src={item?.img} width="24" height="24" />
                       </Box>
                       <Box sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}>
-                        {item?.label}
+                        {value}
                       </Box>
                     </Box>
                   );
