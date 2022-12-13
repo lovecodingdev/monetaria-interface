@@ -90,7 +90,7 @@ export default function Calc() {
       <Paper
         sx={{
           bgcolor: 'background.header',
-          padding: '12px',
+          padding: '24px 8px',
           mt: { xs: '8px', md: '12px' },
           color: '#F1F1F3',
           ...borderGradient,
@@ -140,7 +140,7 @@ export default function Calc() {
 
               <SelectPicker
                 data={all_networks}
-                style={{ width: !downToXSM ? '200px' : '132px' }}
+                style={{ width: !downToXSM ? '200px' : '140px' }}
                 value={firstNetwork}
                 onChange={setFirstNetwork}
                 cleanable={false}
@@ -199,7 +199,7 @@ export default function Calc() {
               </label>
               <SelectPicker
                 data={all_networks}
-                style={{ width: !downToXSM ? '200px' : '132px' }}
+                style={{ width: !downToXSM ? '200px' : '140px' }}
                 value={secondNetwork}
                 onChange={setSecondNetwork}
                 cleanable={false}
