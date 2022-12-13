@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme, Button } from '@mui/material';
 import { Row } from 'src/components/primitives/Row';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { RewardType } from './RewardType';
@@ -125,6 +125,18 @@ export const RewardMobileList = () => {
         >
           <Box>{asset.claimable_tokens}</Box>
         </Row>
+        <Button
+          fullWidth
+          sx={{
+            backgroundColor: 'rgba(21, 126, 255, 0.05)',
+            border: '1px solid rgba(21, 126, 255, 0.2)',
+            color: '#074592',
+            fontWeight: 600,
+            fontSize: '16px',
+          }}
+        >
+          Claim
+        </Button>
       </Box>
     </Box>
   ));

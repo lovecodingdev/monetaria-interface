@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { Table } from 'rsuite';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { RewardType } from './RewardType';
@@ -143,9 +143,36 @@ export const RewardTable = () => {
         <HeaderCell>USD Profits</HeaderCell>
         <Cell>{(rowData) => `${rowData.profit_usd}$`}</Cell>
       </Column>
-      <Column width={422} align="right" sortable verticalAlign="middle">
+      <Column width={422} align="left" verticalAlign="middle" fixed="right">
         <HeaderCell>Claimable Tokens</HeaderCell>
-        <Cell dataKey="claimable_tokens" />
+        <Cell>
+          {(rowData) => (
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <Box> {rowData.claimable_tokens}</Box>
+              <Box>
+                <Button
+                  sx={{
+                    backgroundColor: 'rgba(21, 126, 255, 0.05)',
+                    border: '1px solid rgba(21, 126, 255, 0.2)',
+                    color: '#074592',
+                    fontWeight: 600,
+                    fontSize: '16px',
+                    marginTop: '-4px',
+                  }}
+                >
+                  Claim
+                </Button>
+              </Box>
+            </Box>
+          )}
+        </Cell>
       </Column>
     </Table>
   );
