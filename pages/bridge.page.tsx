@@ -65,21 +65,10 @@ export default function Calc() {
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.up('xsm'));
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
-  const [curGauge, setCurGause] = useState('0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1');
-  const [depositValue, setDepositValue] = useState(0);
-  const [liquidityValue, setLiquidityValue] = useState(0);
   const [approveAmt, setApproveAmt] = useState(12.4);
-  const [veAmount, setVeAmount] = useState(0);
-  const [isVe, setIsVe] = useState(false);
-  const [lockPeriod, setLockPeriod] = useState(26);
   const [networks, setNetworks] = useState([]);
   const [firstNetwork, setFirstNetwork] = useState('Ethereum');
   const [secondNetwork, setSecondNetwork] = useState('Polygon');
-
-  const valuetext = (value: number) => {
-    setLockPeriod(value);
-    return `${value} Week(s)`;
-  };
 
   const exchangeNetwork = () => {
     const first = firstNetwork;
