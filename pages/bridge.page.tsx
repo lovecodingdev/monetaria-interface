@@ -169,7 +169,7 @@ export default function Calc() {
                       }}
                     >
                       <Box>
-                        <img src={item.img} width="24" height="24" />
+                        <img src={item.img} width="22" height="22" />
                       </Box>
                       <Box>{item.label}</Box>
                     </Box>
@@ -181,7 +181,7 @@ export default function Calc() {
                       sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center' }}
                     >
                       <Box>
-                        <img src={item.img} width="24" height="24" />
+                        <img src={item.img} width="22" height="22" />
                       </Box>
                       <Box sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}>
                         {item.label}
