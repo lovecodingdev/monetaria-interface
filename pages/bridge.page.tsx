@@ -90,7 +90,7 @@ export default function Calc() {
       <Paper
         sx={{
           bgcolor: 'background.header',
-          padding: '24px',
+          padding: '12px',
           mt: { xs: '8px', md: '12px' },
           color: '#F1F1F3',
           ...borderGradient,
@@ -120,7 +120,7 @@ export default function Calc() {
             sx={{
               display: 'flex',
               flexDirection: 'row',
-              gap: 2,
+              gap: 1,
               alignItems: 'end',
               justifyContent: 'space-between',
             }}
@@ -140,7 +140,7 @@ export default function Calc() {
 
               <SelectPicker
                 data={all_networks}
-                style={{ width: !downToXSM ? '200px' : '150px' }}
+                style={{ width: !downToXSM ? '200px' : '132px' }}
                 value={firstNetwork}
                 onChange={setFirstNetwork}
                 cleanable={false}
@@ -167,7 +167,7 @@ export default function Calc() {
                 renderValue={(value, item) => {
                   return (
                     <Box
-                      sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center' }}
+                      sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}
                     >
                       <Box>
                         <img src={item?.img} width="22" height="22" />
@@ -199,7 +199,7 @@ export default function Calc() {
               </label>
               <SelectPicker
                 data={all_networks}
-                style={{ width: !downToXSM ? '200px' : '150px' }}
+                style={{ width: !downToXSM ? '200px' : '132px' }}
                 value={secondNetwork}
                 onChange={setSecondNetwork}
                 cleanable={false}
@@ -211,7 +211,7 @@ export default function Calc() {
                       sx={{
                         display: 'flex',
                         flexDirection: 'row',
-                        gap: 2,
+                        gap: 1,
                         alignItems: 'center',
                         fontFamily: 'Gilroy, Arial !important',
                       }}
