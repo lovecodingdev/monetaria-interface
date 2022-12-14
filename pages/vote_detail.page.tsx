@@ -10,6 +10,7 @@ import {
   LinearProgress,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { usePermissions } from 'src/hooks/usePermissions';
 import { ConnectWalletPaper } from '../src/components/ConnectWalletPaper';
 import { ContentContainer } from '../src/components/ContentContainer';
