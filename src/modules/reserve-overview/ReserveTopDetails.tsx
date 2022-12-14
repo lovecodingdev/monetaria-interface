@@ -184,7 +184,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
                         display: 'flex',
                         alignItems: 'center',
                         flexDirection: 'row',
-                        gap: '0.5em',
+                        gap: '0.15em',
                       }}
                     >
                       <ReserveIcon asset={reserve} />

@@ -122,6 +122,7 @@ const StatusList = () => {
         loading={loading}
         cellBordered={false}
         rowHeight={60}
+        onRowClick={(rowData) => console.log(rowData)}
       >
         <Column width={72} align="left" sortable verticalAlign="middle" fixed="left">
           <HeaderCell>No</HeaderCell>
