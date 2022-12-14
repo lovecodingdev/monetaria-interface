@@ -3,6 +3,7 @@ import { Chip, Typography } from '@mui/material';
 import { Table, Pagination } from 'rsuite';
 import { VoteListDataValidator } from './type';
 import { textCenterEllipsis } from 'src/helpers/text-center-ellipsis';
+import 'rsuite/dist/rsuite.min.css';
 
 const { Column, HeaderCell, Cell } = Table;
 const data: VoteListDataValidator[] = [
