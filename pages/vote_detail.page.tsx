@@ -1,5 +1,14 @@
 import { Trans } from '@lingui/macro';
-import { Box, Paper, Typography, useMediaQuery, useTheme, Button, Chip } from '@mui/material';
+import {
+  Box,
+  Paper,
+  Typography,
+  useMediaQuery,
+  useTheme,
+  Button,
+  Chip,
+  LinearProgress,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import { usePermissions } from 'src/hooks/usePermissions';
 import { ConnectWalletPaper } from '../src/components/ConnectWalletPaper';
@@ -11,18 +20,11 @@ import borderGradient from 'src/layouts/borderGradient';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import ShareIcon from '@mui/icons-material/Share';
 import EastIcon from '@mui/icons-material/East';
-import { DatePicker, Slider, SelectPicker } from 'rsuite';
-import 'rsuite/dist/rsuite.min.css';
-import StatusList from 'src/modules/dashboard/lists/StatusList/StatusList';
-import { StatusListMobile } from 'src/modules/dashboard/lists/StatusList/StatusListMobile';
-
-const statusData = ['All', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
-  (item) => ({ label: item, value: item })
-);
-
-const outcomeData = ['All', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
-  (item) => ({ label: item, value: item })
-);
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import VoteList from 'src/modules/dashboard/lists/VoteList/VoteList';
+import { VoteListMobile } from 'src/modules/dashboard/lists/VoteList/VoteListMobile';
+import Logo from '/public/logo_green.svg';
 
 export default function Votes() {
   const { currentAccount, loading: web3Loading } = useWeb3Context();
@@ -30,8 +32,11 @@ export default function Votes() {
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.up('xsm'));
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
-  const [curStatus, setCurStatus] = useState('All');
-  const [curOutcome, setCurOutcome] = useState('All');
+  const [isShowMore, setIsShowMore] = useState(false);
+
+  const showMore = () => {
+    setIsShowMore(!isShowMore);
+  };
 
   return (
     <>
@@ -45,7 +50,7 @@ export default function Votes() {
                 flexWrap: 'wrap',
               }}
             >
-              <Box sx={{ flex: 2, order: { xs: 2, sm: 1 } }}>
+              <Box sx={{ flex: 2 }}>
                 <Paper
                   sx={{
                     bgcolor: 'background.header',
@@ -126,7 +131,7 @@ export default function Votes() {
                           gap: 2,
                           fontSize: '14px',
                           color: '#252C32',
-                          height: '300px',
+                          height: isShowMore ? '100%' : '300px',
                           overflow: 'hidden',
                         }}
                       >
@@ -158,90 +163,139 @@ export default function Votes() {
                           adoption, and authorization of Securitize as a “whitelister” on the Aave
                           Arc market.
                         </p>
+                        <p>
+                          Securitize asks the Aave Governance community to approve the appointment,
+                          adoption, and authorization of Securitize as a “whitelister” on the Aave
+                          Arc market.
+                        </p>
+                        <p>
+                          Securitize asks the Aave Governance community to approve the appointment,
+                          adoption, and authorization of Securitize as a “whitelister” on the Aave
+                          Arc market.
+                        </p>
                       </Box>
-                      <Box
-                        sx={{
-                          backgroundImage:
-                            'linear-gradient(to bottom, rgba(255,255,255, 0) 50%, white)',
-                          height: '100px',
-                          width: '100%',
-                          marginTop: '-100px',
-                          display: 'flex',
-                          justifyContent: 'center',
-                          position: 'relative',
-                        }}
-                      >
-                        <Button
+                      {!isShowMore && (
+                        <Box
                           sx={{
-                            width: '148px',
-                            height: '40px',
-                            color: '#074592',
-                            backgroundColor: 'rgba(21, 126, 255, 0.05)',
-                            border: ' 1px solid rgba(21, 126, 255, 0.2)',
-                            fontSize: '16px',
-                            fontWeight: 600,
-                            position: 'absolute',
-                            top: '90px',
+                            backgroundImage:
+                              'linear-gradient(to bottom, rgba(255,255,255, 0) 50%, white)',
+                            height: '100px',
+                            width: '100%',
+                            marginTop: '-100px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            position: 'relative',
                           }}
-                        >
-                          Show more
-                        </Button>
+                        ></Box>
+                      )}
+                      {downToXSM ? (
+                        <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                          <Button
+                            sx={{
+                              color: '#252C32',
+                              backgroundColor: 'white',
+                              fontSize: '16px',
+                              fontWeight: 600,
+                              marginTop: '-10px',
+                              boxShadow: '1px 1px grey',
+                            }}
+                            onClick={showMore}
+                            fullWidth
+                          >
+                            {isShowMore ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                          </Button>
+                        </Box>
+                      ) : (
+                        <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                          <Button
+                            sx={{
+                              width: '148px',
+                              height: '40px',
+                              color: '#074592',
+                              backgroundColor: 'rgba(21, 126, 255, 0.05)',
+                              border: ' 1px solid rgba(21, 126, 255, 0.2)',
+                              fontSize: '16px',
+                              fontWeight: 600,
+                              marginTop: '-10px',
+                            }}
+                            onClick={showMore}
+                          >
+                            {isShowMore ? 'Show less' : 'Show more'}
+                          </Button>
+                        </Box>
+                      )}
+                    </Box>
+                  </Box>
+                </Paper>
+                <Paper
+                  sx={{
+                    bgcolor: 'background.header',
+                    padding: '24px',
+                    mt: { xs: '8px', md: '12px' },
+                    color: '#F1F1F3',
+                    ...borderGradient,
+                  }}
+                >
+                  <Box>
+                    <Typography sx={{ color: '#080F26', fontWeight: 700, fontSize: '18px' }}>
+                      Discussion
+                    </Typography>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: 2,
+                        alignItems: 'start',
+                        py: '10px',
+                      }}
+                    >
+                      <Box>
+                        <Logo />
+                      </Box>
+                      <Box>
+                        <Typography sx={{ color: '#000000', fontWeight: 600, fontSize: '18px' }}>
+                          REINSTATED: Increase Kanpai Treasury Allocation to 100%
+                        </Typography>
+                        <Typography sx={{ color: '#000000', fontWeight: 400, fontSize: '18px' }}>
+                          REINSTATED: Increase Kanpai Treasury Allocation to 100% I withdrew the
+                          orig...
+                        </Typography>
                       </Box>
                     </Box>
-                    {!downToXSM && (
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          gap: '16px',
-                          justifyContent: 'start',
-                        }}
-                      >
-                        <Box>
-                          <Typography
-                            sx={{
-                              color: '#252C32',
-                              fontWeight: 400,
-                              fontSize: '14px',
-                              paddingBottom: '5px',
-                            }}
-                          >
-                            Status
-                          </Typography>
-                          <SelectPicker
-                            data={statusData}
-                            style={{ width: downToXSM ? '140px' : '169px' }}
-                            value={curStatus}
-                            searchable={false}
-                            onChange={setCurStatus}
-                          />
-                        </Box>
-                        <Box>
-                          <Typography
-                            sx={{
-                              color: '#252C32',
-                              fontWeight: 400,
-                              fontSize: '14px',
-                              paddingBottom: '5px',
-                            }}
-                          >
-                            Outcome
-                          </Typography>
-                          <SelectPicker
-                            data={outcomeData}
-                            style={{ width: downToXSM ? '140px' : '169px' }}
-                            value={curOutcome}
-                            searchable={false}
-                            onChange={setCurOutcome}
-                          />
-                        </Box>
+                  </Box>
+                </Paper>
+                <Paper
+                  sx={{
+                    bgcolor: 'background.header',
+                    padding: '24px',
+                    mt: { xs: '8px', md: '12px' },
+                    color: '#F1F1F3',
+                    ...borderGradient,
+                  }}
+                >
+                  <Box>
+                    {!downToXSM ? (
+                      <VoteList />
+                    ) : (
+                      <Box>
+                        <Typography
+                          sx={{
+                            color: '#080F26',
+                            fontWeight: 700,
+                            fontSize: '18px',
+                            paddingBottom: '10px',
+                          }}
+                        >
+                          Votes
+                        </Typography>
+                        <VoteListMobile />
                       </Box>
                     )}
-                    <Box>{!downToXSM ? <StatusList /> : <StatusListMobile />}</Box>
                   </Box>
                 </Paper>
               </Box>
-              <Box sx={{ flex: 1, order: { xs: 1, sm: 2 } }}>
+
+              <Box sx={{ flex: 1 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                   <Box>
                     <Paper
@@ -255,7 +309,7 @@ export default function Votes() {
                     >
                       <Box>
                         <Typography sx={{ color: '#080F26', fontWeight: 700, fontSize: '18px' }}>
-                          DAO Overview
+                          Current results
                         </Typography>
                         <Box
                           sx={{
@@ -273,40 +327,23 @@ export default function Votes() {
                             }}
                           >
                             <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                              Total vote-locked
+                              YAE
                             </Box>
                             <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-                              602,1243.19
+                              441.16K 9799%
                             </Box>
                           </Box>
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              justifyContent: 'space-between',
-                              gap: '50px',
-                            }}
-                          >
-                            <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                              Percentage of total Locked excluding voting escrow
-                            </Box>
-                            <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-                              93%
-                            </Box>
-                          </Box>
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              justifyContent: 'space-between',
-                            }}
-                          >
-                            <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                              Percentage of total Locked
-                            </Box>
-                            <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-                              48.84%
-                            </Box>
+                          <Box>
+                            <LinearProgress
+                              value={60}
+                              variant="determinate"
+                              sx={{
+                                backgroundColor: `#D5DADD`,
+                                '& .MuiLinearProgress-bar': {
+                                  backgroundColor: `#47D16C`,
+                                },
+                              }}
+                            />
                           </Box>
                           <Box
                             sx={{
@@ -316,25 +353,24 @@ export default function Votes() {
                             }}
                           >
                             <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                              Total veMNT
+                              NAY
                             </Box>
                             <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-                              549,276,641.45
+                              30.60 {'< '}
+                              0.2%
                             </Box>
                           </Box>
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              justifyContent: 'space-between',
-                            }}
-                          >
-                            <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                              Average lock time
-                            </Box>
-                            <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-                              3.62 years
-                            </Box>
+                          <Box>
+                            <LinearProgress
+                              value={20}
+                              variant="determinate"
+                              sx={{
+                                backgroundColor: `#D5DADD`,
+                                '& .MuiLinearProgress-bar': {
+                                  backgroundColor: `#F2271C`,
+                                },
+                              }}
+                            />
                           </Box>
                           <Button
                             sx={{
@@ -346,7 +382,7 @@ export default function Votes() {
                             }}
                             endIcon={<EastIcon />}
                           >
-                            Staking{' '}
+                            Vote{' '}
                           </Button>
                         </Box>
                       </Box>
@@ -363,7 +399,7 @@ export default function Votes() {
                       }}
                     >
                       <Typography sx={{ color: '#080F26', fontWeight: 700, fontSize: '18px' }}>
-                        My Votes
+                        Information
                       </Typography>
                       <Box
                         sx={{ display: 'flex', flexDirection: 'column', gap: '12px', py: '10px' }}
@@ -374,13 +410,23 @@ export default function Votes() {
                             display: 'flex',
                             flexDirection: 'row',
                             justifyContent: 'space-between',
+                            alignItems: 'center',
                           }}
                         >
                           <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                            Total Votes
+                            State
                           </Box>
-                          <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-                            321
+                          <Box>
+                            <Chip
+                              label="Open"
+                              sx={{
+                                color: `#119C2B`,
+                                backgroundColor: `#EBFFF1`,
+                                fontWeight: 600,
+                                fontSize: '14px',
+                                borderRadius: '6px',
+                              }}
+                            />
                           </Box>
                         </Box>
                         <Box
@@ -391,44 +437,10 @@ export default function Votes() {
                           }}
                         >
                           <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                            Votes Casted
+                            End
                           </Box>
                           <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-                            123
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Paper>
-                  </Box>
-                  <Box>
-                    <Paper
-                      sx={{
-                        bgcolor: 'background.header',
-                        padding: '24px',
-                        mt: { xs: '8px', md: '12px' },
-                        color: '#F1F1F3',
-                        ...borderGradient,
-                      }}
-                    >
-                      <Typography sx={{ color: '#080F26', fontWeight: 700, fontSize: '18px' }}>
-                        My wallet
-                      </Typography>
-                      <Box
-                        sx={{ display: 'flex', flexDirection: 'column', gap: '12px', py: '10px' }}
-                      >
-                        {' '}
-                        <Box
-                          sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                          }}
-                        >
-                          <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                            Balance
-                          </Box>
-                          <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-                            234 MNT
+                            04H:13M:28S
                           </Box>
                         </Box>
                         <Box
@@ -439,10 +451,108 @@ export default function Votes() {
                           }}
                         >
                           <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                            My Locked
+                            Quorum
                           </Box>
                           <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-                            234 MNT
+                            Not reached
+                          </Box>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                          }}
+                        >
+                          <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                            Current votes
+                          </Box>
+                          <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+                            207.51K
+                          </Box>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                          }}
+                        >
+                          <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                            Differential
+                          </Box>
+                          <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+                            Reached
+                          </Box>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                          }}
+                        >
+                          <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                            Current differential
+                          </Box>
+                          <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+                            203.38K
+                          </Box>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                          }}
+                        >
+                          <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                            Total voting power
+                          </Box>
+                          <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+                            16,000,000
+                          </Box>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                          }}
+                        >
+                          <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                            Created
+                          </Box>
+                          <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+                            20 Jul 2022, 02:18 am
+                          </Box>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                          }}
+                        >
+                          <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                            Started
+                          </Box>
+                          <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+                            20 Jul 2022, 02:19 am
+                          </Box>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                          }}
+                        >
+                          <Box sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                            Author
+                          </Box>
+                          <Box sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+                            0x5180...87621c
                           </Box>
                         </Box>
                       </Box>
