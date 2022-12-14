@@ -58,3 +58,7 @@
 .rs-pagination-group-total span {
   color: #252C32 !important
 }
+
+.state-list-row {
+  cursor: pointer;
+}

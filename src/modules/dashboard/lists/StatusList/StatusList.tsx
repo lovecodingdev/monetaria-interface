@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Chip } from '@mui/material';
 import { Table, Pagination } from 'rsuite';
 import { StatusListDataValidator } from './type';
+import { useRouter } from 'next/router';
 
 const { Column, HeaderCell, Cell } = Table;
 const data: StatusListDataValidator[] = [
@@ -64,6 +65,7 @@ const data: StatusListDataValidator[] = [
 ];
 
 const StatusList = () => {
+  const router = useRouter();
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();
   const [loading, setLoading] = useState(false);
@@ -122,7 +124,8 @@ const StatusList = () => {
         loading={loading}
         cellBordered={false}
         rowHeight={60}
-        onRowClick={(rowData) => console.log(rowData)}
+        onRowClick={(rowData) => router.push('/vote_detail/')}
+        rowClassName="state-list-row"
       >
         <Column width={72} align="left" sortable verticalAlign="middle" fixed="left">
           <HeaderCell>No</HeaderCell>
