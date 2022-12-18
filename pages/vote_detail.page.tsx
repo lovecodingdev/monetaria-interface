@@ -274,24 +274,81 @@ export default function Votes() {
                     ...borderGradient,
                   }}
                 >
+                  <Typography
+                    sx={{
+                      color: '#080F26',
+                      fontWeight: 700,
+                      fontSize: '18px',
+                      paddingBottom: '10px',
+                    }}
+                  >
+                    Cast your vote
+                  </Typography>{' '}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      padding: '24px',
+                      gap: '12px',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Box>
+                      <Button
+                        sx={{
+                          backgroundColor: 'rgba(21, 126, 255, 0.05)',
+                          border: '1px solid rgba(21, 126, 255, 0.2)',
+                          fontSize: '16px',
+                          color: '#074592',
+                          fontWeight: 600,
+                          width: { xs: '304px', sm: '420px' },
+                        }}
+                      >
+                        Yap
+                      </Button>
+                    </Box>
+                    <Box>
+                      <Button
+                        sx={{
+                          backgroundColor: 'rgba(21, 126, 255, 0.05)',
+                          border: '1px solid rgba(21, 126, 255, 0.2)',
+                          fontSize: '16px',
+                          color: '#074592',
+                          fontWeight: 600,
+                          width: { xs: '304px', sm: '420px' },
+                        }}
+                      >
+                        Nay
+                      </Button>
+                    </Box>
+                    <Box>
+                      <Button
+                        sx={{
+                          backgroundColor: '#074592',
+                          border: '1px solid rgba(21, 126, 255, 0.2)',
+                          fontSize: '16px',
+                          color: '#FFF',
+                          fontWeight: 600,
+                          width: { xs: '304px', sm: '420px' },
+                        }}
+                        variant="contained"
+                      >
+                        Vote
+                      </Button>
+                    </Box>
+                  </Box>
+                </Paper>
+                <Paper
+                  sx={{
+                    bgcolor: 'background.header',
+                    padding: '24px',
+                    mt: { xs: '8px', md: '12px' },
+                    color: '#F1F1F3',
+                    ...borderGradient,
+                  }}
+                >
                   <Box>
-                    {!downToXSM ? (
-                      <VoteList />
-                    ) : (
-                      <Box>
-                        <Typography
-                          sx={{
-                            color: '#080F26',
-                            fontWeight: 700,
-                            fontSize: '18px',
-                            paddingBottom: '10px',
-                          }}
-                        >
-                          Votes
-                        </Typography>
-                        <VoteListMobile />
-                      </Box>
-                    )}
+                    <VoteList />
                   </Box>
                 </Paper>
               </Box>
@@ -373,18 +430,73 @@ export default function Votes() {
                               }}
                             />
                           </Box>
-                          <Button
+                          <Box
                             sx={{
-                              backgroundColor: 'rgba(21, 126, 255, 0.05)',
-                              color: '#074592',
-                              border: '1px solid rgba(21, 126, 255, 0.2)',
-                              fontWeight: 600,
-                              fontSize: '16px',
+                              display: 'flex',
+                              flexDirection: 'row',
+                              borderRadius: '6px',
+                              backgroundColor: '#EBF7FF',
+                              border: '1px solid #D7EDFF',
+                              padding: '12px 24px 12px 16px',
+                              alignItems: 'start',
+                              justifyContent: 'space-between',
                             }}
-                            endIcon={<EastIcon />}
                           >
-                            Vote{' '}
-                          </Button>
+                            <Box sx={{ width: '70%' }}>
+                              <Typography
+                                sx={{ color: '#252C32', fontSize: '14px', fontWeight: 600 }}
+                              >
+                                You didn't have enough veMNT balance(0.00 required)
+                              </Typography>
+                            </Box>
+                            <Box sx={{ width: '30%', display: 'flex', justifyContent: 'end' }}>
+                              <Button
+                                sx={{
+                                  color: '#023997',
+                                  fontWeight: 400,
+                                  fontSize: '14px',
+                                  backgroundColor: 'transparent',
+                                  textDecoration: 'underline',
+                                }}
+                              >
+                                Top Up
+                              </Button>
+                            </Box>
+                          </Box>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                              borderRadius: '6px',
+                              backgroundColor: '#EBF7FF',
+                              border: '1px solid #D7EDFF',
+                              padding: '12px 24px 12px 16px',
+                              alignItems: 'start',
+                              justifyContent: 'space-between',
+                            }}
+                          >
+                            <Box sx={{ width: '60%' }}>
+                              <Typography
+                                sx={{ color: '#252C32', fontSize: '14px', fontWeight: 600 }}
+                              >
+                                You need to have a minimum of 200K MNT in order to submit a
+                                proposal.
+                              </Typography>
+                            </Box>
+                            <Box sx={{ width: '40%', display: 'flex', justifyContent: 'end' }}>
+                              <Button
+                                sx={{
+                                  color: '#023997',
+                                  fontWeight: 400,
+                                  fontSize: '14px',
+                                  backgroundColor: 'transparent',
+                                  textDecoration: 'underline',
+                                }}
+                              >
+                                Learn more
+                              </Button>
+                            </Box>
+                          </Box>
                         </Box>
                       </Box>
                     </Paper>

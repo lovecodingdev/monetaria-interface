@@ -112,12 +112,12 @@ const VoteList = () => {
           </Cell>
         </Column>
 
-        <Column align="left" sortable verticalAlign="middle" width={250}>
+        <Column align="left" sortable verticalAlign="middle" width={250} fixed="left">
           <HeaderCell>MNT</HeaderCell>
           <Cell dataKey="amount" style={{ fontWeight: 400, fontSize: '14px', color: '#252C32' }} />
         </Column>
 
-        <Column align="left" sortable verticalAlign="middle" fixed="right" width={250}>
+        <Column align="left" sortable verticalAlign="middle" width={250}>
           <HeaderCell>Answer</HeaderCell>
           <Cell dataKey="answer" style={{ fontWeight: 400, fontSize: '14px', color: '#252C32' }} />
         </Column>
