@@ -73,6 +73,7 @@ export default function Calc() {
   const exchangeNetwork = () => {
     const first = firstNetwork;
     const second = secondNetwork;
+
     setFirstNetwork(second);
     setSecondNetwork(first);
   };
@@ -142,7 +143,14 @@ export default function Calc() {
                 data={all_networks}
                 style={{ width: !downToXSM ? '200px' : '140px' }}
                 value={firstNetwork}
-                onChange={setFirstNetwork}
+                onChange={(value: string, e) => {
+                  const second = secondNetwork;
+                  if (value === second) {
+                    exchangeNetwork();
+                  } else {
+                    setFirstNetwork(value);
+                  }
+                }}
                 cleanable={false}
                 placeholder="Select a gauge"
                 searchable={false}
@@ -201,7 +209,14 @@ export default function Calc() {
                 data={all_networks}
                 style={{ width: !downToXSM ? '200px' : '140px' }}
                 value={secondNetwork}
-                onChange={setSecondNetwork}
+                onChange={(value: string, e) => {
+                  const first = firstNetwork;
+                  if (value === first) {
+                    exchangeNetwork();
+                  } else {
+                    setSecondNetwork(value);
+                  }
+                }}
                 cleanable={false}
                 placeholder="Select a gauge"
                 searchable={false}
