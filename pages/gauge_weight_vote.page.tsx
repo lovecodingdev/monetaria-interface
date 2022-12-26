@@ -419,14 +419,7 @@ export default function GaugeWeightVoting() {
                       }}
                     >
                       <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
-                        Proportion for All Different Chains
-                      </Typography>
-
-                      <Typography
-                        sx={{ color: '#000', fontWeight: 400, fontSize: '12px', opacity: '50%' }}
-                      >
-                        Data update rules: Ethereum updates every 28 days, other chains update every
-                        7 days, the lastest update 2022-12-12
+                        Proposed future gauge weight changes taking effect on 29/12/2022 UTC
                       </Typography>
                     </Paper>
                   </Box>
