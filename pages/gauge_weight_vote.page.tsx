@@ -15,6 +15,7 @@ import { textCenterEllipsis } from 'src/helpers/text-center-ellipsis';
 import Slider from '@mui/material/Slider';
 
 import ApyEffectList from 'src/modules/dashboard/lists/ApyEffectList/ApyEffectList';
+import VoterList from 'src/modules/dashboard/lists/Voters/VoterList';
 
 const gaugeTempData = [
   {
@@ -49,6 +50,9 @@ export default function GaugeWeightVoting() {
   const xsm = useMediaQuery(breakpoints.up('xsm'));
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
   const [curGauge, setCurGause] = useState<string>('0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1');
+  const [curGaugeForHistory, setCurGauseForHistory] = useState<string>(
+    '0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1'
+  );
   const [voteWeight, setVoteWeight] = useState<number>(0);
   const [slow, setSlow] = useState<number>(0);
   return (
@@ -453,6 +457,159 @@ export default function GaugeWeightVoting() {
                     <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
                       Weight Voting History
                     </Typography>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        marginTop: '32px',
+                        gap: '28px',
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: '60px',
+                          flexWrap: 'wrap',
+                        }}
+                      >
+                        <Box>
+                          <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
+                            Voted this week{' '}
+                          </Typography>
+                          <Typography sx={{ color: '#333333', fontWeight: 700, fontSize: '24px' }}>
+                            596,512.56 <span style={{ fontSize: '14px' }}>veCRV</span>
+                          </Typography>
+                        </Box>
+                        <Box>
+                          <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
+                            Total veCRV
+                          </Typography>
+                          <Typography sx={{ color: '#333333', fontWeight: 700, fontSize: '24px' }}>
+                            563,884,351.8
+                          </Typography>
+                        </Box>
+                        <Box>
+                          <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
+                            veCRV supply voted
+                          </Typography>
+                          <Typography sx={{ color: '#333333', fontWeight: 700, fontSize: '24px' }}>
+                            0.11 %
+                          </Typography>
+                        </Box>
+                      </Box>
+                      <Box>
+                        {' '}
+                        <label
+                          style={{
+                            display: 'block',
+                            color: '#252C32',
+                            fontWeight: 400,
+                            fontSize: '14px',
+                            paddingBottom: '5px',
+                          }}
+                        >
+                          Select a gauge
+                        </label>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', gap: '7px' }}>
+                          {' '}
+                          <Box>
+                            {' '}
+                            <SelectPicker
+                              data={gaugeTempData}
+                              style={{ width: '100%' }}
+                              value={curGaugeForHistory}
+                              onChange={setCurGauseForHistory}
+                              placeholder="Select a gauge"
+                              searchable={false}
+                              renderMenuItem={(label, item) => {
+                                return (
+                                  <Box
+                                    sx={{
+                                      display: 'flex',
+                                      flexDirection: 'row',
+                                      gap: 2,
+                                      alignItems: 'center',
+                                      fontFamily: 'Gilroy, Arial !important',
+                                    }}
+                                  >
+                                    <Box>
+                                      {' '}
+                                      <TokenIcon
+                                        symbol={label}
+                                        sx={{ fontSize: '24px', mr: 1 }}
+                                      />{' '}
+                                    </Box>
+                                    <Box>
+                                      {' '}
+                                      <span
+                                        style={{
+                                          fontWeight: 500,
+                                          fontSize: '18px',
+                                          color: '#5B6871',
+                                        }}
+                                      >
+                                        {label.toUpperCase()} (
+                                        {textCenterEllipsis(item.value, 5, 4)})
+                                      </span>
+                                    </Box>
+                                  </Box>
+                                );
+                              }}
+                              renderValue={(value, item) => {
+                                return (
+                                  <Box
+                                    sx={{
+                                      display: 'flex',
+                                      flexDirection: 'row',
+                                      gap: 2,
+                                      alignItems: 'center',
+                                    }}
+                                  >
+                                    <Box>
+                                      {' '}
+                                      <TokenIcon
+                                        symbol={item.label}
+                                        sx={{ fontSize: '24px', mr: 1 }}
+                                      />{' '}
+                                    </Box>
+                                    <Box>
+                                      {' '}
+                                      <span
+                                        style={{
+                                          fontWeight: 500,
+                                          fontSize: '18px',
+                                          color: '#5B6871',
+                                        }}
+                                      >
+                                        {item.label.toUpperCase()} (
+                                        {textCenterEllipsis(value, 5, 4)})
+                                      </span>
+                                    </Box>
+                                  </Box>
+                                );
+                              }}
+                            />
+                          </Box>
+                          <Box>
+                            <Button
+                              sx={{
+                                backgroundColor: 'rgba(21, 126, 255, 0.05)',
+                                border: '1px solid rgba(21, 126, 255, 0.2)',
+                                color: '#074592',
+                                fontWeight: 600,
+                                fontSize: '16px',
+                              }}
+                            >
+                              Filter
+                            </Button>
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Box>
+                    <Box sx={{ paddingTop: '32px' }}>
+                      <VoterList />
+                    </Box>
                   </Paper>
                 </Box>
               </Box>
