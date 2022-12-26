@@ -110,6 +110,11 @@ const DaoMenuItems: MoreMenuItem[] = [
     title: t`Vote`,
     icon: <></>,
   },
+  {
+    link: '/gauge_weight_vote',
+    title: t`Gauge Weight Voting`,
+    icon: <></>,
+  },
 ];
 
 export const moreMenuExtraItems: MoreMenuItem[] = [];
