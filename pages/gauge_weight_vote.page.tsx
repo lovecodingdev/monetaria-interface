@@ -7,20 +7,40 @@ import { ContentContainer } from '../src/components/ContentContainer';
 import { MainLayout } from '../src/layouts/MainLayout';
 import { useWeb3Context } from '../src/libs/hooks/useWeb3Context';
 import borderGradient from 'src/layouts/borderGradient';
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
-import EastIcon from '@mui/icons-material/East';
-import { DatePicker, Slider, SelectPicker } from 'rsuite';
+
+import { SelectPicker, InputNumber } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
-import StatusList from 'src/modules/dashboard/lists/StatusList/StatusList';
-import { StatusListMobile } from 'src/modules/dashboard/lists/StatusList/StatusListMobile';
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
+import { textCenterEllipsis } from 'src/helpers/text-center-ellipsis';
+import Slider from '@mui/material/Slider';
 
-const statusData = ['All', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
-  (item) => ({ label: item, value: item })
-);
+import ApyEffectList from 'src/modules/dashboard/lists/ApyEffectList/ApyEffectList';
 
-const outcomeData = ['All', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
-  (item) => ({ label: item, value: item })
-);
+const gaugeTempData = [
+  {
+    label: 'mnt',
+    value: '0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1',
+  },
+  {
+    label: 'btc',
+    value: '0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e600b1',
+  },
+];
+
+const marks = [
+  {
+    value: 1,
+    label: 'Standard',
+  },
+  {
+    value: 2,
+    label: 'Fast',
+  },
+  {
+    value: 3,
+    label: 'Instant',
+  },
+];
 
 export default function GaugeWeightVoting() {
   const { currentAccount, loading: web3Loading } = useWeb3Context();
@@ -28,9 +48,9 @@ export default function GaugeWeightVoting() {
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.up('xsm'));
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
-  const [curStatus, setCurStatus] = useState('All');
-  const [curOutcome, setCurOutcome] = useState('All');
-
+  const [curGauge, setCurGause] = useState<string>('0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1');
+  const [voteWeight, setVoteWeight] = useState<number>(0);
+  const [slow, setSlow] = useState<number>(0);
   return (
     <>
       <ContentContainer>
@@ -41,10 +61,9 @@ export default function GaugeWeightVoting() {
                 display: 'flex',
                 flexDirection: 'column',
                 flexWrap: 'wrap',
-                gap: '32px',
               }}
             >
-              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
                 <Box
                   sx={{
                     display: 'flex',
@@ -134,11 +153,308 @@ export default function GaugeWeightVoting() {
                         ...borderGradient,
                       }}
                     >
-                      Hi
+                      <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
+                        Proportion for All Different Chains
+                      </Typography>
+
+                      <Typography
+                        sx={{ color: '#000', fontWeight: 400, fontSize: '12px', opacity: '50%' }}
+                      >
+                        Data update rules: Ethereum updates every 28 days, other chains update every
+                        7 days, the lastest update 2022-12-12
+                      </Typography>
                     </Paper>
                   </Box>
                 </Box>
-                <Box sx={{ display: 'flex', flexDirection: 'row' }}></Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    gap: '24px',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  <Box sx={{ flex: 1.5 }}>
+                    <Paper
+                      sx={{
+                        bgcolor: 'background.header',
+                        padding: '24px',
+                        mt: { xs: '8px', md: '12px' },
+                        color: '#F1F1F3',
+                        ...borderGradient,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '16px',
+                        }}
+                      >
+                        <Box>
+                          {' '}
+                          <label
+                            style={{
+                              display: 'block',
+                              color: '#252C32',
+                              fontWeight: 400,
+                              fontSize: '14px',
+                              paddingBottom: '5px',
+                            }}
+                          >
+                            Select a gauge
+                          </label>
+                          <SelectPicker
+                            data={gaugeTempData}
+                            style={{ width: '100%' }}
+                            value={curGauge}
+                            onChange={setCurGause}
+                            placeholder="Select a gauge"
+                            searchable={false}
+                            renderMenuItem={(label, item) => {
+                              return (
+                                <Box
+                                  sx={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    gap: 2,
+                                    alignItems: 'center',
+                                    fontFamily: 'Gilroy, Arial !important',
+                                  }}
+                                >
+                                  <Box>
+                                    {' '}
+                                    <TokenIcon
+                                      symbol={label}
+                                      sx={{ fontSize: '24px', mr: 1 }}
+                                    />{' '}
+                                  </Box>
+                                  <Box>
+                                    {' '}
+                                    <span
+                                      style={{
+                                        fontWeight: 500,
+                                        fontSize: '18px',
+                                        color: '#5B6871',
+                                      }}
+                                    >
+                                      {label.toUpperCase()} ({textCenterEllipsis(item.value, 5, 4)})
+                                    </span>
+                                  </Box>
+                                </Box>
+                              );
+                            }}
+                            renderValue={(value, item) => {
+                              return (
+                                <Box
+                                  sx={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    gap: 2,
+                                    alignItems: 'center',
+                                  }}
+                                >
+                                  <Box>
+                                    {' '}
+                                    <TokenIcon
+                                      symbol={item.label}
+                                      sx={{ fontSize: '24px', mr: 1 }}
+                                    />{' '}
+                                  </Box>
+                                  <Box>
+                                    {' '}
+                                    <span
+                                      style={{
+                                        fontWeight: 500,
+                                        fontSize: '18px',
+                                        color: '#5B6871',
+                                      }}
+                                    >
+                                      {item.label.toUpperCase()} ({textCenterEllipsis(value, 5, 4)})
+                                    </span>
+                                  </Box>
+                                </Box>
+                              );
+                            }}
+                          />
+                        </Box>
+                        <Box>
+                          <label
+                            style={{
+                              display: 'block',
+                              color: '#252C32',
+                              fontWeight: 400,
+                              fontSize: '14px',
+                              paddingBottom: '5px',
+                            }}
+                          >
+                            Vote Weight %(of your voting power):
+                          </label>
+                          <InputNumber
+                            value={voteWeight}
+                            onChange={setVoteWeight}
+                            min={0}
+                            style={{ width: '372px' }}
+                          />
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            flexWrap: 'wrap',
+                            justifyContent: 'flex-start',
+                            gap: '60px',
+                          }}
+                        >
+                          <Box>
+                            {' '}
+                            <label
+                              style={{
+                                display: 'block',
+                                color: '#252C32',
+                                fontWeight: 400,
+                                fontSize: '14px',
+                                paddingBottom: '5px',
+                              }}
+                            >
+                              Slow
+                            </label>
+                            <InputNumber
+                              value={slow}
+                              onChange={setSlow}
+                              min={0}
+                              step={0.1}
+                              style={{ width: '156px' }}
+                            />
+                          </Box>
+                          <Box sx={{ width: '284px' }}>
+                            <label
+                              style={{
+                                display: 'block',
+                                color: '#252C32',
+                                fontWeight: 400,
+                                fontSize: '14px',
+                                paddingBottom: '5px',
+                              }}
+                            >
+                              Gas priority fee:
+                            </label>{' '}
+                            <Box
+                              sx={{
+                                paddingLeft: '25px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                              }}
+                            >
+                              {' '}
+                              <Slider
+                                aria-label="Custom marks"
+                                defaultValue={2}
+                                step={1}
+                                valueLabelDisplay="auto"
+                                min={1}
+                                max={3}
+                                marks={marks}
+                                sx={{
+                                  '& .MuiSlider-thumb': {
+                                    backgroundColor: '#F6F8F9',
+                                    border: '1px solid #B0BABF',
+                                    opacity: 1,
+                                    '&:focus, &:hover, &.Mui-active': {
+                                      boxShadow:
+                                        '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+                                      // Reset on touch devices, it doesn't add specificity
+                                    },
+                                  },
+                                  '& .MuiSlider-track': {
+                                    border: 'none',
+                                    backgroundColor: '#074592',
+                                  },
+                                  '& .MuiSlider-rail': {
+                                    opacity: 1,
+                                    backgroundColor: '#DDE2E4',
+                                  },
+                                  '& .MuiSlider-mark': {
+                                    backgroundColor: '#bfbfbf',
+                                    height: '2px',
+                                    '&.MuiSlider-markActive': {
+                                      opacity: 1,
+                                      backgroundColor: '#F6F8F9',
+                                    },
+                                  },
+                                }}
+                              />
+                            </Box>
+                          </Box>
+                        </Box>
+                        <Button
+                          sx={{
+                            color: '#F6F8F9',
+                            fontSize: '14px',
+                            fontWeight: 600,
+                            backgroundColor: '#023997',
+                            '&.hover': {
+                              color: '#023997',
+                            },
+                          }}
+                          variant="contained"
+                        >
+                          Submit
+                        </Button>
+                      </Box>
+                    </Paper>
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Paper
+                      sx={{
+                        bgcolor: 'background.header',
+                        padding: '24px',
+                        mt: { xs: '8px', md: '12px' },
+                        color: '#F1F1F3',
+                        ...borderGradient,
+                      }}
+                    >
+                      <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
+                        Proportion for All Different Chains
+                      </Typography>
+
+                      <Typography
+                        sx={{ color: '#000', fontWeight: 400, fontSize: '12px', opacity: '50%' }}
+                      >
+                        Data update rules: Ethereum updates every 28 days, other chains update every
+                        7 days, the lastest update 2022-12-12
+                      </Typography>
+                    </Paper>
+                  </Box>
+                </Box>
+                <Box>
+                  <Paper
+                    sx={{
+                      bgcolor: 'background.header',
+                      padding: '24px',
+                      mt: { xs: '8px', md: '12px' },
+                      color: '#F1F1F3',
+                      ...borderGradient,
+                    }}
+                  >
+                    <ApyEffectList />
+                  </Paper>
+                </Box>
+                <Box>
+                  <Paper
+                    sx={{
+                      bgcolor: 'background.header',
+                      padding: '24px',
+                      mt: { xs: '8px', md: '12px' },
+                      color: '#F1F1F3',
+                      ...borderGradient,
+                    }}
+                  >
+                    <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
+                      Weight Voting History
+                    </Typography>
+                  </Paper>
+                </Box>
               </Box>
             </Box>
           </Box>
