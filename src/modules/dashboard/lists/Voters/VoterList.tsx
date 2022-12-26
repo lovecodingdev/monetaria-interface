@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Chip, Typography } from '@mui/material';
+import { Chip, Typography, Box } from '@mui/material';
 import { Table, Pagination } from 'rsuite';
 import { VoterListDataValidator } from './type';
 import { textCenterEllipsis } from 'src/helpers/text-center-ellipsis';
 import 'rsuite/dist/rsuite.min.css';
+import PieIcon from '/public/icons/pie.svg';
 
 const { Column, HeaderCell, Cell } = Table;
 const data: VoterListDataValidator[] = [
@@ -137,10 +138,27 @@ const VoterList = () => {
         </Column>
         <Column align="left" sortable verticalAlign="middle" width={309}>
           <HeaderCell>Total Weight</HeaderCell>
-          <Cell
-            dataKey="total_weight"
-            style={{ fontWeight: 400, fontSize: '14px', color: '#252C32' }}
-          />
+          <Cell>
+            {(rowData) => (
+              <>
+                <Box
+                  sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px' }}
+                >
+                  <Box>
+                    {' '}
+                    <PieIcon />
+                  </Box>
+
+                  <Box>
+                    {' '}
+                    <Typography sx={{ fontWeight: 400, fontSize: '14px', color: '#252C32' }}>
+                      {rowData.total_weight}
+                    </Typography>
+                  </Box>
+                </Box>
+              </>
+            )}
+          </Cell>
         </Column>
       </Table>
     </div>
