@@ -379,10 +379,9 @@ export default function GaugeWeightVoting() {
                         <Box
                           sx={{
                             display: 'flex',
-                            flexDirection: 'row',
-                            flexWrap: 'wrap',
-                            justifyContent: 'flex-start',
-                            gap: '60px',
+                            flexDirection: downToXSM ? 'column' : 'row',
+                            justifyContent: downToXSM ? 'center' : 'flex-start',
+                            gap: downToXSM ? '16px' : '60px',
                           }}
                         >
                           <Box>
@@ -403,7 +402,7 @@ export default function GaugeWeightVoting() {
                               onChange={setSlow}
                               min={0}
                               step={0.1}
-                              style={{ width: '156px' }}
+                              style={{ width: downToXSM ? '100%' : '156px' }}
                             />
                           </Box>
                           <Box sx={{ width: '284px' }}>
