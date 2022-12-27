@@ -113,6 +113,7 @@ export default function GaugeWeightVoting() {
                         mt: { xs: '8px', md: '12px' },
                         color: '#F1F1F3',
                         ...borderGradient,
+                        height: !downToXSM ? '316px' : 'auto',
                       }}
                     >
                       <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
@@ -225,12 +226,15 @@ export default function GaugeWeightVoting() {
                         mt: { xs: '8px', md: '12px' },
                         color: '#F1F1F3',
                         ...borderGradient,
+                        height: !downToXSM ? '316px' : 'auto',
                       }}
                     >
                       <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
                         Proportion for All Different Chains
                       </Typography>
+
                       <PieChart data={proportion_data} />
+
                       <Typography
                         sx={{ color: '#000', fontWeight: 400, fontSize: '12px', opacity: '50%' }}
                       >
@@ -256,6 +260,7 @@ export default function GaugeWeightVoting() {
                         mt: { xs: '8px', md: '12px' },
                         color: '#F1F1F3',
                         ...borderGradient,
+                        height: !downToXSM ? '344px' : 'auto',
                       }}
                     >
                       <Box
@@ -480,6 +485,7 @@ export default function GaugeWeightVoting() {
                         mt: { xs: '8px', md: '12px' },
                         color: '#F1F1F3',
                         ...borderGradient,
+                        height: !downToXSM ? '344px' : 'auto',
                       }}
                     >
                       <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>

@@ -1,9 +1,14 @@
 import { useState, useEffect, Fragment } from 'react';
 import CanvasJSReact from 'src/libs/canvasjs/canvasjs.react';
+import { useMediaQuery, useTheme } from '@mui/material';
 
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const PieChart = ({ data }) => {
+  const { breakpoints } = useTheme();
+  const xsm = useMediaQuery(breakpoints.up('xsm'));
+  const downToXSM = useMediaQuery(breakpoints.down('xsm'));
+
   const [items, setItems] = useState([]);
   const [percentageTotal, setPercentageTotal] = useState(0);
 
@@ -27,6 +32,8 @@ const PieChart = ({ data }) => {
     <div>
       <CanvasJSChart
         options={{
+          width: downToXSM ? 300 : 400,
+          height: downToXSM ? 150 : 200,
           data: [
             {
               type: 'pie',
@@ -34,7 +41,7 @@ const PieChart = ({ data }) => {
             },
           ],
           responsive: true,
-          maintainAspectRatio: false,
+          maintainAspectRatio: true,
         }}
       />
     </div>
