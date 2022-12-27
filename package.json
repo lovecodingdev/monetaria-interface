@@ -78,6 +78,7 @@
     "react": "latest",
     "react-apexcharts": "^1.4.0",
     "react-dom": "latest",
+    "react-google-charts": "^4.0.0",
     "react-markdown": "^8.0.1",
     "react-number-format": "^4.9.1",
     "react-responsive-carousel": "^3.2.23",

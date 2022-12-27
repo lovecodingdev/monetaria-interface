@@ -16,6 +16,7 @@ import Slider from '@mui/material/Slider';
 
 import ApyEffectList from 'src/modules/dashboard/lists/ApyEffectList/ApyEffectList';
 import VoterList from 'src/modules/dashboard/lists/Voters/VoterList';
+import { PieChart } from 'src/components/piecharts/piechart';
 
 const gaugeTempData = [
   {
@@ -42,6 +43,44 @@ const marks = [
     label: 'Instant',
   },
 ];
+
+const proportion_data = [
+  ['Task', 'Hours per Day'],
+  ['Moonbeam', 2],
+  ['Aurora', 2],
+  ['Moonriver', 2],
+  ['Emerald', 2],
+  ['Polygon', 5],
+  ['Optimism', 30],
+  ['Arbitrum', 25],
+  ['OKC', 25],
+  ['BNB', 20],
+  ['Ethereum', 40],
+];
+
+const proportion_options = {
+  title: '',
+  is3D: true,
+};
+
+const gauge_effect_data = [
+  ['Task', 'Hours per Day'],
+  ['Dola + Fraxbp (0x34ed...))', 2],
+  ['Dola + Fraxbp (0x34ed...))', 2],
+  ['Dola + Fraxbp (0x34ed...))', 2],
+  ['Dola + Fraxbp (0x34ed...))', 2],
+  ['Dola + Fraxbp (0x34ed...))', 5],
+  ['Dola + Fraxbp (0x34ed...))', 30],
+  ['Dola + Fraxbp (0x34ed...))', 25],
+  ['Dola + Fraxbp (0x34ed...))', 25],
+  ['Dola + Fraxbp (0x34ed...))', 20],
+  ['Dola + Fraxbp (0x34ed...))', 40],
+];
+
+const gauge_effect_options = {
+  title: '',
+  is3D: true,
+};
 
 export default function GaugeWeightVoting() {
   const { currentAccount, loading: web3Loading } = useWeb3Context();
@@ -111,7 +150,13 @@ export default function GaugeWeightVoting() {
                           </Typography>
                         </Box>
 
-                        <Box sx={{ display: 'flex', flexDirection: 'row', gap: '74px' }}>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                          }}
+                        >
                           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                             <Box>
                               <Typography
@@ -160,7 +205,7 @@ export default function GaugeWeightVoting() {
                       <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
                         Proportion for All Different Chains
                       </Typography>
-
+                      <PieChart data={proportion_data} options={proportion_options} />
                       <Typography
                         sx={{ color: '#000', fontWeight: 400, fontSize: '12px', opacity: '50%' }}
                       >
@@ -294,12 +339,7 @@ export default function GaugeWeightVoting() {
                           >
                             Vote Weight %(of your voting power):
                           </label>
-                          <InputNumber
-                            value={voteWeight}
-                            onChange={setVoteWeight}
-                            min={0}
-                            style={{ width: '372px' }}
-                          />
+                          <InputNumber value={voteWeight} onChange={setVoteWeight} min={0} />
                         </Box>
                         <Box
                           sx={{
@@ -421,6 +461,7 @@ export default function GaugeWeightVoting() {
                       <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
                         Proposed future gauge weight changes taking effect on 29/12/2022 UTC
                       </Typography>
+                      <PieChart data={gauge_effect_data} options={gauge_effect_options} />
                     </Paper>
                   </Box>
                 </Box>
@@ -504,14 +545,21 @@ export default function GaugeWeightVoting() {
                         >
                           Select a gauge
                         </label>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', gap: '7px' }}>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            flexWrap: 'wrap',
+                            gap: '8px',
+                          }}
+                        >
                           {' '}
                           <Box>
                             {' '}
                             <SelectPicker
                               data={gaugeTempData}
-                              style={{ width: '100%' }}
                               value={curGaugeForHistory}
+                              style={{ width: downToXSM ? '200px' : '100%' }}
                               onChange={setCurGauseForHistory}
                               placeholder="Select a gauge"
                               searchable={false}
