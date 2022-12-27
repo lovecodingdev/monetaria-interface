@@ -136,28 +136,46 @@ export default function GaugeWeightVoting() {
                           gap: '42px',
                         }}
                       >
-                        <Box>
-                          <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
-                            Total WPC Distribution Speed
-                          </Typography>
-                          <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
-                            <span style={{ color: '#333333', fontSize: '24px', fontWeight: 700 }}>
-                              280
-                            </span>{' '}
-                            <span style={{ color: '#000000', fontSize: '14px', fontWeight: 400 }}>
-                              WPC/Block
-                            </span>
-                          </Typography>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: downToXSM ? 'row' : 'column',
+                            justifyContent: downToXSM ? 'space-between' : 'flex-start',
+                          }}
+                        >
+                          <Box>
+                            {' '}
+                            <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
+                              Total WPC Distribution Speed
+                            </Typography>
+                          </Box>
+                          <Box>
+                            {' '}
+                            <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
+                              <span style={{ color: '#333333', fontSize: '24px', fontWeight: 700 }}>
+                                280
+                              </span>{' '}
+                              <span style={{ color: '#000000', fontSize: '14px', fontWeight: 400 }}>
+                                WPC/Block
+                              </span>
+                            </Typography>
+                          </Box>
                         </Box>
 
                         <Box
                           sx={{
                             display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
+                            flexDirection: downToXSM ? 'column' : 'row',
+                            gap: downToXSM ? '42px' : '74px',
                           }}
                         >
-                          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: downToXSM ? 'row' : 'column',
+                              justifyContent: downToXSM ? 'space-between' : 'flex-start',
+                            }}
+                          >
                             <Box>
                               <Typography
                                 sx={{ color: '#000000', fontSize: '14px', fontWeight: 400 }}
@@ -166,15 +184,27 @@ export default function GaugeWeightVoting() {
                               </Typography>
                             </Box>
                             <Box>
-                              <span style={{ color: '#333333', fontSize: '24px', fontWeight: 700 }}>
-                                1,318,372.44
-                              </span>{' '}
-                              <span style={{ color: '#000000', fontSize: '14px', fontWeight: 400 }}>
-                                WPC/Day
-                              </span>
+                              <Typography>
+                                <span
+                                  style={{ color: '#333333', fontSize: '24px', fontWeight: 700 }}
+                                >
+                                  1,318,372.44
+                                </span>{' '}
+                                <span
+                                  style={{ color: '#000000', fontSize: '14px', fontWeight: 400 }}
+                                >
+                                  WPC/Day
+                                </span>
+                              </Typography>
                             </Box>
                           </Box>
-                          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: downToXSM ? 'row' : 'column',
+                              justifyContent: downToXSM ? 'space-between' : 'flex-start',
+                            }}
+                          >
                             <Box>
                               <Typography
                                 sx={{ color: '#000000', fontSize: '14px', fontWeight: 400 }}
@@ -183,9 +213,14 @@ export default function GaugeWeightVoting() {
                               </Typography>
                             </Box>
                             <Box>
-                              <span style={{ color: '#333333', fontSize: '24px', fontWeight: 700 }}>
-                                71.94%
-                              </span>{' '}
+                              <Typography>
+                                {' '}
+                                <span
+                                  style={{ color: '#333333', fontSize: '24px', fontWeight: 700 }}
+                                >
+                                  71.94%
+                                </span>{' '}
+                              </Typography>
                             </Box>
                           </Box>
                         </Box>
