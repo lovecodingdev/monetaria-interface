@@ -84,55 +84,55 @@ export default function Votes() {
                         </Button>
                       </Box>
                     </Box>
-                    {!downToXSM && (
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          gap: '16px',
-                          justifyContent: 'start',
-                        }}
-                      >
-                        <Box>
-                          <Typography
-                            sx={{
-                              color: '#252C32',
-                              fontWeight: 400,
-                              fontSize: '14px',
-                              paddingBottom: '5px',
-                            }}
-                          >
-                            Status
-                          </Typography>
-                          <SelectPicker
-                            data={statusData}
-                            style={{ width: downToXSM ? '140px' : '169px' }}
-                            value={curStatus}
-                            searchable={false}
-                            onChange={setCurStatus}
-                          />
-                        </Box>
-                        <Box>
-                          <Typography
-                            sx={{
-                              color: '#252C32',
-                              fontWeight: 400,
-                              fontSize: '14px',
-                              paddingBottom: '5px',
-                            }}
-                          >
-                            Outcome
-                          </Typography>
-                          <SelectPicker
-                            data={outcomeData}
-                            style={{ width: downToXSM ? '140px' : '169px' }}
-                            value={curOutcome}
-                            searchable={false}
-                            onChange={setCurOutcome}
-                          />
-                        </Box>
+
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: '16px',
+                        justifyContent: 'start',
+                      }}
+                    >
+                      <Box>
+                        <Typography
+                          sx={{
+                            color: '#252C32',
+                            fontWeight: 400,
+                            fontSize: '14px',
+                            paddingBottom: '5px',
+                          }}
+                        >
+                          Status
+                        </Typography>
+                        <SelectPicker
+                          data={statusData}
+                          style={{ width: downToXSM ? '140px' : '169px' }}
+                          value={curStatus}
+                          searchable={false}
+                          onChange={setCurStatus}
+                        />
                       </Box>
-                    )}
+                      <Box>
+                        <Typography
+                          sx={{
+                            color: '#252C32',
+                            fontWeight: 400,
+                            fontSize: '14px',
+                            paddingBottom: '5px',
+                          }}
+                        >
+                          Outcome
+                        </Typography>
+                        <SelectPicker
+                          data={outcomeData}
+                          style={{ width: downToXSM ? '140px' : '169px' }}
+                          value={curOutcome}
+                          searchable={false}
+                          onChange={setCurOutcome}
+                        />
+                      </Box>
+                    </Box>
+
                     <Box>{!downToXSM ? <StatusList /> : <StatusListMobile />}</Box>
                   </Box>
                 </Paper>

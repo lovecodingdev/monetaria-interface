@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Chip } from '@mui/material';
 import { Row } from '../../../../components/primitives/Row';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { StatusListDataValidator } from './type';
@@ -60,15 +60,42 @@ export const StatusListMobile = () => {
   return data.map((asset) => (
     <Box className="card-border" sx={{ padding: 4 }} key={asset.symbol}>
       <Box sx={{ paddingTop: '20px' }}>
-        <Row caption={<Trans>No</Trans>} align="flex-start" captionVariant="description" mb={2}>
-          <div>{asset.no}</div>
+        <Row
+          caption={
+            <Typography sx={{ color: '#252C32', fontWeight: 600, fontSize: '14px' }}>
+              {asset.name}
+            </Typography>
+          }
+          align="flex-start"
+          captionVariant="description"
+          mb={2}
+        >
+          <Box sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}>{asset.no}</Box>
         </Row>
-
-        <Row caption={<Trans>Name</Trans>} align="flex-start" captionVariant="description" mb={2}>
-          <Box>{asset.name}</Box>
-        </Row>
-        <Row caption={<Trans>Status</Trans>} align="flex-start" captionVariant="description" mb={2}>
-          <Box>{asset.status}</Box>
+        <Row
+          caption={
+            <Trans>
+              <Typography sx={{ color: '#6E7C87', fontWeight: 400, fontSize: '14px' }}>
+                Status
+              </Typography>
+            </Trans>
+          }
+          align="flex-start"
+          captionVariant="description"
+          mb={2}
+        >
+          <Box>
+            <Chip
+              label={asset.status}
+              sx={{
+                color: `${asset.color}`,
+                backgroundColor: `${asset.bgColor}`,
+                fontWeight: 600,
+                fontSize: '14px',
+                borderRadius: '6px',
+              }}
+            />
+          </Box>
         </Row>
       </Box>
     </Box>
