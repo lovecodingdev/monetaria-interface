@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/macro';
-import { Box, Paper, Typography, useMediaQuery, useTheme, Button, Tab, Tabs } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Box, Paper, Typography, useMediaQuery, useTheme, Button } from '@mui/material';
+import { useState } from 'react';
 import { usePermissions } from 'src/hooks/usePermissions';
 import { ConnectWalletPaper } from '../src/components/ConnectWalletPaper';
 import { ContentContainer } from '../src/components/ContentContainer';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Chip, Typography } from '@mui/material';
+import { Chip, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Table, Pagination } from 'rsuite';
 import { ApyEffectListDataValidator } from './type';
 import { textCenterEllipsis } from 'src/helpers/text-center-ellipsis';
@@ -35,6 +35,10 @@ const data: ApyEffectListDataValidator[] = [
 ];
 
 const ApyEffectList = () => {
+  const { breakpoints } = useTheme();
+  const xsm = useMediaQuery(breakpoints.up('xsm'));
+  const downToXSM = useMediaQuery(breakpoints.down('xsm'));
+
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();
   const [loading, setLoading] = useState(false);
@@ -97,7 +101,13 @@ const ApyEffectList = () => {
         cellBordered={false}
         rowHeight={60}
       >
-        <Column align="left" sortable verticalAlign="middle" fixed="left" width={402}>
+        <Column
+          align="left"
+          sortable
+          verticalAlign="middle"
+          fixed="left"
+          width={!downToXSM ? 402 : 162}
+        >
           <HeaderCell>Pool</HeaderCell>
           <Cell style={{ fontWeight: 402, fontSize: '14px', color: '#252C32' }}>
             {(rowData) => `cDAI(${textCenterEllipsis(rowData.address, 5, 6)})`}
