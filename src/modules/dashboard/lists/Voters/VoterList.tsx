@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Chip, Typography, Box } from '@mui/material';
+import { Chip, Typography, Box, useMediaQuery, useTheme } from '@mui/material';
 import { Table, Pagination } from 'rsuite';
 import { VoterListDataValidator } from './type';
 import { textCenterEllipsis } from 'src/helpers/text-center-ellipsis';
@@ -53,6 +53,10 @@ const data: VoterListDataValidator[] = [
 ];
 
 const VoterList = () => {
+  const { breakpoints } = useTheme();
+  const xsm = useMediaQuery(breakpoints.up('xsm'));
+  const downToXSM = useMediaQuery(breakpoints.down('xsm'));
+
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();
   const [loading, setLoading] = useState(false);
@@ -113,7 +117,13 @@ const VoterList = () => {
         cellBordered={false}
         rowHeight={60}
       >
-        <Column align="left" sortable verticalAlign="middle" fixed="left" width={316}>
+        <Column
+          align="left"
+          sortable
+          verticalAlign="middle"
+          fixed="left"
+          width={downToXSM ? 166 : 316}
+        >
           <HeaderCell>Voter</HeaderCell>
           <Cell style={{ fontWeight: 402, fontSize: '14px', color: '#252C32' }}>
             {(rowData) => `${textCenterEllipsis(rowData.voter, 5, 6)}`}

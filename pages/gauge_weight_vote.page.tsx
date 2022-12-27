@@ -536,34 +536,81 @@ export default function GaugeWeightVoting() {
                       <Box
                         sx={{
                           display: 'flex',
-                          flexDirection: 'row',
-                          gap: '60px',
+                          flexDirection: downToXSM ? 'column' : 'row',
+                          gap: downToXSM ? '30px' : '60px',
                           flexWrap: 'wrap',
                         }}
                       >
-                        <Box>
-                          <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
-                            Voted this week{' '}
-                          </Typography>
-                          <Typography sx={{ color: '#333333', fontWeight: 700, fontSize: '24px' }}>
-                            596,512.56 <span style={{ fontSize: '14px' }}>veCRV</span>
-                          </Typography>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: downToXSM ? 'row' : 'column',
+                            justifyContent: downToXSM ? 'space-between' : 'flex-start',
+                            alignItems: downToXSM ? 'center' : 'flex-start',
+                          }}
+                        >
+                          <Box>
+                            {' '}
+                            <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
+                              Voted this week{' '}
+                            </Typography>
+                          </Box>
+                          <Box>
+                            {' '}
+                            <Typography
+                              sx={{ color: '#333333', fontWeight: 700, fontSize: '24px' }}
+                            >
+                              596,512.56 <span style={{ fontSize: '14px' }}>veCRV</span>
+                            </Typography>
+                          </Box>
                         </Box>
-                        <Box>
-                          <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
-                            Total veCRV
-                          </Typography>
-                          <Typography sx={{ color: '#333333', fontWeight: 700, fontSize: '24px' }}>
-                            563,884,351.8
-                          </Typography>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: downToXSM ? 'row' : 'column',
+                            justifyContent: downToXSM ? 'space-between' : 'flex-start',
+
+                            alignItems: downToXSM ? 'center' : 'flex-start',
+                          }}
+                        >
+                          <Box>
+                            {' '}
+                            <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
+                              Total veCRV{' '}
+                            </Typography>
+                          </Box>
+                          <Box>
+                            {' '}
+                            <Typography
+                              sx={{ color: '#333333', fontWeight: 700, fontSize: '24px' }}
+                            >
+                              563,884,351.8
+                            </Typography>
+                          </Box>
                         </Box>
-                        <Box>
-                          <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
-                            veCRV supply voted
-                          </Typography>
-                          <Typography sx={{ color: '#333333', fontWeight: 700, fontSize: '24px' }}>
-                            0.11 %
-                          </Typography>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: downToXSM ? 'row' : 'column',
+                            justifyContent: downToXSM ? 'space-between' : 'flex-start',
+
+                            alignItems: downToXSM ? 'center' : 'flex-start',
+                          }}
+                        >
+                          <Box>
+                            {' '}
+                            <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
+                              veCRV supply voted{' '}
+                            </Typography>
+                          </Box>
+                          <Box>
+                            {' '}
+                            <Typography
+                              sx={{ color: '#333333', fontWeight: 700, fontSize: '24px' }}
+                            >
+                              0.11 %
+                            </Typography>
+                          </Box>
                         </Box>
                       </Box>
                       <Box>
