@@ -3,37 +3,53 @@ import { Box, Typography, useMediaQuery, useTheme, Button } from '@mui/material'
 import { Row } from 'src/components/primitives/Row';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { RewardType } from './RewardType';
+import { InputNumber } from 'rsuite';
 
 const data: RewardType[] = [
   {
     asset: 'ETH',
     symbol: 'eth',
     network: 'Ethereum',
-    vAPY: 5.45,
-    tAPR: 539,
-    balance: 2329,
-    profit_usd: 239,
-    claimable_tokens: 2345,
+    apy: 0.68,
+    apr: {
+      yield_farming: 7.8,
+      trading_fees: 5.97,
+      alpaca_rewards: 1.26,
+      borrowing_interest: -1.26,
+      total_apr: 13.09,
+      daily_apr: 0.0358,
+    },
+    leverage: 2,
   },
   {
     asset: 'ETH',
     symbol: 'eth',
     network: 'Ethereum',
-    vAPY: 5.45,
-    tAPR: 539,
-    balance: 2329,
-    profit_usd: 239,
-    claimable_tokens: 2345,
+    apy: 0.68,
+    apr: {
+      yield_farming: 7.8,
+      trading_fees: 5.97,
+      alpaca_rewards: 1.26,
+      borrowing_interest: -1.26,
+      total_apr: 13.09,
+      daily_apr: 0.0358,
+    },
+    leverage: 2,
   },
   {
     asset: 'ETH',
     symbol: 'eth',
     network: 'Ethereum',
-    vAPY: 5.45,
-    tAPR: 5329,
-    balance: 23219,
-    profit_usd: 2392,
-    claimable_tokens: 23345,
+    apy: 0.68,
+    apr: {
+      yield_farming: 7.8,
+      trading_fees: 5.97,
+      alpaca_rewards: 1.26,
+      borrowing_interest: -1.26,
+      total_apr: 13.09,
+      daily_apr: 0.0358,
+    },
+    leverage: 2,
   },
 ];
 
@@ -85,57 +101,164 @@ export const RewardMobileList = () => {
       </Box>
       <Box sx={{ paddingTop: '20px' }}>
         <Row
-          caption={<Trans>Base vAPY</Trans>}
+          caption={
+            <Trans>
+              <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                APY:
+              </Typography>
+            </Trans>
+          }
           align="flex-start"
           captionVariant="description"
           mb={2}
         >
-          <div>{asset.vAPY}%</div>
+          <div>
+            <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+              {asset.apy}%
+            </Typography>
+          </div>
         </Row>
 
         <Row
-          caption={<Trans>Rewards tAPR(CRV+ Incentives)</Trans>}
+          caption={
+            <Trans>
+              <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                Yield Farming:
+              </Typography>
+            </Trans>
+          }
           align="flex-start"
           captionVariant="description"
           mb={2}
         >
-          <Box>{asset.tAPR}$</Box>
+          <Box>
+            {' '}
+            <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+              {asset.apr.yield_farming}%
+            </Typography>
+          </Box>
         </Row>
         <Row
-          caption={<Trans>Balance</Trans>}
+          caption={
+            <Trans>
+              <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                Trading Fees:
+              </Typography>
+            </Trans>
+          }
           align="flex-start"
           captionVariant="description"
           mb={2}
         >
-          <Box>{asset.balance}$</Box>
+          <Box>
+            {' '}
+            <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+              {asset.apr.trading_fees}%
+            </Typography>
+          </Box>
         </Row>
         <Row
-          caption={<Trans>USD Profit</Trans>}
+          caption={
+            <Trans>
+              <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                ALPACA Rewards:
+              </Typography>
+            </Trans>
+          }
           align="flex-start"
           captionVariant="description"
           mb={2}
         >
-          <Box>{asset.profit_usd}$</Box>
+          <Box>
+            {' '}
+            <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+              {asset.apr.alpaca_rewards}%
+            </Typography>
+          </Box>
         </Row>
         <Row
-          caption={<Trans>Claimable Tokens</Trans>}
+          caption={
+            <Trans>
+              <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                Borrowing Interest:
+              </Typography>
+            </Trans>
+          }
           align="flex-start"
           captionVariant="description"
           mb={2}
         >
-          <Box>{asset.claimable_tokens}</Box>
+          <Box>
+            {' '}
+            <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+              {asset.apr.borrowing_interest}%
+            </Typography>
+          </Box>
         </Row>
+        <Row
+          caption={
+            <Trans>
+              <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                Total APR:
+              </Typography>
+            </Trans>
+          }
+          align="flex-start"
+          captionVariant="description"
+          mb={2}
+        >
+          <Box>
+            {' '}
+            <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+              {asset.apr.total_apr}%
+            </Typography>
+          </Box>
+        </Row>
+        <Row
+          caption={
+            <Trans>
+              <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                Daily APR:
+              </Typography>
+            </Trans>
+          }
+          align="flex-start"
+          captionVariant="description"
+          mb={2}
+        >
+          <Box>
+            {' '}
+            <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+              {asset.apr.daily_apr}%
+            </Typography>
+          </Box>
+        </Row>
+        <Box sx={{ padding: '10px 0' }}>
+          <label
+            style={{
+              display: 'block',
+              color: '#252C32',
+              fontWeight: 400,
+              fontSize: '14px',
+              paddingBottom: '5px',
+            }}
+          >
+            Leverage:
+          </label>
+          <InputNumber defaultValue={asset.leverage} style={{ width: '100%' }} min={0} />
+        </Box>
         <Button
           fullWidth
           sx={{
-            backgroundColor: 'rgba(21, 126, 255, 0.05)',
+            backgroundColor: '#074592',
             border: '1px solid rgba(21, 126, 255, 0.2)',
-            color: '#074592',
+            color: '#FFF',
             fontWeight: 600,
             fontSize: '16px',
           }}
+          variant="contained"
         >
-          Claim
+          Farm
         </Button>
       </Box>
     </Box>

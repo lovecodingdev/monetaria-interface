@@ -7,6 +7,7 @@ import { Input, InputGroup } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
 import 'rsuite/dist/rsuite.min.css';
 import { RewardTable } from 'src/modules/dashboard/lists/ActivePoolList/RewardTable';
+import { RewardMobileList } from 'src/modules/dashboard/lists/ActivePoolList/RewardMobileList';
 
 interface dex_type {
   img: string;
@@ -207,9 +208,7 @@ export default function Farm() {
                 ))}
             </Box>
           </Box>
-          <Box>
-            <RewardTable />
-          </Box>
+          <Box>{!downToXSM ? <RewardTable /> : <RewardMobileList />}</Box>
         </Box>
       </Paper>
     </Container>
