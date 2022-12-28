@@ -191,7 +191,7 @@ export const RewardTable = () => {
         </Cell>
       </Column>
 
-      <Column width={150} align="right" sortable verticalAlign="top">
+      <Column width={278} align="right" sortable verticalAlign="top">
         <HeaderCell>Leverage</HeaderCell>
         <Cell>
           {(rowData) => (
@@ -202,7 +202,7 @@ export const RewardTable = () => {
         </Cell>
       </Column>
 
-      <Column width={252} align="right" verticalAlign="top" fixed="right">
+      <Column width={284} align="right" verticalAlign="top" fixed="right">
         <HeaderCell>Actions</HeaderCell>
         <Cell>
           {(rowData) => (
