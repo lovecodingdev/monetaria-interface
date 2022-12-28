@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { MainLayout } from '../src/layouts/MainLayout';
 import borderGradient from 'src/layouts/borderGradient';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import {  Input, InputGroup } from 'rsuite';
+import { Input, InputGroup } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
 import 'rsuite/dist/rsuite.min.css';
 import { RewardTable } from 'src/modules/dashboard/lists/ActivePoolList/RewardTable';
