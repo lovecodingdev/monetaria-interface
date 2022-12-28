@@ -2,13 +2,74 @@ import { Box, Container, Paper, Typography, useMediaQuery, useTheme, Button } fr
 import { useEffect, useState } from 'react';
 import { MainLayout } from '../src/layouts/MainLayout';
 import borderGradient from 'src/layouts/borderGradient';
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { InputNumber, Input, InputGroup } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
 import 'rsuite/dist/rsuite.min.css';
 
-import BISWAP from '/public/icons/swap/bsw.svg';
-import PANCAKESWAP from '/public/icons/swap/pancakeswap.svg';
-import MDEX from '/public/icons/swap/mdex.svg';
+interface dex_type {
+  img: string;
+  title: string;
+}
+
+interface token_type {
+  name: string;
+  symbol: string;
+}
+
+const arrDex: dex_type[] = [
+  {
+    img: '/icons/swap/bsw.svg',
+    title: 'Biswap',
+  },
+  {
+    img: '/icons/swap/pancakeswap.svg',
+    title: 'Pancakeswap',
+  },
+  {
+    img: '/icons/swap/mdex.svg',
+    title: 'MDEX',
+  },
+];
+
+const arrTokens: token_type[] = [
+  {
+    name: 'ALPACA',
+    symbol: 'alpaca',
+  },
+  {
+    name: 'CAKE',
+    symbol: 'cake',
+  },
+  {
+    name: 'BNB',
+    symbol: 'bnb',
+  },
+  {
+    name: 'BUSD',
+    symbol: 'busd',
+  },
+  {
+    name: 'USDT',
+    symbol: 'usdt',
+  },
+  {
+    name: 'USDC',
+    symbol: 'usdc',
+  },
+  {
+    name: 'TUSD',
+    symbol: 'tusd',
+  },
+  {
+    name: 'BTCB',
+    symbol: 'btc',
+  },
+  {
+    name: 'ETH',
+    symbol: 'eth',
+  },
+];
 
 export default function Farm() {
   const { breakpoints } = useTheme();
@@ -77,53 +138,72 @@ export default function Farm() {
                   All
                 </Button>
               </Box>
+              {arrDex &&
+                arrDex.map((dex, idx) => (
+                  <Box key={idx}>
+                    <Button
+                      sx={{
+                        backgroundColor: '#F6F8F9',
+                        color: '#000',
+                        fontWeight: 700,
+                        fontSize: '12px',
+                        width: '144px',
+                      }}
+                      variant="outlined"
+                      startIcon={<img src={dex.img} />}
+                    >
+                      {dex.title}
+                    </Button>
+                  </Box>
+                ))}
+            </Box>
+          </Box>
+          <Box>
+            <label
+              style={{
+                display: 'block',
+                color: '#252C32',
+                fontWeight: 400,
+                fontSize: '14px',
+                paddingBottom: '5px',
+              }}
+            >
+              Paired assets:
+            </label>
+            <Box sx={{ display: 'flex', flexDirection: 'row', gap: '4px', flexWrap: 'wrap' }}>
               <Box>
                 <Button
                   sx={{
-                    backgroundColor: '#F6F8F9',
-                    color: '#000',
+                    backgroundColor: '#074592',
+                    color: '#FFF',
                     fontWeight: 700,
                     fontSize: '12px',
-                    width: '144px',
                   }}
-                  startIcon={<BISWAP />}
-                  variant="outlined"
+                  variant="contained"
                 >
-                  Biswap
+                  All
                 </Button>
               </Box>
-              <Box>
-                {' '}
-                <Button
-                  sx={{
-                    backgroundColor: '#F6F8F9',
-                    color: '#000',
-                    fontWeight: 700,
-                    fontSize: '12px',
-                    width: '144px',
-                  }}
-                  startIcon={<PANCAKESWAP />}
-                  variant="outlined"
-                >
-                  PancakeSwap
-                </Button>
-              </Box>
-              <Box>
-                {' '}
-                <Button
-                  sx={{
-                    backgroundColor: '#F6F8F9',
-                    color: '#000',
-                    fontWeight: 700,
-                    fontSize: '12px',
-                    width: '144px',
-                  }}
-                  startIcon={<MDEX />}
-                  variant="outlined"
-                >
-                  MDEX
-                </Button>
-              </Box>
+              {arrTokens &&
+                arrTokens.map((token, idx) => (
+                  <Box key={idx}>
+                    <Button
+                      sx={{
+                        backgroundColor: '#F6F8F9',
+                        color: '#000',
+                        fontWeight: 700,
+                        fontSize: '12px',
+                        width: '94px',
+                      }}
+                      variant="outlined"
+                      startIcon={
+                        <TokenIcon symbol={token.symbol} sx={{ fontSize: '24px', mr: 1 }} />
+                      }
+                    >
+                      {token.name}
+                    </Button>
+                  </Box>
+                ))}
             </Box>
           </Box>
         </Box>
