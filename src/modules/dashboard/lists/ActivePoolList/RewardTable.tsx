@@ -223,6 +223,7 @@ export const RewardTable = () => {
                     fontWeight: 600,
                     fontSize: '16px',
                     marginTop: '-4px',
+                    width: '110px',
                   }}
                   variant="contained"
                 >
