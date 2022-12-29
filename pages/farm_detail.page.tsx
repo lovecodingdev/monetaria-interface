@@ -296,7 +296,7 @@ export default function FarmDetail() {
                           fontWeight: 500,
                           fontSize: '18px',
                           color: '#D5DADD',
-                          width: downToXSM ? '120px' : '100%',
+                          width: downToXSM ? '110px' : '100%',
                         }}
                       />
                     </Box>
