@@ -542,22 +542,39 @@ export default function FarmDetail() {
                       >
                         Farm 2.0x
                       </Button>
-                      <Button
-                        sx={{
-                          flex: 1,
-                          backgroundColor: '#074592',
-                          border: '1px solid rgba(21, 126, 255, 0.2)',
-                          color: '#F6F8F9',
-                          fontWeight: 600,
-                          fontSize: '14px',
-                        }}
-                        variant="contained"
-                      >
-                        Simulator
-                      </Button>
+                      {!downToXSM && (
+                        <Button
+                          sx={{
+                            flex: 1,
+                            backgroundColor: '#074592',
+                            border: '1px solid rgba(21, 126, 255, 0.2)',
+                            color: '#F6F8F9',
+                            fontWeight: 600,
+                            fontSize: '14px',
+                          }}
+                          variant="contained"
+                        >
+                          Simulator
+                        </Button>
+                      )}
                     </Box>
                   </Box>
                 </Box>
+                {downToXSM && (
+                  <Button
+                    sx={{
+                      flex: 1,
+                      backgroundColor: '#074592',
+                      border: '1px solid rgba(21, 126, 255, 0.2)',
+                      color: '#F6F8F9',
+                      fontWeight: 600,
+                      fontSize: '14px',
+                    }}
+                    variant="contained"
+                  >
+                    Simulator
+                  </Button>
+                )}
               </Box>
             </Paper>
           </Box>
