@@ -646,6 +646,253 @@ export default function FarmDetail() {
               </Box>
             </Paper>
           </Box>
+          <Box>
+            <Paper
+              sx={{
+                bgcolor: 'background.header',
+                padding: { xs: '24px 12px', sm: '24px 22px' },
+                mt: { xs: '8px', md: '12px' },
+                color: '#F1F1F3',
+                ...borderGradient,
+              }}
+            >
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '11px',
+                    border: '1px solid #d4e6f3',
+                    padding: '10px',
+                    borderRadius: '8px',
+                  }}
+                >
+                  {' '}
+                  <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '14px' }}>
+                    Overview
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                      Yield Farm APR
+                    </Typography>
+                    <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                      3.74% → 7.49%
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                      Trading Fees APR(7-day avg.)
+                    </Typography>
+                    <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                      3.74% → 7.49%
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                      MNT Rewards APR
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', gap: '2px' }}>
+                      <TokenIcon symbol={'mnt'} sx={{ fontSize: '16px', mr: 1 }} />
+                      <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                        1.25%
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                      Borrowing Interest APR
+                    </Typography>
+                    <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                      -1.25%
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                      Total APR
+                    </Typography>
+                    <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                      3.74% → 7.49%
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography sx={{ color: '#252C32', fontWeight: 400, fontSize: '10px' }}>
+                      (Yield Farming + Trading Fees + ALPACA Rewards – Borrowing Interest)
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                      Total APY
+                    </Typography>
+                    <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                      3.74% → 7.49%
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                      Neutral
+                    </Typography>
+                    <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                      0.00 BUSD
+                    </Typography>
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '11px',
+                    border: '1px solid #d4e6f3',
+                    padding: '10px',
+                    borderRadius: '8px',
+                  }}
+                >
+                  {' '}
+                  <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '14px' }}>
+                    Summary
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                      Assets Supplied(Equity Value before fees)
+                    </Typography>
+                    <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                      0 MNT+ 0 BUSD
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                      Assets Borrowed(Debt Value)
+                    </Typography>
+                    <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                      0.00 MNT
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                      Assets Borrowed(Debt Value)
+                    </Typography>
+                    <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                      0.00%
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                      Total Assets inPosition Value
+                    </Typography>
+                    <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                      0.00 ALPACA+ 0.00 BUSD
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                      Share of Pool (Alpaca Finance)
+                    </Typography>
+                    <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                      0.00% of 3.21M
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                      Share of Pool (PancakeSwap)
+                    </Typography>
+                    <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                      0.00% of 3.21M
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+            </Paper>{' '}
+          </Box>
         </Box>
       </Box>
     </Container>
