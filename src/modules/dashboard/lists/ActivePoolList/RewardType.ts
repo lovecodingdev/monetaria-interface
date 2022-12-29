@@ -12,4 +12,5 @@ export interface RewardType {
     daily_apr: number;
   };
   leverage: number;
+  isShowMore: boolean;
 }

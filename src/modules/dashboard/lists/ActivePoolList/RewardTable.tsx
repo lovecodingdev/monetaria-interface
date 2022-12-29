@@ -21,6 +21,7 @@ const data: RewardType[] = [
       daily_apr: 0.0358,
     },
     leverage: 2,
+    isShowMore: false,
   },
   {
     asset: 'ETH',
@@ -36,6 +37,7 @@ const data: RewardType[] = [
       daily_apr: 0.0358,
     },
     leverage: 2,
+    isShowMore: false,
   },
   {
     asset: 'ETH',
@@ -51,6 +53,7 @@ const data: RewardType[] = [
       daily_apr: 0.0358,
     },
     leverage: 2,
+    isShowMore: false,
   },
 ];
 

@@ -24,11 +24,12 @@ const data: RewardType[] = [
       daily_apr: 0.0358,
     },
     leverage: 2,
+    isShowMore: false,
   },
   {
-    asset: 'ETH',
-    symbol: 'eth',
-    network: 'Ethereum',
+    asset: 'BNB',
+    symbol: 'bnb',
+    network: 'Binance Smart Chain',
     apy: 0.68,
     apr: {
       yield_farming: 7.8,
@@ -39,11 +40,12 @@ const data: RewardType[] = [
       daily_apr: 0.0358,
     },
     leverage: 2,
+    isShowMore: false,
   },
   {
-    asset: 'ETH',
-    symbol: 'eth',
-    network: 'Ethereum',
+    asset: 'Matic',
+    symbol: 'matic',
+    network: 'Polygon',
     apy: 0.68,
     apr: {
       yield_farming: 7.8,
@@ -54,14 +56,27 @@ const data: RewardType[] = [
       daily_apr: 0.0358,
     },
     leverage: 2,
+    isShowMore: false,
   },
 ];
 
 export const RewardMobileList = () => {
-  const [isShowMore, setIsShowMore] = useState<boolean>(false);
+  const [farmData, setFarmData] = useState<RewardType[]>(data);
 
-  return data.map((asset) => (
-    <Box className="card-border" sx={{ my: 4, padding: 4 }} key={asset.symbol}>
+  const updateVisibleState = (_symbol) => {
+    const tempArr = farmData;
+
+    tempArr.forEach((arr) => {
+      if (arr.symbol == _symbol) {
+        arr.isShowMore = !arr.isShowMore;
+      }
+    });
+    console.log(tempArr);
+    setFarmData([...tempArr]);
+  };
+
+  return farmData.map((asset, idx) => (
+    <Box className="card-border" sx={{ my: 4, padding: 4 }} key={idx}>
       <Box
         sx={{
           position: 'relative',
@@ -160,7 +175,7 @@ export const RewardMobileList = () => {
             <SignalCellularAltIcon sx={{ color: '#074592' }} />
           </Button>
         </Box>
-        {!isShowMore && (
+        {!asset.isShowMore && (
           <Button
             sx={{
               color: '#252C32',
@@ -171,13 +186,13 @@ export const RewardMobileList = () => {
               boxShadow: '1px 1px grey',
             }}
             fullWidth
-            onClick={() => setIsShowMore(true)}
+            onClick={() => updateVisibleState(asset.symbol)}
           >
             <KeyboardArrowDownIcon />
           </Button>
         )}
 
-        {isShowMore && (
+        {asset.isShowMore && (
           <>
             <Row
               caption={
@@ -317,7 +332,7 @@ export const RewardMobileList = () => {
                 boxShadow: '1px 1px grey',
               }}
               fullWidth
-              onClick={() => setIsShowMore(false)}
+              onClick={() => updateVisibleState(asset.symbol)}
             >
               <KeyboardArrowUpIcon />
             </Button>
