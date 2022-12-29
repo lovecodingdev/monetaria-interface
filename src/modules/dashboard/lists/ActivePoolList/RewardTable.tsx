@@ -3,6 +3,7 @@ import { Box, Button } from '@mui/material';
 import { Table, InputNumber } from 'rsuite';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { RewardType } from './RewardType';
+import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 
 const { Column, HeaderCell, Cell } = Table;
 const data: RewardType[] = [
@@ -214,7 +215,19 @@ export const RewardTable = () => {
                 alignItems: 'center',
               }}
             >
-              <Box>
+              <Box sx={{ display: 'flex', flexDirection: 'row', gap: '7.5px' }}>
+                <Button
+                  sx={{
+                    backgroundColor: 'rgba(21, 126, 255, 0.05)',
+                    border: '1px solid rgba(21, 126, 255, 0.2)',
+                    color: '#FFFFFF',
+                    fontWeight: 600,
+                    fontSize: '16px',
+                    marginTop: '-4px',
+                  }}
+                >
+                  <SignalCellularAltIcon sx={{ color: '#074592' }} />
+                </Button>
                 <Button
                   sx={{
                     backgroundColor: '#074592',

@@ -99,7 +99,13 @@ export default function Farm() {
         }}
       >
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-          <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: { xs: 'column', sm: 'row' },
+              justifyContent: { xs: 'flex-start', sm: 'space-between' },
+            }}
+          >
             <Box>
               <Typography sx={{ fontWeight: 500, fontSize: '20px', color: '#080F26' }}>
                 Active Pools

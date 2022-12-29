@@ -1,9 +1,13 @@
+import React, { useState } from 'react';
 import { Trans } from '@lingui/macro';
 import { Box, Typography, useMediaQuery, useTheme, Button } from '@mui/material';
 import { Row } from 'src/components/primitives/Row';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { RewardType } from './RewardType';
 import { InputNumber } from 'rsuite';
+import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const data: RewardType[] = [
   {
@@ -54,6 +58,8 @@ const data: RewardType[] = [
 ];
 
 export const RewardMobileList = () => {
+  const [isShowMore, setIsShowMore] = useState<boolean>(false);
+
   return data.map((asset) => (
     <Box className="card-border" sx={{ my: 4, padding: 4 }} key={asset.symbol}>
       <Box
@@ -119,147 +125,204 @@ export const RewardMobileList = () => {
           </div>
         </Row>
 
-        <Row
-          caption={
-            <Trans>
-              <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                Yield Farming:
-              </Typography>
-            </Trans>
-          }
-          align="flex-start"
-          captionVariant="description"
-          mb={2}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            gap: '8px',
+            alignItems: 'center',
+            paddingBottom: '10px',
+          }}
         >
-          <Box>
-            {' '}
-            <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-              {asset.apr.yield_farming}%
-            </Typography>
-          </Box>
-        </Row>
-        <Row
-          caption={
-            <Trans>
-              <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                Trading Fees:
-              </Typography>
-            </Trans>
-          }
-          align="flex-start"
-          captionVariant="description"
-          mb={2}
-        >
-          <Box>
-            {' '}
-            <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-              {asset.apr.trading_fees}%
-            </Typography>
-          </Box>
-        </Row>
-        <Row
-          caption={
-            <Trans>
-              <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                ALPACA Rewards:
-              </Typography>
-            </Trans>
-          }
-          align="flex-start"
-          captionVariant="description"
-          mb={2}
-        >
-          <Box>
-            {' '}
-            <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-              {asset.apr.alpaca_rewards}%
-            </Typography>
-          </Box>
-        </Row>
-        <Row
-          caption={
-            <Trans>
-              <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                Borrowing Interest:
-              </Typography>
-            </Trans>
-          }
-          align="flex-start"
-          captionVariant="description"
-          mb={2}
-        >
-          <Box>
-            {' '}
-            <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-              {asset.apr.borrowing_interest}%
-            </Typography>
-          </Box>
-        </Row>
-        <Row
-          caption={
-            <Trans>
-              <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                Total APR:
-              </Typography>
-            </Trans>
-          }
-          align="flex-start"
-          captionVariant="description"
-          mb={2}
-        >
-          <Box>
-            {' '}
-            <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-              {asset.apr.total_apr}%
-            </Typography>
-          </Box>
-        </Row>
-        <Row
-          caption={
-            <Trans>
-              <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                Daily APR:
-              </Typography>
-            </Trans>
-          }
-          align="flex-start"
-          captionVariant="description"
-          mb={2}
-        >
-          <Box>
-            {' '}
-            <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-              {asset.apr.daily_apr}%
-            </Typography>
-          </Box>
-        </Row>
-        <Box sx={{ padding: '10px 0' }}>
-          <label
-            style={{
-              display: 'block',
-              color: '#252C32',
-              fontWeight: 400,
-              fontSize: '14px',
-              paddingBottom: '5px',
+          <Button
+            fullWidth
+            sx={{
+              backgroundColor: '#074592',
+              border: '1px solid rgba(21, 126, 255, 0.2)',
+              color: '#FFF',
+              fontWeight: 600,
+              fontSize: '16px',
+            }}
+            variant="contained"
+          >
+            Farm
+          </Button>
+          <Button
+            sx={{
+              backgroundColor: 'rgba(21, 126, 255, 0.05)',
+              border: '1px solid rgba(21, 126, 255, 0.2)',
+              color: '#FFFFFF',
+              fontWeight: 600,
+              fontSize: '16px',
             }}
           >
-            Leverage:
-          </label>
-          <InputNumber defaultValue={asset.leverage} style={{ width: '100%' }} min={0} />
+            <SignalCellularAltIcon sx={{ color: '#074592' }} />
+          </Button>
         </Box>
-        <Button
-          fullWidth
-          sx={{
-            backgroundColor: '#074592',
-            border: '1px solid rgba(21, 126, 255, 0.2)',
-            color: '#FFF',
-            fontWeight: 600,
-            fontSize: '16px',
-          }}
-          variant="contained"
-        >
-          Farm
-        </Button>
+        {!isShowMore && (
+          <Button
+            sx={{
+              color: '#252C32',
+              backgroundColor: 'white',
+              fontSize: '16px',
+              fontWeight: 600,
+              marginTop: '10px',
+              boxShadow: '1px 1px grey',
+            }}
+            fullWidth
+            onClick={() => setIsShowMore(true)}
+          >
+            <KeyboardArrowDownIcon />
+          </Button>
+        )}
+
+        {isShowMore && (
+          <>
+            <Row
+              caption={
+                <Trans>
+                  <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                    Yield Farming:
+                  </Typography>
+                </Trans>
+              }
+              align="flex-start"
+              captionVariant="description"
+              mb={2}
+            >
+              <Box>
+                {' '}
+                <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+                  {asset.apr.yield_farming}%
+                </Typography>
+              </Box>
+            </Row>
+            <Row
+              caption={
+                <Trans>
+                  <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                    Trading Fees:
+                  </Typography>
+                </Trans>
+              }
+              align="flex-start"
+              captionVariant="description"
+              mb={2}
+            >
+              <Box>
+                {' '}
+                <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+                  {asset.apr.trading_fees}%
+                </Typography>
+              </Box>
+            </Row>
+            <Row
+              caption={
+                <Trans>
+                  <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                    ALPACA Rewards:
+                  </Typography>
+                </Trans>
+              }
+              align="flex-start"
+              captionVariant="description"
+              mb={2}
+            >
+              <Box>
+                {' '}
+                <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+                  {asset.apr.alpaca_rewards}%
+                </Typography>
+              </Box>
+            </Row>
+            <Row
+              caption={
+                <Trans>
+                  <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                    Borrowing Interest:
+                  </Typography>
+                </Trans>
+              }
+              align="flex-start"
+              captionVariant="description"
+              mb={2}
+            >
+              <Box>
+                {' '}
+                <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+                  {asset.apr.borrowing_interest}%
+                </Typography>
+              </Box>
+            </Row>
+            <Row
+              caption={
+                <Trans>
+                  <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                    Total APR:
+                  </Typography>
+                </Trans>
+              }
+              align="flex-start"
+              captionVariant="description"
+              mb={2}
+            >
+              <Box>
+                {' '}
+                <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+                  {asset.apr.total_apr}%
+                </Typography>
+              </Box>
+            </Row>
+            <Row
+              caption={
+                <Trans>
+                  <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
+                    Daily APR:
+                  </Typography>
+                </Trans>
+              }
+              align="flex-start"
+              captionVariant="description"
+              mb={2}
+            >
+              <Box>
+                {' '}
+                <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
+                  {asset.apr.daily_apr}%
+                </Typography>
+              </Box>
+            </Row>
+            <Box sx={{ padding: '10px 0' }}>
+              <label
+                style={{
+                  display: 'block',
+                  color: '#252C32',
+                  fontWeight: 400,
+                  fontSize: '14px',
+                  paddingBottom: '5px',
+                }}
+              >
+                Leverage:
+              </label>
+              <InputNumber defaultValue={asset.leverage} style={{ width: '100%' }} min={0} />
+            </Box>
+            <Button
+              sx={{
+                color: '#252C32',
+                backgroundColor: 'white',
+                fontSize: '16px',
+                fontWeight: 600,
+                marginTop: '10px',
+                boxShadow: '1px 1px grey',
+              }}
+              fullWidth
+              onClick={() => setIsShowMore(false)}
+            >
+              <KeyboardArrowUpIcon />
+            </Button>
+          </>
+        )}
       </Box>
     </Box>
   ));
