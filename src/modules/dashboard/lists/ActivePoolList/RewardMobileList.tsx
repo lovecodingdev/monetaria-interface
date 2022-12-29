@@ -71,7 +71,6 @@ export const RewardMobileList = () => {
         arr.isShowMore = !arr.isShowMore;
       }
     });
-    console.log(tempArr);
     setFarmData([...tempArr]);
   };
 
