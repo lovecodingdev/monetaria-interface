@@ -4,6 +4,7 @@ import { Table, InputNumber } from 'rsuite';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { RewardType } from './RewardType';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
+import { useRouter } from 'next/router';
 
 const { Column, HeaderCell, Cell } = Table;
 const data: RewardType[] = [
@@ -58,6 +59,7 @@ const data: RewardType[] = [
 ];
 
 export const RewardTable = () => {
+  const router = useRouter();
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();
   const [loading, setLoading] = useState(false);
@@ -102,6 +104,7 @@ export const RewardTable = () => {
       loading={loading}
       cellBordered={false}
       rowHeight={158}
+      onRowClick={(rowData) => router.push('/farm_detail/')}
     >
       <Column width={156} align="center" fixed sortable verticalAlign="top">
         <HeaderCell>Pool</HeaderCell>
