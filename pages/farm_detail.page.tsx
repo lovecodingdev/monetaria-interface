@@ -5,62 +5,19 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-  IconButton,
   Button,
+  IconButton,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { MainLayout } from '../src/layouts/MainLayout';
 import borderGradient from 'src/layouts/borderGradient';
-import { InputGroup, Input } from 'rsuite';
+import { InputGroup, Input, SelectPicker } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
-import { BaseNetworkConfig } from 'src/ui-config/networksConfig';
-import {
-  availableMarkets,
-  CustomMarket,
-  MarketDataType,
-  marketsData,
-  networkConfigs,
-} from 'src/utils/marketsAndNetworksConfig';
 import Slider from '@mui/material/Slider';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import SettingsIcon from '@mui/icons-material/Settings';
 import MntShiba from '/public/icons/tokens/mnt-shiba.svg';
-
-export const getMarketInfoById = (marketId: CustomMarket) => {
-  const market: MarketDataType = marketsData[marketId as CustomMarket];
-  const network: BaseNetworkConfig = networkConfigs[market.chainId];
-
-  return { market, network };
-};
-
-const getMarketHelpData = (marketName: string) => {
-  const testChains = ['Görli', 'Ropsten', 'Mumbai', 'Fuji', 'Testnet', 'Kovan', 'Rinkeby'];
-  const arrayName = marketName.split(' ');
-  const testChainName = arrayName.filter((el) => testChains.indexOf(el) > -1);
-  const marketTitle = arrayName.filter((el) => !testChainName.includes(el)).join(' ');
-  return {
-    name: marketTitle,
-    testChainName: testChainName[0],
-  };
-};
-
-interface Network {
-  label: string;
-  value: string;
-  img: string;
-}
-
-const all_networks: Network[] = [];
-
-availableMarkets.map((marketId: CustomMarket) => {
-  const { market, network } = getMarketInfoById(marketId);
-  const marketNaming = getMarketHelpData(market.marketTitle);
-  all_networks.push({
-    label: `${marketNaming.name}`,
-    value: market.marketTitle,
-    img: network.networkLogoPath,
-  });
-});
 
 const marks = [
   {
@@ -77,6 +34,17 @@ const marks = [
   },
 ];
 
+const coinList = [
+  {
+    label: 'eth',
+    value: '0xc7CB9A26DD5DFd155864C93C0eF6Af73D0e600b1',
+  },
+  {
+    label: 'btc',
+    value: '0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e600b1',
+  },
+];
+
 export default function FarmDetail() {
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.up('xsm'));
@@ -84,6 +52,7 @@ export default function FarmDetail() {
   const [amtOfMnt, setAmtOfMnt] = useState(0);
   const [amtOfCoin, setAmtOfCoin] = useState(0);
   const [times, setTimes] = useState(1.5);
+  const [curCoin, setCurCoin] = useState('0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e600b1');
 
   const valuetext = (value: number) => {
     setTimes(value);
@@ -130,7 +99,7 @@ export default function FarmDetail() {
           <Paper
             sx={{
               bgcolor: 'background.header',
-              padding: { xs: '24px 8px', sm: '24px 22px' },
+              padding: { xs: '24px 12px', sm: '24px 22px' },
               mt: { xs: '8px', md: '12px' },
               color: '#F1F1F3',
               ...borderGradient,
@@ -436,6 +405,120 @@ export default function FarmDetail() {
                       <Input value={times} />
                       <InputGroup.Addon>X</InputGroup.Addon>
                     </InputGroup>
+                  </Box>
+                </Box>
+              </Box>
+              <Box>
+                <label
+                  style={{
+                    display: 'block',
+                    color: '#252C32',
+                    fontWeight: 400,
+                    fontSize: '14px',
+                    paddingBottom: '5px',
+                  }}
+                >
+                  Which asset would you like to borrow?
+                </label>
+                <Box>
+                  <SelectPicker
+                    data={coinList}
+                    style={{ width: '100%' }}
+                    value={curCoin}
+                    onChange={setCurCoin}
+                    placeholder="Select a coin"
+                    searchable={false}
+                    renderMenuItem={(label, item) => {
+                      return (
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            gap: 2,
+                            alignItems: 'center',
+                            fontFamily: 'Gilroy, Arial !important',
+                          }}
+                        >
+                          <Box>
+                            {' '}
+                            <TokenIcon symbol={label} sx={{ fontSize: '24px', mr: 1 }} />{' '}
+                          </Box>
+                          <Box>
+                            {' '}
+                            <span style={{ fontWeight: 500, fontSize: '18px', color: '#5B6871' }}>
+                              {label.toUpperCase()}
+                            </span>
+                          </Box>
+                        </Box>
+                      );
+                    }}
+                    renderValue={(value, item) => {
+                      return (
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            gap: 2,
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Box>
+                            {' '}
+                            <TokenIcon symbol={item.label} sx={{ fontSize: '24px', mr: 1 }} />{' '}
+                          </Box>
+                          <Box>
+                            {' '}
+                            <span style={{ fontWeight: 500, fontSize: '18px', color: '#5B6871' }}>
+                              {item.label.toUpperCase()}
+                            </span>
+                          </Box>
+                        </Box>
+                      );
+                    }}
+                  />
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                <Box sx={{ flex: 1 }}>
+                  <IconButton>
+                    <SettingsIcon sx={{ color: '#023997' }} />
+                  </IconButton>
+                </Box>
+                <Box sx={{ flex: 3 }}>
+                  {' '}
+                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '12px' }}>
+                    <Button
+                      sx={{
+                        flex: 1,
+                        backgroundColor: 'rgba(21, 126, 255, 0.05)',
+                        border: '1px solid rgba(21, 126, 255, 0.2)',
+                        color: '#023997',
+                        fontWeight: 600,
+                        fontSize: '14px',
+                      }}
+                    >
+                      Farm 2.0x
+                    </Button>
+                    <Button
+                      sx={{
+                        flex: 1,
+                        backgroundColor: '#074592',
+                        border: '1px solid rgba(21, 126, 255, 0.2)',
+                        color: '#F6F8F9',
+                        fontWeight: 600,
+                        fontSize: '14px',
+                      }}
+                      variant="contained"
+                    >
+                      Simulator
+                    </Button>
                   </Box>
                 </Box>
               </Box>
