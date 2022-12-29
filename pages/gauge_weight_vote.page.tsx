@@ -367,9 +367,29 @@ export default function GaugeWeightVoting() {
                               paddingBottom: '5px',
                             }}
                           >
-                            Vote Weight %(of your voting power):
+                            Vote Weight :
                           </label>
-                          <InputNumber value={voteWeight} onChange={setVoteWeight} min={0} />
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                              justifyContent: 'flex-start',
+                              gap: '16px',
+                              alignItems: 'end',
+                            }}
+                          >
+                            <Box>
+                              <InputNumber
+                                value={voteWeight}
+                                onChange={setVoteWeight}
+                                min={0}
+                                style={{ width: downToXSM ? '108px' : '372px' }}
+                              />
+                            </Box>
+                            <Box sx={{ color: 'black', fontWeight: 400, fontSize: '14px' }}>
+                              %(of your voting power)
+                            </Box>
+                          </Box>
                         </Box>
                         <Box
                           sx={{
@@ -460,20 +480,24 @@ export default function GaugeWeightVoting() {
                             </Box>
                           </Box>
                         </Box>
-                        <Button
-                          sx={{
-                            color: '#F6F8F9',
-                            fontSize: '14px',
-                            fontWeight: 600,
-                            backgroundColor: '#023997',
-                            '&.hover': {
-                              color: '#023997',
-                            },
-                          }}
-                          variant="contained"
-                        >
-                          Submit
-                        </Button>
+                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                          {' '}
+                          <Button
+                            sx={{
+                              color: '#F6F8F9',
+                              fontSize: '14px',
+                              fontWeight: 600,
+                              width: '299px',
+                              backgroundColor: '#023997',
+                              '&.hover': {
+                                color: '#023997',
+                              },
+                            }}
+                            variant="contained"
+                          >
+                            Submit
+                          </Button>
+                        </Box>
                       </Box>
                     </Paper>
                   </Box>
