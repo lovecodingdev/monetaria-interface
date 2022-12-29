@@ -822,6 +822,7 @@ export default function FarmDetail() {
                       flexDirection: 'row',
                       justifyContent: 'space-between',
                       alignItems: 'center',
+                      gap: '5px',
                     }}
                   >
                     <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
@@ -867,6 +868,7 @@ export default function FarmDetail() {
                       flexDirection: 'row',
                       justifyContent: 'space-between',
                       alignItems: 'center',
+                      gap: '5px',
                     }}
                   >
                     <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
