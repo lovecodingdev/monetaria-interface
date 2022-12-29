@@ -13,9 +13,6 @@ import { MainLayout } from '../src/layouts/MainLayout';
 import borderGradient from 'src/layouts/borderGradient';
 import { SelectPicker, InputNumber, ButtonToolbar, ButtonGroup } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
-import SyncIcon from '@mui/icons-material/Sync';
-import Logo from '/public/logo_green.svg';
-import Cup from '/public/icons/cup.svg';
 import { BaseNetworkConfig } from 'src/ui-config/networksConfig';
 import {
   availableMarkets,
@@ -24,6 +21,7 @@ import {
   marketsData,
   networkConfigs,
 } from 'src/utils/marketsAndNetworksConfig';
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import MntShiba from '/public/icons/tokens/mnt-shiba.svg';
 
@@ -67,18 +65,7 @@ export default function FarmDetail() {
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.up('xsm'));
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
-  const [approveAmt, setApproveAmt] = useState(12.4);
-  const [networks, setNetworks] = useState([]);
-  const [firstNetwork, setFirstNetwork] = useState('Ethereum');
-  const [secondNetwork, setSecondNetwork] = useState('Polygon');
-
-  const exchangeNetwork = () => {
-    const first = firstNetwork;
-    const second = secondNetwork;
-
-    setFirstNetwork(second);
-    setSecondNetwork(first);
-  };
+  const [amtOfMnt, setAmtOfMnt] = useState(0);
 
   return (
     <Container
@@ -120,13 +107,130 @@ export default function FarmDetail() {
           <Paper
             sx={{
               bgcolor: 'background.header',
-              padding: { xs: '24px 8px', sm: '24px' },
+              padding: { xs: '24px 8px', sm: '24px 22px' },
               mt: { xs: '8px', md: '12px' },
               color: '#F1F1F3',
               ...borderGradient,
             }}
           >
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}> </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <Box>
+                <label
+                  style={{
+                    display: 'block',
+                    color: '#252C32',
+                    fontWeight: 400,
+                    fontSize: '14px',
+                    paddingBottom: '5px',
+                  }}
+                >
+                  MNT
+                </label>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    backgroundColor: '#F6F8F9',
+                    border: '1px solid #EEF0F2',
+                    height: '48px',
+                    alignItems: 'center',
+                    padding: '0 17px',
+                    borderRadius: '8px',
+                  }}
+                >
+                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+                    <TokenIcon symbol={'mnt'} sx={{ fontSize: '24px', mr: 1 }} />
+                    <input
+                      type="number"
+                      className="stake-input"
+                      placeholder="0.00"
+                      step={0.01}
+                      value={amtOfMnt}
+                      onChange={(e) => setAmtOfMnt(e.target.value)}
+                      style={{
+                        outline: 'none',
+                        border: 'none',
+                        backgroundColor: 'transparent',
+                        fontWeight: 500,
+                        fontSize: '18px',
+                        color: '#D5DADD',
+                        width: downToXSM ? '120px' : '100%',
+                      }}
+                    />
+                  </Box>
+                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '4px' }}>
+                    <Typography sx={{ color: '#9AA6AC', fontWeight: 400, fontSize: '12px' }}>
+                      Balance: <span style={{ fontWeight: 600 }}>179 MNT</span>
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: '#9AA6AC',
+                        fontWeight: 400,
+                        fontSize: '12px',
+                        textDecoration: 'underline',
+                      }}
+                    >
+                      Buy
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'row', gap: '8px' }}>
+                <Button
+                  sx={{
+                    flex: 1,
+                    backgroundColor: '#EEF0F2',
+                    color: '#000000',
+                    borderRadius: '8px',
+                    height: '33px',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                  }}
+                >
+                  25%
+                </Button>
+                <Button
+                  sx={{
+                    flex: 1,
+                    backgroundColor: '#EEF0F2',
+                    color: '#000000',
+                    borderRadius: '8px',
+                    height: '33px',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                  }}
+                >
+                  50%
+                </Button>
+                <Button
+                  sx={{
+                    flex: 1,
+                    backgroundColor: '#EEF0F2',
+                    color: '#000000',
+                    borderRadius: '8px',
+                    height: '33px',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                  }}
+                >
+                  75%
+                </Button>
+                <Button
+                  sx={{
+                    flex: 1,
+                    backgroundColor: '#EEF0F2',
+                    color: '#000000',
+                    borderRadius: '8px',
+                    height: '33px',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                  }}
+                >
+                  100%
+                </Button>
+              </Box>
+            </Box>
           </Paper>
         </Box>
       </Box>
