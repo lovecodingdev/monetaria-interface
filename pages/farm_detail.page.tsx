@@ -103,7 +103,7 @@ export default function FarmDetail() {
       }}
     >
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: { xs: '24px', sm: '98px' } }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: { xs: '24px', sm: '23%' } }}>
           <Box>
             <IconButton
               href="/farm"
