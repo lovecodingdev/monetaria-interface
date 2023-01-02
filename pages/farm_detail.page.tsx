@@ -105,25 +105,34 @@ export default function FarmDetail() {
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: { xs: '24px', sm: '98px' } }}>
           <Box>
-            <Button
+            <IconButton
               href="/farm"
               sx={{
                 backgroundColor: 'white',
                 border: '1px solid #DDE2E4',
                 borderRadius: '8px',
                 color: '#252C32',
-                width: '48px',
+                width: '52px',
+                padding: '4px 12px',
                 height: '32px',
               }}
             >
               <KeyboardArrowLeftIcon />
-            </Button>
+            </IconButton>
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
             <Typography sx={{ color: '#080F26', fontWeight: 700, fontSize: '24px' }}>
               Farming
             </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                color: '#080F26',
+                fontSize: '16px',
+                fontWeight: 400,
+              }}
+            >
               <MntShiba /> MNT - Shiba
             </Box>
           </Box>
