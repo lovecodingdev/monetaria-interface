@@ -106,19 +106,20 @@ export default function FarmDetail() {
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: { xs: '24px', sm: '98px' } }}>
           <Box>
             <Button
-              startIcon={<KeyboardArrowLeftIcon />}
               href="/farm"
               sx={{
                 backgroundColor: 'white',
                 border: '1px solid #DDE2E4',
                 borderRadius: '8px',
                 color: '#252C32',
+                width: '48px',
+                height: '32px',
               }}
             >
-              Back
+              <KeyboardArrowLeftIcon />
             </Button>
           </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'row', gap: '3px' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
             <Typography sx={{ color: '#080F26', fontWeight: 700, fontSize: '24px' }}>
               Farming
             </Typography>
