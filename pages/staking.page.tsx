@@ -464,7 +464,7 @@ export default function Staking() {
                                   fontSize: '28px',
                                   outline: 'none',
                                   fontWeight: 500,
-                                  width: '170px',
+                                  width: '140px',
                                   textAlign: 'right',
                                 }}
                               />
