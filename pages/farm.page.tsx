@@ -127,8 +127,16 @@ export default function Farm() {
             </Box>
           </Box>
           {downToXSM && (
-            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-              <Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                gap: '12px',
+                alignItems: 'center',
+              }}
+            >
+              <Box sx={{ flex: 1 }}>
                 <label
                   style={{
                     display: 'block',
@@ -160,7 +168,7 @@ export default function Farm() {
                       >
                         <Box>
                           {' '}
-                          <img src={item.img} />
+                          <img src={item.img} width={24} />
                         </Box>
                         <Box>
                           {' '}
@@ -196,7 +204,7 @@ export default function Farm() {
                   }}
                 />
               </Box>
-              <Box>
+              <Box sx={{ flex: 1 }}>
                 {' '}
                 <label
                   style={{
@@ -229,7 +237,7 @@ export default function Farm() {
                       >
                         <Box>
                           {' '}
-                          <TokenIcon symbol={item.value} sx={{ fontSize: '24px', mr: 1 }} />
+                          <TokenIcon symbol={item.value} sx={{ fontSize: '21px', mr: 1 }} />
                         </Box>
                         <Box>
                           {' '}
