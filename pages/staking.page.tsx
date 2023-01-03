@@ -392,6 +392,59 @@ export default function Staking() {
                             }}
                           >
                             <Box>
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  flexDirection: 'row',
+                                  gap: '8px',
+                                  alignItems: 'center',
+                                  borderRadius: '12px',
+                                  backgroundColor: 'white',
+                                  padding: '10px 10px',
+                                  width: '100px',
+                                }}
+                              >
+                                <TokenIcon symbol={'eth'} sx={{ fontSize: '24px', mr: 1 }} />{' '}
+                                <Typography
+                                  sx={{
+                                    color: '#252C32',
+                                    fontWeight: 400,
+                                    fontSize: '14px',
+                                  }}
+                                >
+                                  MNT
+                                </Typography>
+                              </Box>
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  flexDirection: 'row',
+                                  gap: '5px',
+                                  alignItems: 'center',
+                                  marginTop: '2px',
+                                }}
+                              >
+                                <Typography
+                                  sx={{ color: '#9AA6AC', fontSize: '12px', fontWeight: 400 }}
+                                >
+                                  Balance: 0
+                                </Typography>
+                                <Box>
+                                  <Button
+                                    variant="text"
+                                    sx={{
+                                      width: '24px',
+                                      fontWeight: 400,
+                                      fontSize: '12px',
+                                    }}
+                                  >
+                                    Max
+                                  </Button>
+                                </Box>
+                              </Box>
+                            </Box>
+                            <Box>
+                              {' '}
                               <input
                                 value={stakeAmount}
                                 className="stake-input"
@@ -412,105 +465,103 @@ export default function Staking() {
                                   outline: 'none',
                                   fontWeight: 500,
                                   width: '170px',
+                                  textAlign: 'right',
                                 }}
                               />
-                              <Box sx={{ color: '#9AA6AC', fontSize: '12px', fontWeight: 400 }}>
+                              <Box
+                                sx={{
+                                  color: '#9AA6AC',
+                                  fontSize: '12px',
+                                  fontWeight: 400,
+                                  display: 'flex',
+                                  justifyContent: 'end',
+                                }}
+                              >
                                 $179,721,98
                               </Box>
                             </Box>
+                          </Box>
+                          <Box
+                            sx={{
+                              backgroundColor: '#EEF0F2',
+                              borderRadius: '16px',
+                              border: '1px solid #EEEEEE',
+                              padding: '16px 16px 0px',
+                            }}
+                          >
+                            {' '}
                             <Box
                               sx={{
                                 display: 'flex',
                                 flexDirection: 'row',
-                                gap: '8px',
+                                justifyContent: 'space-between',
                                 alignItems: 'center',
-                                borderRadius: '12px',
-                                backgroundColor: 'white',
-                                padding: '10px 10px',
                               }}
                             >
-                              <TokenIcon symbol={'eth'} sx={{ fontSize: '24px', mr: 1 }} />{' '}
-                              <Typography
-                                sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}
+                              <Box sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}>
+                                Choose lock time
+                              </Box>
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  justifyContent: 'end',
+                                  color: '#252C32',
+                                  fontWeight: 400,
+                                  fontSize: '14px',
+                                }}
                               >
-                                MNT
-                              </Typography>
+                                {lockPeriod} Week(s)
+                              </Box>{' '}
                             </Box>
-                          </Box>
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              justifyContent: 'space-between',
-                              alignItems: 'center',
-                            }}
-                          >
-                            <Box sx={{ color: '#252C32', fontWeight: 400, fontSize: '14px' }}>
-                              Choose lock time
-                            </Box>
-                            <Box>
-                              {' '}
-                              <DatePicker placeholder="Choose Lock time" />
-                            </Box>
-                          </Box>
-                          <Box
-                            sx={{
-                              padding: '10px',
-                              display: 'flex',
-                              flexDirection: 'column',
-                            }}
-                          >
                             <Box
                               sx={{
+                                padding: '10px',
                                 display: 'flex',
-                                justifyContent: 'end',
-                                color: '#252C32',
-                                fontWeight: 400,
-                                fontSize: '14px',
+                                flexDirection: 'column',
                               }}
                             >
-                              {lockPeriod} Week(s)
-                            </Box>{' '}
-                            <Box>
-                              <Slider
-                                aria-label="Custom marks"
-                                defaultValue={26}
-                                getAriaValueText={valuetext}
-                                step={1}
-                                valueLabelDisplay="auto"
-                                min={1}
-                                max={52}
-                                sx={{
-                                  '& .MuiSlider-thumb': {
-                                    backgroundColor: '#F6F8F9',
-                                    border: '1px solid #B0BABF',
-                                    opacity: 1,
-                                    '&:focus, &:hover, &.Mui-active': {
-                                      boxShadow:
-                                        '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
-                                      // Reset on touch devices, it doesn't add specificity
-                                    },
-                                  },
-                                  '& .MuiSlider-track': {
-                                    border: 'none',
-                                    backgroundColor: '#074592',
-                                  },
-                                  '& .MuiSlider-rail': {
-                                    opacity: 1,
-                                    backgroundColor: '#DDE2E4',
-                                  },
-                                  '& .MuiSlider-mark': {
-                                    backgroundColor: '#bfbfbf',
-                                    height: '2px',
-                                    '&.MuiSlider-markActive': {
-                                      opacity: 1,
+                              <Box>
+                                <Slider
+                                  aria-label="Custom marks"
+                                  defaultValue={26}
+                                  getAriaValueText={valuetext}
+                                  step={1}
+                                  valueLabelDisplay="auto"
+                                  min={1}
+                                  max={52}
+                                  sx={{
+                                    '& .MuiSlider-thumb': {
                                       backgroundColor: '#F6F8F9',
+                                      border: '1px solid #B0BABF',
+                                      opacity: 1,
+                                      '&:focus, &:hover, &.Mui-active': {
+                                        boxShadow:
+                                          '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+                                        // Reset on touch devices, it doesn't add specificity
+                                      },
                                     },
-                                  },
-                                }}
-                              />
+                                    '& .MuiSlider-track': {
+                                      border: 'none',
+                                      backgroundColor: '#074592',
+                                    },
+                                    '& .MuiSlider-rail': {
+                                      opacity: 1,
+                                      backgroundColor: '#DDE2E4',
+                                    },
+                                    '& .MuiSlider-mark': {
+                                      backgroundColor: '#bfbfbf',
+                                      height: '2px',
+                                      '&.MuiSlider-markActive': {
+                                        opacity: 1,
+                                        backgroundColor: '#F6F8F9',
+                                      },
+                                    },
+                                  }}
+                                />
+                              </Box>
                             </Box>
                           </Box>
+
                           <Box
                             sx={{
                               display: 'flex',
