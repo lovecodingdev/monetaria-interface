@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { MainLayout } from '../src/layouts/MainLayout';
 import borderGradient from 'src/layouts/borderGradient';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import { Input, InputGroup } from 'rsuite';
+import { Input, InputGroup, SelectPicker } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
 import 'rsuite/dist/rsuite.min.css';
 import { RewardTable } from 'src/modules/dashboard/lists/ActivePoolList/RewardTable';
@@ -11,65 +11,69 @@ import { RewardMobileList } from 'src/modules/dashboard/lists/ActivePoolList/Rew
 
 interface dex_type {
   img: string;
-  title: string;
+  label: string;
+  value: string;
 }
 
 interface token_type {
-  name: string;
-  symbol: string;
+  label: string;
+  value: string;
 }
 
 const arrDex: dex_type[] = [
   {
     img: '/icons/swap/bsw.svg',
-    title: 'Biswap',
+    label: 'Biswap',
+    value: 'Biswap',
   },
   {
     img: '/icons/swap/pancakeswap.svg',
-    title: 'Pancakeswap',
+    label: 'Pancakeswap',
+    value: 'Pancakeswap',
   },
   {
     img: '/icons/swap/mdex.svg',
-    title: 'MDEX',
+    label: 'MDEX',
+    value: 'MDEX',
   },
 ];
 
 const arrTokens: token_type[] = [
   {
-    name: 'ALPACA',
-    symbol: 'alpaca',
+    label: 'ALPACA',
+    value: 'alpaca',
   },
   {
-    name: 'CAKE',
-    symbol: 'cake',
+    label: 'CAKE',
+    value: 'cake',
   },
   {
-    name: 'BNB',
-    symbol: 'bnb',
+    label: 'BNB',
+    value: 'bnb',
   },
   {
-    name: 'BUSD',
-    symbol: 'busd',
+    label: 'BUSD',
+    value: 'busd',
   },
   {
-    name: 'USDT',
-    symbol: 'usdt',
+    label: 'USDT',
+    value: 'usdt',
   },
   {
-    name: 'USDC',
-    symbol: 'usdc',
+    label: 'USDC',
+    value: 'usdc',
   },
   {
-    name: 'TUSD',
-    symbol: 'tusd',
+    label: 'TUSD',
+    value: 'tusd',
   },
   {
-    name: 'BTCB',
-    symbol: 'btc',
+    label: 'BTCB',
+    value: 'btc',
   },
   {
-    name: 'ETH',
-    symbol: 'eth',
+    label: 'ETH',
+    value: 'eth',
   },
 ];
 
@@ -77,6 +81,8 @@ export default function Farm() {
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.up('xsm'));
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
+  const [dexList, setDexList] = useState('Biswap');
+  const [pairedAssets, setPairedAssets] = useState('alpaca');
 
   return (
     <Container
@@ -120,100 +126,246 @@ export default function Farm() {
               </InputGroup>
             </Box>
           </Box>
-          <Box>
-            <label
-              style={{
-                display: 'block',
-                color: '#252C32',
-                fontWeight: 400,
-                fontSize: '14px',
-                paddingBottom: '5px',
-              }}
-            >
-              DEX:
-            </label>
-            <Box sx={{ display: 'flex', flexDirection: 'row', gap: '4px', flexWrap: 'wrap' }}>
+          {downToXSM && (
+            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
               <Box>
-                <Button
-                  sx={{
-                    backgroundColor: '#074592',
-                    color: '#FFF',
-                    fontWeight: 700,
-                    fontSize: '12px',
+                <label
+                  style={{
+                    display: 'block',
+                    color: '#252C32',
+                    fontWeight: 400,
+                    fontSize: '14px',
+                    paddingBottom: '5px',
                   }}
-                  variant="contained"
                 >
-                  All
-                </Button>
+                  DEX
+                </label>
+                <SelectPicker
+                  data={arrDex}
+                  style={{ width: '100%' }}
+                  value={dexList}
+                  onChange={setDexList}
+                  placeholder="DEX"
+                  searchable={false}
+                  renderMenuItem={(label, item) => {
+                    return (
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: 2,
+                          alignItems: 'center',
+                          fontFamily: 'Gilroy, Arial !important',
+                        }}
+                      >
+                        <Box>
+                          {' '}
+                          <img src={item.img} />
+                        </Box>
+                        <Box>
+                          {' '}
+                          <span style={{ fontWeight: 400, fontSize: '12px', color: '#5B6871' }}>
+                            {item.label}
+                          </span>
+                        </Box>
+                      </Box>
+                    );
+                  }}
+                  renderValue={(value, item) => {
+                    return (
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: 2,
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Box>
+                          {' '}
+                          <img src={item.img} />
+                        </Box>
+                        <Box>
+                          {' '}
+                          <span style={{ fontWeight: 400, fontSize: '12px', color: '#5B6871' }}>
+                            {item.value}
+                          </span>
+                        </Box>
+                      </Box>
+                    );
+                  }}
+                />
               </Box>
-              {arrDex &&
-                arrDex.map((dex, idx) => (
-                  <Box key={idx}>
+              <Box>
+                {' '}
+                <label
+                  style={{
+                    display: 'block',
+                    color: '#252C32',
+                    fontWeight: 400,
+                    fontSize: '14px',
+                    paddingBottom: '5px',
+                  }}
+                >
+                  Paired assets
+                </label>
+                <SelectPicker
+                  data={arrTokens}
+                  style={{ width: '100%' }}
+                  value={pairedAssets}
+                  onChange={setPairedAssets}
+                  placeholder="Assets"
+                  searchable={false}
+                  renderMenuItem={(label, item) => {
+                    return (
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: 2,
+                          alignItems: 'center',
+                          fontFamily: 'Gilroy, Arial !important',
+                        }}
+                      >
+                        <Box>
+                          {' '}
+                          <TokenIcon symbol={item.value} sx={{ fontSize: '24px', mr: 1 }} />
+                        </Box>
+                        <Box>
+                          {' '}
+                          <span style={{ fontWeight: 400, fontSize: '12px', color: '#5B6871' }}>
+                            {label.toUpperCase()}
+                          </span>
+                        </Box>
+                      </Box>
+                    );
+                  }}
+                  renderValue={(value, item) => {
+                    return (
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: 2,
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Box>
+                          {' '}
+                          <TokenIcon symbol={value} sx={{ fontSize: '24px', mr: 1 }} />
+                        </Box>
+                        <Box>
+                          {' '}
+                          <span style={{ fontWeight: 400, fontSize: '12px', color: '#5B6871' }}>
+                            {value.toUpperCase()}
+                          </span>
+                        </Box>
+                      </Box>
+                    );
+                  }}
+                />
+              </Box>
+            </Box>
+          )}
+          {!downToXSM && (
+            <>
+              <Box>
+                <label
+                  style={{
+                    display: 'block',
+                    color: '#252C32',
+                    fontWeight: 400,
+                    fontSize: '14px',
+                    paddingBottom: '5px',
+                  }}
+                >
+                  DEX:
+                </label>
+                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '4px', flexWrap: 'wrap' }}>
+                  <Box>
                     <Button
                       sx={{
-                        backgroundColor: '#F6F8F9',
-                        color: '#000',
+                        backgroundColor: '#074592',
+                        color: '#FFF',
                         fontWeight: 700,
                         fontSize: '12px',
-                        width: '144px',
                       }}
-                      variant="outlined"
-                      startIcon={<img src={dex.img} />}
+                      variant="contained"
                     >
-                      {dex.title}
+                      All
                     </Button>
                   </Box>
-                ))}
-            </Box>
-          </Box>
-          <Box>
-            <label
-              style={{
-                display: 'block',
-                color: '#252C32',
-                fontWeight: 400,
-                fontSize: '14px',
-                paddingBottom: '5px',
-              }}
-            >
-              Paired assets:
-            </label>
-            <Box sx={{ display: 'flex', flexDirection: 'row', gap: '4px', flexWrap: 'wrap' }}>
-              <Box>
-                <Button
-                  sx={{
-                    backgroundColor: '#074592',
-                    color: '#FFF',
-                    fontWeight: 700,
-                    fontSize: '12px',
-                  }}
-                  variant="contained"
-                >
-                  All
-                </Button>
+                  {arrDex &&
+                    arrDex.map((dex, idx) => (
+                      <Box key={idx}>
+                        <Button
+                          sx={{
+                            backgroundColor: '#F6F8F9',
+                            color: '#000',
+                            fontWeight: 700,
+                            fontSize: '12px',
+                            width: '144px',
+                          }}
+                          variant="outlined"
+                          startIcon={<img src={dex.img} />}
+                        >
+                          {dex.label}
+                        </Button>
+                      </Box>
+                    ))}
+                </Box>
               </Box>
-              {arrTokens &&
-                arrTokens.map((token, idx) => (
-                  <Box key={idx}>
+              <Box>
+                <label
+                  style={{
+                    display: 'block',
+                    color: '#252C32',
+                    fontWeight: 400,
+                    fontSize: '14px',
+                    paddingBottom: '5px',
+                  }}
+                >
+                  Paired assets:
+                </label>
+                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '4px', flexWrap: 'wrap' }}>
+                  <Box>
                     <Button
                       sx={{
-                        backgroundColor: '#F6F8F9',
-                        color: '#000',
+                        backgroundColor: '#074592',
+                        color: '#FFF',
                         fontWeight: 700,
                         fontSize: '12px',
-                        width: '94px',
                       }}
-                      variant="outlined"
-                      startIcon={
-                        <TokenIcon symbol={token.symbol} sx={{ fontSize: '24px', mr: 1 }} />
-                      }
+                      variant="contained"
                     >
-                      {token.name}
+                      All
                     </Button>
                   </Box>
-                ))}
-            </Box>
-          </Box>
+                  {arrTokens &&
+                    arrTokens.map((token, idx) => (
+                      <Box key={idx}>
+                        <Button
+                          sx={{
+                            backgroundColor: '#F6F8F9',
+                            color: '#000',
+                            fontWeight: 700,
+                            fontSize: '12px',
+                            width: '94px',
+                          }}
+                          variant="outlined"
+                          startIcon={
+                            <TokenIcon symbol={token.value} sx={{ fontSize: '24px', mr: 1 }} />
+                          }
+                        >
+                          {token.label}
+                        </Button>
+                      </Box>
+                    ))}
+                </Box>
+              </Box>
+            </>
+          )}
+
           <Box>{!downToXSM ? <RewardTable /> : <RewardMobileList />}</Box>
         </Box>
       </Paper>
