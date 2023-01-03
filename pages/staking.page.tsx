@@ -419,9 +419,10 @@ export default function Staking() {
                                 sx={{
                                   display: 'flex',
                                   flexDirection: 'row',
-                                  gap: '5px',
+
                                   alignItems: 'center',
                                   marginTop: '2px',
+                                  justifyContent: 'space-between',
                                 }}
                               >
                                 <Typography
@@ -464,7 +465,7 @@ export default function Staking() {
                                   fontSize: '28px',
                                   outline: 'none',
                                   fontWeight: 500,
-                                  width: '140px',
+                                  width: '130px',
                                   textAlign: 'right',
                                 }}
                               />
