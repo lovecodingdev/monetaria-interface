@@ -102,7 +102,7 @@ export const RewardMobileList = () => {
                   noWrap
                   sx={{ fontSize: '14px', fontWeight: 400, color: 'black' }}
                 >
-                  {asset.symbol}
+                  {asset.symbol.toUpperCase()}
                 </Typography>
               </Box>
               <Box>
