@@ -8,6 +8,7 @@ import SearchIcon from '@rsuite/icons/Search';
 import 'rsuite/dist/rsuite.min.css';
 import { RewardTable } from 'src/modules/dashboard/lists/ActivePoolList/RewardTable';
 import { RewardMobileList } from 'src/modules/dashboard/lists/ActivePoolList/RewardMobileList';
+import { BasicModal } from 'src/components/primitives/BasicModal';
 
 interface dex_type {
   img: string;
@@ -83,6 +84,11 @@ export default function Farm() {
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
   const [dexList, setDexList] = useState('Biswap');
   const [pairedAssets, setPairedAssets] = useState('alpaca');
+  const [openModal, setOpenModal] = useState(false);
+
+  const showModal = (_type: boolean) => {
+    setOpenModal(_type);
+  };
 
   return (
     <Container
@@ -95,6 +101,9 @@ export default function Farm() {
         paddingTop: '33px',
       }}
     >
+      <BasicModal open={openModal} setOpen={setOpenModal} withCloseButton={false}>
+        Ok
+      </BasicModal>
       <Paper
         sx={{
           bgcolor: 'background.header',
@@ -374,7 +383,13 @@ export default function Farm() {
             </>
           )}
 
-          <Box>{!downToXSM ? <RewardTable /> : <RewardMobileList />}</Box>
+          <Box>
+            {!downToXSM ? (
+              <RewardTable showModal={showModal} />
+            ) : (
+              <RewardMobileList showModal={showModal} />
+            )}
+          </Box>
         </Box>
       </Paper>
     </Container>

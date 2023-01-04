@@ -60,7 +60,7 @@ const data: RewardType[] = [
   },
 ];
 
-export const RewardMobileList = () => {
+export const RewardMobileList = ({ showModal }) => {
   const [farmData, setFarmData] = useState<RewardType[]>(data);
 
   const updateVisibleState = (_symbol) => {
@@ -169,6 +169,10 @@ export const RewardMobileList = () => {
               color: '#FFFFFF',
               fontWeight: 600,
               fontSize: '16px',
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              showModal(true);
             }}
           >
             <SignalCellularAltIcon sx={{ color: '#074592' }} />

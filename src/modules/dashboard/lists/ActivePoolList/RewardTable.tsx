@@ -58,7 +58,7 @@ const data: RewardType[] = [
   },
 ];
 
-export const RewardTable = () => {
+export const RewardTable = ({ showModal }) => {
   const router = useRouter();
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();
@@ -230,6 +230,10 @@ export const RewardTable = () => {
                     fontWeight: 600,
                     fontSize: '16px',
                     marginTop: '-4px',
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    showModal(true);
                   }}
                 >
                   <SignalCellularAltIcon sx={{ color: '#074592' }} />
