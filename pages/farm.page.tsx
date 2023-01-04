@@ -1,4 +1,15 @@
-import { Box, Container, Paper, Typography, useMediaQuery, useTheme, Button } from '@mui/material';
+import {
+  Box,
+  Container,
+  Paper,
+  Typography,
+  useMediaQuery,
+  useTheme,
+  Button,
+  Tab,
+  Tabs,
+} from '@mui/material';
+import { styled } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { MainLayout } from '../src/layouts/MainLayout';
 import borderGradient from 'src/layouts/borderGradient';
@@ -10,6 +21,38 @@ import { RewardTable } from 'src/modules/dashboard/lists/ActivePoolList/RewardTa
 import { RewardMobileList } from 'src/modules/dashboard/lists/ActivePoolList/RewardMobileList';
 import { BasicModal } from 'src/components/primitives/BasicModal';
 
+const NewTabs = styled(Tabs)({
+  minHeight: '28px',
+  '& .MuiTabs-flexContainer': {
+    gap: 4,
+  },
+  '& .MuiTabs-indicator': {
+    display: 'none',
+  },
+  border: '1px solid #F6F8F9',
+  padding: '2px',
+  borderRadius: '100px',
+});
+
+const NewTab = styled(Tab)`
+  margin: 0px;
+  fontweight: 600;
+  fontfamily: Gilroy, Arial !important;
+  fontstyle: normal !important;
+  min-height: 24px;
+  border-radius: 6px;
+  height: 24px;
+  width: 30%;
+  color: #b0babf;
+  &.Mui-selected,
+  &:hover {
+    background: #eef0f2;
+    border-radius: 6px;
+    color: #000000;
+    font-weight: bold;
+  }
+`;
+
 interface dex_type {
   img: string;
   label: string;
@@ -19,6 +62,12 @@ interface dex_type {
 interface token_type {
   label: string;
   value: string;
+}
+
+interface price_btn_type {
+  title: string;
+  isClicked: boolean;
+  value: number;
 }
 
 const arrDex: dex_type[] = [
@@ -78,6 +127,29 @@ const arrTokens: token_type[] = [
   },
 ];
 
+const priceBtns: price_btn_type[] = [
+  {
+    title: '1d',
+    isClicked: true,
+    value: 1,
+  },
+  {
+    title: '7d',
+    isClicked: false,
+    value: 7,
+  },
+  {
+    title: '14d',
+    isClicked: false,
+    value: 14,
+  },
+  {
+    title: '30d',
+    isClicked: false,
+    value: 30,
+  },
+];
+
 export default function Farm() {
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.up('xsm'));
@@ -85,9 +157,30 @@ export default function Farm() {
   const [dexList, setDexList] = useState('Biswap');
   const [pairedAssets, setPairedAssets] = useState('alpaca');
   const [openModal, setOpenModal] = useState(false);
+  const [selectedTab, setSelectedTab] = useState(0);
+  const [priceBtnSet, setPriceBtnSet] = useState(priceBtns);
+  const [currentPeriod, setCurrentPeriod] = useState(1);
 
   const showModal = (_type: boolean) => {
     setOpenModal(_type);
+  };
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setSelectedTab(newValue);
+  };
+
+  const setPeriod = (_period: number) => {
+    const tempArr = priceBtnSet;
+
+    tempArr.forEach((arr) => {
+      if (arr.value == _period) {
+        arr.isClicked = true;
+      } else {
+        arr.isClicked = false;
+      }
+    });
+    setPriceBtnSet([...tempArr]);
+    setCurrentPeriod(_period);
   };
 
   return (
@@ -101,8 +194,96 @@ export default function Farm() {
         paddingTop: '33px',
       }}
     >
-      <BasicModal open={openModal} setOpen={setOpenModal} withCloseButton={false}>
-        Ok
+      <BasicModal
+        open={openModal}
+        setOpen={setOpenModal}
+        withCloseButton={true}
+        contentMaxWidth={downToXSM ? 343 : 731}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Box>
+            {' '}
+            <Typography sx={{ color: '#080F26', fontSize: '20px', fontWeight: 500 }}>
+              MNT - Historical Price
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              mr: downToXSM ? '0px' : '40px',
+              display: 'flex',
+              mt: { xs: '10px', sm: '0' },
+              width: downToXSM ? '100%' : 'auto',
+              justifyContent: 'center',
+            }}
+          >
+            <NewTabs
+              value={selectedTab}
+              onChange={handleChange}
+              sx={{
+                mb: 2,
+              }}
+            >
+              <NewTab
+                label="TVL"
+                sx={{
+                  fontSize: { xs: '14px', md: '14px' },
+                  fontFamily: 'Gilroy,Arial !important',
+                  fontStyle: 'normal',
+                }}
+              />
+              <NewTab
+                label="Price"
+                sx={{
+                  fontSize: { xs: '14px', md: '14px' },
+                  fontFamily: 'Gilroy,Arial !important',
+                  fontStyle: 'normal',
+                }}
+              />
+              <NewTab
+                label="APY"
+                sx={{
+                  fontSize: { xs: '14px', md: '14px' },
+                  fontFamily: 'Gilroy,Arial !important',
+                  fontStyle: 'normal',
+                }}
+              />
+            </NewTabs>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '8px',
+            width: downToXSM ? '100%' : 'auto',
+            justifyContent: downToXSM ? 'center' : 'flex-start',
+            marginTop: '18px',
+          }}
+        >
+          {priceBtnSet &&
+            priceBtnSet.map((btn) => (
+              <Button
+                sx={{
+                  backgroundColor: btn.isClicked ? '#074592' : '#F6F8F9',
+                  color: btn.isClicked ? '#FFFFFF' : '#000000',
+                  fontWeight: 400,
+                  fontSize: '12px',
+                }}
+                key={btn.value}
+                onClick={() => setPeriod(btn.value)}
+              >
+                {btn.title}
+              </Button>
+            ))}
+        </Box>
+        <Box></Box>
       </BasicModal>
       <Paper
         sx={{
