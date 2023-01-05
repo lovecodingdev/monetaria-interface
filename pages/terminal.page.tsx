@@ -7,6 +7,11 @@ import { ContentContainer } from '../src/components/ContentContainer';
 import { MainLayout } from '../src/layouts/MainLayout';
 import { useWeb3Context } from '../src/libs/hooks/useWeb3Context';
 import borderGradient from 'src/layouts/borderGradient';
+import dynamic from 'next/dynamic';
+
+const DynamicComponent = dynamic(() => import('react-tradingview-widget'), {
+  ssr: false,
+});
 
 export default function Votes() {
   const { currentAccount, loading: web3Loading } = useWeb3Context();
@@ -46,7 +51,9 @@ export default function Votes() {
                       color: '#F1F1F3',
                       ...borderGradient,
                     }}
-                  ></Paper>
+                  >
+                    <DynamicComponent symbol="BTCUSDT" width="779px" height="419px" />
+                  </Paper>
                   <Paper
                     sx={{
                       bgcolor: 'background.header',
