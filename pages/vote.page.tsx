@@ -73,6 +73,7 @@ export default function Votes() {
                         <Button
                           startIcon={<NoteAddIcon />}
                           variant="contained"
+                          href="/create_proposal"
                           sx={{
                             backgroundColor: '#023997',
                             padding: '8px 16px',
