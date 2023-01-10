@@ -9,7 +9,7 @@ import {
   Button,
   Tab,
   Tabs,
-  ButtonGroup,
+  Switch,
 } from '@mui/material';
 import { styled } from '@mui/system';
 import { useEffect, useState } from 'react';
@@ -35,6 +35,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import CodeImg from '/public/icons/code.svg';
 import Slippage from '/public/icons/slippage.svg';
+import PartialFill from '/public/icons/partial-fill.svg';
+import OptimizedRouter from '/public/icons/optimized_router.svg';
+import CompatibilityMode from '/public/icons/compatibility-mode.svg';
+import LiquiditySources from '/public/icons/liquidity_sources.svg';
+import CustomToken from '/public/icons/custom_token.svg';
+import InfoIcon from '@mui/icons-material/Info';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 interface marketTrader {
   size: number;
@@ -133,6 +140,10 @@ export default function Terminal() {
   const [curCoin, setCurCoin] = useState('0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1');
   const [selectedTab, setSelectedTab] = useState(0);
   const [openModal, setOpenModal] = useState(false);
+  const [isPartialFilled, setIsPartialFilled] = useState(true);
+  const [isRoutedPreset, setIsRoutedPreset] = useState(false);
+  const [isCompatibilityMode, setIsCompatibilityMode] = useState(false);
+  const [isV4, setIsV4] = useState(false);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
@@ -152,7 +163,7 @@ export default function Terminal() {
                   alignItems: 'center',
                 }}
               >
-                <IconButton>
+                <IconButton onClick={() => setOpenModal(!openModal)}>
                   <KeyboardArrowLeftIcon sx={{ fontSize: '24px', color: '#252C32' }} />
                 </IconButton>
                 <Typography sx={{ color: '#06070A', fontSize: '20px', fontWeight: 500 }}>
@@ -395,6 +406,205 @@ export default function Terminal() {
                     </Box>
                   </AccordionDetails>
                 </Accordion>
+              </Box>
+              <Box
+                sx={{ display: 'flex', flexDirection: 'column', gap: '5px', paddingTop: '15px' }}
+              >
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: '12px',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Box>
+                      <PartialFill sx={{ width: '24px' }} />
+                    </Box>
+                    <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                      Partial fill
+                    </Typography>
+                    <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
+                  </Box>
+                  <Box>
+                    <Switch
+                      checked={isPartialFilled}
+                      onChange={() => setIsPartialFilled(!isPartialFilled)}
+                    />
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: '12px',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Box>
+                      <OptimizedRouter sx={{ width: '24px' }} />
+                    </Box>
+                    <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                      Routing preset
+                    </Typography>
+                    <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
+                  </Box>
+                  <Box>
+                    <Switch
+                      checked={isRoutedPreset}
+                      onChange={() => setIsRoutedPreset(!isRoutedPreset)}
+                    />
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: '12px',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Box>
+                      <CompatibilityMode sx={{ width: '24px' }} />
+                    </Box>
+                    <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                      Compatibility mode
+                    </Typography>
+                    <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
+                  </Box>
+                  <Box>
+                    <Switch
+                      checked={isCompatibilityMode}
+                      onChange={() => setIsCompatibilityMode(!isCompatibilityMode)}
+                    />
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: '12px',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Box>
+                      <LiquiditySources sx={{ width: '24px' }} />
+                    </Box>
+                    <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                      Liquidity sources
+                    </Typography>
+                    <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: '4px',
+                      alignItems: 'center',
+                      color: '#6C86AD',
+                      fontWeight: 400,
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '16px' }}>95</Typography> <KeyboardArrowRightIcon />
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: '12px',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Box>
+                      <CustomToken sx={{ width: '24px' }} />
+                    </Box>
+                    <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                      Custom tokens
+                    </Typography>
+                    <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: '4px',
+                      alignItems: 'center',
+                      color: '#6C86AD',
+                      fontWeight: 400,
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '16px' }}>0</Typography> <KeyboardArrowRightIcon />
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: '12px',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Box>
+                      <OptimizedRouter sx={{ width: '24px' }} />
+                    </Box>
+                    <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                      Use Router V4
+                    </Typography>
+                    <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
+                  </Box>
+                  <Box>
+                    <Switch checked={isV4} onChange={() => setIsV4(!isV4)} />
+                  </Box>
+                </Box>
               </Box>
             </BasicModal>
             <Box
