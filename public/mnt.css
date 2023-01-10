@@ -63,4 +63,35 @@
   cursor: pointer;
 }
 
-.custom-option {}
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(26, 32, 36, 0.2);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.custom-select .rs-picker-toggle.rs-btn.rs-btn-default {
+  background-color: transparent !important;
+  border: none;
+}
+
+.custom-select .rs-picker-toggle-caret.rs-icon {
+  top: 12px !important;
+}
+
+.pool-select .rs-picker-toggle-caret.rs-icon {
+  top: 17px !important;
+}
