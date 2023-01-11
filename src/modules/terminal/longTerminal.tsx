@@ -57,11 +57,13 @@ const coinList = [
   {
     label: 'mnt',
     title: 'MNT',
+    network: 'Ethereum',
     value: '0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1',
   },
   {
     label: 'usdt',
     title: 'USDT',
+    network: 'Tron',
     value: '0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e607b1',
   },
 ];
@@ -311,6 +313,14 @@ export default function LongTerminal({ setIsSettingClicked }) {
                                   {item.title}
                                 </span>
                               </Box>
+                              <Box>
+                                {' '}
+                                <Typography
+                                  sx={{ color: '#84919A', fontWeight: 400, fontSize: '14px' }}
+                                >
+                                  {item.network}
+                                </Typography>
+                              </Box>
                             </Box>
                           );
                         }}
@@ -459,6 +469,14 @@ export default function LongTerminal({ setIsSettingClicked }) {
                                 >
                                   {item.title}
                                 </span>
+                              </Box>
+                              <Box>
+                                {' '}
+                                <Typography
+                                  sx={{ color: '#84919A', fontWeight: 400, fontSize: '14px' }}
+                                >
+                                  {item.network}
+                                </Typography>
                               </Box>
                             </Box>
                           );
