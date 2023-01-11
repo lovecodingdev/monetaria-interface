@@ -169,15 +169,15 @@ export default function Terminal() {
   const [isCompatibilityMode, setIsCompatibilityMode] = useState(false);
   const [isV4, setIsV4] = useState(false);
   const [isSettingClicked, setIsSettingClicked] = useState(false);
-  const [gasPrice, setGasPrice] = useState('market');
+  const [gasPrice, setGasPrice] = useState('Market');
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
   };
 
-  const getPeriod = (_label: string) => {
+  const getPeriod = (_label) => {
     const idx = gasOptions.findIndex((el) => el.label == _label);
-    return gasOptions[idx]['value'];
+    return gasOptions[idx].value;
   };
 
   return (
@@ -402,16 +402,21 @@ export default function Terminal() {
                             flexDirection: 'row',
                             justifyContent: 'space-between',
                             alignItems: 'center',
+                            gap: { xs: '0px', sm: '10px' },
                           }}
                         >
-                          <Button
-                            sx={{ backgroundColor: '#023997', width: '80px', color: 'white' }}
-                            variant="contained"
-                          >
-                            Auto
-                          </Button>
+                          <Box sx={{ flex: 1 }}>
+                            <Button
+                              sx={{ backgroundColor: '#2F8AF5', color: 'white' }}
+                              variant="contained"
+                            >
+                              Auto
+                            </Button>
+                          </Box>
+
                           <Box
                             sx={{
+                              flex: 3,
                               display: 'flex',
                               flexDirection: 'row',
                               gap: '0',
@@ -421,6 +426,7 @@ export default function Terminal() {
                           >
                             <Button
                               sx={{
+                                flex: 1,
                                 color: '#06070A',
                                 fontWeight: 400,
                                 fontSize: '13px',
@@ -431,6 +437,7 @@ export default function Terminal() {
                             </Button>
                             <Button
                               sx={{
+                                flex: 1,
                                 color: '#06070A',
                                 fontWeight: 400,
                                 fontSize: '13px',
@@ -441,6 +448,7 @@ export default function Terminal() {
                             </Button>
                             <Button
                               sx={{
+                                flex: 1,
                                 color: '#06070A',
                                 fontWeight: 400,
                                 fontSize: '13px',
@@ -449,16 +457,21 @@ export default function Terminal() {
                             >
                               1%
                             </Button>
-                            <Button
-                              sx={{
+                            <input
+                              style={{
+                                flex: 1.5,
                                 color: '#9BAFCD',
                                 fontWeight: 400,
                                 fontSize: '13px',
-                                minWidth: 'auto',
+                                width: '100%',
+                                border: 'none',
+                                outline: 'none',
+                                backgroundColor: 'transparent',
+                                textAlign: 'center',
                               }}
-                            >
-                              Custom
-                            </Button>
+                              placeholder="Custom"
+                              type="text"
+                            />
                           </Box>
                         </Box>
                       </AccordionDetails>
