@@ -105,7 +105,7 @@ const marks = [
   },
 ];
 
-export default function LongTerminal({ setOpenModal }) {
+export default function LongTerminal({ setIsSettingClicked }) {
   const [selectedTab, setSelectedTab] = useState(0);
   const [amtOfCoinA, setAmtOfCoinA] = useState(0);
   const [curCoinA, setCurCoinA] = useState('0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1');
@@ -196,7 +196,7 @@ export default function LongTerminal({ setOpenModal }) {
           <IconButton>
             <AddIcon sx={{ fontSize: '16px', color: '#5B6871' }} />
           </IconButton>
-          <IconButton onClick={() => setOpenModal(true)}>
+          <IconButton onClick={() => setIsSettingClicked(true)}>
             <SettingsIcon sx={{ fontSize: '16px', color: '#5B6871' }} />
           </IconButton>
         </Box>
