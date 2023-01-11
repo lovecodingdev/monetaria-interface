@@ -153,471 +153,480 @@ export default function Terminal() {
         {currentAccount && !isPermissionsLoading ? (
           <Box sx={{ fontFamily: 'Gilroy, Arial !important', fontStyle: 'normal' }}>
             {isSettingClicked && (
-              <Paper
-                sx={{
-                  bgcolor: 'background.header',
-                  padding: '24px',
-                  mt: { xs: '8px', md: '12px' },
-                  color: '#F1F1F3',
-                  ...borderGradient,
-                }}
-              >
-                <Box
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                {' '}
+                <Paper
                   sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
+                    bgcolor: 'background.header',
+                    padding: '24px',
+                    mt: { xs: '8px', md: '12px' },
+                    color: '#F1F1F3',
+                    width: { xs: '100%', sm: '500px' },
+                    ...borderGradient,
                   }}
                 >
-                  <IconButton onClick={() => setIsSettingClicked(false)}>
-                    <KeyboardArrowLeftIcon sx={{ fontSize: '24px', color: '#252C32' }} />
-                  </IconButton>
-                  <Typography sx={{ color: '#06070A', fontSize: '20px', fontWeight: 500 }}>
-                    Settings
-                  </Typography>
-                  <Button sx={{ color: '#06070A', fontSize: '16px', fontWeight: 400 }}>
-                    Reset
-                  </Button>
-                </Box>
-                <Box sx={{ paddingTop: '15px' }}>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          gap: '14px',
-                          alignItems: 'center',
-                        }}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <IconButton onClick={() => setIsSettingClicked(false)}>
+                      <KeyboardArrowLeftIcon sx={{ fontSize: '24px', color: '#252C32' }} />
+                    </IconButton>
+                    <Typography sx={{ color: '#06070A', fontSize: '20px', fontWeight: 500 }}>
+                      Settings
+                    </Typography>
+                    <Button sx={{ color: '#06070A', fontSize: '16px', fontWeight: 400 }}>
+                      Reset
+                    </Button>
+                  </Box>
+                  <Box sx={{ paddingTop: '15px' }}>
+                    <Accordion>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
                       >
-                        <Box>
-                          <CodeImg />
-                        </Box>
-                        <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
-                          Gas price
-                        </Typography>
-                        <Typography sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '15px' }}>
-                          Market (35.64 - 37.51 Gwei)
-                        </Typography>
-                      </Box>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-                        <RadioGroup name="radioList">
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              justifyContent: 'space-between',
-                              alignItems: 'center',
-                              padding: '10px',
-                              border: '1px solid #EFF1F5',
-                              height: '48px',
-                              borderTopLeftRadius: '8px',
-                              borderTopRightRadius: '8px',
-                            }}
-                          >
-                            <Box>
-                              <Radio value={'market'}>
-                                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
-                                  <Typography
-                                    sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                                  >
-                                    Market
-                                  </Typography>
-                                  <Typography
-                                    sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '13px' }}
-                                  >
-                                    ~12 sec
-                                  </Typography>
-                                </Box>
-                              </Radio>
-                            </Box>
-                            <Box>
-                              <Typography
-                                sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                              >
-                                35.64 - 37.51 Gwei
-                              </Typography>
-                            </Box>
-                          </Box>
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              justifyContent: 'space-between',
-                              alignItems: 'center',
-                              padding: '10px',
-                              border: '1px solid #EFF1F5',
-                              height: '48px',
-                            }}
-                          >
-                            <Box>
-                              <Radio value={'Aggressive'}>
-                                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
-                                  <Typography
-                                    sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                                  >
-                                    Aggressive
-                                  </Typography>
-                                  <Typography
-                                    sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '13px' }}
-                                  >
-                                    {'<'} 10 sec
-                                  </Typography>
-                                </Box>
-                              </Radio>
-                            </Box>
-                            <Box>
-                              <Typography
-                                sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                              >
-                                35.64 - 48.77 Gwei
-                              </Typography>
-                            </Box>
-                          </Box>
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              justifyContent: 'space-between',
-                              alignItems: 'center',
-                              padding: '10px',
-                              border: '1px solid #EFF1F5',
-                              height: '48px',
-                              borderBottomLeftRadius: '8px',
-                              borderBottomRightRadius: '8px',
-                            }}
-                          >
-                            <Box>
-                              <Radio value={'Custom'}>
-                                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
-                                  <Typography
-                                    sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                                  >
-                                    Custom
-                                  </Typography>
-                                  <Typography
-                                    sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '13px' }}
-                                  >
-                                    ~12 sec
-                                  </Typography>
-                                </Box>
-                              </Radio>
-                            </Box>
-                            <Box>
-                              <Typography
-                                sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                              >
-                                35.64 - 37.51 Gwei
-                              </Typography>
-                            </Box>
-                          </Box>
-                        </RadioGroup>
-                      </Box>
-                    </AccordionDetails>
-                  </Accordion>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content"
-                      id="panel2a-header"
-                    >
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          gap: '14px',
-                          alignItems: 'center',
-                        }}
-                      >
-                        <Box>
-                          <Slippage />
-                        </Box>
-                        <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
-                          Slippage tolerance
-                        </Typography>
-                        <Typography sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '15px' }}>
-                          0.5% Auto
-                        </Typography>
-                      </Box>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                        }}
-                      >
-                        <Button
-                          sx={{ backgroundColor: '#023997', width: '80px', color: 'white' }}
-                          variant="contained"
-                        >
-                          Auto
-                        </Button>
                         <Box
                           sx={{
                             display: 'flex',
                             flexDirection: 'row',
-                            gap: '0',
-                            backgroundColor: '#ECF0F9',
-                            borderRadius: '8px',
+                            gap: '14px',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Box>
+                            <CodeImg />
+                          </Box>
+                          <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                            Gas price
+                          </Typography>
+                          <Typography sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '15px' }}>
+                            Market (35.64 - 37.51 Gwei)
+                          </Typography>
+                        </Box>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+                          <RadioGroup name="radioList">
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                padding: '10px',
+                                border: '1px solid #EFF1F5',
+                                height: '48px',
+                                borderTopLeftRadius: '8px',
+                                borderTopRightRadius: '8px',
+                              }}
+                            >
+                              <Box>
+                                <Radio value={'market'}>
+                                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
+                                    <Typography
+                                      sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
+                                    >
+                                      Market
+                                    </Typography>
+                                    <Typography
+                                      sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '13px' }}
+                                    >
+                                      ~12 sec
+                                    </Typography>
+                                  </Box>
+                                </Radio>
+                              </Box>
+                              <Box>
+                                <Typography
+                                  sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
+                                >
+                                  35.64 - 37.51 Gwei
+                                </Typography>
+                              </Box>
+                            </Box>
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                padding: '10px',
+                                border: '1px solid #EFF1F5',
+                                height: '48px',
+                              }}
+                            >
+                              <Box>
+                                <Radio value={'Aggressive'}>
+                                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
+                                    <Typography
+                                      sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
+                                    >
+                                      Aggressive
+                                    </Typography>
+                                    <Typography
+                                      sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '13px' }}
+                                    >
+                                      {'<'} 10 sec
+                                    </Typography>
+                                  </Box>
+                                </Radio>
+                              </Box>
+                              <Box>
+                                <Typography
+                                  sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
+                                >
+                                  35.64 - 48.77 Gwei
+                                </Typography>
+                              </Box>
+                            </Box>
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                padding: '10px',
+                                border: '1px solid #EFF1F5',
+                                height: '48px',
+                                borderBottomLeftRadius: '8px',
+                                borderBottomRightRadius: '8px',
+                              }}
+                            >
+                              <Box>
+                                <Radio value={'Custom'}>
+                                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
+                                    <Typography
+                                      sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
+                                    >
+                                      Custom
+                                    </Typography>
+                                    <Typography
+                                      sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '13px' }}
+                                    >
+                                      ~12 sec
+                                    </Typography>
+                                  </Box>
+                                </Radio>
+                              </Box>
+                              <Box>
+                                <Typography
+                                  sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
+                                >
+                                  35.64 - 37.51 Gwei
+                                </Typography>
+                              </Box>
+                            </Box>
+                          </RadioGroup>
+                        </Box>
+                      </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel2a-content"
+                        id="panel2a-header"
+                      >
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            gap: '14px',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Box>
+                            <Slippage />
+                          </Box>
+                          <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                            Slippage tolerance
+                          </Typography>
+                          <Typography sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '15px' }}>
+                            0.5% Auto
+                          </Typography>
+                        </Box>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
                           }}
                         >
                           <Button
+                            sx={{ backgroundColor: '#023997', width: '80px', color: 'white' }}
+                            variant="contained"
+                          >
+                            Auto
+                          </Button>
+                          <Box
                             sx={{
-                              color: '#06070A',
-                              fontWeight: 400,
-                              fontSize: '13px',
-                              minWidth: 'auto',
+                              display: 'flex',
+                              flexDirection: 'row',
+                              gap: '0',
+                              backgroundColor: '#ECF0F9',
+                              borderRadius: '8px',
                             }}
                           >
-                            0.1%
-                          </Button>
-                          <Button
-                            sx={{
-                              color: '#06070A',
-                              fontWeight: 400,
-                              fontSize: '13px',
-                              minWidth: 'auto',
-                            }}
-                          >
-                            0.5%
-                          </Button>
-                          <Button
-                            sx={{
-                              color: '#06070A',
-                              fontWeight: 400,
-                              fontSize: '13px',
-                              minWidth: 'auto',
-                            }}
-                          >
-                            1%
-                          </Button>
-                          <Button
-                            sx={{
-                              color: '#9BAFCD',
-                              fontWeight: 400,
-                              fontSize: '13px',
-                              minWidth: 'auto',
-                            }}
-                          >
-                            Custom
-                          </Button>
+                            <Button
+                              sx={{
+                                color: '#06070A',
+                                fontWeight: 400,
+                                fontSize: '13px',
+                                minWidth: 'auto',
+                              }}
+                            >
+                              0.1%
+                            </Button>
+                            <Button
+                              sx={{
+                                color: '#06070A',
+                                fontWeight: 400,
+                                fontSize: '13px',
+                                minWidth: 'auto',
+                              }}
+                            >
+                              0.5%
+                            </Button>
+                            <Button
+                              sx={{
+                                color: '#06070A',
+                                fontWeight: 400,
+                                fontSize: '13px',
+                                minWidth: 'auto',
+                              }}
+                            >
+                              1%
+                            </Button>
+                            <Button
+                              sx={{
+                                color: '#9BAFCD',
+                                fontWeight: 400,
+                                fontSize: '13px',
+                                minWidth: 'auto',
+                              }}
+                            >
+                              Custom
+                            </Button>
+                          </Box>
                         </Box>
-                      </Box>
-                    </AccordionDetails>
-                  </Accordion>
-                </Box>
-                <Box
-                  sx={{ display: 'flex', flexDirection: 'column', gap: '5px', paddingTop: '15px' }}
-                >
+                      </AccordionDetails>
+                    </Accordion>
+                  </Box>
                   <Box
                     sx={{
                       display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
+                      flexDirection: 'column',
+                      gap: '5px',
+                      paddingTop: '15px',
                     }}
                   >
                     <Box
                       sx={{
                         display: 'flex',
                         flexDirection: 'row',
-                        gap: '12px',
+                        justifyContent: 'space-between',
                         alignItems: 'center',
                       }}
                     >
-                      <Box>
-                        <PartialFill sx={{ width: '24px' }} />
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: '12px',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Box>
+                          <PartialFill sx={{ width: '24px' }} />
+                        </Box>
+                        <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                          Partial fill
+                        </Typography>
+                        <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
                       </Box>
-                      <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
-                        Partial fill
-                      </Typography>
-                      <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
+                      <Box>
+                        <Switch
+                          checked={isPartialFilled}
+                          onChange={() => setIsPartialFilled(!isPartialFilled)}
+                        />
+                      </Box>
                     </Box>
-                    <Box>
-                      <Switch
-                        checked={isPartialFilled}
-                        onChange={() => setIsPartialFilled(!isPartialFilled)}
-                      />
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: '12px',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Box>
+                          <OptimizedRouter sx={{ width: '24px' }} />
+                        </Box>
+                        <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                          Routing preset
+                        </Typography>
+                        <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
+                      </Box>
+                      <Box>
+                        <Switch
+                          checked={isRoutedPreset}
+                          onChange={() => setIsRoutedPreset(!isRoutedPreset)}
+                        />
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: '12px',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Box>
+                          <CompatibilityMode sx={{ width: '24px' }} />
+                        </Box>
+                        <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                          Compatibility mode
+                        </Typography>
+                        <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
+                      </Box>
+                      <Box>
+                        <Switch
+                          checked={isCompatibilityMode}
+                          onChange={() => setIsCompatibilityMode(!isCompatibilityMode)}
+                        />
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: '12px',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Box>
+                          <LiquiditySources sx={{ width: '24px' }} />
+                        </Box>
+                        <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                          Liquidity sources
+                        </Typography>
+                        <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
+                      </Box>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: '4px',
+                          alignItems: 'center',
+                          color: '#6C86AD',
+                          fontWeight: 400,
+                        }}
+                      >
+                        <Typography sx={{ fontSize: '16px' }}>95</Typography>{' '}
+                        <KeyboardArrowRightIcon />
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: '12px',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Box>
+                          <CustomToken sx={{ width: '24px' }} />
+                        </Box>
+                        <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                          Custom tokens
+                        </Typography>
+                        <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
+                      </Box>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: '4px',
+                          alignItems: 'center',
+                          color: '#6C86AD',
+                          fontWeight: 400,
+                        }}
+                      >
+                        <Typography sx={{ fontSize: '16px' }}>0</Typography>{' '}
+                        <KeyboardArrowRightIcon />
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: '12px',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Box>
+                          <OptimizedRouter sx={{ width: '24px' }} />
+                        </Box>
+                        <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
+                          Use Router V4
+                        </Typography>
+                        <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
+                      </Box>
+                      <Box>
+                        <Switch checked={isV4} onChange={() => setIsV4(!isV4)} />
+                      </Box>
                     </Box>
                   </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '12px',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Box>
-                        <OptimizedRouter sx={{ width: '24px' }} />
-                      </Box>
-                      <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
-                        Routing preset
-                      </Typography>
-                      <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
-                    </Box>
-                    <Box>
-                      <Switch
-                        checked={isRoutedPreset}
-                        onChange={() => setIsRoutedPreset(!isRoutedPreset)}
-                      />
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '12px',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Box>
-                        <CompatibilityMode sx={{ width: '24px' }} />
-                      </Box>
-                      <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
-                        Compatibility mode
-                      </Typography>
-                      <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
-                    </Box>
-                    <Box>
-                      <Switch
-                        checked={isCompatibilityMode}
-                        onChange={() => setIsCompatibilityMode(!isCompatibilityMode)}
-                      />
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '12px',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Box>
-                        <LiquiditySources sx={{ width: '24px' }} />
-                      </Box>
-                      <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
-                        Liquidity sources
-                      </Typography>
-                      <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
-                    </Box>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '4px',
-                        alignItems: 'center',
-                        color: '#6C86AD',
-                        fontWeight: 400,
-                      }}
-                    >
-                      <Typography sx={{ fontSize: '16px' }}>95</Typography>{' '}
-                      <KeyboardArrowRightIcon />
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '12px',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Box>
-                        <CustomToken sx={{ width: '24px' }} />
-                      </Box>
-                      <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
-                        Custom tokens
-                      </Typography>
-                      <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
-                    </Box>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '4px',
-                        alignItems: 'center',
-                        color: '#6C86AD',
-                        fontWeight: 400,
-                      }}
-                    >
-                      <Typography sx={{ fontSize: '16px' }}>0</Typography>{' '}
-                      <KeyboardArrowRightIcon />
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '12px',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Box>
-                        <OptimizedRouter sx={{ width: '24px' }} />
-                      </Box>
-                      <Typography sx={{ color: '#222222', fontWeight: 400, fontSize: '16px' }}>
-                        Use Router V4
-                      </Typography>
-                      <InfoIcon sx={{ fontSize: '16px', color: '#B0BABF' }} />
-                    </Box>
-                    <Box>
-                      <Switch checked={isV4} onChange={() => setIsV4(!isV4)} />
-                    </Box>
-                  </Box>
-                </Box>
-              </Paper>
+                </Paper>
+              </Box>
             )}
             {!isSettingClicked && (
               <Box
