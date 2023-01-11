@@ -20,7 +20,7 @@ import { useWeb3Context } from '../src/libs/hooks/useWeb3Context';
 import borderGradient from 'src/layouts/borderGradient';
 import dynamic from 'next/dynamic';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import { SelectPicker, Radio, RadioGroup } from 'rsuite';
+import { SelectPicker, Radio, RadioGroup, Input, InputGroup } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
 import TerminalList from 'src/modules/dashboard/lists/TerminalList/TerminalList';
 import LongTerminal from 'src/modules/terminal/longTerminal';
@@ -65,6 +65,24 @@ const coinList = [
     value: '0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e607b1',
     tokenA: 'btc',
     tokenB: 'busd',
+  },
+];
+
+const gasOptions = [
+  {
+    label: 'Market',
+    value: '35.64 - 37.51 Gwei',
+    period: '~12 sec',
+  },
+  {
+    label: 'Aggressive',
+    value: '35.64 - 48.77 Gwei',
+    period: '< 10 sec',
+  },
+  {
+    label: 'Custom',
+    value: '35.64 - 37.51 Gwei',
+    period: '~12 sec',
   },
 ];
 
@@ -129,6 +147,15 @@ const NewTab = styled(Tab)`
   }
 `;
 
+const CustomInputGroupWidthButton = ({ placeholder, ...props }) => (
+  <InputGroup {...props} inside>
+    <Input placeholder={placeholder} style={{ color: '#06070a' }} />
+    <InputGroup.Button>
+      <span style={{ color: '#6c86ad' }}>Gwei</span>
+    </InputGroup.Button>
+  </InputGroup>
+);
+
 export default function Terminal() {
   const { currentAccount, loading: web3Loading } = useWeb3Context();
   const { isPermissionsLoading } = usePermissions();
@@ -146,6 +173,11 @@ export default function Terminal() {
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
+  };
+
+  const getPeriod = (_label: string) => {
+    const idx = gasOptions.findIndex((el) => el.label == _label);
+    return gasOptions[idx]['value'];
   };
 
   return (
@@ -206,147 +238,135 @@ export default function Terminal() {
                             Gas price
                           </Typography>
                           <Typography sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '15px' }}>
-                            Market (35.64 - 37.51 Gwei)
+                            {`${gasPrice} (${getPeriod(gasPrice)})`}
                           </Typography>
                         </Box>
                       </AccordionSummary>
                       <AccordionDetails>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '0',
+                            backgroundColor: '#ECF0F9',
+                            borderRadius: '10px',
+                          }}
+                        >
                           <RadioGroup
                             name="radioList"
                             className="custom-radio"
                             value={gasPrice}
-                            onChange={setGasPrice}
-                            style={{
-                              backgroundColor: '#ECF0F9',
-                              borderRadius: '10px',
-                            }}
+                            onChange={(value) => setGasPrice(value)}
                           >
-                            <Box
-                              sx={{
-                                display: 'flex',
-                                padding: '10px 10px',
-                                height: '48px',
-                                borderTopLeftRadius: '10px',
-                                borderTopRightRadius: '10px',
-                                alignItems: 'center',
-                              }}
-                            >
-                              <Radio value={'market'} style={{ width: '100%' }}>
+                            {gasOptions &&
+                              gasOptions.map((option, idx) => (
                                 <Box
                                   sx={{
                                     display: 'flex',
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between',
+                                    padding: '10px 10px',
+                                    height: '48px',
+                                    alignItems: 'center',
+                                    borderTop: idx == 1 ? '1px solid #E6EAF2' : 'none',
+                                    borderBottom: idx == 1 ? '1px solid #E6EAF2' : 'none',
                                   }}
+                                  key={idx}
                                 >
-                                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
-                                    <Typography
-                                      sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
+                                  <Radio value={option.label} style={{ width: '100%' }}>
+                                    <Box
+                                      sx={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        justifyContent: 'space-between',
+                                      }}
                                     >
-                                      Market
-                                    </Typography>
-                                    <Typography
-                                      sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '13px' }}
-                                    >
-                                      ~12 sec
-                                    </Typography>
-                                  </Box>
-                                  <Box>
-                                    <Typography
-                                      sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                                    >
-                                      35.64 - 37.51 Gwei
-                                    </Typography>
-                                  </Box>
+                                      <Box
+                                        sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}
+                                      >
+                                        <Typography
+                                          sx={{
+                                            color: '#06070A',
+                                            fontWeight: 400,
+                                            fontSize: '13px',
+                                          }}
+                                        >
+                                          {option.label}
+                                        </Typography>
+                                        <Typography
+                                          sx={{
+                                            color: '#6C86AD',
+                                            fontWeight: 400,
+                                            fontSize: '13px',
+                                          }}
+                                        >
+                                          {option.period}
+                                        </Typography>
+                                      </Box>
+                                      <Box>
+                                        <Typography
+                                          sx={{
+                                            color: '#06070A',
+                                            fontWeight: 400,
+                                            fontSize: '13px',
+                                          }}
+                                        >
+                                          {option.value}
+                                        </Typography>
+                                      </Box>
+                                    </Box>
+                                  </Radio>
                                 </Box>
-                              </Radio>
-                            </Box>
-                            <Box
-                              sx={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                padding: '10px',
-                                borderTop: '1px solid #E6EAF2',
-                                borderBottom: '1px solid #E6EAF2',
-                                height: '48px',
-                              }}
-                            >
-                              <Radio value={'aggressive'} style={{ width: '100%' }}>
-                                <Box
-                                  sx={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between',
-                                  }}
-                                >
-                                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
-                                    <Typography
-                                      sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                                    >
-                                      Aggressive
-                                    </Typography>
-                                    <Typography
-                                      sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '13px' }}
-                                    >
-                                      {'<'} 10 sec
-                                    </Typography>
-                                  </Box>
-                                  <Box>
-                                    <Typography
-                                      sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                                    >
-                                      35.64 - 48.77 Gwei
-                                    </Typography>
-                                  </Box>
-                                </Box>
-                              </Radio>
-                            </Box>
-                            <Box
-                              sx={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                padding: '10px',
-                                height: '48px',
-                                borderBottomLeftRadius: '10px',
-                                borderBottomRightRadius: '10px',
-                              }}
-                            >
-                              <Radio value={'custom'} style={{ width: '100%' }}>
-                                <Box
-                                  sx={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between',
-                                  }}
-                                >
-                                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
-                                    <Typography
-                                      sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                                    >
-                                      Custom
-                                    </Typography>
-                                    <Typography
-                                      sx={{ color: '#6C86AD', fontWeight: 400, fontSize: '13px' }}
-                                    >
-                                      ~12 sec
-                                    </Typography>
-                                  </Box>
-                                  <Box>
-                                    <Typography
-                                      sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                                    >
-                                      35.64 - 37.51 Gwei
-                                    </Typography>
-                                  </Box>
-                                </Box>
-                              </Radio>
-                            </Box>
+                              ))}
                           </RadioGroup>
+                          {gasPrice == 'Custom' && (
+                            <Box
+                              sx={{
+                                padding: '10px 30px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '5px',
+                              }}
+                            >
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  flexDirection: 'row',
+                                  justifyContent: 'space-between',
+                                }}
+                              >
+                                <Typography sx={{ color: '#6c86ad', fontSize: '13px' }}>
+                                  Max base fee
+                                </Typography>
+                                <Typography sx={{ color: '#6c86ad', fontSize: '13px' }}>
+                                  Miner Priority fee
+                                </Typography>
+                              </Box>
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  flexDirection: 'row',
+                                  justifyContent: 'space-between',
+                                  gap: '15px',
+                                }}
+                              >
+                                <CustomInputGroupWidthButton />
+                                <CustomInputGroupWidthButton />
+                              </Box>
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  flexDirection: 'row',
+                                  justifyContent: 'space-between',
+                                }}
+                              >
+                                <Typography sx={{ color: '#6c86ad', fontSize: '13px' }}>
+                                  <span style={{ color: '#2f8af5' }}>Current</span> 26.58 Gwei
+                                </Typography>
+                                <Typography sx={{ color: '#6c86ad', fontSize: '13px' }}>
+                                  <span style={{ color: '#2f8af5' }}>Current</span> 26.58 Gwei
+                                </Typography>
+                              </Box>
+                            </Box>
+                          )}
                         </Box>
                       </AccordionDetails>
                     </Accordion>
