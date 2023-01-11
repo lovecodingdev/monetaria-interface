@@ -142,6 +142,7 @@ export default function Terminal() {
   const [isCompatibilityMode, setIsCompatibilityMode] = useState(false);
   const [isV4, setIsV4] = useState(false);
   const [isSettingClicked, setIsSettingClicked] = useState(false);
+  const [gasPrice, setGasPrice] = useState('market');
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
@@ -211,22 +212,34 @@ export default function Terminal() {
                       </AccordionSummary>
                       <AccordionDetails>
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-                          <RadioGroup name="radioList">
+                          <RadioGroup
+                            name="radioList"
+                            className="custom-radio"
+                            value={gasPrice}
+                            onChange={setGasPrice}
+                            style={{
+                              backgroundColor: '#ECF0F9',
+                              borderRadius: '10px',
+                            }}
+                          >
                             <Box
                               sx={{
                                 display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                padding: '10px',
-                                border: '1px solid #EFF1F5',
+                                padding: '10px 10px',
                                 height: '48px',
-                                borderTopLeftRadius: '8px',
-                                borderTopRightRadius: '8px',
+                                borderTopLeftRadius: '10px',
+                                borderTopRightRadius: '10px',
+                                alignItems: 'center',
                               }}
                             >
-                              <Box>
-                                <Radio value={'market'}>
+                              <Radio value={'market'} style={{ width: '100%' }}>
+                                <Box
+                                  sx={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                  }}
+                                >
                                   <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
                                     <Typography
                                       sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
@@ -239,15 +252,15 @@ export default function Terminal() {
                                       ~12 sec
                                     </Typography>
                                   </Box>
-                                </Radio>
-                              </Box>
-                              <Box>
-                                <Typography
-                                  sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                                >
-                                  35.64 - 37.51 Gwei
-                                </Typography>
-                              </Box>
+                                  <Box>
+                                    <Typography
+                                      sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
+                                    >
+                                      35.64 - 37.51 Gwei
+                                    </Typography>
+                                  </Box>
+                                </Box>
+                              </Radio>
                             </Box>
                             <Box
                               sx={{
@@ -256,12 +269,19 @@ export default function Terminal() {
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
                                 padding: '10px',
-                                border: '1px solid #EFF1F5',
+                                borderTop: '1px solid #E6EAF2',
+                                borderBottom: '1px solid #E6EAF2',
                                 height: '48px',
                               }}
                             >
-                              <Box>
-                                <Radio value={'Aggressive'}>
+                              <Radio value={'aggressive'} style={{ width: '100%' }}>
+                                <Box
+                                  sx={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                  }}
+                                >
                                   <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
                                     <Typography
                                       sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
@@ -274,15 +294,15 @@ export default function Terminal() {
                                       {'<'} 10 sec
                                     </Typography>
                                   </Box>
-                                </Radio>
-                              </Box>
-                              <Box>
-                                <Typography
-                                  sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                                >
-                                  35.64 - 48.77 Gwei
-                                </Typography>
-                              </Box>
+                                  <Box>
+                                    <Typography
+                                      sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
+                                    >
+                                      35.64 - 48.77 Gwei
+                                    </Typography>
+                                  </Box>
+                                </Box>
+                              </Radio>
                             </Box>
                             <Box
                               sx={{
@@ -291,14 +311,19 @@ export default function Terminal() {
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
                                 padding: '10px',
-                                border: '1px solid #EFF1F5',
                                 height: '48px',
-                                borderBottomLeftRadius: '8px',
-                                borderBottomRightRadius: '8px',
+                                borderBottomLeftRadius: '10px',
+                                borderBottomRightRadius: '10px',
                               }}
                             >
-                              <Box>
-                                <Radio value={'Custom'}>
+                              <Radio value={'custom'} style={{ width: '100%' }}>
+                                <Box
+                                  sx={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                  }}
+                                >
                                   <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
                                     <Typography
                                       sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
@@ -311,15 +336,15 @@ export default function Terminal() {
                                       ~12 sec
                                     </Typography>
                                   </Box>
-                                </Radio>
-                              </Box>
-                              <Box>
-                                <Typography
-                                  sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
-                                >
-                                  35.64 - 37.51 Gwei
-                                </Typography>
-                              </Box>
+                                  <Box>
+                                    <Typography
+                                      sx={{ color: '#06070A', fontWeight: 400, fontSize: '13px' }}
+                                    >
+                                      35.64 - 37.51 Gwei
+                                    </Typography>
+                                  </Box>
+                                </Box>
+                              </Radio>
                             </Box>
                           </RadioGroup>
                         </Box>

@@ -95,3 +95,12 @@
 .pool-select .rs-picker-toggle-caret.rs-icon {
   top: 17px !important;
 }
+
+.custom-radio .rs-radio.rs-radio-checked .rs-radio-inner:before {
+  background: url(https://app.1inch.io/check_mark.e7d4a9050b678858.svg), #3498ff;
+  background-position: center;
+}
+
+.custom-radio .rs-radio.rs-radio-checked .rs-radio-inner:after {
+  display: none;
+}
