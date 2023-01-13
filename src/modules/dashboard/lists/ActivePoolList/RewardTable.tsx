@@ -11,7 +11,8 @@ const data: RewardType[] = [
   {
     asset: 'ETH',
     symbol: 'eth',
-    network: 'Ethereum',
+    protocol: 'Pancake Swap',
+    tvl: 'TVL 3.42m',
     apy: 0.68,
     apr: {
       yield_farming: 7.8,
@@ -27,7 +28,8 @@ const data: RewardType[] = [
   {
     asset: 'ETH',
     symbol: 'eth',
-    network: 'Ethereum',
+    protocol: 'Pancake Swap',
+    tvl: 'TVL 3.42m',
     apy: 0.68,
     apr: {
       yield_farming: 7.8,
@@ -43,7 +45,8 @@ const data: RewardType[] = [
   {
     asset: 'ETH',
     symbol: 'eth',
-    network: 'Ethereum',
+    protocol: 'Pancake Swap',
+    tvl: 'TVL 3.42m',
     apy: 0.68,
     apr: {
       yield_farming: 7.8,
@@ -133,14 +136,19 @@ export const RewardTable = ({ showModal }) => {
                 }}
               >
                 <Box
-                  sx={{ fontSize: '14px', fontWeight: 400, textAlign: 'left', color: '#252C32' }}
+                  sx={{ fontSize: '14px', fontWeight: 600, textAlign: 'left', color: '#252C32' }}
                 >
                   {rowData.asset}
                 </Box>
                 <Box
                   sx={{ fontSize: '12px', fontWeight: 400, color: '#84919A', textAlign: 'left' }}
                 >
-                  {rowData.network}
+                  {rowData.protocol}
+                </Box>
+                <Box
+                  sx={{ fontSize: '12px', fontWeight: 400, color: '#48535B', textAlign: 'left' }}
+                >
+                  {rowData.tvl}
                 </Box>
               </Box>
             </Box>

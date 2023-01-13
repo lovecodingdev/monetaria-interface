@@ -1,7 +1,8 @@
 export interface RewardType {
   asset: string;
   symbol: string;
-  network: string;
+  protocol: string;
+  tvl: string;
   apy: number;
   apr: {
     yield_farming: number;
