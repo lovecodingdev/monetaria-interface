@@ -7,6 +7,8 @@ import {
   useTheme,
   Button,
   IconButton,
+  AlertTitle,
+  Alert,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { MainLayout } from '../src/layouts/MainLayout';
@@ -77,6 +79,7 @@ export default function FarmDetail() {
   const [times, setTimes] = useState(1.5);
   const [investDay, setInvestDay] = useState('90');
   const [curCoin, setCurCoin] = useState('0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e600b1');
+  const [isWarning, setIsWarning] = useState(true);
 
   const valuetext = (value: number) => {
     setTimes(value);
@@ -103,6 +106,27 @@ export default function FarmDetail() {
       }}
     >
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        {isWarning && (
+          <Box sx={{ marginBottom: '24px' }}>
+            <Alert
+              severity="error"
+              onClose={() => setIsWarning(false)}
+              sx={{
+                backgroundColor: '#FFFCC2',
+                border: '1px solid #FCF27D',
+                padding: '16px 16px 20px',
+              }}
+            >
+              <AlertTitle sx={{ color: '#252C32', fontWeight: 600, fontSize: '14px' }}>
+                Warning
+              </AlertTitle>
+              Please be aware of a potential large price impact when opening a large position. This
+              is due to your position size compared to the underlying liquidity of the pool
+              PancakeSwap BUSD-ALPACA.
+            </Alert>
+          </Box>
+        )}
+
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: { xs: '24px', sm: '23%' } }}>
           <Box>
             <IconButton
