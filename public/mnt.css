@@ -104,3 +104,12 @@
 .custom-radio .rs-radio.rs-radio-checked .rs-radio-inner:after {
   display: none;
 }
+
+.farm-custom-select .rs-picker-toggle.rs-btn.rs-btn-default {
+  background-color: #F6F8F9 !important;
+  border: none;
+}
+
+.farm-custom-select .rs-picker-toggle-caret.rs-icon {
+  top: 9px !important;
+}
