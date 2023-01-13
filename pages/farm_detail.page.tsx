@@ -20,6 +20,8 @@ import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MntShiba from '/public/icons/tokens/mnt-shiba.svg';
+import { BasicModal } from 'src/components/primitives/BasicModal';
+import { useSafeAppConnection } from '@gnosis.pm/safe-apps-web3-react';
 
 const marks = [
   {
@@ -80,6 +82,8 @@ export default function FarmDetail() {
   const [investDay, setInvestDay] = useState('90');
   const [curCoin, setCurCoin] = useState('0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e600b1');
   const [isWarning, setIsWarning] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
+  const [slippage, setSlippage] = useState(0.25);
 
   const valuetext = (value: number) => {
     setTimes(value);
@@ -120,47 +124,66 @@ export default function FarmDetail() {
               <AlertTitle sx={{ color: '#252C32', fontWeight: 600, fontSize: '14px' }}>
                 Warning
               </AlertTitle>
-              Please be aware of a potential large price impact when opening a large position. This
-              is due to your position size compared to the underlying liquidity of the pool
-              PancakeSwap BUSD-ALPACA.
+              <Typography sx={{ color: '#5B6871' }}>
+                {' '}
+                Please be aware of a potential large price impact when opening a large position.
+                This is due to your position size compared to the underlying liquidity of the pool
+                PancakeSwap BUSD-ALPACA.
+              </Typography>
             </Alert>
           </Box>
         )}
 
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: { xs: '24px', sm: '23%' } }}>
-          <Box>
-            <IconButton
-              href="/farm"
-              sx={{
-                backgroundColor: 'white',
-                border: '1px solid #DDE2E4',
-                borderRadius: '8px',
+        <BasicModal open={openModal} setOpen={setOpenModal} withCloseButton={true}>
+          <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
+            Settings
+          </Typography>
+          <Box sx={{ mt: 2 }}>
+            {' '}
+            <label
+              style={{
+                display: 'block',
                 color: '#252C32',
-                width: '52px',
-                padding: '4px 12px',
-                height: '32px',
+                fontWeight: 400,
+                fontSize: '14px',
+                paddingBottom: '5px',
               }}
             >
-              <KeyboardArrowLeftIcon />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
-            <Typography sx={{ color: '#080F26', fontWeight: 700, fontSize: '24px' }}>
-              Farming
-            </Typography>
+              Slippage tolerance
+            </label>
             <Box
               sx={{
                 display: 'flex',
+                border: '1px solid #DDE2E4',
+                width: '279px',
+                height: '40px',
+                borderRadius: '6px',
                 alignItems: 'center',
-                color: '#080F26',
-                fontSize: '16px',
-                fontWeight: 400,
+                paddingLeft: '10px',
               }}
             >
-              <MntShiba /> MNT - Shiba
+              {' '}
+              <input
+                type="number"
+                className="stake-input"
+                placeholder="0.00"
+                step={0.01}
+                value={slippage}
+                onChange={(e) => setSlippage(e.target.value)}
+                style={{
+                  outline: 'none',
+                  border: 'none',
+                  backgroundColor: 'transparent',
+                  fontWeight: 500,
+                  fontSize: '18px',
+                  color: '#252C32',
+                  width: downToXSM ? '120px' : '100%',
+                }}
+              />
             </Box>
           </Box>
-        </Box>
+        </BasicModal>
+
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <Box>
             <Paper
@@ -173,6 +196,38 @@ export default function FarmDetail() {
               }}
             >
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', gap: { xs: '24px', sm: '20%' } }}>
+                  <Box>
+                    <IconButton
+                      href="/farm"
+                      sx={{
+                        backgroundColor: 'transparent',
+                        color: '#252C32',
+                      }}
+                    >
+                      <KeyboardArrowLeftIcon />
+                    </IconButton>
+                  </Box>
+                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+                    <Typography sx={{ color: '#080F26', fontWeight: 700, fontSize: '24px' }}>
+                      Farming
+                    </Typography>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        color: '#080F26',
+                        fontSize: '16px',
+                        fontWeight: 400,
+                      }}
+                    >
+                      <MntShiba /> MNT - Shiba
+                    </Box>
+                  </Box>
+                </Box>
+                <Typography sx={{ color: 'black', fontWeight: 700, fontSize: '18px' }}>
+                  How much would you like to add for farming?
+                </Typography>
                 <Box>
                   <label
                     style={{
@@ -183,7 +238,7 @@ export default function FarmDetail() {
                       paddingBottom: '5px',
                     }}
                   >
-                    MNT
+                    Available Balance: 0.01 BNB
                   </label>
                   <Box
                     sx={{
@@ -198,8 +253,15 @@ export default function FarmDetail() {
                       borderRadius: '8px',
                     }}
                   >
-                    <Box sx={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
-                      <TokenIcon symbol={'mnt'} sx={{ fontSize: '24px', mr: 1 }} />
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: '10px',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <TokenIcon symbol={'bnb'} sx={{ fontSize: '24px', mr: 1 }} />
                       <input
                         type="number"
                         className="stake-input"
@@ -220,19 +282,27 @@ export default function FarmDetail() {
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'row', gap: '4px' }}>
                       <Typography sx={{ color: '#9AA6AC', fontWeight: 400, fontSize: '12px' }}>
-                        Balance: <span style={{ fontWeight: 600 }}>179 MNT</span>
-                      </Typography>
-                      <Typography
-                        sx={{
-                          color: '#9AA6AC',
-                          fontWeight: 400,
-                          fontSize: '12px',
-                          textDecoration: 'underline',
-                        }}
-                      >
-                        Buy
+                        <span style={{ fontWeight: 600 }}> MNT</span>
                       </Typography>
                     </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      mt: 2,
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: '6px',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Box>
+                      {' '}
+                      <TokenIcon symbol={'bnb'} sx={{ fontSize: '20px', mr: 1 }} />
+                    </Box>
+                    <Typography sx={{ color: '#5B6871', fontSize: '12px', fontWeight: 400 }}>
+                      1 BNB = 285 BUSD
+                    </Typography>
+                    <Button>Buy</Button>
                   </Box>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: '8px' }}>
@@ -299,7 +369,7 @@ export default function FarmDetail() {
                       paddingBottom: '5px',
                     }}
                   >
-                    COIN
+                    Available Balance: 0.01 SHIBA
                   </label>
                   <Box
                     sx={{
@@ -314,7 +384,14 @@ export default function FarmDetail() {
                       borderRadius: '8px',
                     }}
                   >
-                    <Box sx={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: '10px',
+                        alignItems: 'center',
+                      }}
+                    >
                       <TokenIcon symbol={'bnb'} sx={{ fontSize: '24px', mr: 1 }} />
                       <input
                         type="number"
@@ -336,19 +413,27 @@ export default function FarmDetail() {
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'row', gap: '4px' }}>
                       <Typography sx={{ color: '#9AA6AC', fontWeight: 400, fontSize: '12px' }}>
-                        Balance: <span style={{ fontWeight: 600 }}>179 COIN</span>
-                      </Typography>
-                      <Typography
-                        sx={{
-                          color: '#9AA6AC',
-                          fontWeight: 400,
-                          fontSize: '12px',
-                          textDecoration: 'underline',
-                        }}
-                      >
-                        Buy
+                        <span style={{ fontWeight: 600 }}>SHIBA</span>
                       </Typography>
                     </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      mt: 2,
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: '6px',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Box>
+                      {' '}
+                      <TokenIcon symbol={'bnb'} sx={{ fontSize: '20px', mr: 1 }} />
+                    </Box>
+                    <Typography sx={{ color: '#5B6871', fontSize: '12px', fontWeight: 400 }}>
+                      1 Shiba = 285 BUSD
+                    </Typography>
+                    <Button>Buy</Button>
                   </Box>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: '8px' }}>
@@ -547,6 +632,24 @@ export default function FarmDetail() {
                       }}
                     />
                   </Box>
+                  <Box sx={{ mt: 2 }}>
+                    <Alert
+                      severity="error"
+                      sx={{
+                        backgroundColor: '#FFEFEB',
+                        border: '1px solid #FED6CD',
+                        padding: '16px',
+                        borderRadius: '6px',
+                      }}
+                    >
+                      <Typography sx={{ color: '#F76659' }}>
+                        {' '}
+                        Please keep in mind that when you leverage above 2x, you will have a slight
+                        short on the borrowed asset. The other paired asset will have typical long
+                        exposure, so choose which asset you borrow wisely.
+                      </Typography>
+                    </Alert>
+                  </Box>
                 </Box>
                 <Box
                   sx={{
@@ -557,7 +660,7 @@ export default function FarmDetail() {
                   }}
                 >
                   <Box sx={{ flex: 1 }}>
-                    <IconButton>
+                    <IconButton onClick={() => setOpenModal(true)}>
                       <SettingsIcon sx={{ color: '#023997' }} />
                     </IconButton>
                   </Box>
@@ -574,7 +677,7 @@ export default function FarmDetail() {
                           fontSize: '14px',
                         }}
                       >
-                        Farm 2.0x
+                        Approve
                       </Button>
                       {!downToXSM && (
                         <Button
