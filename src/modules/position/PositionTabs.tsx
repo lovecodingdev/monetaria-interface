@@ -20,6 +20,7 @@ import { SuppliedPositionsList } from '../dashboard/lists/SuppliedPositionsList/
 import TransactionList from '../dashboard/lists/TransactionList/TransactionList';
 import LiquidationHistoryList from '../dashboard/lists/LiquidationHistoryList/LiquidationHistoryList';
 import { Dashboard } from './Dashboard';
+import { FarmPosition } from './FarmPosition';
 
 const NewTabs = styled(Tabs)({
   minHeight: '24px',
@@ -213,6 +214,15 @@ export const PositionTabs = () => {
               fontStyle: 'normal',
             }}
           />
+
+          <NewTab
+            label="Farm"
+            sx={{
+              fontSize: { xs: '14px', md: '14px' },
+              fontFamily: 'Gilroy,Arial !important',
+              fontStyle: 'normal',
+            }}
+          />
         </NewTabs>
       </Box>
       {selectedTab == 0 && <SuppliedPositionsList />}
@@ -220,6 +230,7 @@ export const PositionTabs = () => {
       {selectedTab == 2 && <TransactionList />}
       {selectedTab == 3 && <LiquidationHistoryList />}
       {selectedTab == 4 && <Dashboard />}
+      {selectedTab == 5 && <FarmPosition />}
     </Paper>
   );
 };
