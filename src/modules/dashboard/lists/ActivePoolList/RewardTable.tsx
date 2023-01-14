@@ -152,18 +152,36 @@ export const RewardTable = ({ showModal }) => {
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
-                gap: 4,
+                gap: 8,
                 justifyContent: 'start',
                 alignItems: 'center',
                 cursor: 'pointer',
               }}
               onClick={() => router.push('/farm_detail/')}
             >
-              <TokenIcon
-                symbol={rowData.symbol}
-                sx={{ fontSize: `24px`, ml: -1 }}
-                key={rowData.symbol}
-              />
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  position: 'relative',
+                }}
+              >
+                {' '}
+                <TokenIcon
+                  symbol={rowData.apr.borrowing_interest[0].value}
+                  sx={{ fontSize: '32px', mr: 1, zIndex: 10 }}
+                />{' '}
+                <TokenIcon
+                  symbol={rowData.apr.borrowing_interest[1].value}
+                  sx={{
+                    fontSize: '32px',
+                    mr: 1,
+                    position: 'absolute',
+                    left: '24px',
+                    zIndex: 9,
+                  }}
+                />{' '}
+              </Box>
               <Box
                 sx={{
                   display: 'flex',
