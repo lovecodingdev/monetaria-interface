@@ -262,22 +262,41 @@ export default function FarmDetail() {
                     <KeyboardArrowLeftIcon />
                   </IconButton>
                 </Box>
-                <Typography sx={{ color: 'black', fontWeight: 700, fontSize: '18px' }}>
-                  How much would you like to add for farming?
-                </Typography>
+                {!downToXSM && (
+                  <Typography sx={{ color: 'black', fontWeight: 700, fontSize: '18px' }}>
+                    How much would you like to add for farming?
+                  </Typography>
+                )}
+                {downToXSM && (
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      color: '#080F26',
+                      fontSize: '16px',
+                      fontWeight: 400,
+                    }}
+                  >
+                    <MntShiba /> MNT - Shiba
+                  </Box>
+                )}
+
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: { xs: '24px', sm: '20%' } }}>
                   <Box sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        color: '#080F26',
-                        fontSize: '16px',
-                        fontWeight: 400,
-                      }}
-                    >
-                      <MntShiba /> MNT - Shiba
-                    </Box>
+                    {!downToXSM && (
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          color: '#080F26',
+                          fontSize: '16px',
+                          fontWeight: 400,
+                        }}
+                      >
+                        <MntShiba /> MNT - Shiba
+                      </Box>
+                    )}
+
                     <Box>
                       <IconButton onClick={() => setOpenModal(true)}>
                         <SettingsIcon sx={{ color: '#84919A' }} />
@@ -288,7 +307,14 @@ export default function FarmDetail() {
               </Box>
 
               {/* Begin Farming Detail Paper */}
-              <Box sx={{ display: 'flex', flexDirection: 'row', gap: '35px', paddingTop: '24px' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: { xs: 'column', sm: 'row' },
+                  gap: { xs: '21px', sm: '35px' },
+                  paddingTop: '24px',
+                }}
+              >
                 <Box
                   sx={{
                     flex: 1,
@@ -298,6 +324,11 @@ export default function FarmDetail() {
                   }}
                 >
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {downToXSM && (
+                      <Typography sx={{ color: 'black', fontWeight: 700, fontSize: '18px' }}>
+                        How much would you like to add for farming?
+                      </Typography>
+                    )}
                     <Box
                       sx={{
                         backgroundColor: '#EEF0F2',
@@ -703,37 +734,24 @@ export default function FarmDetail() {
                             Simulate Your Position
                           </Button>
                         )}
-                        <Button
-                          sx={{
-                            flex: 1,
-                            backgroundColor: '#074592',
-                            border: '1px solid rgba(21, 126, 255, 0.2)',
-                            color: '#F6F8F9',
-                            fontWeight: 600,
-                            fontSize: '14px',
-                          }}
-                          variant="contained"
-                        >
-                          Farm 6x
-                        </Button>
+                        {!downToXSM && (
+                          <Button
+                            sx={{
+                              flex: 1,
+                              backgroundColor: '#074592',
+                              border: '1px solid rgba(21, 126, 255, 0.2)',
+                              color: '#F6F8F9',
+                              fontWeight: 600,
+                              fontSize: '14px',
+                            }}
+                            variant="contained"
+                          >
+                            Farm 6x
+                          </Button>
+                        )}
                       </Box>
                     </Box>
                   </Box>
-                  {downToXSM && (
-                    <Button
-                      sx={{
-                        flex: 1,
-                        backgroundColor: '#074592',
-                        border: '1px solid rgba(21, 126, 255, 0.2)',
-                        color: '#F6F8F9',
-                        fontWeight: 600,
-                        fontSize: '14px',
-                      }}
-                      variant="contained"
-                    >
-                      Simulator
-                    </Button>
-                  )}
                 </Box>
                 {/** Tab for Overview and Simulator */}
                 <Box sx={{ flex: 1 }}>
@@ -1081,6 +1099,39 @@ export default function FarmDetail() {
                         </Box>
                       </Box>
                     </>
+                  )}
+                </Box>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {downToXSM && (
+                    <Button
+                      sx={{
+                        flex: 1,
+                        backgroundColor: 'rgba(21, 126, 255, 0.05)',
+                        border: '1px solid rgba(21, 126, 255, 0.2)',
+                        color: '#023997',
+                        fontWeight: 600,
+                        fontSize: '14px',
+                      }}
+                      fullWidth
+                    >
+                      Simulate Your Position
+                    </Button>
+                  )}
+                  {downToXSM && (
+                    <Button
+                      sx={{
+                        flex: 1,
+                        backgroundColor: '#074592',
+                        border: '1px solid rgba(21, 126, 255, 0.2)',
+                        color: '#F6F8F9',
+                        fontWeight: 600,
+                        fontSize: '14px',
+                      }}
+                      variant="contained"
+                      fullWidth
+                    >
+                      Farm 6x
+                    </Button>
                   )}
                 </Box>
               </Box>
