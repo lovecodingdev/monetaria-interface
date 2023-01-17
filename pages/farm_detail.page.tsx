@@ -372,86 +372,27 @@ export default function FarmDetail() {
                               Max
                             </Button>
                           )}
-                          <SelectPicker
-                            data={coinList}
-                            style={{ width: '100%' }}
-                            value={curCoinA}
-                            cleanable={false}
-                            placeholder="Select a coin"
-                            searchable={false}
-                            onChange={(value: string, e) => {
-                              setCurCoinA(value);
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                              gap: 2,
+                              alignItems: 'center',
                             }}
-                            renderMenuItem={(label, item) => {
-                              return (
-                                <Box
-                                  sx={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    gap: 2,
-                                    alignItems: 'center',
-                                    fontFamily: 'Gilroy, Arial !important',
-                                  }}
-                                >
-                                  <Box>
-                                    {' '}
-                                    <TokenIcon
-                                      symbol={label}
-                                      sx={{ fontSize: '32px', mr: 1 }}
-                                    />{' '}
-                                  </Box>
-                                  <Box>
-                                    {' '}
-                                    <span
-                                      style={{
-                                        fontWeight: 400,
-                                        fontSize: '14px',
-                                        color: '#5B6871',
-                                      }}
-                                    >
-                                      {item.title}
-                                    </span>
-                                  </Box>
-                                  <Box>
-                                    {' '}
-                                    <Typography
-                                      sx={{ color: '#84919A', fontWeight: 400, fontSize: '14px' }}
-                                    >
-                                      {item.network}
-                                    </Typography>
-                                  </Box>
-                                </Box>
-                              );
-                            }}
-                            renderValue={(value, item) => {
-                              return (
-                                <Box
-                                  sx={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    gap: 2,
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Box>
-                                    {' '}
-                                    <TokenIcon
-                                      symbol={item.label}
-                                      sx={{ fontSize: '32px', mr: 1 }}
-                                    />{' '}
-                                  </Box>
-                                  <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                                    {' '}
-                                    <Typography
-                                      sx={{ fontWeight: 400, fontSize: '14px', color: '#080F26' }}
-                                    >
-                                      {item.title.toUpperCase()}
-                                    </Typography>{' '}
-                                  </Box>
-                                </Box>
-                              );
-                            }}
-                          />
+                          >
+                            <Box>
+                              {' '}
+                              <TokenIcon symbol={'bnb'} sx={{ fontSize: '32px', mr: 1 }} />{' '}
+                            </Box>
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                              {' '}
+                              <Typography
+                                sx={{ fontWeight: 400, fontSize: '14px', color: '#080F26' }}
+                              >
+                                BNB
+                              </Typography>{' '}
+                            </Box>
+                          </Box>
                         </Box>
                       </Box>
                     </Box>
@@ -529,86 +470,27 @@ export default function FarmDetail() {
                               Max
                             </Button>
                           )}
-                          <SelectPicker
-                            data={coinList}
-                            style={{ width: '100%' }}
-                            value={curCoinB}
-                            cleanable={false}
-                            placeholder="Select a coin"
-                            searchable={false}
-                            onChange={(value: string, e) => {
-                              setCurCoinB(value);
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                              gap: 2,
+                              alignItems: 'center',
                             }}
-                            renderMenuItem={(label, item) => {
-                              return (
-                                <Box
-                                  sx={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    gap: 2,
-                                    alignItems: 'center',
-                                    fontFamily: 'Gilroy, Arial !important',
-                                  }}
-                                >
-                                  <Box>
-                                    {' '}
-                                    <TokenIcon
-                                      symbol={label}
-                                      sx={{ fontSize: '32px', mr: 1 }}
-                                    />{' '}
-                                  </Box>
-                                  <Box>
-                                    {' '}
-                                    <span
-                                      style={{
-                                        fontWeight: 400,
-                                        fontSize: '14px',
-                                        color: '#5B6871',
-                                      }}
-                                    >
-                                      {item.title}
-                                    </span>
-                                  </Box>
-                                  <Box>
-                                    {' '}
-                                    <Typography
-                                      sx={{ color: '#84919A', fontWeight: 400, fontSize: '14px' }}
-                                    >
-                                      {item.network}
-                                    </Typography>
-                                  </Box>
-                                </Box>
-                              );
-                            }}
-                            renderValue={(value, item) => {
-                              return (
-                                <Box
-                                  sx={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    gap: 2,
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Box>
-                                    {' '}
-                                    <TokenIcon
-                                      symbol={item.label}
-                                      sx={{ fontSize: '32px', mr: 1 }}
-                                    />{' '}
-                                  </Box>
-                                  <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                                    {' '}
-                                    <Typography
-                                      sx={{ fontWeight: 400, fontSize: '14px', color: '#080F26' }}
-                                    >
-                                      {item.title.toUpperCase()}
-                                    </Typography>{' '}
-                                  </Box>
-                                </Box>
-                              );
-                            }}
-                          />
+                          >
+                            <Box>
+                              {' '}
+                              <TokenIcon symbol={'usdt'} sx={{ fontSize: '32px', mr: 1 }} />{' '}
+                            </Box>
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                              {' '}
+                              <Typography
+                                sx={{ fontWeight: 400, fontSize: '14px', color: '#080F26' }}
+                              >
+                                USDT
+                              </Typography>{' '}
+                            </Box>
+                          </Box>
                         </Box>
                       </Box>
                     </Box>
@@ -807,33 +689,33 @@ export default function FarmDetail() {
                     <Box sx={{ flex: 3 }}>
                       {' '}
                       <Box sx={{ display: 'flex', flexDirection: 'row', gap: '12px' }}>
-                        <Button
-                          sx={{
-                            flex: 1,
-                            backgroundColor: 'rgba(21, 126, 255, 0.05)',
-                            border: '1px solid rgba(21, 126, 255, 0.2)',
-                            color: '#023997',
-                            fontWeight: 600,
-                            fontSize: '14px',
-                          }}
-                        >
-                          Approve
-                        </Button>
                         {!downToXSM && (
                           <Button
                             sx={{
                               flex: 1,
-                              backgroundColor: '#074592',
+                              backgroundColor: 'rgba(21, 126, 255, 0.05)',
                               border: '1px solid rgba(21, 126, 255, 0.2)',
-                              color: '#F6F8F9',
+                              color: '#023997',
                               fontWeight: 600,
                               fontSize: '14px',
                             }}
-                            variant="contained"
                           >
-                            Simulator
+                            Simulate Your Position
                           </Button>
                         )}
+                        <Button
+                          sx={{
+                            flex: 1,
+                            backgroundColor: '#074592',
+                            border: '1px solid rgba(21, 126, 255, 0.2)',
+                            color: '#F6F8F9',
+                            fontWeight: 600,
+                            fontSize: '14px',
+                          }}
+                          variant="contained"
+                        >
+                          Farm 6x
+                        </Button>
                       </Box>
                     </Box>
                   </Box>
@@ -909,7 +791,7 @@ export default function FarmDetail() {
                             alignItems: 'center',
                           }}
                         >
-                          <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Yield Farm APR
                           </Typography>
                           <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
@@ -924,7 +806,7 @@ export default function FarmDetail() {
                             alignItems: 'center',
                           }}
                         >
-                          <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Trading Fees APR(7-day avg.)
                           </Typography>
                           <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
@@ -939,7 +821,7 @@ export default function FarmDetail() {
                             alignItems: 'center',
                           }}
                         >
-                          <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             MNT Rewards APR
                           </Typography>
                           <Box sx={{ display: 'flex', flexDirection: 'row', gap: '2px' }}>
@@ -959,7 +841,7 @@ export default function FarmDetail() {
                             alignItems: 'center',
                           }}
                         >
-                          <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Borrowing Interest APR
                           </Typography>
                           <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
@@ -974,7 +856,7 @@ export default function FarmDetail() {
                             alignItems: 'center',
                           }}
                         >
-                          <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Total APR
                           </Typography>
                           <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
@@ -982,7 +864,7 @@ export default function FarmDetail() {
                           </Typography>
                         </Box>
                         <Box>
-                          <Typography sx={{ color: '#252C32', fontWeight: 400, fontSize: '10px' }}>
+                          <Typography sx={{ color: '#252C32', fontWeight: 500, fontSize: '10px' }}>
                             (Yield Farming + Trading Fees + ALPACA Rewards – Borrowing Interest)
                           </Typography>
                         </Box>
@@ -994,7 +876,7 @@ export default function FarmDetail() {
                             alignItems: 'center',
                           }}
                         >
-                          <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Total APY
                           </Typography>
                           <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
@@ -1009,7 +891,7 @@ export default function FarmDetail() {
                             alignItems: 'center',
                           }}
                         >
-                          <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Neutral
                           </Typography>
                           <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
@@ -1037,7 +919,7 @@ export default function FarmDetail() {
                             gap: '5px',
                           }}
                         >
-                          <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Assets Supplied(Equity Value before fees)
                           </Typography>
                           <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
@@ -1052,7 +934,7 @@ export default function FarmDetail() {
                             alignItems: 'center',
                           }}
                         >
-                          <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Assets Borrowed(Debt Value)
                           </Typography>
                           <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
@@ -1067,7 +949,7 @@ export default function FarmDetail() {
                             alignItems: 'center',
                           }}
                         >
-                          <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Assets Borrowed(Debt Value)
                           </Typography>
                           <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
@@ -1083,7 +965,7 @@ export default function FarmDetail() {
                             gap: '5px',
                           }}
                         >
-                          <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Total Assets inPosition Value
                           </Typography>
                           <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
@@ -1098,7 +980,7 @@ export default function FarmDetail() {
                             alignItems: 'center',
                           }}
                         >
-                          <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Share of Pool (Alpaca Finance)
                           </Typography>
                           <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
@@ -1113,7 +995,7 @@ export default function FarmDetail() {
                             alignItems: 'center',
                           }}
                         >
-                          <Typography sx={{ color: '#59729D', fontWeight: 400, fontSize: '12px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Share of Pool (PancakeSwap)
                           </Typography>
                           <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
