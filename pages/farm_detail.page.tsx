@@ -117,16 +117,15 @@ export default function FarmDetail() {
   const xsm = useMediaQuery(breakpoints.up('xsm'));
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
   const [times, setTimes] = useState(1.5);
-  const [investDay, setInvestDay] = useState('90');
+  const [investDay, setInvestDay] = useState('180');
   const [curCoin, setCurCoin] = useState('0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e600b1');
   const [isWarning, setIsWarning] = useState(true);
   const [openModal, setOpenModal] = useState(false);
+  const [openModalForGraph, setOpenModalForGraph] = useState(false);
   const [slippage, setSlippage] = useState(0.25);
   const [selectedTab, setSelectedTab] = useState(0);
   const [amtOfCoinA, setAmtOfCoinA] = useState(0);
   const [amtOfCoinB, setAmtOfCoinB] = useState(0);
-  const [curCoinA, setCurCoinA] = useState('0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1');
-  const [curCoinB, setCurCoinB] = useState('0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e607b1');
   const [curBorrow, setCurBorrow] = useState('0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e607b1');
 
   const valuetext = (value: number) => {
@@ -139,11 +138,7 @@ export default function FarmDetail() {
   };
 
   const valuetextForInvest = (_value: number) => {
-    const curMarkLabel = investMarks.filter((mark) => {
-      return mark.value == _value;
-    });
-    setInvestDay(curMarkLabel[0].label);
-    return `${curMarkLabel[0].label} Day(s)`;
+    setInvestDay(_value);
   };
 
   return (
@@ -228,6 +223,82 @@ export default function FarmDetail() {
                   width: downToXSM ? '120px' : '100%',
                 }}
               />
+            </Box>
+          </Box>
+        </BasicModal>
+
+        <BasicModal open={openModalForGraph} setOpen={setOpenModalForGraph} withCloseButton={false}>
+          <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
+            Farming Simulator
+          </Typography>
+          <Box sx={{ mt: 2 }}>
+            {' '}
+            <Box>
+              <label
+                style={{
+                  display: 'block',
+                  color: '#252C32',
+                  fontWeight: 400,
+                  fontSize: '14px',
+                  paddingBottom: '5px',
+                }}
+              >
+                Invest Days:
+              </label>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  gap: '12px',
+                  flexWrap: 'wrap',
+                }}
+              >
+                <Box sx={{ flex: 3, padding: '0 10px' }}>
+                  {' '}
+                  <Slider
+                    aria-label="Custom marks"
+                    defaultValue={180}
+                    step={1}
+                    valueLabelDisplay="auto"
+                    getAriaValueText={valuetextForInvest}
+                    min={1}
+                    max={365}
+                    marks={investMarks}
+                    sx={{
+                      '& .MuiSlider-thumb': {
+                        backgroundColor: '#F6F8F9',
+                        border: '1px solid #B0BABF',
+                        opacity: 1,
+                        '&:focus, &:hover, &.Mui-active': {
+                          boxShadow:
+                            '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+                          // Reset on touch devices, it doesn't add specificity
+                        },
+                      },
+                      '& .MuiSlider-track': {
+                        border: 'none',
+                        backgroundColor: '#074592',
+                      },
+                      '& .MuiSlider-rail': {
+                        opacity: 1,
+                        backgroundColor: '#DDE2E4',
+                      },
+                      '& .MuiSlider-mark': {
+                        backgroundColor: '#bfbfbf',
+                        height: '2px',
+                        '&.MuiSlider-markActive': {
+                          opacity: 1,
+                          backgroundColor: '#F6F8F9',
+                        },
+                      },
+                    }}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  {' '}
+                  <Input value={investDay} />
+                </Box>
+              </Box>
             </Box>
           </Box>
         </BasicModal>
@@ -755,30 +826,33 @@ export default function FarmDetail() {
                 </Box>
                 {/** Tab for Overview and Simulator */}
                 <Box sx={{ flex: 1 }}>
-                  <NewTabs
-                    value={selectedTab}
-                    onChange={handleChange}
-                    sx={{
-                      mb: 2,
-                    }}
-                  >
-                    <NewTab
-                      label="Overview"
+                  {!downToXSM && (
+                    <NewTabs
+                      value={selectedTab}
+                      onChange={handleChange}
                       sx={{
-                        fontSize: { xs: '14px', md: '14px' },
-                        fontFamily: 'Gilroy,Arial !important',
-                        fontStyle: 'normal',
+                        mb: 2,
                       }}
-                    />
-                    <NewTab
-                      label="Farming Simulator"
-                      sx={{
-                        fontSize: { xs: '14px', md: '14px' },
-                        fontFamily: 'Gilroy,Arial !important',
-                        fontStyle: 'normal',
-                      }}
-                    />
-                  </NewTabs>
+                    >
+                      <NewTab
+                        label="Overview"
+                        sx={{
+                          fontSize: { xs: '14px', md: '14px' },
+                          fontFamily: 'Gilroy,Arial !important',
+                          fontStyle: 'normal',
+                        }}
+                      />
+                      <NewTab
+                        label="Farming Simulator"
+                        sx={{
+                          fontSize: { xs: '14px', md: '14px' },
+                          fontFamily: 'Gilroy,Arial !important',
+                          fontStyle: 'normal',
+                        }}
+                      />
+                    </NewTabs>
+                  )}
+
                   {selectedTab == 0 && (
                     <Box
                       sx={{
@@ -1023,7 +1097,8 @@ export default function FarmDetail() {
                       </Box>
                     </Box>
                   )}
-                  {selectedTab == 1 && (
+
+                  {selectedTab == 1 && !downToXSM && (
                     <>
                       <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
                         Farming Simulator
@@ -1113,6 +1188,9 @@ export default function FarmDetail() {
                         fontSize: '14px',
                       }}
                       fullWidth
+                      onClick={() => {
+                        setOpenModalForGraph(true);
+                      }}
                     >
                       Simulate Your Position
                     </Button>
