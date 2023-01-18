@@ -1176,8 +1176,8 @@ export default function FarmDetail() {
                     </>
                   )}
                 </Box>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  {downToXSM && (
+                {downToXSM && (
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     <Button
                       sx={{
                         flex: 1,
@@ -1194,8 +1194,6 @@ export default function FarmDetail() {
                     >
                       Simulate Your Position
                     </Button>
-                  )}
-                  {downToXSM && (
                     <Button
                       sx={{
                         flex: 1,
@@ -1210,8 +1208,8 @@ export default function FarmDetail() {
                     >
                       Farm 6x
                     </Button>
-                  )}
-                </Box>
+                  </Box>
+                )}
               </Box>
             </Paper>
           </Box>

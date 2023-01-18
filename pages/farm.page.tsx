@@ -292,7 +292,7 @@ export default function Farm() {
           mt: { xs: '8px', md: '12px' },
           color: '#F1F1F3',
           ...borderGradient,
-        }}
+        }} 
       >
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <Box
