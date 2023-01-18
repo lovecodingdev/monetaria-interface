@@ -146,7 +146,7 @@ export default function FarmDetail() {
       sx={{
         pb: 0,
         flexGrow: 0,
-        width: { xs: '100%', sm: '996px' },
+        width: { xs: '100%', sm: '1026px' },
         fontFamily: 'Gilroy, Arial !important',
         fontStyle: 'normal',
         paddingTop: '33px',
@@ -862,6 +862,7 @@ export default function FarmDetail() {
                         border: '1px solid #d4e6f3',
                         padding: '15px',
                         borderRadius: '8px',
+                        backgroundColor: '#F6F8F9',
                       }}
                     >
                       <Box
@@ -1060,7 +1061,7 @@ export default function FarmDetail() {
                           <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Total Assets inPosition Value
                           </Typography>
-                          <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px',  }}>
                             0.00 ALPACA+ 0.00 BUSD
                           </Typography>
                         </Box>
