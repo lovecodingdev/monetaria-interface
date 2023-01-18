@@ -150,6 +150,7 @@ export default function FarmDetail() {
         fontFamily: 'Gilroy, Arial !important',
         fontStyle: 'normal',
         paddingTop: '33px',
+        paddingBottom: '33px',
       }}
     >
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -348,7 +349,25 @@ export default function FarmDetail() {
                       fontWeight: 400,
                     }}
                   >
-                    <MntShiba /> MNT - Shiba
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                      }}
+                    >
+                      <TokenIcon symbol={'bnb'} sx={{ fontSize: '32px', mr: -2, zIndex: 1 }} />
+                      <TokenIcon symbol={'usdt'} sx={{ fontSize: '32px', mr: 1 }} />
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        paddingLeft: '8px',
+                      }}
+                    >
+                      <Typography>SHB-BNB</Typography>
+                      <Typography sx={{ color: '#84919A' }}>Pancake Swap</Typography>
+                    </Box>
                   </Box>
                 )}
 
@@ -364,7 +383,36 @@ export default function FarmDetail() {
                           fontWeight: 400,
                         }}
                       >
-                        <MntShiba /> MNT - Shiba
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                            }}
+                          >
+                            <TokenIcon
+                              symbol={'bnb'}
+                              sx={{ fontSize: '32px', mr: -2, zIndex: 1 }}
+                            />
+                            <TokenIcon symbol={'usdt'} sx={{ fontSize: '32px', mr: 1 }} />
+                          </Box>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: 'column',
+                              paddingLeft: '8px',
+                            }}
+                          >
+                            <Typography>SHB-BNB</Typography>
+                            <Typography sx={{ color: '#84919A' }}>Pancake Swap</Typography>
+                          </Box>
+                        </Box>
                       </Box>
                     )}
 
@@ -417,9 +465,16 @@ export default function FarmDetail() {
                         }}
                       >
                         <Box sx={{ display: 'flex', flexDirection: 'row', gap: '4px' }}>
-                          <Typography sx={{ color: 'black', fontWeight: 600, fontSize: '14px' }}>
-                            Add for farming
-                          </Typography>
+                          <Box sx={{ display: 'flex', flexDirection: 'row', gap: '4px' }}>
+                            <Typography sx={{ color: 'black', fontWeight: 600, fontSize: '14px' }}>
+                              Farm
+                            </Typography>
+                            <Typography
+                              sx={{ color: '#84919A', fontWeight: 400, fontSize: '14px' }}
+                            >
+                              1,252.07 USD
+                            </Typography>
+                          </Box>
                         </Box>
                         <Typography sx={{ color: '#84919A', fontWeight: 400, fontSize: '14px' }}>
                           Balance: 0.01 BNB
@@ -515,9 +570,16 @@ export default function FarmDetail() {
                         }}
                       >
                         <Box sx={{ display: 'flex', flexDirection: 'row', gap: '4px' }}>
-                          <Typography sx={{ color: 'black', fontWeight: 600, fontSize: '14px' }}>
-                            Add for farming
-                          </Typography>
+                          <Box sx={{ display: 'flex', flexDirection: 'row', gap: '4px' }}>
+                            <Typography sx={{ color: 'black', fontWeight: 600, fontSize: '14px' }}>
+                              Farm
+                            </Typography>
+                            <Typography
+                              sx={{ color: '#84919A', fontWeight: 400, fontSize: '14px' }}
+                            >
+                              1,252.07 USD
+                            </Typography>
+                          </Box>
                         </Box>
                         <Typography sx={{ color: '#84919A', fontWeight: 400, fontSize: '14px' }}>
                           Balance: 0.01 USDT
@@ -1000,7 +1062,13 @@ export default function FarmDetail() {
                         }}
                       >
                         {' '}
-                        <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '14px' }}>
+                        <Typography
+                          sx={{
+                            color: '#59729D',
+                            fontWeight: 500,
+                            fontSize: '14px',
+                          }}
+                        >
                           Summary
                         </Typography>
                         <Box
@@ -1061,7 +1129,7 @@ export default function FarmDetail() {
                           <Typography sx={{ color: '#59729D', fontWeight: 500, fontSize: '12px' }}>
                             Total Assets inPosition Value
                           </Typography>
-                          <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px',  }}>
+                          <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
                             0.00 ALPACA+ 0.00 BUSD
                           </Typography>
                         </Box>
