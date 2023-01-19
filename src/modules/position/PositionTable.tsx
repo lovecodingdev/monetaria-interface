@@ -3,6 +3,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { Table } from 'rsuite';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { PositionType } from './positionType';
+import { useRouter } from 'next/router';
 
 const { Column, HeaderCell, Cell } = Table;
 const data: PositionType[] = [
@@ -54,6 +55,7 @@ export const PositionTable = () => {
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const getData = () => {
     if (sortColumn && sortType) {
@@ -242,6 +244,12 @@ export const PositionTable = () => {
               <Box>
                 {' '}
                 <Button
+                  onClick={() =>
+                    router.push({
+                      pathname: '/position_adjust',
+                      query: { tknA: 'bnb', tknB: 'busd' },
+                    })
+                  }
                   sx={{
                     backgroundColor: 'rgba(21, 126, 255, 0.05)',
                     border: '1px solid rgba(21, 126, 255, 0.2)',

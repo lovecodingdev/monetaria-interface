@@ -5,7 +5,7 @@ interface ContentWithTooltipProps {
   children: ReactNode;
   // eslint-disable-next-line
   tooltipContent: ReactElement<any, string | JSXElementConstructor<any>>;
-  placement?: 'top' | 'bottom';
+  placement?: 'top' | 'bottom' | 'left' | 'right';
   withoutHover?: boolean;
   open?: boolean;
   setOpen?: (value: boolean) => void;

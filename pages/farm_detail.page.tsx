@@ -155,7 +155,7 @@ export default function FarmDetail() {
     >
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         {isWarning && (
-          <Box sx={{ marginBottom: '24px' }}>
+          <Box sx={{ marginBottom: '26px' }}>
             <Alert
               severity="error"
               onClose={() => setIsWarning(false)}
@@ -310,7 +310,6 @@ export default function FarmDetail() {
               sx={{
                 bgcolor: 'background.header',
                 padding: { xs: '24px 12px', sm: '24px 22px' },
-                mt: { xs: '8px', md: '12px' },
                 color: '#F1F1F3',
                 ...borderGradient,
               }}
