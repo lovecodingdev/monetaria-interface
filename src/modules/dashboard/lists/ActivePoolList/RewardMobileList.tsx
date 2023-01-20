@@ -4,7 +4,7 @@ import { Box, Typography, useMediaQuery, useTheme, Button } from '@mui/material'
 import { Row } from 'src/components/primitives/Row';
 import { TokenPair } from 'src/components/primitives/TokenPair';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import { RewardType } from './RewardType';
+import { RewardType, borrowing_interest_type } from './RewardType';
 import { InputNumber, SelectPicker } from 'rsuite';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -12,12 +12,13 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { TVLTooltip } from 'src/components/infoTooltips/TVLTooltip';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 import InfoIcon from '@mui/icons-material/Info';
+import { SelectPickerComponent } from 'rsuite/esm/SelectPicker/SelectPicker';
 
 const data: RewardType[] = [
   {
     asset: 'ETH',
     symbol: 'eth',
-    network: 'Ethereum',
+    protocol: 'Ethereum',
     tvl: 'TVL 3.42m',
     apy: 0.68,
     apr: {
@@ -45,7 +46,7 @@ const data: RewardType[] = [
   {
     asset: 'BNB',
     symbol: 'bnb',
-    network: 'Binance Smart Chain',
+    protocol: 'Binance Smart Chain',
     tvl: 'TVL 3.42m',
     apy: 0.68,
     apr: {
@@ -73,7 +74,7 @@ const data: RewardType[] = [
   {
     asset: 'Matic',
     symbol: 'matic',
-    network: 'Polygon',
+    protocol: 'Polygon',
     tvl: 'TVL 3.42m',
     apy: 0.68,
     apr: {
@@ -100,10 +101,14 @@ const data: RewardType[] = [
   },
 ];
 
-export const RewardMobileList = ({ showModal }) => {
+interface RewardMobileListProps {
+  showModal: (type: boolean) => void;
+}
+
+export const RewardMobileList = ({ showModal }: RewardMobileListProps) => {
   const [farmData, setFarmData] = useState<RewardType[]>(data);
 
-  const updateVisibleState = (_symbol) => {
+  const updateVisibleState = (_symbol: string) => {
     const tempArr = farmData;
 
     tempArr.forEach((arr) => {
@@ -151,7 +156,7 @@ export const RewardMobileList = ({ showModal }) => {
                   noWrap
                   sx={{ fontSize: '12px', fontWeight: 400, color: '#84919A' }}
                 >
-                  {asset.network}
+                  {asset.protocol}
                 </Typography>
                 <Typography
                   variant="description"
@@ -224,21 +229,6 @@ export const RewardMobileList = ({ showModal }) => {
             <SignalCellularAltIcon sx={{ color: '#074592' }} />
           </Button>
         </Box>
-        {!asset.isShowMore && (
-          <Button
-            sx={{
-              color: '#252C32',
-              backgroundColor: 'white',
-              fontSize: '16px',
-              fontWeight: 600,
-              marginTop: '10px',
-            }}
-            fullWidth
-            onClick={() => updateVisibleState(asset.symbol)}
-          >
-            <KeyboardArrowDownIcon />
-          </Button>
-        )}
 
         {asset.isShowMore && (
           <>
@@ -330,7 +320,10 @@ export const RewardMobileList = ({ showModal }) => {
                       >
                         <Box>
                           {' '}
-                          <TokenIcon symbol={item.value} sx={{ fontSize: `24px`, ml: -1 }} />
+                          <TokenIcon
+                            symbol={String(item.value)}
+                            sx={{ fontSize: `24px`, ml: -1 }}
+                          />
                         </Box>
                         <Box>
                           {' '}
@@ -442,21 +435,21 @@ export const RewardMobileList = ({ showModal }) => {
               </Box>
               <InputNumber defaultValue={asset.leverage} style={{ width: '100%' }} min={0} />
             </Box>
-            <Button
-              sx={{
-                color: '#252C32',
-                backgroundColor: 'white',
-                fontSize: '16px',
-                fontWeight: 600,
-                marginTop: '10px',
-              }}
-              fullWidth
-              onClick={() => updateVisibleState(asset.symbol)}
-            >
-              <KeyboardArrowUpIcon />
-            </Button>
           </>
         )}
+        <Button
+          sx={{
+            color: '#252C32',
+            backgroundColor: 'white',
+            fontSize: '16px',
+            fontWeight: 600,
+            marginTop: '10px',
+          }}
+          fullWidth
+          onClick={() => updateVisibleState(asset.symbol)}
+        >
+          {asset.isShowMore ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        </Button>
       </Box>
     </Box>
   ));

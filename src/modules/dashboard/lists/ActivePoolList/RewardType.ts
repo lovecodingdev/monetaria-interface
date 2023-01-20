@@ -16,7 +16,7 @@ export interface RewardType {
   isShowMore: boolean;
 }
 
-interface borrowing_interest_type {
+export interface borrowing_interest_type {
   label: string;
   value: string;
   token_value: number;
