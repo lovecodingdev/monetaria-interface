@@ -97,7 +97,7 @@ const data: RewardType[] = [
   },
 ];
 
-export const RewardTable = ({ showModal }) => {
+export const RewardTable = ({ showModal }: {showModal: (type: boolean)=>void}) => {
   const router = useRouter();
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();

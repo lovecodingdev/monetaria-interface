@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Trans } from '@lingui/macro';
 import { Box, Typography, useMediaQuery, useTheme, Button } from '@mui/material';
 import { Row } from 'src/components/primitives/Row';
+import { TokenPair } from 'src/components/primitives/TokenPair';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { RewardType } from './RewardType';
 import { InputNumber, SelectPicker } from 'rsuite';
@@ -9,6 +10,8 @@ import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { TVLTooltip } from 'src/components/infoTooltips/TVLTooltip';
+import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
+import InfoIcon from '@mui/icons-material/Info';
 
 const data: RewardType[] = [
   {
@@ -126,11 +129,10 @@ export const RewardMobileList = ({ showModal }) => {
             display: 'flex',
             flexDirection: 'column',
             gap: 1,
-            mb: 4,
           }}
         >
           <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
-            <TokenIcon symbol={asset.symbol} sx={{ fontSize: `32px`, ml: -1 }} />
+            <TokenPair tokenA={asset.symbol} tokenB={asset.apr.borrowing_interest[1].value} />{' '}
             <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
               <Box>
                 {' '}
@@ -163,7 +165,7 @@ export const RewardMobileList = ({ showModal }) => {
           </Box>
         </Box>
       </Box>
-      <Box sx={{ paddingTop: '20px' }}>
+      <Box sx={{ paddingTop: '8px' }}>
         <Row
           caption={
             <Trans>
@@ -230,7 +232,6 @@ export const RewardMobileList = ({ showModal }) => {
               fontSize: '16px',
               fontWeight: 600,
               marginTop: '10px',
-              boxShadow: '1px 1px grey',
             }}
             fullWidth
             onClick={() => updateVisibleState(asset.symbol)}
@@ -425,17 +426,20 @@ export const RewardMobileList = ({ showModal }) => {
               </Box>
             </Row>
             <Box sx={{ padding: '10px 0' }}>
-              <label
-                style={{
-                  display: 'block',
-                  color: '#252C32',
-                  fontWeight: 400,
-                  fontSize: '14px',
-                  paddingBottom: '5px',
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  gap: '4px',
+                  alignItems: 'center',
+                  mb: 1,
                 }}
               >
-                Leverage:
-              </label>
+                {' '}
+                <ElectricBoltIcon sx={{ fontSize: '12px', color: '#48535B' }} />
+                <Typography sx={{ fontSize: '12px', color: '#5B6871' }}>Boosted</Typography>
+                <InfoIcon sx={{ fontSize: '12px', color: '#D5DADD' }} />
+              </Box>
               <InputNumber defaultValue={asset.leverage} style={{ width: '100%' }} min={0} />
             </Box>
             <Button
@@ -445,7 +449,6 @@ export const RewardMobileList = ({ showModal }) => {
                 fontSize: '16px',
                 fontWeight: 600,
                 marginTop: '10px',
-                boxShadow: '1px 1px grey',
               }}
               fullWidth
               onClick={() => updateVisibleState(asset.symbol)}
