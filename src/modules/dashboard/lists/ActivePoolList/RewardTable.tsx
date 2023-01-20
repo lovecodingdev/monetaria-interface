@@ -376,7 +376,7 @@ export const RewardTable = ({ showModal }) => {
         </Cell>
       </Column>
 
-      <Column width={284} align="right" verticalAlign="top">
+      <Column width={284} align="right" verticalAlign="top" fixed="right">
         <HeaderCell>Actions</HeaderCell>
         <Cell>
           {(rowData) => (

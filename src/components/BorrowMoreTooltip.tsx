@@ -30,7 +30,6 @@ export const BorrowMoreToolTip = ({
         flexDirection: 'row',
         gap: '0.2em',
         '& .MuiTooltip-tooltip': {
-          // background: 'linear-gradient(270deg, #393DFF 0%, #9582FF 100%)',
           background: 'red !important',
         },
       }}
