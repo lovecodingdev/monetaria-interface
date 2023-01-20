@@ -14,7 +14,7 @@ export function MainLayout({ children }: { children: ReactNode }) {
           flexDirection: 'column',
           flex: 1,
           position: 'relative',
-          marginTop: { xs: '90px', md: '0' },
+          marginTop: { xs: '82px', md: '0' },
         }}
       >
         <Box

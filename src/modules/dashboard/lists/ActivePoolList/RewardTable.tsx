@@ -145,7 +145,7 @@ export const RewardTable = ({ showModal }) => {
       cellBordered={false}
       rowHeight={178}
     >
-      <Column flexGrow={2} align="center" fixed sortable verticalAlign="top">
+      <Column minWidth={180} flexGrow={2} align="center" fixed sortable verticalAlign="top">
         <HeaderCell>Pool</HeaderCell>
         <Cell>
           {(rowData) => (
@@ -216,10 +216,10 @@ export const RewardTable = ({ showModal }) => {
         <HeaderCell>APY</HeaderCell>
         <Cell style={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
           {(rowData) => `${rowData.apy}%`}
-        </Cell>
+        </Cell> 
       </Column>
 
-      <Column flexGrow={3} align="left" sortable verticalAlign="top">
+      <Column minWidth={300} flexGrow={3} align="left" sortable verticalAlign="top">
         <HeaderCell>Yield (APR)</HeaderCell>
         <Cell>
           {(rowData, idx) => (
