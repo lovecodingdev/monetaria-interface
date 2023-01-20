@@ -4,22 +4,35 @@ import { Box, Typography, useMediaQuery, useTheme, Button } from '@mui/material'
 import { Row } from 'src/components/primitives/Row';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { RewardType } from './RewardType';
-import { InputNumber } from 'rsuite';
+import { InputNumber, SelectPicker } from 'rsuite';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { TVLTooltip } from 'src/components/infoTooltips/TVLTooltip';
 
 const data: RewardType[] = [
   {
     asset: 'ETH',
     symbol: 'eth',
     network: 'Ethereum',
+    tvl: 'TVL 3.42m',
     apy: 0.68,
     apr: {
       yield_farming: 7.8,
       trading_fees: 5.97,
       alpaca_rewards: 1.26,
-      borrowing_interest: -1.26,
+      borrowing_interest: [
+        {
+          label: 'BNB',
+          value: 'bnb',
+          token_value: -1.26,
+        },
+        {
+          label: 'USDT',
+          value: 'usdt',
+          token_value: -1.26,
+        },
+      ],
       total_apr: 13.09,
       daily_apr: 0.0358,
     },
@@ -30,12 +43,24 @@ const data: RewardType[] = [
     asset: 'BNB',
     symbol: 'bnb',
     network: 'Binance Smart Chain',
+    tvl: 'TVL 3.42m',
     apy: 0.68,
     apr: {
       yield_farming: 7.8,
       trading_fees: 5.97,
       alpaca_rewards: 1.26,
-      borrowing_interest: -1.26,
+      borrowing_interest: [
+        {
+          label: 'BNB',
+          value: 'bnb',
+          token_value: -1.26,
+        },
+        {
+          label: 'USDT',
+          value: 'usdt',
+          token_value: -1.26,
+        },
+      ],
       total_apr: 13.09,
       daily_apr: 0.0358,
     },
@@ -46,12 +71,24 @@ const data: RewardType[] = [
     asset: 'Matic',
     symbol: 'matic',
     network: 'Polygon',
+    tvl: 'TVL 3.42m',
     apy: 0.68,
     apr: {
       yield_farming: 7.8,
       trading_fees: 5.97,
       alpaca_rewards: 1.26,
-      borrowing_interest: -1.26,
+      borrowing_interest: [
+        {
+          label: 'BNB',
+          value: 'bnb',
+          token_value: -1.26,
+        },
+        {
+          label: 'USDT',
+          value: 'usdt',
+          token_value: -1.26,
+        },
+      ],
       total_apr: 13.09,
       daily_apr: 0.0358,
     },
@@ -113,6 +150,13 @@ export const RewardMobileList = ({ showModal }) => {
                   sx={{ fontSize: '12px', fontWeight: 400, color: '#84919A' }}
                 >
                   {asset.network}
+                </Typography>
+                <Typography
+                  variant="description"
+                  noWrap
+                  sx={{ fontSize: '12px', fontWeight: 400, color: '#84919A' }}
+                >
+                  <TVLTooltip text={asset.tvl} />
                 </Typography>
               </Box>
             </Box>
@@ -254,25 +298,94 @@ export const RewardMobileList = ({ showModal }) => {
                 </Typography>
               </Box>
             </Row>
-            <Row
-              caption={
-                <Trans>
-                  <Typography sx={{ color: '#6E7C87', fontSize: '14px', fontWeight: 400 }}>
-                    Borrowing Interest:
-                  </Typography>
-                </Trans>
-              }
-              align="flex-start"
-              captionVariant="description"
-              mb={2}
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '8px',
+              }}
             >
-              <Box>
-                {' '}
-                <Typography sx={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
-                  {asset.apr.borrowing_interest}%
-                </Typography>
+              <Box sx={{ color: '#6E7C87' }}>Borrowing Interest :</Box>
+              <Box className="farm-custom-select">
+                <SelectPicker
+                  data={asset.apr.borrowing_interest}
+                  style={{ width: '100%' }}
+                  defaultValue={asset.apr.borrowing_interest[0].value}
+                  placeholder="borrowing interest"
+                  searchable={false}
+                  cleanable={false}
+                  renderMenuItem={(label, item) => {
+                    return (
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: 2,
+                          alignItems: 'center',
+                          fontFamily: 'Gilroy, Arial !important',
+                        }}
+                      >
+                        <Box>
+                          {' '}
+                          <TokenIcon symbol={item.value} sx={{ fontSize: `24px`, ml: -1 }} />
+                        </Box>
+                        <Box>
+                          {' '}
+                          <Typography
+                            style={{ fontWeight: 400, fontSize: '14px', color: ' #252C32' }}
+                          >
+                            {label}
+                          </Typography>
+                        </Box>
+                        <Box>
+                          {' '}
+                          <Typography
+                            style={{ fontWeight: 400, fontSize: '14px', color: '#84919A' }}
+                          >
+                            {item.token_value} %
+                          </Typography>
+                        </Box>
+                      </Box>
+                    );
+                  }}
+                  renderValue={(value, item) => {
+                    return (
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: 2,
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Box>
+                          {' '}
+                          <TokenIcon symbol={value} sx={{ fontSize: `24px` }} />
+                        </Box>
+                        <Box>
+                          {' '}
+                          <Typography
+                            style={{ fontWeight: 400, fontSize: '14px', color: ' #0F1228' }}
+                          >
+                            {item.label}
+                          </Typography>
+                        </Box>
+                        <Box>
+                          {' '}
+                          <Typography
+                            style={{ fontWeight: 400, fontSize: '14px', color: '#0F1228' }}
+                          >
+                            {item.token_value} %
+                          </Typography>
+                        </Box>
+                      </Box>
+                    );
+                  }}
+                />
               </Box>
-            </Row>
+            </Box>
             <Row
               caption={
                 <Trans>

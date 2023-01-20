@@ -7,6 +7,7 @@ import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import { useRouter } from 'next/router';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 import InfoIcon from '@mui/icons-material/Info';
+import { TVLTooltip } from 'src/components/infoTooltips/TVLTooltip';
 
 const { Column, HeaderCell, Cell } = Table;
 const data: RewardType[] = [
@@ -144,7 +145,7 @@ export const RewardTable = ({ showModal }) => {
       cellBordered={false}
       rowHeight={178}
     >
-      <Column width={160} align="center" fixed sortable verticalAlign="top">
+      <Column flexGrow={2} align="center" fixed sortable verticalAlign="top">
         <HeaderCell>Pool</HeaderCell>
         <Cell>
           {(rowData) => (
@@ -203,7 +204,7 @@ export const RewardTable = ({ showModal }) => {
                 <Box
                   sx={{ fontSize: '12px', fontWeight: 400, color: '#48535B', textAlign: 'left' }}
                 >
-                  {rowData.tvl}
+                  <TVLTooltip text={rowData.tvl} />
                 </Box>
               </Box>
             </Box>
@@ -211,14 +212,14 @@ export const RewardTable = ({ showModal }) => {
         </Cell>
       </Column>
 
-      <Column width={125} align="right" sortable verticalAlign="top">
+      <Column width={100} align="center" sortable verticalAlign="top">
         <HeaderCell>APY</HeaderCell>
         <Cell style={{ color: '#252C32', fontSize: '14px', fontWeight: 400 }}>
           {(rowData) => `${rowData.apy}%`}
         </Cell>
       </Column>
 
-      <Column width={343} align="left" sortable verticalAlign="top">
+      <Column flexGrow={3} align="left" sortable verticalAlign="top">
         <HeaderCell>Yield (APR)</HeaderCell>
         <Cell>
           {(rowData, idx) => (
@@ -344,7 +345,7 @@ export const RewardTable = ({ showModal }) => {
         </Cell>
       </Column>
 
-      <Column width={278} align="right" sortable verticalAlign="top">
+      <Column width={180} align="center" sortable verticalAlign="top">
         <HeaderCell>Leverage</HeaderCell>
         <Cell>
           {(rowData) => (
@@ -353,7 +354,7 @@ export const RewardTable = ({ showModal }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '4px',
-                alignItems: 'flex-end',
+                alignItems: 'center',
               }}
             >
               <Box
@@ -376,7 +377,7 @@ export const RewardTable = ({ showModal }) => {
         </Cell>
       </Column>
 
-      <Column width={284} align="right" verticalAlign="top" fixed="right">
+      <Column width={200} align="right" verticalAlign="top" fixed="right">
         <HeaderCell>Actions</HeaderCell>
         <Cell>
           {(rowData) => (
