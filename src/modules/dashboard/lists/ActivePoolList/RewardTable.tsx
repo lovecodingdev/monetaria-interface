@@ -144,7 +144,7 @@ export const RewardTable = ({ showModal }) => {
       cellBordered={false}
       rowHeight={178}
     >
-      <Column width={156} align="center" fixed sortable verticalAlign="top">
+      <Column width={160} align="center" fixed sortable verticalAlign="top">
         <HeaderCell>Pool</HeaderCell>
         <Cell>
           {(rowData) => (
