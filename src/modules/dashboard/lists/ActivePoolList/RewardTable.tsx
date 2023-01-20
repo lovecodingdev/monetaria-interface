@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { Table, InputNumber, SelectPicker } from 'rsuite';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';

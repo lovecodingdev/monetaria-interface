@@ -21,6 +21,8 @@ import { RewardTable } from 'src/modules/dashboard/lists/ActivePoolList/RewardTa
 import { RewardMobileList } from 'src/modules/dashboard/lists/ActivePoolList/RewardMobileList';
 import { BasicModal } from 'src/components/primitives/BasicModal';
 
+const sortByData = ['APY', 'Leverage', 'Pool'].map((item) => ({ label: item, value: item }));
+
 const NewTabs = styled(Tabs)({
   minHeight: '28px',
   '& .MuiTabs-flexContainer': {
@@ -198,13 +200,32 @@ export default function Farm() {
             Active Pools
           </Typography>
         </Box>
-        <Box>
-          <InputGroup>
-            <Input placeholder="Search token" />
-            <InputGroup.Button>
-              <SearchIcon />
-            </InputGroup.Button>
-          </InputGroup>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '16px',
+            alignItems: 'center',
+          }}
+        >
+          <Box sx={{ flex: 1 }}>
+            <InputGroup>
+              <Input placeholder="Search token" />
+              <InputGroup.Button>
+                <SearchIcon />
+              </InputGroup.Button>
+            </InputGroup>
+          </Box>
+          <Box className="farm-custom-select">
+            <SelectPicker
+              label="Sort by"
+              data={sortByData}
+              style={{ width: '100%' }}
+              defaultValue="APY"
+              searchable={false}
+              cleanable={false}
+            />
+          </Box>
         </Box>
       </Box>
       {downToXSM && (
@@ -464,7 +485,7 @@ export default function Farm() {
       </Box>
     </Box>
   );
-  
+
   return (
     <Container
       sx={{
