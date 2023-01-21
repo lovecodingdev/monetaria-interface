@@ -494,7 +494,7 @@ export default function Farm() {
         width: '100%',
         fontFamily: 'Gilroy, Arial !important',
         fontStyle: 'normal',
-        paddingTop: '24px',
+        py: '24px',
         bgcolor: { xs: 'white', xsm: '#ffffff00' },
       }}
     >
