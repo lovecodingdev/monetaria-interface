@@ -1,7 +1,10 @@
+import React from 'react';
+
 import { API_ETH_MOCK_ADDRESS, InterestRate } from '@monetaria/contract-helpers';
 import { valueToBigNumber } from '@monetaria/math-utils';
 import { Trans } from '@lingui/macro';
-import { Box, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme, Tabs, Tab } from '@mui/material';
+import { styled } from '@mui/system';
 import { useModalContext } from 'src/hooks/useModal';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { fetchIconSymbolAndName } from 'src/ui-config/reservePatches';
@@ -21,10 +24,62 @@ import { ListLoader } from '../ListLoader';
 import { ListTopInfoItem } from '../ListTopInfoItem';
 import { BorrowedPositionsListItem } from './BorrowedPositionsListItem';
 import { BorrowedPositionsListMobileItem } from './BorrowedPositionsListMobileItem';
+import LiquidationHistoryList from '../LiquidationHistoryList/LiquidationHistoryList';
 
 import WalletIcon from 'public/icons/markets/wallet-icon.svg';
 import NetAPYIcon from 'public/icons/markets/net-apy-icon.svg';
 import PowerIcon from 'public/icons/markets/power.svg';
+import { useEffect, useState } from 'react';
+
+// Tab CSS
+const NewTabs = styled(Tabs)({
+  '& .MuiTabs-flexContainer': {
+    gap: '8px',
+  },
+  '& .MuiTabs-indicator': {
+    display: 'none',
+  },
+  padding: '0px',
+});
+
+const NewTab = styled(Tab)`
+  margin: 0px;
+  fontweight: 600;
+  fontfamily: Gilroy, Arial !important;
+  fontstyle: normal !important;
+  background: #f6f8f9;
+  padding: 0 20px;
+  color: #000000;
+  border-radius: 10px;
+  min-height: 24px;
+  &.Mui-selected,
+  &:hover {
+    background: #074592;
+    border-radius: 10px;
+    color: #ffffff;
+    font-weight: bold;
+  }
+`;
+
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 
 export const BorrowedPositionsList = () => {
   const { user, loading } = useAppDataContext();
@@ -32,6 +87,11 @@ export const BorrowedPositionsList = () => {
   const { openEmode } = useModalContext();
   const theme = useTheme();
   const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
 
   const borrowPositions =
     user?.userReservesData.reduce((acc, userReserve) => {
@@ -115,20 +175,31 @@ export const BorrowedPositionsList = () => {
 
       {borrowPositions.length ? (
         <>
-          {!downToXSM && <ListHeader head={head} />}
-          {borrowPositions.map((item) =>
-            downToXSM ? (
-              <BorrowedPositionsListMobileItem
-                {...item}
-                key={item.underlyingAsset + item.borrowRateMode}
-              />
-            ) : (
-              <BorrowedPositionsListItem
-                {...item}
-                key={item.underlyingAsset + item.borrowRateMode}
-              />
-            )
-          )}
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+              <Tab label="Active Positions" />
+              <Tab label="Liquidated Positions" />
+            </Tabs>
+          </Box>
+          <TabPanel value={value} index={0}>
+            {!downToXSM && <ListHeader head={head} />}
+            {borrowPositions.map((item) =>
+              downToXSM ? (
+                <BorrowedPositionsListMobileItem
+                  {...item}
+                  key={item.underlyingAsset + item.borrowRateMode}
+                />
+              ) : (
+                <BorrowedPositionsListItem
+                  {...item}
+                  key={item.underlyingAsset + item.borrowRateMode}
+                />
+              )
+            )}
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <LiquidationHistoryList />
+          </TabPanel>
         </>
       ) : (
         <DashboardContentNoData text={<Trans>Nothing borrowed yet</Trans>} />

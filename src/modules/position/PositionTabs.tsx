@@ -198,14 +198,14 @@ export const PositionTabs = () => {
               fontStyle: 'normal',
             }}
           />
-          <NewTab
+          {/* <NewTab
             label="Liquidation History"
             sx={{
               fontSize: { xs: '14px', md: '14px' },
               fontFamily: 'Gilroy,Arial !important',
               fontStyle: 'normal',
             }}
-          />
+          /> */}
           <NewTab
             label="Dashboard"
             sx={{
