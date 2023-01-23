@@ -144,6 +144,15 @@ const ChartContainer: React.FC<BoxProps> = (props) => (
   />
 );
 
+enum PositionTab {
+  Deposits,
+  Borrows,
+  Transactions,
+  // LiquidationHistory,
+  Dashboard,
+  Farm,
+}
+
 export const PositionTabs = () => {
   const [selectedTab, setSelectedTab] = useState(0);
 
@@ -225,12 +234,12 @@ export const PositionTabs = () => {
           />
         </NewTabs>
       </Box>
-      {selectedTab == 0 && <SuppliedPositionsList />}
-      {selectedTab == 1 && <BorrowedPositionsList />}
-      {selectedTab == 2 && <TransactionList />}
-      {selectedTab == 3 && <LiquidationHistoryList />}
-      {selectedTab == 4 && <Dashboard />}
-      {selectedTab == 5 && <FarmPosition />}
+      {selectedTab == PositionTab.Deposits && <SuppliedPositionsList />}
+      {selectedTab == PositionTab.Borrows && <BorrowedPositionsList />}
+      {selectedTab == PositionTab.Transactions && <TransactionList />}
+      {/* {selectedTab == PositionTab.LiquidationHistory && <LiquidationHistoryList />} */}
+      {selectedTab == PositionTab.Dashboard && <Dashboard />}
+      {selectedTab == PositionTab.Farm && <FarmPosition />}
     </Paper>
   );
 };
