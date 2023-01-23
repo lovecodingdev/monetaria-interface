@@ -58,7 +58,7 @@ const LiquidationHistoryListItem = () => {
 
   return (
     <Table
-      height={420}
+      autoHeight
       data={getData()}
       sortColumn={sortColumn}
       sortType={sortType}
