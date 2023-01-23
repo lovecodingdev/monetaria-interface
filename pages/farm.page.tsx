@@ -41,9 +41,7 @@ const NewTab = styled(Tab)`
   fontweight: 600;
   fontfamily: Gilroy, Arial !important;
   fontstyle: normal !important;
-  min-height: 24px;
   border-radius: 6px;
-  height: 24px;
   width: 30%;
   color: #b0babf;
   &.Mui-selected,
