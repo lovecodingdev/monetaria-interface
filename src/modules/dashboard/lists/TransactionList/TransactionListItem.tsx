@@ -74,7 +74,7 @@ const TransactionListItem = () => {
       cellBordered={false}
       rowHeight={60}
     >
-      <Column width={150} align="center" fixed sortable verticalAlign="middle">
+      <Column flexGrow={1} align="left" fixed sortable verticalAlign="middle">
         <HeaderCell>Asset</HeaderCell>
         <Cell>
           {(rowData) => (
@@ -114,26 +114,26 @@ const TransactionListItem = () => {
         </Cell>
       </Column>
 
-      <Column width={150} align="left" sortable verticalAlign="middle">
+      <Column flexGrow={1} align="left" sortable verticalAlign="middle">
         <HeaderCell>Type</HeaderCell>
         <Cell dataKey="type" />
       </Column>
 
-      <Column width={150} align="left" sortable verticalAlign="middle">
+      <Column flexGrow={1} align="left" sortable verticalAlign="middle">
         <HeaderCell>Amount</HeaderCell>
         <Cell dataKey="amount" />
       </Column>
 
-      <Column width={100} align="left" sortable verticalAlign="middle">
+      <Column flexGrow={1} align="left" sortable verticalAlign="middle">
         <HeaderCell>Block</HeaderCell>
         <Cell dataKey="block" />
       </Column>
 
-      <Column width={260} align="right" sortable verticalAlign="middle">
+      <Column flexGrow={1} align="left" sortable verticalAlign="middle">
         <HeaderCell>Hash Id</HeaderCell>
         <Cell dataKey="hash_id" />
       </Column>
-      <Column width={130} align="left" sortable fixed="right" verticalAlign="middle">
+      <Column flexGrow={1} align="left" sortable fixed="right" verticalAlign="middle">
         <HeaderCell>Date</HeaderCell>
         <Cell dataKey="date" />
       </Column>

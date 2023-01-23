@@ -67,22 +67,22 @@ const LiquidationHistoryListItem = () => {
       cellBordered={false}
       rowHeight={60}
     >
-      <Column width={284} align="center" fixed sortable verticalAlign="middle">
+      <Column flexGrow={1} align="left" fixed sortable verticalAlign="middle">
         <HeaderCell>Date</HeaderCell>
         <Cell dataKey="date" />
       </Column>
 
-      <Column width={284} align="left" sortable verticalAlign="middle">
+      <Column flexGrow={1} align="left" sortable verticalAlign="middle">
         <HeaderCell>Dept Repaid</HeaderCell>
         <Cell dataKey="dept_repaid" />
       </Column>
 
-      <Column width={284} align="left" sortable verticalAlign="middle">
+      <Column flexGrow={1} align="left" sortable verticalAlign="middle">
         <HeaderCell>Remaining Dept</HeaderCell>
         <Cell dataKey="remaining_dept" />
       </Column>
 
-      <Column width={284} align="left" sortable verticalAlign="middle" fixed="right">
+      <Column flexGrow={1} align="left" sortable verticalAlign="middle" fixed="right">
         <HeaderCell>Collateral Lost</HeaderCell>
         <Cell dataKey="collateral_lost" />
       </Column>
