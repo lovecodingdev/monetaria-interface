@@ -84,7 +84,7 @@ export const RewardTable = () => {
       cellBordered={false}
       rowHeight={60}
     >
-      <Column flexGrow={1} align="left" fixed sortable verticalAlign="middle">
+      <Column flexGrow={2} align="left" fixed sortable verticalAlign="middle">
         <HeaderCell>Pool</HeaderCell>
         <Cell>
           {(rowData) => (
@@ -124,26 +124,26 @@ export const RewardTable = () => {
         </Cell>
       </Column>
 
-      <Column flexGrow={1} align="right" sortable verticalAlign="middle">
+      <Column flexGrow={2} align="right" sortable verticalAlign="middle">
         <HeaderCell>Base vAPY</HeaderCell>
         <Cell>{(rowData) => `${rowData.vAPY}%`}</Cell>
       </Column>
 
-      <Column flexGrow={1} align="right" sortable verticalAlign="middle">
+      <Column flexGrow={2} align="right" sortable verticalAlign="middle">
         <HeaderCell>Rewards tAPR(CRV+ Incentives)</HeaderCell>
         <Cell>{(rowData) => `${rowData.tAPR}$`}</Cell>
       </Column>
 
-      <Column flexGrow={1} align="right" sortable verticalAlign="middle">
+      <Column flexGrow={2} align="right" sortable verticalAlign="middle">
         <HeaderCell>Balance</HeaderCell>
         <Cell>{(rowData) => `${rowData.balance}$`}</Cell>
       </Column>
 
-      <Column flexGrow={1} align="right" sortable verticalAlign="middle">
+      <Column flexGrow={2} align="right" sortable verticalAlign="middle">
         <HeaderCell>USD Profits</HeaderCell>
         <Cell>{(rowData) => `${rowData.profit_usd}$`}</Cell>
       </Column>
-      <Column flexGrow={1} align="right" verticalAlign="middle" fixed="right">
+      <Column flexGrow={3} align="right" verticalAlign="middle" fixed="right">
         <HeaderCell>Claimable Tokens</HeaderCell>
         <Cell>
           {(rowData) => (
