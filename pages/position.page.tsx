@@ -1,13 +1,4 @@
-import { Trans } from '@lingui/macro';
-import {
-  Box,
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { usePermissions } from 'src/hooks/usePermissions';
 import { ConnectWalletPaper } from '../src/components/ConnectWalletPaper';
 import { ContentContainer } from '../src/components/ContentContainer';
@@ -36,17 +27,17 @@ export default function Position() {
                 gap: 4,
               }}
             >
-              <Box sx={{flex: 1}}>
+              <Box sx={{ flex: 1 }}>
                 <PositionTopPanel />
               </Box>
-              <Box sx={{flex: 2}}>
+              <Box sx={{ flex: 2 }}>
                 <MNTPanel />
               </Box>
             </Box>
             <PositionTabs />
           </Box>
         ) : (
-            <ConnectWalletPaper loading={web3Loading} />
+          <ConnectWalletPaper loading={web3Loading} />
         )}
       </ContentContainer>
     </>

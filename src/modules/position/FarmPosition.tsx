@@ -299,7 +299,14 @@ export const FarmPosition = () => {
               }}
             >
               <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
-                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
                   <TokenIcon symbol={'bnb'} sx={{ fontSize: `24px`, ml: -1 }} />
                   <Typography sx={{ fontSize: '20px', fontWeight: 500, color: '#FFFFFF' }}>
                     MNT Earned:

@@ -1726,7 +1726,7 @@ export const PositionTable = () => {
             )}
           </Cell>
         </Column>
-        <Column width={165} align="left" fixed sortable verticalAlign="middle">
+        <Column minWidth={185} flexGrow={1} align="left" fixed sortable verticalAlign="middle">
           <HeaderCell>Pool</HeaderCell>
           <Cell>
             {(rowData) => (
