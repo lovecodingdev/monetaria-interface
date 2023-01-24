@@ -281,13 +281,12 @@ export const FarmPosition = () => {
         <Box>
           <Paper
             sx={(theme) => ({
-              border: `1px solid ${theme.palette.divider}`,
               width: '100%',
-              bgcolor: 'background.paper',
               my: { xs: '16px', md: '24px' },
               mx: 'auto',
               padding: '12px 16px',
               ...borderGradient,
+              background: 'linear-gradient(270deg, #393DFF 0%, #9582FF 100%)',
             })}
           >
             <Box
@@ -296,23 +295,28 @@ export const FarmPosition = () => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                gap: '50px',
+                gap: 6,
               }}
             >
-              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
-                  <TokenIcon symbol={'mnt'} sx={{ fontSize: `24px`, ml: -1 }} />
-                  <Typography sx={{ fontSize: '20px', fontWeight: 500, color: '#080F26' }}>
-                    MNT Earned
+                  <TokenIcon symbol={'bnb'} sx={{ fontSize: `24px`, ml: -1 }} />
+                  <Typography sx={{ fontSize: '20px', fontWeight: 500, color: '#FFFFFF' }}>
+                    MNT Earned:
                   </Typography>
                 </Box>
-                <Typography sx={{ fontSize: '24px', fontWeight: 700, color: '#333333' }}>
+                <Typography sx={{ fontSize: '24px', fontWeight: 700, color: '#FFFFFF' }}>
                   13.50
                 </Typography>
               </Box>
               <Box>
                 <Button
-                  sx={{ backgroundColor: '#074592', fontWeight: 600, fontSize: '16px' }}
+                  sx={{
+                    background: '#FFFFFF',
+                    fontWeight: 600,
+                    fontSize: '16px',
+                    color: '#000000',
+                  }}
                   variant="contained"
                   onClick={() => setOpenModal(true)}
                 >
