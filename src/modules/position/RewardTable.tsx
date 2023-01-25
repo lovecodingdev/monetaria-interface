@@ -146,32 +146,18 @@ export const RewardTable = () => {
       <Column flexGrow={3} align="right" verticalAlign="middle" fixed="right">
         <HeaderCell>Claimable Tokens</HeaderCell>
         <Cell>
-          {(rowData) => (
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <Box> {rowData.claimable_tokens}</Box>
-              <Box>
-                <Button
-                  sx={{
-                    backgroundColor: 'rgba(21, 126, 255, 0.05)',
-                    border: '1px solid rgba(21, 126, 255, 0.2)',
-                    color: '#074592',
-                    fontWeight: 600,
-                    fontSize: '16px',
-                    marginTop: '-4px',
-                  }}
-                >
-                  Claim
-                </Button>
-              </Box>
-            </Box>
-          )}
+          <Button
+            sx={{
+              backgroundColor: 'rgba(21, 126, 255, 0.05)',
+              border: '1px solid rgba(21, 126, 255, 0.2)',
+              color: '#074592',
+              fontWeight: 600,
+              fontSize: '16px',
+              marginTop: '-4px',
+            }}
+          >
+            Claim
+          </Button>
         </Cell>
       </Column>
     </Table>
