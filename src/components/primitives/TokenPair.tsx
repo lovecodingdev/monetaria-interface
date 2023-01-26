@@ -1,6 +1,4 @@
-import { Trans } from '@lingui/macro';
-import { Box, Typography } from '@mui/material';
-import { ReactNode } from 'react';
+import { Box } from '@mui/material';
 import { TokenIcon } from './TokenIcon';
 
 interface TokenPairProps {

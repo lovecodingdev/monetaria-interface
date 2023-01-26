@@ -2,143 +2,163 @@ import { Trans } from '@lingui/macro';
 import { Box, Typography, useMediaQuery, useTheme, Button } from '@mui/material';
 import { Row } from 'src/components/primitives/Row';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import { RewardType } from './RewardType';
+import { PositionType } from './PositionType';
+import { TokenPair } from 'src/components/primitives/TokenPair';
 
-const data: RewardType[] = [
+const data: PositionType[] = [
   {
-    asset: 'ETH',
-    symbol: 'eth',
-    network: 'Ethereum',
-    vAPY: 5.45,
-    tAPR: 539,
-    balance: 2329,
-    profit_usd: 239,
-    claimable_tokens: 2345,
+    asset: 'BUSD',
+    symbol: 'busd',
+    no: 57287,
+    tokenA: 'bnb',
+    tokenB: 'busd',
+    protocol: 'Pancake Swap',
+    position_value: 39.98,
+    debt_value: 0,
+    current_apy: 1.03,
+    debt_ratio: 0,
+    liq_threshold: 'No Debt',
+    safety_buffer: 'No Debt',
   },
   {
-    asset: 'ETH',
-    symbol: 'eth',
-    network: 'Ethereum',
-    vAPY: 5.45,
-    tAPR: 539,
-    balance: 2329,
-    profit_usd: 239,
-    claimable_tokens: 2345,
+    asset: 'BUSD',
+    symbol: 'busd',
+    no: 57288,
+    tokenA: 'bnb',
+    tokenB: 'usdt',
+    protocol: 'Pancake Swap',
+    position_value: 39.98,
+    debt_value: 0,
+    current_apy: 1.03,
+    debt_ratio: 0,
+    liq_threshold: 'No Debt',
+    safety_buffer: 'No Debt',
   },
   {
-    asset: 'ETH',
-    symbol: 'eth',
-    network: 'Ethereum',
-    vAPY: 5.45,
-    tAPR: 5329,
-    balance: 23219,
-    profit_usd: 2392,
-    claimable_tokens: 23345,
+    asset: 'BUSD',
+    symbol: 'busd',
+    no: 57289,
+    tokenA: 'bnb',
+    tokenB: 'cake',
+    protocol: 'Pancake Swap',
+    position_value: 39.98,
+    debt_value: 0,
+    current_apy: 1.03,
+    debt_ratio: 0,
+    liq_threshold: 'No Debt',
+    safety_buffer: 'No Debt',
   },
 ];
 
 export const PositionMobileList = () => {
   return (
     <>
-      {data.map((asset) => (
-        <Box className="card-border" sx={{ my: 4, padding: 4 }} key={asset.symbol}>
+      {data.map((rowObject) => (
+        <Box className="card-border" sx={{ my: 4, padding: 4 }} key={rowObject.symbol}>
           <Box
             sx={{
-              position: 'relative',
+              color: 'white',
+              backgroundColor: 'transparent',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 1,
             }}
           >
-            <Box
-              sx={{
-                padding: 1.5,
-                color: 'white',
-                backgroundColor: 'transparent',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 1,
-                mb: 4,
-              }}
-            >
-              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
-                <TokenIcon symbol={asset.symbol} sx={{ fontSize: `32px`, ml: -1 }} />
-                <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-                  <Box>
-                    {' '}
-                    <Typography
-                      variant="description"
-                      noWrap
-                      sx={{ fontSize: '14px', fontWeight: 400, color: 'black' }}
-                    >
-                      {asset.symbol}
-                    </Typography>
-                  </Box>
-                  <Box>
-                    {' '}
-                    <Typography
-                      variant="description"
-                      noWrap
-                      sx={{ fontSize: '12px', fontWeight: 400, color: '#84919A' }}
-                    >
-                      {asset.network}
-                    </Typography>
-                  </Box>
-                </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+              <TokenPair tokenA={rowObject.tokenA} tokenB={rowObject.tokenB} />
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  paddingLeft: '8px',
+                  pr: 12,
+                }}
+              >
+                <Typography sx={{ color: '#080F26', fontSize: '16px' }}>
+                  {rowObject.asset}
+                </Typography>
+                <Typography sx={{ color: '#84919A' }}>{rowObject.protocol}</Typography>
               </Box>
             </Box>
           </Box>
           <Box sx={{ paddingTop: '20px' }}>
             <Row
-              caption={<Trans>Base vAPY</Trans>}
+              caption={<Trans>Position Value</Trans>}
               align="flex-start"
               captionVariant="description"
               mb={2}
             >
-              <div>{asset.vAPY}%</div>
+              <div>{rowObject.position_value}</div>
             </Row>
 
             <Row
-              caption={<Trans>Rewards tAPR(CRV+ Incentives)</Trans>}
+              caption={<Trans>Debt Value</Trans>}
               align="flex-start"
               captionVariant="description"
               mb={2}
             >
-              <Box>{asset.tAPR}$</Box>
+              <Box>{rowObject.debt_value}</Box>
             </Row>
             <Row
-              caption={<Trans>Balance</Trans>}
+              caption={<Trans>Current APY</Trans>}
               align="flex-start"
               captionVariant="description"
               mb={2}
             >
-              <Box>{asset.balance}$</Box>
+              <Box>{rowObject.current_apy}</Box>
             </Row>
             <Row
-              caption={<Trans>USD Profit</Trans>}
+              caption={<Trans>Debt Ratio</Trans>}
               align="flex-start"
               captionVariant="description"
               mb={2}
             >
-              <Box>{asset.profit_usd}$</Box>
+              <Box>{rowObject.debt_ratio}</Box>
             </Row>
             <Row
-              caption={<Trans>Claimable Tokens</Trans>}
+              caption={<Trans>Liquidation Thresh</Trans>}
               align="flex-start"
               captionVariant="description"
               mb={2}
             >
-              <Box>{asset.claimable_tokens}</Box>
+              <Box>{rowObject.liq_threshold}</Box>
             </Row>
-            <Button
-              fullWidth
-              sx={{
-                backgroundColor: 'rgba(21, 126, 255, 0.05)',
-                border: '1px solid rgba(21, 126, 255, 0.2)',
-                color: '#074592',
-                fontWeight: 600,
-                fontSize: '16px',
-              }}
+            <Row
+              caption={<Trans>Safety Buffer</Trans>}
+              align="flex-start"
+              captionVariant="description"
+              mb={6}
             >
-              Claim
-            </Button>
+              <Box>{rowObject.safety_buffer}</Box>
+            </Row>
+            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
+              <Button
+                sx={{
+                  flex: 1,
+                  backgroundColor: 'rgba(21, 126, 255, 0.05)',
+                  border: '1px solid rgba(21, 126, 255, 0.2)',
+                  color: '#074592',
+                  fontWeight: 600,
+                  fontSize: '16px',
+                  marginTop: '-4px',
+                }}
+              >
+                Adjust
+              </Button>
+              <Button
+                sx={{
+                  flex: 1,
+                  backgroundColor: '#074592',
+                  color: 'white',
+                  fontWeight: 600,
+                  fontSize: '16px',
+                  marginTop: '-4px',
+                }}
+                variant="contained"
+              >
+                Close
+              </Button>
+            </Box>
           </Box>
         </Box>
       ))}

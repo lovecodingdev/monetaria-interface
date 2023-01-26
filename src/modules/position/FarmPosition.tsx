@@ -267,13 +267,18 @@ export const FarmPosition = () => {
         </Box>
       </BasicModal>
 
-      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { md: 'row', xs: 'column' },
+          justifyContent: 'space-between',
+        }}
+      >
+        <Box sx={{ display: 'flex', flexDirection: { md: 'column', xs: 'row' }, gap: '16px' }}>
           <Typography sx={{ color: '#080F26', fontSize: '24px', fontWeight: 600 }}>
             Your position
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            {' '}
             <FormControlLabel control={<Switch defaultChecked />} label="Enable Profit and Loss" />
             <InfoIcon sx={{ fontSize: '12px', color: '#B0BABF' }} />
           </Box>
