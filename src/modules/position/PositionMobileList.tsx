@@ -1,56 +1,14 @@
 import { Trans } from '@lingui/macro';
-import { Box, Typography, useMediaQuery, useTheme, Button } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import { Row } from 'src/components/primitives/Row';
-import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import { PositionType } from './PositionType';
 import { TokenPair } from 'src/components/primitives/TokenPair';
+import { PositionType } from './positionType';
 
-const data: PositionType[] = [
-  {
-    asset: 'BUSD',
-    symbol: 'busd',
-    no: 57287,
-    tokenA: 'bnb',
-    tokenB: 'busd',
-    protocol: 'Pancake Swap',
-    position_value: 39.98,
-    debt_value: 0,
-    current_apy: 1.03,
-    debt_ratio: 0,
-    liq_threshold: 'No Debt',
-    safety_buffer: 'No Debt',
-  },
-  {
-    asset: 'BUSD',
-    symbol: 'busd',
-    no: 57288,
-    tokenA: 'bnb',
-    tokenB: 'usdt',
-    protocol: 'Pancake Swap',
-    position_value: 39.98,
-    debt_value: 0,
-    current_apy: 1.03,
-    debt_ratio: 0,
-    liq_threshold: 'No Debt',
-    safety_buffer: 'No Debt',
-  },
-  {
-    asset: 'BUSD',
-    symbol: 'busd',
-    no: 57289,
-    tokenA: 'bnb',
-    tokenB: 'cake',
-    protocol: 'Pancake Swap',
-    position_value: 39.98,
-    debt_value: 0,
-    current_apy: 1.03,
-    debt_ratio: 0,
-    liq_threshold: 'No Debt',
-    safety_buffer: 'No Debt',
-  },
-];
+interface farmPositionProps {
+  data: PositionType[];
+}
 
-export const PositionMobileList = () => {
+export const PositionMobileList = ({ data }: farmPositionProps) => {
   return (
     <>
       {data.map((rowObject) => (

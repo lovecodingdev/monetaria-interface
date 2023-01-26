@@ -16,56 +16,12 @@ import { InformationCircleIcon } from '@heroicons/react/outline';
 import { styled } from '@mui/system';
 import { InputGroup, Input, Table, SelectPicker } from 'rsuite';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import { PositionType } from './positionType';
 import { useRouter } from 'next/router';
 import { BasicModal } from 'src/components/primitives/BasicModal';
 import { TokenPair } from 'src/components/primitives/TokenPair';
+import { PositionType } from './positionType';
 
 const { Column, HeaderCell, Cell } = Table;
-const data: PositionType[] = [
-  {
-    asset: 'BUSD',
-    symbol: 'busd',
-    no: 57287,
-    tokenA: 'bnb',
-    tokenB: 'busd',
-    protocol: 'Pancake Swap',
-    position_value: 39.98,
-    debt_value: 0,
-    current_apy: 1.03,
-    debt_ratio: 0,
-    liq_threshold: 'No Debt',
-    safety_buffer: 'No Debt',
-  },
-  {
-    asset: 'BUSD',
-    symbol: 'busd',
-    no: 57288,
-    tokenA: 'bnb',
-    tokenB: 'usdt',
-    protocol: 'Pancake Swap',
-    position_value: 39.98,
-    debt_value: 0,
-    current_apy: 1.03,
-    debt_ratio: 0,
-    liq_threshold: 'No Debt',
-    safety_buffer: 'No Debt',
-  },
-  {
-    asset: 'BUSD',
-    symbol: 'busd',
-    no: 57289,
-    tokenA: 'bnb',
-    tokenB: 'cake',
-    protocol: 'Pancake Swap',
-    position_value: 39.98,
-    debt_value: 0,
-    current_apy: 1.03,
-    debt_ratio: 0,
-    liq_threshold: 'No Debt',
-    safety_buffer: 'No Debt',
-  },
-];
 
 const investMarks = [
   {
@@ -145,7 +101,11 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-export const PositionTable = () => {
+interface farmPositionProps {
+  data: PositionType[],
+}
+
+export const PositionTable = ({ data } : farmPositionProps) => {
   const theme = useTheme();
   const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));
   const [sortColumn, setSortColumn] = useState();

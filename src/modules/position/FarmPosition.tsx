@@ -19,6 +19,52 @@ import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import borderGradient from 'src/layouts/borderGradient';
 import { BasicModal } from 'src/components/primitives/BasicModal';
 import { useEffect, useState } from 'react';
+import { PositionType } from './positionType';
+
+const farmPositionData: PositionType[] = [
+  {
+    asset: 'BUSD',
+    symbol: 'busd',
+    no: 57287,
+    tokenA: 'bnb',
+    tokenB: 'busd',
+    protocol: 'Pancake Swap',
+    position_value: 39.98,
+    debt_value: 0,
+    current_apy: 1.03,
+    debt_ratio: 0,
+    liq_threshold: 'No Debt',
+    safety_buffer: 'No Debt',
+  },
+  {
+    asset: 'BUSD',
+    symbol: 'busd',
+    no: 57288,
+    tokenA: 'bnb',
+    tokenB: 'usdt',
+    protocol: 'Pancake Swap',
+    position_value: 39.98,
+    debt_value: 0,
+    current_apy: 1.03,
+    debt_ratio: 0,
+    liq_threshold: 'No Debt',
+    safety_buffer: 'No Debt',
+  },
+  {
+    asset: 'BUSD',
+    symbol: 'busd',
+    no: 57289,
+    tokenA: 'bnb',
+    tokenB: 'cake',
+    protocol: 'Pancake Swap',
+    position_value: 39.98,
+    debt_value: 0,
+    current_apy: 1.03,
+    debt_ratio: 0,
+    liq_threshold: 'No Debt',
+    safety_buffer: 'No Debt',
+  },
+];
 
 // Tab CSS
 const NewTabs = styled(Tabs)({
@@ -347,7 +393,11 @@ export const FarmPosition = () => {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          {!downToXSM ? <PositionTable /> : <PositionMobileList />}
+          {!downToXSM ? (
+            <PositionTable data={farmPositionData} />
+          ) : (
+            <PositionMobileList data={farmPositionData} />
+          )}
         </TabPanel>
         <TabPanel value={value} index={1}>
           Item Two
