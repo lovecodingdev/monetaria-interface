@@ -6,9 +6,10 @@ import { PositionType } from './positionType';
 
 interface farmPositionProps {
   data: PositionType[];
+  chooseOpenModalTwo: any;
 }
 
-export const PositionMobileList = ({ data }: farmPositionProps) => {
+export const PositionMobileList = ({ data, chooseOpenModalTwo }: farmPositionProps) => {
   return (
     <>
       {data.map((rowObject) => (
@@ -113,6 +114,7 @@ export const PositionMobileList = ({ data }: farmPositionProps) => {
                   marginTop: '-4px',
                 }}
                 variant="contained"
+                onClick={() => chooseOpenModalTwo(true)}
               >
                 Close
               </Button>
