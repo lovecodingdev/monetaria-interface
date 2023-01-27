@@ -4,12 +4,12 @@ import { Row } from 'src/components/primitives/Row';
 import { TokenPair } from 'src/components/primitives/TokenPair';
 import { PositionType } from './positionType';
 
-interface farmPositionProps {
+interface FarmPositionProps {
   data: PositionType[];
-  chooseOpenModalTwo: any;
+  onClose: (isOpenModalTwo: boolean) => void;
 }
 
-export const PositionMobileList = ({ data, chooseOpenModalTwo }: farmPositionProps) => {
+export const PositionMobileList = ({ data, onClose }: FarmPositionProps) => {
   return (
     <>
       {data.map((rowObject) => (
@@ -114,7 +114,7 @@ export const PositionMobileList = ({ data, chooseOpenModalTwo }: farmPositionPro
                   marginTop: '-4px',
                 }}
                 variant="contained"
-                onClick={() => chooseOpenModalTwo(true)}
+                onClick={() => onClose(true)}
               >
                 Close
               </Button>

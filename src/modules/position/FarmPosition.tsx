@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React from 'react';
 import {
   Box,
@@ -204,14 +206,14 @@ export const FarmPosition = () => {
   const theme = useTheme();
   const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));
   const [value, setValue] = React.useState(0);
-  const [openModalOne, setOpenModalOne] = useState(false);
-  const [openModalTwo, setOpenModalTwo] = useState(false);
+  const [isOpenClaimModal, setIsOpenClaimModal] = useState(false);
+  const [isOpenFarmCloseModal, setIsOpenFarmCloseModal] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
   const [optionValue, setOptionValue] = useState(0);
-  const [investDay, setInvestDay] = useState('180');
-  
-  const chooseOpenModalTwo = (isOpenModalTwo: boolean) => {
-    setOpenModalTwo(isOpenModalTwo);
+  const [investDay, setInvestDay] = useState(180);
+
+  const openFarmCloseModal = (isOpenModalTwo: boolean) => {
+    setIsOpenFarmCloseModal(true);
   };
 
   const valuetextForInvest = (_value: number) => {
@@ -229,8 +231,8 @@ export const FarmPosition = () => {
   return (
     <div>
       <BasicModal
-        open={openModalOne}
-        setOpen={setOpenModalOne}
+        open={isOpenClaimModal}
+        setOpen={setIsOpenClaimModal}
         withCloseButton={true}
         contentMaxWidth={731}
       >
@@ -413,7 +415,7 @@ export const FarmPosition = () => {
                     color: '#000000',
                   }}
                   variant="contained"
-                  onClick={() => setOpenModalOne(true)}
+                  onClick={() => setIsOpenClaimModal(true)}
                 >
                   Claim
                 </Button>
@@ -431,9 +433,9 @@ export const FarmPosition = () => {
         </Box>
         <TabPanel value={value} index={0}>
           {!downToXSM ? (
-            <PositionTable data={farmPositionData} chooseOpenModalTwo={chooseOpenModalTwo} />
+            <PositionTable data={farmPositionData} onClose={openFarmCloseModal} />
           ) : (
-            <PositionMobileList data={farmPositionData} chooseOpenModalTwo={chooseOpenModalTwo} />
+            <PositionMobileList data={farmPositionData} onClose={openFarmCloseModal} />
           )}
         </TabPanel>
         <TabPanel value={value} index={1}>
@@ -442,8 +444,8 @@ export const FarmPosition = () => {
       </Box>
 
       <BasicModal
-        open={openModalTwo}
-        setOpen={setOpenModalTwo}
+        open={isOpenFarmCloseModal}
+        setOpen={setIsOpenFarmCloseModal}
         withCloseButton={true}
         contentMaxWidth={731}
       >
@@ -1381,7 +1383,7 @@ export const FarmPosition = () => {
                       </Typography>
                     </Box>
                     <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
-                      39.98 BUSD -> 39.98 BUSD
+                      39.98 BUSD {'->'} 39.98 BUSD
                     </Typography>
                   </Box>
                   <Box
@@ -1404,7 +1406,7 @@ export const FarmPosition = () => {
                       </Typography>
                     </Box>
                     <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
-                      0.00 BUSD -> 0.00 BUSD
+                      0.00 BUSD {'->'} 0.00 BUSD
                     </Typography>
                   </Box>
                   <Box
@@ -1435,7 +1437,7 @@ export const FarmPosition = () => {
                       </Box>
                     </Box>
                     <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
-                      0.00% (1.00x )  ->  0.00% (1.00x)
+                      0.00% (1.00x ) {'->'} 0.00% (1.00x)
                     </Typography>
                   </Box>
                   <Box
@@ -1460,7 +1462,7 @@ export const FarmPosition = () => {
                       </Typography>
                     </Box>
                     <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
-                      92.00% ->  92.00%
+                      92.00% {'->'} 92.00%
                     </Typography>
                   </Box>
                   <Box
@@ -1483,7 +1485,7 @@ export const FarmPosition = () => {
                       </Typography>
                     </Box>
                     <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
-                      0.00%  -> 0.00%
+                      0.00% {'->'} 0.00%
                     </Typography>
                   </Box>
                   <Box
@@ -1506,7 +1508,7 @@ export const FarmPosition = () => {
                       </Typography>
                     </Box>
                     <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
-                      1.03%  -> 1.03%
+                      1.03% {'->'} 1.03%
                     </Typography>
                   </Box>
                   <Box
@@ -1529,7 +1531,7 @@ export const FarmPosition = () => {
                       </Typography>
                     </Box>
                     <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
-                      0.00% ->     0.00%
+                      0.00% {'->'} 0.00%
                     </Typography>
                   </Box>
                   <Box
@@ -1552,7 +1554,7 @@ export const FarmPosition = () => {
                       </Typography>
                     </Box>
                     <Typography sx={{ color: '#F76659', fontWeight: 600, fontSize: '12px' }}>
-                      1.03%  -> 1.03%
+                      1.03% {'->'} 1.03%
                     </Typography>
                   </Box>
                   <Box
@@ -1583,7 +1585,7 @@ export const FarmPosition = () => {
                       </Box>
                     </Box>
                     <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
-                      0.00% (1.00x )  ->  0.00% (1.00x)
+                      0.00% (1.00x ) {'->'} 0.00% (1.00x)
                     </Typography>
                   </Box>
                   <Box
@@ -1622,7 +1624,7 @@ export const FarmPosition = () => {
                       </IconButton>
                     </Box>
                     <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
-                      1.03%  -> 1.03%
+                      1.03% {'->'} 1.03%
                     </Typography>
                   </Box>
                   <Box>
@@ -1712,10 +1714,10 @@ export const FarmPosition = () => {
                       alignItems: 'first-start',
                     }}
                   >
-                    <Box 
+                    <Box
                       sx={{
                         dispaly: 'flex',
-                        flexDirection: 'column'
+                        flexDirection: 'column',
                       }}
                     >
                       <Box
@@ -1748,10 +1750,10 @@ export const FarmPosition = () => {
                       </Typography>
                     </Box>
                     <Typography sx={{ color: '#59729D', fontWeight: 600, fontSize: '14px' }}>
-                      0.00% (1.00x )  ->  0.00% (1.00x)
+                      0.00% (1.00x ) {'->'} 0.00% (1.00x)
                     </Typography>
                   </Box>
-                                    <Box
+                  <Box
                     sx={{
                       display: 'flex',
                       flexDirection: 'row',
@@ -1885,7 +1887,7 @@ export const FarmPosition = () => {
               </>
             )}
 
-            {selectedTab == 1 && 
+            {selectedTab == 1 && (
               <>
                 <Box
                   sx={{
@@ -1910,7 +1912,7 @@ export const FarmPosition = () => {
                   </Typography>
                 </Box>
               </>
-            }
+            )}
           </>
         )}
 

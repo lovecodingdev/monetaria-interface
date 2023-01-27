@@ -7,12 +7,12 @@ import { PositionType } from './positionType';
 
 const { Column, HeaderCell, Cell } = Table;
 
-interface farmPositionProps {
+interface FarmPositionProps {
   data: PositionType[];
-  chooseOpenModalTwo: any;
+  onClose: (isOpenModalTwo: boolean) => void;
 }
 
-export const PositionTable = ({ data, chooseOpenModalTwo }: farmPositionProps) => {
+export const PositionTable = ({ data, onClose }: FarmPositionProps) => {
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();
   const [loading, setLoading] = useState(false);
@@ -24,9 +24,11 @@ export const PositionTable = ({ data, chooseOpenModalTwo }: farmPositionProps) =
         let x = a[sortColumn];
         let y = b[sortColumn];
         if (typeof x === 'string') {
+          // @ts-ignore
           x = x.charCodeAt();
         }
         if (typeof y === 'string') {
+          // @ts-ignore
           y = y.charCodeAt();
         }
         if (sortType === 'asc') {
@@ -39,12 +41,13 @@ export const PositionTable = ({ data, chooseOpenModalTwo }: farmPositionProps) =
     return data;
   };
 
-  const handleSortColumn = (sortColumn, sortType) => {
+  // @ts-ignore
+  const handleSortColumn = (_sortColumn, _sortType) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      setSortColumn(sortColumn);
-      setSortType(sortType);
+      setSortColumn(_sortColumn);
+      setSortType(_sortType);
     }, 500);
   };
 
@@ -234,7 +237,7 @@ export const PositionTable = ({ data, chooseOpenModalTwo }: farmPositionProps) =
                       marginTop: '-4px',
                     }}
                     variant="contained"
-                    onClick={() => chooseOpenModalTwo(true)}
+                    onClick={() => onClose(true)}
                   >
                     Close
                   </Button>
