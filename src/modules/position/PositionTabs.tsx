@@ -1,14 +1,10 @@
 import React, { useState, ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
 import {
   Box,
   Paper,
   Typography,
   Tab,
   Tabs,
-  Alert,
-  Link,
-  SvgIcon,
   BoxProps,
   TypographyProps,
   useTheme,
@@ -18,7 +14,6 @@ import { styled } from '@mui/system';
 import { BorrowedPositionsList } from '../dashboard/lists/BorrowedPositionsList/BorrowedPositionsList';
 import { SuppliedPositionsList } from '../dashboard/lists/SuppliedPositionsList/SuppliedPositionsList';
 import TransactionList from '../dashboard/lists/TransactionList/TransactionList';
-import LiquidationHistoryList from '../dashboard/lists/LiquidationHistoryList/LiquidationHistoryList';
 import { Dashboard } from './Dashboard';
 import { FarmPosition } from './FarmPosition';
 
@@ -51,6 +46,7 @@ const NewTab = styled(Tab)`
     font-weight: bold;
   }
 `;
+
 export const PanelRow: React.FC<BoxProps> = (props) => (
   <Box
     {...props}
@@ -62,6 +58,7 @@ export const PanelRow: React.FC<BoxProps> = (props) => (
     }}
   />
 );
+
 export const PanelTitle: React.FC<TypographyProps> = (props) => (
   <Typography
     {...props}
@@ -128,21 +125,6 @@ export const PanelItem: React.FC<PanelItemProps> = ({ title, children }) => {
     </Box>
   );
 };
-
-const ChartContainer: React.FC<BoxProps> = (props) => (
-  <Box
-    {...props}
-    sx={{
-      minWidth: 0,
-      width: '100%',
-      maxWidth: '100%',
-      height: 300,
-      marginLeft: 0,
-      flexGrow: 1,
-      ...props.sx,
-    }}
-  />
-);
 
 enum PositionTab {
   Deposits,
