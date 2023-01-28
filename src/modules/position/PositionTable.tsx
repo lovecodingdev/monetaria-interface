@@ -9,7 +9,7 @@ const { Column, HeaderCell, Cell } = Table;
 
 interface FarmPositionProps {
   data: PositionType[];
-  onClose: (isOpenModalTwo: boolean) => void;
+  onClose: () => void;
 }
 
 export const PositionTable = ({ data, onClose }: FarmPositionProps) => {
@@ -237,7 +237,7 @@ export const PositionTable = ({ data, onClose }: FarmPositionProps) => {
                       marginTop: '-4px',
                     }}
                     variant="contained"
-                    onClick={() => onClose(true)}
+                    onClick={() => onClose()}
                   >
                     Close
                   </Button>

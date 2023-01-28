@@ -6,7 +6,7 @@ import { PositionType } from './positionType';
 
 interface FarmPositionProps {
   data: PositionType[];
-  onClose: (isOpenModalTwo: boolean) => void;
+  onClose: () => void;
 }
 
 export const PositionMobileList = ({ data, onClose }: FarmPositionProps) => {
@@ -114,7 +114,7 @@ export const PositionMobileList = ({ data, onClose }: FarmPositionProps) => {
                   marginTop: '-4px',
                 }}
                 variant="contained"
-                onClick={() => onClose(true)}
+                onClick={() => onClose()}
               >
                 Close
               </Button>
