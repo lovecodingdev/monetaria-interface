@@ -469,6 +469,14 @@ export function getThemedComponents(theme: Theme) {
         defaultProps: {
           variant: 'description',
         },
+        styleOverrides: {
+          root: {
+            '&:focus, &:hover': {
+              textDecoration: 'none',
+              color: '#080F26',
+            },
+          },
+        },
       },
       MuiMenu: {
         defaultProps: {

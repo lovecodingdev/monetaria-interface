@@ -47,9 +47,9 @@ export function DaoMenu() {
       </Button>
 
       <Menu
-        id="more-menu"
+        id="dao-menu"
         MenuListProps={{
-          'aria-labelledby': 'more-button',
+          'aria-labelledby': 'dao-button',
         }}
         anchorEl={anchorEl}
         open={open}
