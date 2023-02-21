@@ -55,6 +55,7 @@ export enum CustomMarket {
   proto_fuji_v3 = 'proto_fuji_v3',
   proto_goerli_v3 = 'proto_goerli_v3',
   proto_optimism_goerli_v3 = 'proto_optimism_goerli_v3',
+  proto_bsc_testnet_v3 = 'proto_bsc_testnet_v3',
   // v3 mainnets
   proto_optimism_v3 = 'proto_optimism_v3',
   proto_fantom_v3 = 'proto_fantom_v3',
@@ -535,5 +536,36 @@ export const marketsData: {
       UI_POOL_DATA_PROVIDER: '0xBA6378f1c1D046e9EB0F538560BA7558546edF3C',
       UI_INCENTIVE_DATA_PROVIDER: '0x9842E5B7b7C6cEDfB1952a388e050582Ff95645b',
     },
+  },
+  [CustomMarket.proto_bsc_testnet_v3]: {
+    marketTitle: 'BSC Testnet',
+    v3: true,
+    chainId: ChainId.bsc_testnet,
+    enabledFeatures: {
+      // Note: We should remove this based on the addresses that you provide in the addresses below
+      faucet: true,
+      // governance: true,
+      // staking: true,
+      // incentives: true,
+    },
+    rpcOnly: true,
+    addresses: {
+      // LENDING_POOL_ADDRESS_PROVIDER: '0xc4dCB5126a3AfEd129BC3668Ea19285A9f56D15D'.toLowerCase(),
+      // LENDING_POOL: '0x368EedF3f56ad10b9bC57eed4Dac65B26Bb667f6',
+      // WETH_GATEWAY: '0xd5B55D3Ed89FDa19124ceB5baB620328287b915d',
+      // FAUCET: '0x1ca525Cd5Cb77DB5Fa9cBbA02A0824e283469DBe',
+      // WALLET_BALANCE_PROVIDER: '0x75CC0f0E3764be7594772D08EEBc322970CbB3a9',
+      // UI_POOL_DATA_PROVIDER: '0xC576539371a2f425545B7BF4eb2a14Eee1944a1C',
+      // UI_INCENTIVE_DATA_PROVIDER: '0xACFd610B51ac6B70F030B277EA8A2A8D2143dC7A',
+
+      LENDING_POOL_ADDRESS_PROVIDER: '0xcc6E0458845CBe15a0E4f980C5F1543E9d8316d5'.toLowerCase(),
+      LENDING_POOL: '0x945f65f1Abe6383De79C01A9aE7eB8f499Bff88b',
+      WETH_GATEWAY: '0x665a8beb5E1E0876240aeae65F59E7C1ab95d3D8',
+      WALLET_BALANCE_PROVIDER: '0x47903c1589e180f07E29E387696f8911BF1242Ec',
+      UI_POOL_DATA_PROVIDER: '0x206543e36ECE2cEd36331f4A106eb84fBd1d7696',
+      UI_INCENTIVE_DATA_PROVIDER: '0x1CACe2064C53B5e5DEc5Ad47e3e35C455E32f51f',
+      FAUCET: '0x20c181A630EBD56A1F7eFFA701C8B2f7C6ad7B78',
+    },
+    bgColor: 'linear-gradient(90deg, rgba(73,91,252,1) 0%, rgba(63,133,238,1) 100%)',
   },
 } as const;
