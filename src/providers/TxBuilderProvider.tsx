@@ -7,6 +7,7 @@ import {
   LendingPool,
   Pool,
   PoolInterface,
+  VotingEscrow
 } from '@monetaria/contract-helpers';
 import React, { ReactElement } from 'react';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
@@ -17,6 +18,7 @@ export interface TxBuilderContextInterface {
   faucetService: FaucetService;
   incentivesTxBuilder: IncentivesControllerInterface;
   incentivesTxBuilderV2: IncentivesControllerV2Interface;
+  votingEscrow: VotingEscrow;
 }
 
 export const TxBuilderProvider: React.FC<{ children: ReactElement }> = ({ children }) => {
@@ -49,9 +51,14 @@ export const TxBuilderProvider: React.FC<{ children: ReactElement }> = ({ childr
     jsonRpcProvider
   );
 
+  const votingEscrow: VotingEscrow = new VotingEscrow(jsonRpcProvider, {
+    VOTING_ESCROW: currentMarketData.addresses.VOTING_ESCROW,
+    MNT: currentMarketData.addresses.MNT,
+  });
+
   return (
     <TxBuilderContext.Provider
-      value={{ lendingPool, faucetService, incentivesTxBuilder, incentivesTxBuilderV2 }}
+      value={{ lendingPool, faucetService, incentivesTxBuilder, incentivesTxBuilderV2, votingEscrow }}
     >
       {children}
     </TxBuilderContext.Provider>
