@@ -36,6 +36,7 @@ export type MarketDataType = {
     COLLECTOR?: string;
     VOTING_ESCROW?: string;
     MNT?: string;
+    GAUGES?: Record<string, string>
   };
   /**
    * https://www.hal.xyz/ has integrated aave for healtfactor warning notification
@@ -569,6 +570,9 @@ export const marketsData: {
       FAUCET: '0xf7b36dEaF7b2d2d8f1edd4a6918B66f3A56A3De7',
       VOTING_ESCROW: '0x823C2FCEc33005188b3FA5eFB7130851C91e9562',
       MNT: '0x64E2C58F063EFED4477C313a4d4e51184CfFE198',
+      GAUGES: {
+        "WBTC": "0x3200c69BaAC0DE4F9b474F941C9eeec36891520a"
+      }
     },
     bgColor: 'linear-gradient(90deg, rgba(73,91,252,1) 0%, rgba(63,133,238,1) 100%)',
   },

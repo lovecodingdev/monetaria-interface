@@ -38,7 +38,7 @@
     "@graphql-codegen/typescript-react-apollo": "^3.2.8",
     "@heroicons/react": "^1.0.6",
     "@lingui/react": "^3.13.2",
-    "@monetaria/contract-helpers": "^1.0.4",
+    "@monetaria/contract-helpers": "^1.0.5",
     "@monetaria/math-utils": "^1.0.2",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",

@@ -17,6 +17,11 @@ import Slider from '@mui/material/Slider';
 import ApyEffectList from 'src/modules/dashboard/lists/ApyEffectList/ApyEffectList';
 import VoterList from 'src/modules/dashboard/lists/Voters/VoterList';
 import dynamic from 'next/dynamic';
+import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
+import { ItemDataType } from 'src/helpers/rsuite-types';
+import { GuageWeightVoteActions } from 'src/components/transactions/GaugeWeightVote/GuageWeightVoteActions';
+import { ChangeNetworkWarning } from 'src/components/transactions/Warnings/ChangeNetworkWarning';
+import { getNetworkConfig } from 'src/utils/marketsAndNetworksConfig';
 
 const PieChart = dynamic(() => import('src/components/piecharts/piechart'), { ssr: false });
 
@@ -72,18 +77,67 @@ const gauge_effect_data = [
   { name: 'Fraxbp', address: '0x34ed...', percentage: 10 },
 ];
 
+interface TokenOptionProps {
+  item: ItemDataType;
+}
+
+const TokenOption = ({ item }: TokenOptionProps) => {
+  const _item = item as ItemDataType;
+  const _label = _item.label as string;
+  const _value = _item.value as string;
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 2,
+        alignItems: 'center',
+        fontFamily: 'Gilroy, Arial !important',
+      }}
+    >
+      <Box>
+        {' '}
+        <TokenIcon symbol={_label} sx={{ fontSize: '24px', mr: 1 }} />{' '}
+      </Box>
+      <Box>
+        {' '}
+        <span
+          style={{
+            fontWeight: 500,
+            fontSize: '18px',
+            color: '#5B6871',
+          }}
+        >
+          {_label.toUpperCase()} ({textCenterEllipsis(_value, 5, 4)})
+        </span>
+      </Box>
+    </Box>
+  );
+};
+
 export default function GaugeWeightVoting() {
-  const { currentAccount, loading: web3Loading } = useWeb3Context();
+  const { currentAccount, loading: web3Loading, chainId: connectedChainId } = useWeb3Context();
   const { isPermissionsLoading } = usePermissions();
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.up('xsm'));
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
-  const [curGauge, setCurGause] = useState<string>('0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1');
-  const [curGaugeForHistory, setCurGauseForHistory] = useState<string>(
-    '0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1'
-  );
+  const [curGauge, setCurGause] = useState<string>();
+  const [curGaugeForHistory, setCurGauseForHistory] = useState<string>();
   const [voteWeight, setVoteWeight] = useState<number>(0);
   const [slow, setSlow] = useState<number>(0);
+
+  const { currentMarketData, currentChainId: marketChainId } = useProtocolDataContext();
+
+  const gaugePickerData = [];
+  for (const key in currentMarketData.addresses.GAUGES) {
+    gaugePickerData.push({
+      label: key,
+      value: currentMarketData.addresses.GAUGES[key],
+    });
+  }
+
+  const isWrongNetwork = connectedChainId !== marketChainId;
+
   return (
     <>
       <ContentContainer>
@@ -283,78 +337,25 @@ export default function GaugeWeightVoting() {
                           >
                             Select a gauge
                           </label>
+                          {isWrongNetwork && (
+                            // <Box sx={{mb: -6}}>
+                              <ChangeNetworkWarning
+                                networkName={getNetworkConfig(marketChainId).name}
+                                chainId={marketChainId}
+                              />
+                            // </Box>
+                          )}
+
                           <SelectPicker
-                            data={gaugeTempData}
+                            data={gaugePickerData}
                             style={{ width: '100%' }}
                             value={curGauge}
-                            onChange={setCurGause}
+                            onChange={(value) => setCurGause(value || '')}
                             placeholder="Select a gauge"
                             searchable={false}
-                            renderMenuItem={(label, item) => {
-                              return (
-                                <Box
-                                  sx={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    gap: 2,
-                                    alignItems: 'center',
-                                    fontFamily: 'Gilroy, Arial !important',
-                                  }}
-                                >
-                                  <Box>
-                                    {' '}
-                                    <TokenIcon
-                                      symbol={label}
-                                      sx={{ fontSize: '24px', mr: 1 }}
-                                    />{' '}
-                                  </Box>
-                                  <Box>
-                                    {' '}
-                                    <span
-                                      style={{
-                                        fontWeight: 500,
-                                        fontSize: '18px',
-                                        color: '#5B6871',
-                                      }}
-                                    >
-                                      {label.toUpperCase()} ({textCenterEllipsis(item.value, 5, 4)})
-                                    </span>
-                                  </Box>
-                                </Box>
-                              );
-                            }}
-                            renderValue={(value, item) => {
-                              return (
-                                <Box
-                                  sx={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    gap: 2,
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Box>
-                                    {' '}
-                                    <TokenIcon
-                                      symbol={item.label}
-                                      sx={{ fontSize: '24px', mr: 1 }}
-                                    />{' '}
-                                  </Box>
-                                  <Box>
-                                    {' '}
-                                    <span
-                                      style={{
-                                        fontWeight: 500,
-                                        fontSize: '18px',
-                                        color: '#5B6871',
-                                      }}
-                                    >
-                                      {item.label.toUpperCase()} ({textCenterEllipsis(value, 5, 4)})
-                                    </span>
-                                  </Box>
-                                </Box>
-                              );
-                            }}
+                            renderMenuItem={(label, item) => <TokenOption item={item} />}
+                            renderValue={(value, item) => <TokenOption item={item} />}
+                            cleanable={false}
                           />
                         </Box>
                         <Box>
@@ -373,116 +374,32 @@ export default function GaugeWeightVoting() {
                             sx={{
                               display: 'flex',
                               flexDirection: 'row',
-                              justifyContent: 'flex-start',
+                              justifyContent: 'space-between',
                               gap: '16px',
-                              alignItems: 'end',
+                              alignItems: 'center',
                             }}
                           >
-                            <Box>
-                              <InputNumber
-                                value={voteWeight}
-                                onChange={setVoteWeight}
-                                min={0}
-                                style={{ width: downToXSM ? '108px' : '372px' }}
-                              />
-                            </Box>
-                            <Box sx={{ color: 'black', fontWeight: 400, fontSize: '14px' }}>
-                              %(of your voting power)
-                            </Box>
-                          </Box>
-                        </Box>
-                        <Box
-                          sx={{
-                            display: 'flex',
-                            flexDirection: downToXSM ? 'column' : 'row',
-                            justifyContent: downToXSM ? 'center' : 'flex-start',
-                            gap: downToXSM ? '16px' : '60px',
-                          }}
-                        >
-                          <Box>
-                            {' '}
-                            <label
-                              style={{
-                                display: 'block',
-                                color: '#252C32',
-                                fontWeight: 400,
-                                fontSize: '14px',
-                                paddingBottom: '5px',
-                              }}
-                            >
-                              Slow
-                            </label>
                             <InputNumber
-                              value={slow}
-                              onChange={setSlow}
+                              value={voteWeight}
+                              onChange={(value) => setVoteWeight(Number(value))}
                               min={0}
-                              step={0.1}
-                              style={{ width: downToXSM ? '100%' : '156px' }}
+                              step={10}
+                              style={{ flex: 1 }}
                             />
-                          </Box>
-                          <Box sx={{ width: '284px' }}>
-                            <label
-                              style={{
-                                display: 'block',
-                                color: '#252C32',
-                                fontWeight: 400,
-                                fontSize: '14px',
-                                paddingBottom: '5px',
-                              }}
-                            >
-                              Gas priority fee:
-                            </label>{' '}
                             <Box
                               sx={{
-                                paddingLeft: '25px',
-                                display: 'flex',
-                                justifyContent: 'center',
+                                color: 'black',
+                                fontWeight: 400,
+                                fontSize: '14px',
+                                textAlign: 'end',
                               }}
                             >
-                              {' '}
-                              <Slider
-                                aria-label="Custom marks"
-                                defaultValue={2}
-                                step={1}
-                                valueLabelDisplay="auto"
-                                min={1}
-                                max={3}
-                                marks={marks}
-                                sx={{
-                                  '& .MuiSlider-thumb': {
-                                    backgroundColor: '#F6F8F9',
-                                    border: '1px solid #B0BABF',
-                                    opacity: 1,
-                                    '&:focus, &:hover, &.Mui-active': {
-                                      boxShadow:
-                                        '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
-                                      // Reset on touch devices, it doesn't add specificity
-                                    },
-                                  },
-                                  '& .MuiSlider-track': {
-                                    border: 'none',
-                                    backgroundColor: '#074592',
-                                  },
-                                  '& .MuiSlider-rail': {
-                                    opacity: 1,
-                                    backgroundColor: '#DDE2E4',
-                                  },
-                                  '& .MuiSlider-mark': {
-                                    backgroundColor: '#bfbfbf',
-                                    height: '2px',
-                                    '&.MuiSlider-markActive': {
-                                      opacity: 1,
-                                      backgroundColor: '#F6F8F9',
-                                    },
-                                  },
-                                }}
-                              />
+                              % ( of your voting power )
                             </Box>
                           </Box>
                         </Box>
-                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                          {' '}
-                          <Button
+                        <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+                          {/* <Button
                             sx={{
                               color: '#F6F8F9',
                               fontSize: '14px',
@@ -496,7 +413,13 @@ export default function GaugeWeightVoting() {
                             variant="contained"
                           >
                             Submit
-                          </Button>
+                          </Button> */}
+                          <GuageWeightVoteActions 
+                            gaugeAddr={curGauge || ""}
+                            userWeight={voteWeight}
+                            isWrongNetwork={isWrongNetwork}
+                            blocked={false}
+                          />
                         </Box>
                       </Box>
                     </Paper>
@@ -658,79 +581,15 @@ export default function GaugeWeightVoting() {
                           <Box>
                             {' '}
                             <SelectPicker
-                              data={gaugeTempData}
+                              data={gaugePickerData}
                               value={curGaugeForHistory}
                               style={{ width: downToXSM ? '200px' : '100%' }}
-                              onChange={setCurGauseForHistory}
+                              onChange={value => setCurGauseForHistory(value || "")}
                               placeholder="Select a gauge"
                               searchable={false}
-                              renderMenuItem={(label, item) => {
-                                return (
-                                  <Box
-                                    sx={{
-                                      display: 'flex',
-                                      flexDirection: 'row',
-                                      gap: 2,
-                                      alignItems: 'center',
-                                      fontFamily: 'Gilroy, Arial !important',
-                                    }}
-                                  >
-                                    <Box>
-                                      {' '}
-                                      <TokenIcon
-                                        symbol={label}
-                                        sx={{ fontSize: '24px', mr: 1 }}
-                                      />{' '}
-                                    </Box>
-                                    <Box>
-                                      {' '}
-                                      <span
-                                        style={{
-                                          fontWeight: 500,
-                                          fontSize: '18px',
-                                          color: '#5B6871',
-                                        }}
-                                      >
-                                        {label.toUpperCase()} (
-                                        {textCenterEllipsis(item.value, 5, 4)})
-                                      </span>
-                                    </Box>
-                                  </Box>
-                                );
-                              }}
-                              renderValue={(value, item) => {
-                                return (
-                                  <Box
-                                    sx={{
-                                      display: 'flex',
-                                      flexDirection: 'row',
-                                      gap: 2,
-                                      alignItems: 'center',
-                                    }}
-                                  >
-                                    <Box>
-                                      {' '}
-                                      <TokenIcon
-                                        symbol={item.label}
-                                        sx={{ fontSize: '24px', mr: 1 }}
-                                      />{' '}
-                                    </Box>
-                                    <Box>
-                                      {' '}
-                                      <span
-                                        style={{
-                                          fontWeight: 500,
-                                          fontSize: '18px',
-                                          color: '#5B6871',
-                                        }}
-                                      >
-                                        {item.label.toUpperCase()} (
-                                        {textCenterEllipsis(value, 5, 4)})
-                                      </span>
-                                    </Box>
-                                  </Box>
-                                );
-                              }}
+                              renderMenuItem={(label, item) => <TokenOption item={item} />}
+                              renderValue={(value, item) => <TokenOption item={item} />}
+                              cleanable={false}
                             />
                           </Box>
                           <Box>
