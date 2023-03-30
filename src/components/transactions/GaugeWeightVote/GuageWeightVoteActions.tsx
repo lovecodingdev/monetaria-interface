@@ -33,7 +33,7 @@ export const GuageWeightVoteActions = ({
         });
       },
       skip: blocked,
-      deps: [],
+      deps: [gaugeAddr],
     });
 
   return (

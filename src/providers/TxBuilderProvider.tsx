@@ -59,7 +59,7 @@ export const TxBuilderProvider: React.FC<{ children: ReactElement }> = ({ childr
   });
 
   const gaugeController: GaugeController = new GaugeController(jsonRpcProvider, {
-    VOTING_ESCROW: currentMarketData.addresses.VOTING_ESCROW,
+    GAUGE_CONTROLLER: currentMarketData.addresses.GAUGE_CONTROLLER,
     MNT: currentMarketData.addresses.MNT,
   });
 

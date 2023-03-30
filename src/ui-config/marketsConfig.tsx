@@ -36,6 +36,7 @@ export type MarketDataType = {
     COLLECTOR?: string;
     VOTING_ESCROW?: string;
     MNT?: string;
+    GAUGE_CONTROLLER?: string;
     GAUGES?: Record<string, string>
   };
   /**
@@ -570,6 +571,7 @@ export const marketsData: {
       FAUCET: '0xf7b36dEaF7b2d2d8f1edd4a6918B66f3A56A3De7',
       VOTING_ESCROW: '0x823C2FCEc33005188b3FA5eFB7130851C91e9562',
       MNT: '0x64E2C58F063EFED4477C313a4d4e51184CfFE198',
+      GAUGE_CONTROLLER: '0x39c76fD1808e1a3A1db4D3B82b360D65c48C50F3',
       GAUGES: {
         "WBTC": "0x3200c69BaAC0DE4F9b474F941C9eeec36891520a"
       }
