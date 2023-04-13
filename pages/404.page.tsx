@@ -1,13 +1,8 @@
-import { Box, Button, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { MainLayout } from '../src/layouts/MainLayout';
 import ErrorImg from 'public/404_white.svg';
 
 export default function Custom404() {
-  const { breakpoints } = useTheme();
-  const lg = useMediaQuery(breakpoints.up('lg'));
-  const xsm = useMediaQuery(breakpoints.down('xsm'));
-  const md = useMediaQuery(breakpoints.down('md'));
-
   return (
     <>
       <Box

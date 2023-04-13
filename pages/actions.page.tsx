@@ -1,9 +1,6 @@
 import {
   Box,
   Container,
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -16,7 +13,6 @@ import {
 import { MainLayout } from 'src/layouts/MainLayout';
 import { ActionsTopDetails } from 'src/modules/actions/ActionsTopDetails';
 
-import { ContentContainer } from '../src/components/ContentContainer';
 import { ActionTabs } from '../src/components/transactions/ActionTabs/ActionTabs';
 import { TokenSelectModal } from 'src/components/transactions/ActionTabs/TokenSelectModal';
 import { useModalContext } from 'src/hooks/useModal';

@@ -8,10 +8,10 @@ import {
   IconButton,
   Button,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MainLayout } from '../src/layouts/MainLayout';
 import borderGradient from 'src/layouts/borderGradient';
-import { SelectPicker, InputNumber, ButtonToolbar, ButtonGroup } from 'rsuite';
+import { SelectPicker } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
 import SyncIcon from '@mui/icons-material/Sync';
 import Logo from '/public/logo_green.svg';

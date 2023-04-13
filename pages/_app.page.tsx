@@ -21,7 +21,6 @@ import { BackgroundDataProvider } from 'src/hooks/app-data-provider/BackgroundDa
 import { AppDataProvider } from 'src/hooks/app-data-provider/useAppDataProvider';
 import { ConnectionStatusProvider } from 'src/hooks/useConnectionStatusContext';
 import { ModalContextProvider } from 'src/hooks/useModal';
-// import { Web3ContextProvider } from 'src/libs/web3-data-provider/Web3ContextProvider';
 import { TxBuilderProvider } from 'src/providers/TxBuilderProvider';
 import { apolloClient } from 'src/utils/apolloClient';
 
