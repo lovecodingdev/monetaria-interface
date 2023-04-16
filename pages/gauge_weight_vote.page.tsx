@@ -10,8 +10,6 @@ import borderGradient from 'src/layouts/borderGradient';
 
 import { SelectPicker, InputNumber } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
-import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import { textCenterEllipsis } from 'src/helpers/text-center-ellipsis';
 import Slider from '@mui/material/Slider';
 
 import ApyEffectList from 'src/modules/dashboard/lists/ApyEffectList/ApyEffectList';
@@ -22,6 +20,7 @@ import { ItemDataType } from 'src/helpers/rsuite-types';
 import { GuageWeightVoteActions } from 'src/components/transactions/GaugeWeightVote/GuageWeightVoteActions';
 import { ChangeNetworkWarning } from 'src/components/transactions/Warnings/ChangeNetworkWarning';
 import { getNetworkConfig } from 'src/utils/marketsAndNetworksConfig';
+import { TokenOption } from 'src/components/TokenOption';
 
 const PieChart = dynamic(() => import('src/components/piecharts/piechart'), { ssr: false });
 
@@ -76,44 +75,6 @@ const gauge_effect_data = [
   { name: 'Fraxbp', address: '0x34ed...', percentage: 10 },
   { name: 'Fraxbp', address: '0x34ed...', percentage: 10 },
 ];
-
-interface TokenOptionProps {
-  item: ItemDataType;
-}
-
-const TokenOption = ({ item }: TokenOptionProps) => {
-  const _item = item as ItemDataType;
-  const _label = _item.label as string;
-  const _value = _item.value as string;
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        gap: 2,
-        alignItems: 'center',
-        fontFamily: 'Gilroy, Arial !important',
-      }}
-    >
-      <Box>
-        {' '}
-        <TokenIcon symbol={_label} sx={{ fontSize: '24px', mr: 1 }} />{' '}
-      </Box>
-      <Box>
-        {' '}
-        <span
-          style={{
-            fontWeight: 500,
-            fontSize: '18px',
-            color: '#5B6871',
-          }}
-        >
-          {_label.toUpperCase()} ({textCenterEllipsis(_value, 5, 4)})
-        </span>
-      </Box>
-    </Box>
-  );
-};
 
 export default function GaugeWeightVoting() {
   const { currentAccount, loading: web3Loading, chainId: connectedChainId } = useWeb3Context();
