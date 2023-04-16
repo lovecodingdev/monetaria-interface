@@ -573,7 +573,7 @@ export const marketsData: {
       MNT: '0x64E2C58F063EFED4477C313a4d4e51184CfFE198',
       GAUGE_CONTROLLER: '0x39c76fD1808e1a3A1db4D3B82b360D65c48C50F3',
       GAUGES: {
-        "WBTC": "0x3200c69BaAC0DE4F9b474F941C9eeec36891520a"
+        "WBTC": "0x2D55905f98B40194191e2714728F493b8a7db8B9"
       }
     },
     bgColor: 'linear-gradient(90deg, rgba(73,91,252,1) 0%, rgba(63,133,238,1) 100%)',

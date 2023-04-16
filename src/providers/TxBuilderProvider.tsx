@@ -9,8 +9,9 @@ import {
   PoolInterface,
   VotingEscrow,
   GaugeController,
+  LiquidityGauge,
 } from '@monetaria/contract-helpers';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useMemo } from 'react';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { TxBuilderContext } from 'src/hooks/useTxBuilder';
 
@@ -21,6 +22,7 @@ export interface TxBuilderContextInterface {
   incentivesTxBuilderV2: IncentivesControllerV2Interface;
   votingEscrow: VotingEscrow;
   gaugeController: GaugeController;
+  gauges: Record<string, LiquidityGauge>
 }
 
 export const TxBuilderProvider: React.FC<{ children: ReactElement }> = ({ children }) => {
@@ -63,6 +65,17 @@ export const TxBuilderProvider: React.FC<{ children: ReactElement }> = ({ childr
     MNT: currentMarketData.addresses.MNT,
   });
 
+  let gauges: Record<string, LiquidityGauge> = useMemo(()=>{
+    let _gauges: Record<string, LiquidityGauge> = {};
+    for (const key in currentMarketData.addresses.GAUGES) {
+      let gaugeAddr = currentMarketData.addresses.GAUGES[key];
+      _gauges[gaugeAddr] = new LiquidityGauge(jsonRpcProvider, {
+        LIQUIDITY_GAUGE: gaugeAddr
+      })
+    }
+    return _gauges;
+  }, [currentMarketData.addresses.GAUGES]);
+
   return (
     <TxBuilderContext.Provider
       value={{
@@ -72,6 +85,7 @@ export const TxBuilderProvider: React.FC<{ children: ReactElement }> = ({ childr
         incentivesTxBuilderV2,
         votingEscrow,
         gaugeController,
+        gauges,
       }}
     >
       {children}

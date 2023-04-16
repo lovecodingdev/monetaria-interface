@@ -4,38 +4,56 @@ import { MainLayout } from '../src/layouts/MainLayout';
 import borderGradient from 'src/layouts/borderGradient';
 import { SelectPicker, InputNumber, Button, ButtonToolbar, ButtonGroup } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
-import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import { textCenterEllipsis } from 'src/helpers/text-center-ellipsis';
 import Rocket from '/public/icons/rocket.svg';
 import Slider from '@mui/material/Slider';
-
-const gaugeTempData = [
-  {
-    label: 'mnt',
-    value: '0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1',
-  },
-  {
-    label: 'btc',
-    value: '0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e600b1',
-  },
-];
+import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
+import { TokenOption } from 'src/components/TokenOption';
+import { useTxBuilderContext } from 'src/hooks/useTxBuilder';
+import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
 
 export default function Calc() {
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.up('xsm'));
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
-  const [curGauge, setCurGause] = useState('0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1');
+  const [curGauge, setCurGause] = useState<string>();
   const [depositValue, setDepositValue] = useState(0);
   const [liquidityValue, setLiquidityValue] = useState(0);
   const [mntAmount, setMntAmount] = useState(0);
   const [veAmount, setVeAmount] = useState(0);
   const [isVe, setIsVe] = useState(false);
   const [lockPeriod, setLockPeriod] = useState(26);
+  const [boost, setBoost] = useState(1.0);
+
+  const { currentAccount } = useWeb3Context();
+  const { currentMarketData } = useProtocolDataContext();
+  const { gauges } = useTxBuilderContext();
+
+  const gaugePickerData = [];
+  for (const key in currentMarketData.addresses.GAUGES) {
+    gaugePickerData.push({
+      label: key,
+      value: currentMarketData.addresses.GAUGES[key],
+    });
+  }
 
   const valuetext = (value: number) => {
     setLockPeriod(value);
     return `${value} Week(s)`;
   };
+
+  const handleCalculate = async () => {
+    if(!curGauge) return;
+    let gauge = gauges[curGauge];
+    let [, _boost] = await gauge.calcUpdateLiquidityGauge({
+      user: currentAccount,
+      l: depositValue.toString(),
+      L: liquidityValue.toString(),
+      veCRV: veAmount.toString(),
+      totalveCRV: veAmount.toString(),
+    })
+    console.log({_boost})
+    setBoost(_boost);
+  }
 
   return (
     <Container
@@ -71,52 +89,15 @@ export default function Calc() {
               Select a gauge
             </label>
             <SelectPicker
-              data={gaugeTempData}
+              data={gaugePickerData}
               style={{ width: '100%' }}
               value={curGauge}
-              onChange={setCurGause}
+              onChange={(value) => setCurGause(value || '')}
               placeholder="Select a gauge"
               searchable={false}
-              renderMenuItem={(label, item) => {
-                return (
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      gap: 2,
-                      alignItems: 'center',
-                      fontFamily: 'Gilroy, Arial !important',
-                    }}
-                  >
-                    <Box>
-                      {' '}
-                      <TokenIcon symbol={label} sx={{ fontSize: '24px', mr: 1 }} />{' '}
-                    </Box>
-                    <Box>
-                      {' '}
-                      <span style={{ fontWeight: 500, fontSize: '18px', color: '#5B6871' }}>
-                        {label.toUpperCase()} ({textCenterEllipsis(item.value, 5, 4)})
-                      </span>
-                    </Box>
-                  </Box>
-                );
-              }}
-              renderValue={(value, item) => {
-                return (
-                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center' }}>
-                    <Box>
-                      {' '}
-                      <TokenIcon symbol={item.label} sx={{ fontSize: '24px', mr: 1 }} />{' '}
-                    </Box>
-                    <Box>
-                      {' '}
-                      <span style={{ fontWeight: 500, fontSize: '18px', color: '#5B6871' }}>
-                        {item.label.toUpperCase()} ({textCenterEllipsis(value, 5, 4)})
-                      </span>
-                    </Box>
-                  </Box>
-                );
-              }}
+              renderMenuItem={(label, item) => <TokenOption item={item} />}
+              renderValue={(value, item) => <TokenOption item={item} />}
+              cleanable={false}
             />
           </Box>
           <Box
@@ -128,7 +109,7 @@ export default function Calc() {
               justifyContent: 'space-between',
             }}
           >
-            <Box>
+            <Box sx={{flex: 1}}>
               <label
                 style={{
                   display: 'block',
@@ -138,11 +119,15 @@ export default function Calc() {
                   paddingBottom: '5px',
                 }}
               >
-                Deposit: Use existing deposit
+                Deposit:
               </label>
-              <InputNumber value={depositValue} onChange={setDepositValue} min={0} />
+              <InputNumber
+                value={depositValue}
+                onChange={(value) => setDepositValue(Number(value))}
+                min={0}
+              />
             </Box>
-            <Box>
+            <Box sx={{flex: 1}}>
               <label
                 style={{
                   display: 'block',
@@ -154,7 +139,11 @@ export default function Calc() {
               >
                 Pool liquidity
               </label>
-              <InputNumber value={liquidityValue} onChange={setLiquidityValue} min={0} />
+              <InputNumber
+                value={liquidityValue}
+                onChange={(value) => setLiquidityValue(Number(value))}
+                min={0}
+              />
             </Box>
           </Box>
           <Box>
@@ -229,7 +218,11 @@ export default function Calc() {
                   >
                     My MNT
                   </label>
-                  <InputNumber value={mntAmount} onChange={setMntAmount} min={0} />
+                  <InputNumber
+                    value={mntAmount}
+                    onChange={(value) => setMntAmount(Number(value))}
+                    min={0}
+                  />
                 </Box>
                 <Box>
                   <label
@@ -328,7 +321,11 @@ export default function Calc() {
               >
                 My veMNT
               </label>
-              <InputNumber value={veAmount} onChange={setVeAmount} min={0} />
+              <InputNumber
+                value={veAmount}
+                onChange={(value) => setVeAmount(Number(value))}
+                min={0}
+              />
             </Box>
           )}
           <Button
@@ -341,6 +338,7 @@ export default function Calc() {
               fontWeight: 600,
               fontSize: '14px',
             }}
+            onClick={handleCalculate}
           >
             Calculate
           </Button>
@@ -380,7 +378,7 @@ export default function Calc() {
                 Boost:
               </Typography>
               <Typography sx={{ color: 'black', fontWeight: 600, fontSize: '24px' }}>
-                <Rocket /> 2.50x
+                <Rocket /> {boost.toFixed(2)}x
               </Typography>
             </Box>
           </Box>

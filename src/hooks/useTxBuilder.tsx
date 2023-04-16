@@ -6,6 +6,7 @@ import {
   PoolInterface,
   VotingEscrow,
   GaugeController,
+  LiquidityGauge
 } from '@monetaria/contract-helpers';
 import React, { useContext } from 'react';
 
@@ -16,6 +17,7 @@ export interface TxBuilderContextInterface {
   incentivesTxBuilderV2: IncentivesControllerV2Interface;
   votingEscrow: VotingEscrow;
   gaugeController: GaugeController; 
+  gauges: Record<string, LiquidityGauge>;
 }
 
 export const TxBuilderContext = React.createContext({} as TxBuilderContextInterface);
