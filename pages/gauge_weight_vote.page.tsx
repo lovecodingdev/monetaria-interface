@@ -132,7 +132,7 @@ export default function GaugeWeightVoting() {
                       }}
                     >
                       <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
-                        WPC Distribution
+                        MNT Distribution
                       </Typography>
                       <Box
                         sx={{
