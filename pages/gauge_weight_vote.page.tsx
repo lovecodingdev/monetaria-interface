@@ -152,7 +152,7 @@ export default function GaugeWeightVoting() {
                           <Box>
                             {' '}
                             <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
-                              Total WPC Distribution Speed
+                              Total MNT Distribution Speed
                             </Typography>
                           </Box>
                           <Box>
@@ -162,7 +162,7 @@ export default function GaugeWeightVoting() {
                                 280
                               </span>{' '}
                               <span style={{ color: '#000000', fontSize: '14px', fontWeight: 400 }}>
-                                WPC/Block
+                                MNT/Block
                               </span>
                             </Typography>
                           </Box>
@@ -199,7 +199,7 @@ export default function GaugeWeightVoting() {
                                 <span
                                   style={{ color: '#000000', fontSize: '14px', fontWeight: 400 }}
                                 >
-                                  WPC/Day
+                                  MNT/Day
                                 </span>
                               </Typography>
                             </Box>
