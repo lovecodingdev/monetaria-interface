@@ -1,10 +1,10 @@
-export interface TransactionListValidator {
+export interface Transaction {
   asset: string;
   symbol: string;
   network: string;
   type: string;
   amount: number;
-  block: string;
-  hash_id: string;
+  block: number;
+  hash: string;
   date: string;
 }

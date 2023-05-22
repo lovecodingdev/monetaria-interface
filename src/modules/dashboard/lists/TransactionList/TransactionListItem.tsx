@@ -1,19 +1,21 @@
 import { useState } from 'react';
 import { Box } from '@mui/material';
-import { Table } from 'rsuite';
+import { Table, Pagination } from 'rsuite';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import { TransactionListValidator } from './type';
+import { Transaction } from './type';
+import { SortType } from 'src/helpers/rsuite-types';
+import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 
 const { Column, HeaderCell, Cell } = Table;
-const data: TransactionListValidator[] = [
+const data: Transaction[] = [
   {
     asset: 'ETH',
     symbol: 'eth',
     network: 'Ethereum',
     type: 'ETH borrow',
     amount: 2374.5,
-    block: 'YES',
-    hash_id: '2342342342342',
+    block: 231,
+    hash: '2342342342342',
     date: '16/12/2022',
   },
   {
@@ -22,122 +24,160 @@ const data: TransactionListValidator[] = [
     network: 'BTC',
     type: 'ETH borrow',
     amount: 237.5,
-    block: 'YES',
-    hash_id: '2342342342342',
+    block: 232,
+    hash: '2342342342342',
     date: '16/12/2022',
   },
 ];
 
-const TransactionListItem = () => {
-  const [sortColumn, setSortColumn] = useState();
-  const [sortType, setSortType] = useState();
+const TransactionListItem = ({txs}: {txs: Transaction[]}) => {
+  const [sortColumn, setSortColumn] = useState("");
+  const [sortType, setSortType] = useState("desc" as SortType);
   const [loading, setLoading] = useState(false);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const {currentNetworkConfig} = useProtocolDataContext();
 
-  const getData = () => {
-    if (sortColumn && sortType) {
-      return data.sort((a, b) => {
-        let x = a[sortColumn];
-        let y = b[sortColumn];
-        if (typeof x === 'string') {
-          x = x.charCodeAt();
-        }
-        if (typeof y === 'string') {
-          y = y.charCodeAt();
-        }
-        if (sortType === 'asc') {
-          return x - y;
-        } else {
-          return y - x;
-        }
-      });
-    }
-    return data;
+  const handleChangeLimit = (dataKey: number) => {
+    setPage(1);
+    setLimit(dataKey);
   };
 
-  const handleSortColumn = (sortColumn, sortType) => {
+  const filteredTxs = txs.filter((v, i) => {
+    const start = limit * (page - 1);
+    const end = start + limit;
+    return i >= start && i < end;
+  });
+  // const getData = () => {
+  //   if (sortColumn && sortType) {
+  //     return data.sort((a, b) => {
+  //       let x = a[sortColumn];
+  //       let y = b[sortColumn];
+  //       if (typeof x === 'string') {
+  //         x = x.charCodeAt();
+  //       }
+  //       if (typeof y === 'string') {
+  //         y = y.charCodeAt();
+  //       }
+  //       if (sortType === 'asc') {
+  //         return x - y;
+  //       } else {
+  //         return y - x;
+  //       }
+  //     });
+  //   }
+  //   return data;
+  // };
+
+  const handleSortColumn = (sortColumn: string, sortType?: SortType) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       setSortColumn(sortColumn);
-      setSortType(sortType);
+      setSortType(sortType!);
     }, 500);
   };
 
   return (
-    <Table
-      autoHeight
-      data={getData()}
-      sortColumn={sortColumn}
-      sortType={sortType}
-      onSortColumn={handleSortColumn}
-      loading={loading}
-      cellBordered={false}
-      rowHeight={60}
-    >
-      <Column flexGrow={1} align="left" fixed sortable verticalAlign="middle">
-        <HeaderCell>Asset</HeaderCell>
-        <Cell>
-          {(rowData) => (
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                gap: 4,
-                justifyContent: 'start',
-                alignItems: 'center',
-              }}
-            >
-              <TokenIcon
-                symbol={rowData.symbol}
-                sx={{ fontSize: `24px`, ml: -1 }}
-                key={rowData.symbol}
-              />
+    <Box>
+      <Table
+        autoHeight
+        data={filteredTxs}
+        sortColumn={sortColumn}
+        sortType={sortType}
+        onSortColumn={handleSortColumn}
+        loading={loading}
+        cellBordered={false}
+        rowHeight={60}
+      >
+        <Column flexGrow={1} align="left" fixed sortable verticalAlign="middle">
+          <HeaderCell>Asset</HeaderCell>
+          <Cell>
+            {(rowData) => (
               <Box
                 sx={{
                   display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.05em',
+                  flexDirection: 'row',
+                  gap: 4,
                   justifyContent: 'start',
+                  alignItems: 'center',
                 }}
               >
-                <Box sx={{ fontSize: '14px', fontWeight: 400, textAlign: 'left' }}>
-                  {rowData.asset}
-                </Box>
+                <TokenIcon
+                  symbol={rowData.symbol}
+                  sx={{ fontSize: `24px`, ml: -1 }}
+                  key={rowData.symbol}
+                />
                 <Box
-                  sx={{ fontSize: '12px', fontWeight: 400, color: '#84919A', textAlign: 'left' }}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.05em',
+                    justifyContent: 'start',
+                  }}
                 >
-                  {rowData.network}
+                  <Box sx={{ fontSize: '14px', fontWeight: 400, textAlign: 'left' }}>
+                    {rowData.asset}
+                  </Box>
+                  <Box
+                    sx={{ fontSize: '12px', fontWeight: 400, color: '#84919A', textAlign: 'left' }}
+                  >
+                    {rowData.network}
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-          )}
-        </Cell>
-      </Column>
+            )}
+          </Cell>
+        </Column>
 
-      <Column flexGrow={1} align="left" sortable verticalAlign="middle">
-        <HeaderCell>Type</HeaderCell>
-        <Cell dataKey="type" />
-      </Column>
+        <Column flexGrow={1} align="left" sortable verticalAlign="middle">
+          <HeaderCell>Type</HeaderCell>
+          <Cell dataKey="type" />
+        </Column>
 
-      <Column flexGrow={1} align="left" sortable verticalAlign="middle">
-        <HeaderCell>Amount</HeaderCell>
-        <Cell dataKey="amount" />
-      </Column>
+        <Column flexGrow={1} align="left" sortable verticalAlign="middle">
+          <HeaderCell>Amount</HeaderCell>
+          <Cell dataKey="amount" />
+        </Column>
 
-      <Column flexGrow={1} align="left" sortable verticalAlign="middle">
-        <HeaderCell>Block</HeaderCell>
-        <Cell dataKey="block" />
-      </Column>
+        <Column flexGrow={1} align="left" sortable verticalAlign="middle">
+          <HeaderCell>Block</HeaderCell>
+          <Cell dataKey="block" />
+        </Column>
 
-      <Column flexGrow={1} align="left" sortable verticalAlign="middle">
-        <HeaderCell>Hash Id</HeaderCell>
-        <Cell dataKey="hash_id" />
-      </Column>
-      <Column flexGrow={1} align="left" sortable fixed="right" verticalAlign="middle">
-        <HeaderCell>Date</HeaderCell>
-        <Cell dataKey="date" />
-      </Column>
-    </Table>
+        <Column flexGrow={1} align="left" sortable verticalAlign="middle">
+          <HeaderCell>Hash</HeaderCell>
+          <Cell>
+            {row=>(
+              <a href={currentNetworkConfig.explorerLink+"/tx/"+row.hash}>{row.hash.slice(0, 16)+"..."}</a>
+            )}
+          </Cell>
+        </Column>
+        <Column flexGrow={1} align="left" sortable fixed="right" verticalAlign="middle">
+          <HeaderCell>Date</HeaderCell>
+          <Cell dataKey="date" />
+        </Column>
+      </Table>
+      <div style={{ padding: 20 }}>
+        <Pagination
+          prev
+          next
+          first
+          last
+          ellipsis
+          boundaryLinks
+          maxButtons={5}
+          size="xs"
+          layout={['total', '-', 'limit', '|', 'pager', 'skip']}
+          total={txs.length}
+          limitOptions={[10, 30, 50]}
+          limit={limit}
+          activePage={page}
+          onChangePage={setPage}
+          onChangeLimit={handleChangeLimit}
+        />
+      </div>
+    </Box>
   );
 };
 export default TransactionListItem;
