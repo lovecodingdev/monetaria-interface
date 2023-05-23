@@ -65,7 +65,7 @@ function TransactionListHeader() {
           style={{ width: downToXSM ? '140px' : '169px' }}
           value={curAction}
           searchable={false}
-          onChange={setCurAction}
+          onChange={val => setCurAction(val!)}
         />
       </Box>
       <Box>
@@ -84,7 +84,7 @@ function TransactionListHeader() {
           data={assetData}
           style={{ width: downToXSM ? '140px' : '169px' }}
           value={curAssets}
-          onChange={setCurAssets}
+          onChange={val=>setCurAssets(val!)}
           searchable={false}
         />
       </Box>
