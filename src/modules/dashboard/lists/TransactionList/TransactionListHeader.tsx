@@ -7,15 +7,23 @@ const actionData = ['All', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia',
   (item) => ({ label: item, value: item })
 );
 
-const assetData = ['All', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
-  (item) => ({ label: item, value: item })
-);
+interface TransactionListHeaderProps {
+  assets: string[];
+}
 
-function TransactionListHeader() {
+function TransactionListHeader({ assets }: TransactionListHeaderProps) {
   const theme = useTheme();
   const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));
   const [curAction, setCurAction] = useState('All');
   const [curAssets, setCurAssets] = useState('All');
+
+  console.log({assets});
+
+  const _assets = ["All", ...assets];
+  const assetData = _assets.map(
+    (item) => ({ label: item, value: item })
+  );
+
   return (
     <Box
       sx={{
@@ -48,7 +56,7 @@ function TransactionListHeader() {
           showOneCalendar={downToXSM}
         />
       </Box>
-      <Box>
+      {/* <Box>
         <label
           style={{
             display: 'block',
@@ -67,7 +75,7 @@ function TransactionListHeader() {
           searchable={false}
           onChange={val => setCurAction(val!)}
         />
-      </Box>
+      </Box> */}
       <Box>
         <label
           style={{

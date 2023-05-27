@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import TransactionListHeader from './TransactionListHeader';
 import TransactionListItem from './TransactionListItem';
@@ -8,68 +8,52 @@ import {ethers} from 'ethers'
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
 import { Transaction } from './type';
+import { AnkrProvider } from '@ankr.com/ankr.js';
 
-function getMethodFromInput(input: string) {
-  const iface = new ethers.utils.Interface([
-    'function transfer(address,uint256)',
-    'function transferFrom(address,address,uint256)',
-    'function approve(address,uint256)',
-    'function mint(address,uint256)',
-    'function supply(address,uint256,address,uint16)',
-    'function withdraw(address,uint256,address)',
-    'function borrow(address,uint256,uint256,uint16,address)',
-    'function repay(address,uint256,uint256,address)',
-    'function repayWithMTokens(address,uint256,uint256)',
-    'function swapBorrowRateMode(address,uint256)',
-    'function deposit(address,uint256,address,uint16)',
-    'function create_lock(uint256, uint256)',
-    'function add_gauge(address addr, int128 gauge_type)',
-    'function add_gauge(address addr, int128 gauge_type, int128 weight)',
-    'function vote_for_gauge_weights(address,uint256)',
-    'function add_type(string)',
-    'function add_type(string,uint256)',
-  ]);
-  try {
-    const method = iface.parseTransaction({ data: input }).name;
-    return method;
-  } catch {
-    return "Unknown";
-  }
-}
+const ankrProvider = new AnkrProvider("https://rpc.ankr.com/multichain/569ca1f392f7d3d0bb1073a1173ecb649af1d9249231fe59fa95db19d5ae41fe");
 
 function TransactionList() {
   const [txs, setTxs] = useState([] as Transaction[]);
+  const [assets, setAssets] = useState([] as string[]);
 
   const theme = useTheme();
   const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));  
   const {currentAccount} = useWeb3Context();
-  const provider = new ethers.providers.EtherscanProvider('goerli', 'S5YC7V62ZDAA2M5J32411166F2AQFG61YD');
-  provider.getHistory(currentAccount)
-    .then((_txs)=>{
-      console.log({_txs});
-      setTxs(_txs.map((tx) => {
+
+  useEffect(()=>{
+    ankrProvider.getTokenTransfers({ 
+      blockchain:    'eth_goerli',
+      address:       [currentAccount],
+      descOrder: true,
+    })
+    .then(res => {
+      console.log(res);
+      let _assets: Record<string, boolean> = {};
+      setTxs(res.transfers.map((tx) => {
         const date = new Date(tx.timestamp! * 1000);
         const dateString = date.toLocaleString();
-        const value = ethers.utils.formatEther(tx.value);
-        const from = tx.from;
-        const to = tx.to;
-        const hash = tx.hash;
-        const method = to !== null && tx.data === '0x' ? 'ETH Transfer' : getMethodFromInput(tx.data);
+        const value = tx.value;
+        const hash = tx.transactionHash;
+        _assets[tx.tokenSymbol] = true;
         return {
           date: dateString,
-          symbol: 'eth',
-          type: method,
-          block: tx.blockNumber,
+          asset: tx.tokenSymbol,
+          symbol: tx.tokenSymbol,
+          network: tx.blockchain,
+          type: "Transfer",
+          amount: +value,
+          block: tx.blockHeight,
           hash
         } as Transaction
-      }).reverse());
+      }));
+      setAssets(Object.keys(_assets));
     })
-    .catch(err=>{
-      console.error(err);
-    })
+    .catch(console.error);
+  }, [])
+
   return (
     <Box sx={{ paddingTop: '10px' }}>
-      <TransactionListHeader />
+      <TransactionListHeader assets={assets}/>
       <Box>{!downToXSM ? <TransactionListItem txs={txs} /> : <TransactionListMobileItem />}</Box>
     </Box>
   );

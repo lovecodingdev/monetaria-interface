@@ -30,6 +30,14 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
+"@ankr.com/ankr.js@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@ankr.com/ankr.js/-/ankr.js-0.4.0.tgz#24241b18c1a47097ef0e66eccdd485578270f2f7"
+  integrity sha512-7yA/NM/XSzx7vXartN6PDGN6toS/dueFt7Yp/+LiRDa6dB7FfGa380YHNWipf81CqSkwQEeHVWvS+fts+TWXeg==
+  dependencies:
+    axios "^0.26.1"
+    typescript "^4.6.2"
+
 "@apollo/client@^3.5.10":
   version "3.5.10"
   resolved "https://registry.npmjs.org/@apollo/client/-/client-3.5.10.tgz"
@@ -2587,10 +2595,10 @@
   resolved "https://registry.npmjs.org/@metamask/safe-event-emitter/-/safe-event-emitter-2.0.0.tgz"
   integrity sha512-/kSXhY692qiV1MXu6EeOZvg5nECLclxNXcKCxJ3cXQgYuRymRHpdx/t7JXfsK+JLjwA1e1c1/SBrlQYpusC29Q==
 
-"@monetaria/contract-helpers@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@monetaria/contract-helpers/-/contract-helpers-1.0.6.tgz#ba3fcd91fc5ad389e883a8ccb2a14726c6d292b8"
-  integrity sha512-Hyu9Lt4uW494QF2Zs2D/bOUV4taZ5jIz0yp5imFR8yo3NUP6iWeiYoJnHsC2J9P73GKah5PnH0vwkLqf+rfxJw==
+"@monetaria/contract-helpers@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@monetaria/contract-helpers/-/contract-helpers-1.0.7.tgz#1bef44014c22ed9c38add1a0a16fa6b736af2114"
+  integrity sha512-lD47PXm7A/DHGXTbMZR6E7/HnRsyzgw9noMS+LWl+A7PjgPEe0zbgCWsPAxSnYgg8J8fIYBVK9gkGUWJ2zIolQ==
   dependencies:
     isomorphic-unfetch "^3.1.0"
 
@@ -4316,6 +4324,13 @@ axios@^0.26.0:
   version "0.26.0"
   resolved "https://registry.npmjs.org/axios/-/axios-0.26.0.tgz"
   integrity sha512-lKoGLMYtHvFrPVt3r+RBMp9nh34N0M8zEfCWqdWZx6phynIEhQqAdydpyBAAG211zlhX9Rgu08cOamy6XjE5Og==
+  dependencies:
+    follow-redirects "^1.14.8"
+
+axios@^0.26.1:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.26.1.tgz#1ede41c51fcf51bbbd6fd43669caaa4f0495aaa9"
+  integrity sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==
   dependencies:
     follow-redirects "^1.14.8"
 

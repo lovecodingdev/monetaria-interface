@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.32",
+    "@ankr.com/ankr.js": "^0.4.0",
     "@apollo/client": "^3.5.10",
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
