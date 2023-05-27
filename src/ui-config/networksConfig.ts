@@ -329,7 +329,7 @@ export const networkConfigs: Record<string, BaseNetworkConfig> = {
     baseAssetSymbol: 'BNB',
     wrappedBaseAssetSymbol: 'WBNB',
     baseAssetDecimals: 18,
-    explorerLink: 'https://testnet.bscscan.io',
+    explorerLink: 'https://testnet.bscscan.com',
     // rpcOnly: true,
     // usdMarket: true,
     isTestnet: true,

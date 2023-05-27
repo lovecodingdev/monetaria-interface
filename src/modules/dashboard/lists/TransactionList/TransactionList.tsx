@@ -10,6 +10,20 @@ import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
 import { Transaction } from './type';
 import { AnkrProvider } from '@ankr.com/ankr.js';
 
+const ANKR_SUPPORTED_CHAINS: Record<number, string> = {
+  1: "eth", 
+  56: "bsc", 
+  250: "fantom", 
+  43114: "avalanche", 
+  137: "polygon", 
+  42161: "arbitrum", 
+  57: "syscoin", 
+  10: "optimism", 
+  5: "eth_goerli", 
+  80001: "polygon_mumbai", 
+  43113: "avalanche_fuji"
+}
+
 function TransactionList() {
   const [txs, setTxs] = useState([] as Transaction[]);
   const [assets, setAssets] = useState([] as string[]);
@@ -20,8 +34,11 @@ function TransactionList() {
   const theme = useTheme();
   const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));  
   const {currentAccount} = useWeb3Context();
+  const {currentChainId} = useProtocolDataContext();
 
   useEffect(()=>{
+    if(!ANKR_SUPPORTED_CHAINS[currentChainId]) return;
+    
     const ankrProvider = new AnkrProvider("https://rpc.ankr.com/multichain/569ca1f392f7d3d0bb1073a1173ecb649af1d9249231fe59fa95db19d5ae41fe");
     ankrProvider.getTokenTransfers({ 
       blockchain:    'eth_goerli',
