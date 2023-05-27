@@ -6,5 +6,5 @@ export interface Transaction {
   amount: number;
   block: number;
   hash: string;
-  date: string;
+  date: Date;
 }

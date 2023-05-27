@@ -10,17 +10,19 @@ import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
 import { Transaction } from './type';
 import { AnkrProvider } from '@ankr.com/ankr.js';
 
-const ankrProvider = new AnkrProvider("https://rpc.ankr.com/multichain/569ca1f392f7d3d0bb1073a1173ecb649af1d9249231fe59fa95db19d5ae41fe");
-
 function TransactionList() {
   const [txs, setTxs] = useState([] as Transaction[]);
   const [assets, setAssets] = useState([] as string[]);
+  const [selectedAsset, setSelectedAsset] = useState("All");
+  const [startDate, setStartDate] = useState<Date>();
+  const [endDate, setEndDate] = useState<Date>();
 
   const theme = useTheme();
   const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));  
   const {currentAccount} = useWeb3Context();
 
   useEffect(()=>{
+    const ankrProvider = new AnkrProvider("https://rpc.ankr.com/multichain/569ca1f392f7d3d0bb1073a1173ecb649af1d9249231fe59fa95db19d5ae41fe");
     ankrProvider.getTokenTransfers({ 
       blockchain:    'eth_goerli',
       address:       [currentAccount],
@@ -36,7 +38,7 @@ function TransactionList() {
         const hash = tx.transactionHash;
         _assets[tx.tokenSymbol] = true;
         return {
-          date: dateString,
+          date,
           asset: tx.tokenSymbol,
           symbol: tx.tokenSymbol,
           network: tx.blockchain,
@@ -51,10 +53,28 @@ function TransactionList() {
     .catch(console.error);
   }, [])
 
+  const filteredTxs = () => {
+    let _filteredTxs = selectedAsset == "All" ? [...txs] : txs.filter(tx=>tx.asset == selectedAsset);
+    _filteredTxs = startDate ? _filteredTxs.filter(tx=>tx.date>=startDate) : _filteredTxs;
+    _filteredTxs = endDate ? _filteredTxs.filter(tx=>tx.date<=endDate) : _filteredTxs;
+    return _filteredTxs;
+  }
+
   return (
     <Box sx={{ paddingTop: '10px' }}>
-      <TransactionListHeader assets={assets}/>
-      <Box>{!downToXSM ? <TransactionListItem txs={txs} /> : <TransactionListMobileItem />}</Box>
+      <TransactionListHeader
+        assets={assets}
+        onChangeDateRange={(startDate, endDate)=>{
+          setStartDate(startDate);
+          setEndDate(endDate);
+        }}
+        onChangeAsset={asset=>setSelectedAsset(asset)}
+      />
+      <Box>
+        {!downToXSM ? 
+          <TransactionListItem txs={filteredTxs()}/> : 
+          <TransactionListMobileItem txs={filteredTxs()}/>}
+      </Box>
     </Box>
   );
 } 

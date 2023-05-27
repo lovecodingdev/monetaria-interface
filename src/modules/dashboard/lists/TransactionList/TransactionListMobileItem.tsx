@@ -4,33 +4,14 @@ import { Row } from '../../../../components/primitives/Row';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { Transaction } from './type';
 
-const data: Transaction[] = [
-  {
-    asset: 'ETH',
-    symbol: 'eth',
-    network: 'Ethereum',
-    type: 'ETH borrow',
-    amount: 2374.5,
-    block: 123,
-    hash: '2342342342342',
-    date: '16/12/2022',
-  },
-  {
-    asset: 'BTC',
-    symbol: 'btc',
-    network: 'BTC',
-    type: 'ETH borrow',
-    amount: 237.5,
-    block: 124,
-    hash: '2342342342342',
-    date: '16/12/2022',
-  },
-];
+interface Props {
+  txs: Transaction[];
+}
 
-export const TransactionListMobileItem = () => {
+export const TransactionListMobileItem = ({txs}: Props) => {
   return (
     <>
-      {data.map((asset) => (
+      {txs.map((asset) => (
         <Box className="card-border" sx={{ my: 4, padding: 4 }} key={asset.symbol}>
           <Box
             sx={{
@@ -95,7 +76,7 @@ export const TransactionListMobileItem = () => {
               <Box>{asset.hash}</Box>
             </Row>
             <Row caption={<Trans>Date</Trans>} align="flex-start" captionVariant="description" mb={2}>
-              <Box>{asset.date}</Box>
+              <Box>{asset.date.toLocaleString()}</Box>
             </Row>
           </Box>
         </Box>

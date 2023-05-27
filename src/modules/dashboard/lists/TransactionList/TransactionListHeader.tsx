@@ -7,11 +7,13 @@ const actionData = ['All', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia',
   (item) => ({ label: item, value: item })
 );
 
-interface TransactionListHeaderProps {
+interface Props {
   assets: string[];
+  onChangeDateRange: (startDate: Date, endDate: Date) => void;
+  onChangeAsset: (asset: string) => void;
 }
 
-function TransactionListHeader({ assets }: TransactionListHeaderProps) {
+function TransactionListHeader({ assets, onChangeDateRange, onChangeAsset }: Props) {
   const theme = useTheme();
   const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));
   const [curAction, setCurAction] = useState('All');
@@ -54,6 +56,11 @@ function TransactionListHeader({ assets }: TransactionListHeaderProps) {
             width: downToXSM ? '305px' : '280px',
           }}
           showOneCalendar={downToXSM}
+          onChange={(dateRange)=>{
+            if(dateRange){
+              onChangeDateRange(dateRange[0], dateRange[1]);
+            }
+          }}
         />
       </Box>
       {/* <Box>
@@ -92,8 +99,12 @@ function TransactionListHeader({ assets }: TransactionListHeaderProps) {
           data={assetData}
           style={{ width: downToXSM ? '140px' : '169px' }}
           value={curAssets}
-          onChange={val=>setCurAssets(val!)}
+          onChange={val=>{
+            setCurAssets(val!);
+            onChangeAsset(val!);
+          }}
           searchable={false}
+          cleanable={false}
         />
       </Box>
     </Box>

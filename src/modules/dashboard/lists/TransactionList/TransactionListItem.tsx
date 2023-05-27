@@ -7,30 +7,12 @@ import { SortType } from 'src/helpers/rsuite-types';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 
 const { Column, HeaderCell, Cell } = Table;
-const data: Transaction[] = [
-  {
-    asset: 'ETH',
-    symbol: 'eth',
-    network: 'Ethereum',
-    type: 'ETH borrow',
-    amount: 2374.5,
-    block: 231,
-    hash: '2342342342342',
-    date: '16/12/2022',
-  },
-  {
-    asset: 'BTC',
-    symbol: 'btc',
-    network: 'BTC',
-    type: 'ETH borrow',
-    amount: 237.5,
-    block: 232,
-    hash: '2342342342342',
-    date: '16/12/2022',
-  },
-];
 
-const TransactionListItem = ({txs}: {txs: Transaction[]}) => {
+interface Props {
+  txs: Transaction[];
+}
+
+const TransactionListItem = ({txs}: Props) => {
   const [sortColumn, setSortColumn] = useState("");
   const [sortType, setSortType] = useState("desc" as SortType);
   const [loading, setLoading] = useState(false);
@@ -155,7 +137,9 @@ const TransactionListItem = ({txs}: {txs: Transaction[]}) => {
         </Column>
         <Column flexGrow={1} align="left" sortable fixed="right" verticalAlign="middle">
           <HeaderCell>Date</HeaderCell>
-          <Cell dataKey="date" />
+          <Cell>
+            {row=>row.date.toLocaleString()}
+          </Cell>
         </Column>
       </Table>
       <div style={{ padding: 20 }}>
