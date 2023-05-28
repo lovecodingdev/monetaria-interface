@@ -9,7 +9,7 @@ export const Dashboard = () => {
   const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));
   return (
     <div>
-      <HeaderDashboard />
+      {/* <HeaderDashboard /> */}
       <Box>{!downToXSM ? <RewardTable /> : <RewardMobileList />}</Box>
     </div>
   );

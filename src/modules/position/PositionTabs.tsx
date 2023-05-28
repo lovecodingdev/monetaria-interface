@@ -198,7 +198,7 @@ export const PositionTabs = () => {
             }}
           /> */}
           <NewTab
-            label="Dashboard"
+            label="Rewards"
             sx={{
               fontSize: { xs: '14px', md: '14px' },
               fontFamily: 'Gilroy,Arial !important',

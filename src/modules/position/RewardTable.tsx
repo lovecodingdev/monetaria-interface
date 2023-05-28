@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Button } from '@mui/material';
 import { Table } from 'rsuite';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { RewardType } from './RewardType';
+import { Reward } from 'src/helpers/types';
+import { useAppDataContext } from 'src/hooks/app-data-provider/useAppDataProvider';
+import { normalize, UserIncentiveData } from '@monetaria/math-utils';
+import { SortType } from 'src/helpers/rsuite-types';
 
 const { Column, HeaderCell, Cell } = Table;
 const data: RewardType[] = [
@@ -39,44 +43,80 @@ const data: RewardType[] = [
 ];
 
 export const RewardTable = () => {
-  const [sortColumn, setSortColumn] = useState();
-  const [sortType, setSortType] = useState();
+  const [sortColumn, setSortColumn] = useState("");
+  const [sortType, setSortType] = useState("desc" as SortType);
   const [loading, setLoading] = useState(false);
+  const [claimableUsd, setClaimableUsd] = useState('0');
+  const { user, reserves } = useAppDataContext();
+  const [selectedRewardSymbol, setSelectedRewardSymbol] = useState<string>('all');
+  const [allReward, setAllReward] = useState<Reward>();
+  const [rewards, setRewards] = useState<Reward[]>([]);
 
-  const getData = () => {
-    if (sortColumn && sortType) {
-      return data.sort((a, b) => {
-        let x = a[sortColumn];
-        let y = b[sortColumn];
-        if (typeof x === 'string') {
-          x = x.charCodeAt();
-        }
-        if (typeof y === 'string') {
-          y = y.charCodeAt();
-        }
-        if (sortType === 'asc') {
-          return x - y;
-        } else {
-          return y - x;
-        }
-      });
-    }
-    return data;
-  };
+  // get all rewards
+  useEffect(() => {
+    const userIncentives: Reward[] = [];
+    let totalClaimableUsd = Number(claimableUsd);
+    const allAssets: string[] = [];
+    Object.keys(user.calculatedUserIncentives).forEach((rewardTokenAddress) => {
+      const incentive: UserIncentiveData = user.calculatedUserIncentives[rewardTokenAddress];
+      const rewardBalance = normalize(incentive.claimableRewards, incentive.rewardTokenDecimals);
 
-  const handleSortColumn = (sortColumn, sortType) => {
+      let tokenPrice = Number(incentive.rewardPriceFeed);
+
+      const rewardBalanceUsd = Number(rewardBalance) * tokenPrice;
+
+      if (rewardBalanceUsd > 0) {
+        incentive.assets.forEach((asset) => {
+          if (allAssets.indexOf(asset) === -1) {
+            allAssets.push(asset);
+          }
+        });
+
+        userIncentives.push({
+          assets: incentive.assets,
+          incentiveControllerAddress: incentive.incentiveControllerAddress,
+          symbol: incentive.rewardTokenSymbol,
+          balance: rewardBalance,
+          balanceUsd: rewardBalanceUsd.toString(),
+          rewardTokenAddress,
+        });
+
+        totalClaimableUsd = totalClaimableUsd + Number(rewardBalanceUsd);
+      }
+    });
+
+    // if (userIncentives.length === 1) {
+    //   setSelectedRewardSymbol(userIncentives[0].symbol);
+    // } else if (userIncentives.length > 1 && !selectedReward) {
+    //   const allRewards = {
+    //     assets: allAssets,
+    //     incentiveControllerAddress: userIncentives[0].incentiveControllerAddress,
+    //     symbol: 'all',
+    //     balance: '0',
+    //     balanceUsd: totalClaimableUsd.toString(),
+    //     rewardTokenAddress: '',
+    //   };
+    //   setSelectedRewardSymbol('all');
+    //   setAllReward(allRewards);
+    // }
+
+    setRewards(userIncentives);
+    setClaimableUsd(totalClaimableUsd.toString());
+  }, []);
+
+  const handleSortColumn = (sortColumn: string, sortType?: SortType) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       setSortColumn(sortColumn);
-      setSortType(sortType);
+      setSortType(sortType!);
     }, 500);
   };
 
   return (
     <Table
       autoHeight
-      data={getData()}
+      data={rewards}
       sortColumn={sortColumn}
       sortType={sortType}
       onSortColumn={handleSortColumn}
@@ -87,7 +127,7 @@ export const RewardTable = () => {
       <Column flexGrow={2} align="left" fixed sortable verticalAlign="middle">
         <HeaderCell>Pool</HeaderCell>
         <Cell>
-          {(rowData) => (
+          {(rowData: Reward) => (
             <Box
               sx={{
                 display: 'flex',
@@ -111,13 +151,13 @@ export const RewardTable = () => {
                 }}
               >
                 <Box sx={{ fontSize: '14px', fontWeight: 400, textAlign: 'left' }}>
-                  {rowData.asset}
+                  {rowData.symbol}
                 </Box>
-                <Box
+                {/* <Box
                   sx={{ fontSize: '12px', fontWeight: 400, color: '#84919A', textAlign: 'left' }}
                 >
                   {rowData.network}
-                </Box>
+                </Box> */}
               </Box>
             </Box>
           )}
@@ -125,23 +165,13 @@ export const RewardTable = () => {
       </Column>
 
       <Column flexGrow={2} align="right" sortable verticalAlign="middle">
-        <HeaderCell>Base vAPY</HeaderCell>
-        <Cell>{(rowData) => `${rowData.vAPY}%`}</Cell>
-      </Column>
-
-      <Column flexGrow={2} align="right" sortable verticalAlign="middle">
-        <HeaderCell>Rewards tAPR(CRV+ Incentives)</HeaderCell>
-        <Cell>{(rowData) => `${rowData.tAPR}$`}</Cell>
-      </Column>
-
-      <Column flexGrow={2} align="right" sortable verticalAlign="middle">
         <HeaderCell>Balance</HeaderCell>
-        <Cell>{(rowData) => `${rowData.balance}$`}</Cell>
+        <Cell>{(rowData: Reward) => `${rowData.balance}`}</Cell>
       </Column>
 
       <Column flexGrow={2} align="right" sortable verticalAlign="middle">
         <HeaderCell>USD Profits</HeaderCell>
-        <Cell>{(rowData) => `${rowData.profit_usd}$`}</Cell>
+        <Cell>{(rowData: Reward) => `$${rowData.balanceUsd}`}</Cell>
       </Column>
       <Column flexGrow={3} align="right" verticalAlign="middle" fixed="right">
         <HeaderCell>Claimable Tokens</HeaderCell>
