@@ -89,7 +89,7 @@ export const TokenLinkDropdown = ({ poolReserve, downToSM }: TokenLinkDropdownPr
           >
             <TokenIcon symbol={poolReserve.iconSymbol} mToken={true} sx={{ fontSize: '20px' }} />
             <Typography variant="subheader1" sx={{ ml: 3 }} noWrap data-cy={`assetName`}>
-              {'a' + poolReserve.symbol}
+              {'m' + poolReserve.symbol}
             </Typography>
           </Link>
         </MenuItem>
