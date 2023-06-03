@@ -258,7 +258,7 @@ export const SupplyAssetsList = () => {
     >
       <>
         {!downToXSM && <ListHeader head={head} />}
-        {supplyReserves
+        {sortedSupplyReserves
           .filter((r) => r.symbol.toLowerCase().includes(search))
           .map((item) =>
             downToXSM ? (
