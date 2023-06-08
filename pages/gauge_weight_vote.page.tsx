@@ -21,8 +21,75 @@ import { GuageWeightVoteActions } from 'src/components/transactions/GaugeWeightV
 import { ChangeNetworkWarning } from 'src/components/transactions/Warnings/ChangeNetworkWarning';
 import { getNetworkConfig } from 'src/utils/marketsAndNetworksConfig';
 import { TokenOption } from 'src/components/TokenOption';
+import * as Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import HighchartsExporting from 'highcharts/modules/exporting'
+if (typeof Highcharts === 'object') {
+    HighchartsExporting(Highcharts)
+}
 
-const PieChart = dynamic(() => import('src/components/piecharts/piechart'), { ssr: false });
+const options: Highcharts.Options = {
+  chart: {
+    height: 300
+  },
+  title: {
+    text: 'Proposed future gauge weight changes taking effect on 29/12/2022 UTC',
+    align: 'left'
+  },
+  tooltip: {
+    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+  },
+  accessibility: {
+    point: {
+      valueSuffix: '%'
+    }
+  },
+  plotOptions: {
+    pie: {
+      size:'100%',
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: true,
+        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+      }
+    }
+  },
+  series: [{
+    type: 'pie',
+    name: 'Brands',
+    colorByPoint: true,
+    data: [{
+      name: 'Chrome',
+      y: 70.67,
+      selected: true
+    }, {
+      name: 'Edge',
+      y: 14.77
+    },  {
+      name: 'Firefox',
+      y: 4.86
+    }, {
+      name: 'Safari',
+      y: 2.63
+    }, {
+      name: 'Internet Explorer',
+      y: 1.53
+    },  {
+      name: 'Opera',
+      y: 1.40
+    }, {
+      name: 'Sogou Explorer',
+      y: 0.84
+    }, {
+      name: 'QQ',
+      y: 0.51
+    }, {
+      name: 'Other',
+      y: 2.6
+    }]
+  }]
+};
 
 const gaugeTempData = [
   {
@@ -111,8 +178,8 @@ export default function GaugeWeightVoting() {
                 flexWrap: 'wrap',
               }}
             >
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                <Box
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                {/* <Box
                   sx={{
                     display: 'flex',
                     flexDirection: { xs: 'column', sm: 'row' },
@@ -258,7 +325,7 @@ export default function GaugeWeightVoting() {
                       </Typography>
                     </Paper>
                   </Box>
-                </Box>
+                </Box> */}
                 <Box
                   sx={{
                     display: 'flex',
@@ -267,22 +334,33 @@ export default function GaugeWeightVoting() {
                     flexWrap: 'wrap',
                   }}
                 >
-                  <Box sx={{ flex: 1.5 }}>
+                  <Box sx={{ flex: 1 }}>
                     <Paper
                       sx={{
                         bgcolor: 'background.header',
                         padding: '24px',
-                        mt: { xs: '8px', md: '12px' },
                         color: '#F1F1F3',
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
                         ...borderGradient,
-                        height: !downToXSM ? '344px' : 'auto',
                       }}
                     >
+                      <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px', mb: 4 }}>
+                        Vote for Gauge Weight
+                      </Typography>
+                      {isWrongNetwork && (
+                        <ChangeNetworkWarning
+                          networkName={getNetworkConfig(marketChainId).name}
+                          chainId={marketChainId}
+                        />
+                      )}
                       <Box
                         sx={{
                           display: 'flex',
                           flexDirection: 'column',
                           gap: '16px',
+                          flex: 1,
                         }}
                       >
                         <Box>
@@ -298,15 +376,6 @@ export default function GaugeWeightVoting() {
                           >
                             Select a gauge
                           </label>
-                          {isWrongNetwork && (
-                            // <Box sx={{mb: -6}}>
-                              <ChangeNetworkWarning
-                                networkName={getNetworkConfig(marketChainId).name}
-                                chainId={marketChainId}
-                              />
-                            // </Box>
-                          )}
-
                           <SelectPicker
                             data={gaugePickerData}
                             style={{ width: '100%' }}
@@ -359,27 +428,14 @@ export default function GaugeWeightVoting() {
                             </Box>
                           </Box>
                         </Box>
-                        <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-                          {/* <Button
-                            sx={{
-                              color: '#F6F8F9',
-                              fontSize: '14px',
-                              fontWeight: 600,
-                              width: '299px',
-                              backgroundColor: '#023997',
-                              '&.hover': {
-                                color: '#023997',
-                              },
-                            }}
-                            variant="contained"
-                          >
-                            Submit
-                          </Button> */}
+                        <Box sx={{flex: 1}}/>
+                        <Box sx={{ display: 'flex' }}>
                           <GuageWeightVoteActions 
                             gaugeAddr={curGauge || ""}
                             userWeight={voteWeight}
                             isWrongNetwork={isWrongNetwork}
                             blocked={false}
+                            sx={{mt: 0, width: '100%'}}
                           />
                         </Box>
                       </Box>
@@ -390,16 +446,15 @@ export default function GaugeWeightVoting() {
                       sx={{
                         bgcolor: 'background.header',
                         padding: '24px',
-                        mt: { xs: '8px', md: '12px' },
                         color: '#F1F1F3',
+                        height: '100%',
                         ...borderGradient,
-                        height: !downToXSM ? '344px' : 'auto',
                       }}
                     >
-                      <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
-                        Proposed future gauge weight changes taking effect on 29/12/2022 UTC
-                      </Typography>
-                      <PieChart data={gauge_effect_data} />
+                      <HighchartsReact
+                        highcharts={Highcharts}
+                        options={options}
+                      />
                     </Paper>
                   </Box>
                 </Box>
@@ -408,7 +463,6 @@ export default function GaugeWeightVoting() {
                     sx={{
                       bgcolor: 'background.header',
                       padding: '24px',
-                      mt: { xs: '8px', md: '12px' },
                       color: '#F1F1F3',
                       ...borderGradient,
                     }}
@@ -421,7 +475,6 @@ export default function GaugeWeightVoting() {
                     sx={{
                       bgcolor: 'background.header',
                       padding: '24px',
-                      mt: { xs: '8px', md: '12px' },
                       color: '#F1F1F3',
                       ...borderGradient,
                     }}
