@@ -33,7 +33,7 @@ const options: Highcharts.Options = {
     height: 300
   },
   title: {
-    text: 'Proposed future gauge weight changes taking effect on 29/12/2022 UTC',
+    text: 'Proposed future gauge weights',
     align: 'left'
   },
   tooltip: {
