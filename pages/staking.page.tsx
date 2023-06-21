@@ -18,6 +18,8 @@ import { LockActions } from 'src/components/transactions/Lock/LockActions';
 import { ChangeNetworkWarning } from 'src/components/transactions/Warnings/ChangeNetworkWarning';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { getNetworkConfig } from 'src/utils/marketsAndNetworksConfig';
+import { useModalContext } from 'src/hooks/useModal';
+import { GasEstimationError } from 'src/components/transactions/FlowCommons/GasEstimationError';
 
 interface DescriptionData {
   image: string;
@@ -98,11 +100,12 @@ export default function Staking() {
   const { breakpoints } = useTheme();
   const xsm = useMediaQuery(breakpoints.up('xsm'));
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
+  const { txError } = useModalContext();
 
   const isWrongNetwork = connectedChainId !== marketChainId;
 
   useEffect(()=>{
-    setUnlockTime(Date.now() + lockPeriod * 86400 * 1000);
+    setUnlockTime(Date.now() + lockPeriod * 7 * 86400 * 1000);
   }, [lockPeriod]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -122,8 +125,6 @@ export default function Staking() {
     setLockPeriod(value);
     return `${value} Week(s)`;
   };
-
-  const handleCreateLock = async () => {};
 
   return (
     <ContentContainer>
@@ -628,6 +629,9 @@ export default function Staking() {
                         >
                           Create Lock
                         </Button> */}
+
+                        {txError && <GasEstimationError txError={txError} />}
+
                         <Box sx={{mt: -12}}>
                           <LockActions
                             amountToLock={""+stakeAmount}
