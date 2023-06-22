@@ -7,78 +7,24 @@ import { ContentContainer } from '../src/components/ContentContainer';
 import { MainLayout } from '../src/layouts/MainLayout';
 import { useWeb3Context } from '../src/libs/hooks/useWeb3Context';
 import borderGradient from 'src/layouts/borderGradient';
-
 import { SelectPicker, InputNumber } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
-import Slider from '@mui/material/Slider';
-
 import ApyEffectList from 'src/modules/dashboard/lists/ApyEffectList/ApyEffectList';
 import VoterList from 'src/modules/dashboard/lists/Voters/VoterList';
-import dynamic from 'next/dynamic';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { ItemDataType } from 'src/helpers/rsuite-types';
 import { GuageWeightVoteActions } from 'src/components/transactions/GaugeWeightVote/GuageWeightVoteActions';
 import { ChangeNetworkWarning } from 'src/components/transactions/Warnings/ChangeNetworkWarning';
 import { getNetworkConfig } from 'src/utils/marketsAndNetworksConfig';
 import { TokenOption } from 'src/components/TokenOption';
+import { useModalContext } from 'src/hooks/useModal';
+import { GasEstimationError } from 'src/components/transactions/FlowCommons/GasEstimationError';
 import * as Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import HighchartsExporting from 'highcharts/modules/exporting'
 if (typeof Highcharts === 'object') {
     HighchartsExporting(Highcharts)
 }
-
-const gaugeTempData = [
-  {
-    label: 'mnt',
-    value: '0xc6CB9A26DD5DFd155864C93C0eF6Af73D0e600b1',
-  },
-  {
-    label: 'btc',
-    value: '0xc6CB9A26DD5DFd155864C93B0eF6Af73D0e600b1',
-  },
-];
-
-const marks = [
-  {
-    value: 1,
-    label: 'Standard',
-  },
-  {
-    value: 2,
-    label: 'Fast',
-  },
-  {
-    value: 3,
-    label: 'Instant',
-  },
-];
-
-const proportion_data = [
-  { name: 'Moonbeam', address: '', percentage: 1 },
-  { name: 'Aurora', address: '', percentage: 1 },
-  { name: 'Moonriver', address: '', percentage: 1 },
-  { name: 'Emerald', address: '', percentage: 1 },
-  { name: 'Polygon', address: '', percentage: 6 },
-  { name: 'Optimism', address: '', percentage: 20 },
-  { name: 'Arbitrm', address: '', percentage: 15 },
-  { name: 'OKC', address: '', percentage: 15 },
-  { name: 'BNB', address: '', percentage: 15 },
-  { name: 'Ethereum', address: '', percentage: 25 },
-];
-
-const gauge_effect_data = [
-  { name: 'Dola', address: '0x34ed...', percentage: 10 },
-  { name: 'Fraxbp', address: '0x34ed...', percentage: 10 },
-  { name: 'Fraxbp', address: '0x34ed...', percentage: 10 },
-  { name: 'Fraxbp', address: '0x34ed...', percentage: 10 },
-  { name: 'Fraxbp', address: '0x34ed...', percentage: 10 },
-  { name: 'Fraxbp', address: '0x34ed...', percentage: 10 },
-  { name: 'Fraxbp', address: '0x34ed...', percentage: 10 },
-  { name: 'Fraxbp', address: '0x34ed...', percentage: 10 },
-  { name: 'Fraxbp', address: '0x34ed...', percentage: 10 },
-  { name: 'Fraxbp', address: '0x34ed...', percentage: 10 },
-];
 
 export default function GaugeWeightVoting() {
   const { currentAccount, loading: web3Loading, chainId: connectedChainId } = useWeb3Context();
@@ -126,6 +72,7 @@ export default function GaugeWeightVoting() {
   });
 
   const { currentMarketData, currentChainId: marketChainId } = useProtocolDataContext();
+  const { txError } = useModalContext();
 
   const isWrongNetwork = connectedChainId !== marketChainId;
 
@@ -165,153 +112,6 @@ export default function GaugeWeightVoting() {
               }}
             >
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                {/* <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: { xs: 'column', sm: 'row' },
-                    gap: '24px',
-                    flexWrap: 'wrap',
-                  }}
-                >
-                  <Box sx={{ flex: 1.5 }}>
-                    <Paper
-                      sx={{
-                        bgcolor: 'background.header',
-                        padding: '24px',
-                        mt: { xs: '8px', md: '12px' },
-                        color: '#F1F1F3',
-                        ...borderGradient,
-                        height: !downToXSM ? '316px' : 'auto',
-                      }}
-                    >
-                      <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
-                        MNT Distribution
-                      </Typography>
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          marginTop: '42px',
-                          gap: '42px',
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            display: 'flex',
-                            flexDirection: downToXSM ? 'row' : 'column',
-                            justifyContent: downToXSM ? 'space-between' : 'flex-start',
-                          }}
-                        >
-                          <Box>
-                            {' '}
-                            <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
-                              Total MNT Distribution Speed
-                            </Typography>
-                          </Box>
-                          <Box>
-                            {' '}
-                            <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
-                              <span style={{ color: '#333333', fontSize: '24px', fontWeight: 700 }}>
-                                280
-                              </span>{' '}
-                              <span style={{ color: '#000000', fontSize: '14px', fontWeight: 400 }}>
-                                MNT/Block
-                              </span>
-                            </Typography>
-                          </Box>
-                        </Box>
-
-                        <Box
-                          sx={{
-                            display: 'flex',
-                            flexDirection: downToXSM ? 'column' : 'row',
-                            gap: downToXSM ? '42px' : '74px',
-                          }}
-                        >
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              flexDirection: downToXSM ? 'row' : 'column',
-                              justifyContent: downToXSM ? 'space-between' : 'flex-start',
-                            }}
-                          >
-                            <Box>
-                              <Typography
-                                sx={{ color: '#000000', fontSize: '14px', fontWeight: 400 }}
-                              >
-                                Community Part Distribution Speed
-                              </Typography>
-                            </Box>
-                            <Box>
-                              <Typography>
-                                <span
-                                  style={{ color: '#333333', fontSize: '24px', fontWeight: 700 }}
-                                >
-                                  1,318,372.44
-                                </span>{' '}
-                                <span
-                                  style={{ color: '#000000', fontSize: '14px', fontWeight: 400 }}
-                                >
-                                  MNT/Day
-                                </span>
-                              </Typography>
-                            </Box>
-                          </Box>
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              flexDirection: downToXSM ? 'row' : 'column',
-                              justifyContent: downToXSM ? 'space-between' : 'flex-start',
-                            }}
-                          >
-                            <Box>
-                              <Typography
-                                sx={{ color: '#000000', fontSize: '14px', fontWeight: 400 }}
-                              >
-                                Community Part Ratio
-                              </Typography>
-                            </Box>
-                            <Box>
-                              <Typography>
-                                {' '}
-                                <span
-                                  style={{ color: '#333333', fontSize: '24px', fontWeight: 700 }}
-                                >
-                                  71.94%
-                                </span>{' '}
-                              </Typography>
-                            </Box>
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Paper>
-                  </Box>
-                  <Box sx={{ flex: 1 }}>
-                    <Paper
-                      sx={{
-                        bgcolor: 'background.header',
-                        padding: '24px',
-                        mt: { xs: '8px', md: '12px' },
-                        color: '#F1F1F3',
-                        ...borderGradient,
-                        height: !downToXSM ? '316px' : 'auto',
-                      }}
-                    >
-                      <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
-                        Proportion for All Different Chains
-                      </Typography>
-
-                      <PieChart data={proportion_data} />
-
-                      <Typography
-                        sx={{ color: '#000', fontWeight: 400, fontSize: '12px', opacity: '50%' }}
-                      >
-                        Data update rules: Ethereum updates every 28 days, other chains update every
-                        7 days, the lastest update 2022-12-12
-                      </Typography>
-                    </Paper>
-                  </Box>
-                </Box> */}
                 <Box
                   sx={{
                     display: 'flex',
@@ -415,6 +215,7 @@ export default function GaugeWeightVoting() {
                           </Box>
                         </Box>
                         <Box sx={{flex: 1}}/>
+                        {txError && <GasEstimationError txError={txError} />}
                         <Box sx={{ display: 'flex' }}>
                           <GuageWeightVoteActions 
                             gaugeAddr={curGauge || ""}
