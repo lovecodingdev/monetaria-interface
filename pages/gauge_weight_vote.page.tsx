@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/macro';
 import { Box, Paper, Typography, useMediaQuery, useTheme, Button } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePermissions } from 'src/hooks/usePermissions';
 import { ConnectWalletPaper } from '../src/components/ConnectWalletPaper';
 import { ContentContainer } from '../src/components/ContentContainer';
@@ -27,69 +27,6 @@ import HighchartsExporting from 'highcharts/modules/exporting'
 if (typeof Highcharts === 'object') {
     HighchartsExporting(Highcharts)
 }
-
-const options: Highcharts.Options = {
-  chart: {
-    height: 300
-  },
-  title: {
-    text: 'Proposed future gauge weights',
-    align: 'left'
-  },
-  tooltip: {
-    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-  },
-  accessibility: {
-    point: {
-      valueSuffix: '%'
-    }
-  },
-  plotOptions: {
-    pie: {
-      size:'100%',
-      allowPointSelect: true,
-      cursor: 'pointer',
-      dataLabels: {
-        enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-      }
-    }
-  },
-  series: [{
-    type: 'pie',
-    name: 'Brands',
-    colorByPoint: true,
-    data: [{
-      name: 'Chrome',
-      y: 70.67,
-      selected: true
-    }, {
-      name: 'Edge',
-      y: 14.77
-    },  {
-      name: 'Firefox',
-      y: 4.86
-    }, {
-      name: 'Safari',
-      y: 2.63
-    }, {
-      name: 'Internet Explorer',
-      y: 1.53
-    },  {
-      name: 'Opera',
-      y: 1.40
-    }, {
-      name: 'Sogou Explorer',
-      y: 0.84
-    }, {
-      name: 'QQ',
-      y: 0.51
-    }, {
-      name: 'Other',
-      y: 2.6
-    }]
-  }]
-};
 
 const gaugeTempData = [
   {
@@ -152,19 +89,68 @@ export default function GaugeWeightVoting() {
   const [curGauge, setCurGause] = useState<string>();
   const [curGaugeForHistory, setCurGauseForHistory] = useState<string>();
   const [voteWeight, setVoteWeight] = useState<number>(0);
-  const [slow, setSlow] = useState<number>(0);
+  const [totalWeight, setTotalWeight] = useState<number>(0);
+  const [gaugePickerData, setGaugePickerData] = useState<ItemDataType<string>[]>([]);
+  const [pieOptions, setPieOptions]  = useState<Highcharts.Options>({
+    chart: {
+      height: 300
+    },
+    title: {
+      text: 'Proposed future gauge weights',
+      align: 'left'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+        valueSuffix: '%'
+      }
+    },
+    plotOptions: {
+      pie: {
+        size:'100%',
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        }
+      }
+    },
+    series: [{
+      type: 'pie',
+      name: 'Gauges',
+      data: [],
+    }]
+  });
 
   const { currentMarketData, currentChainId: marketChainId } = useProtocolDataContext();
 
-  const gaugePickerData = [];
-  for (const key in currentMarketData.addresses.GAUGES) {
-    gaugePickerData.push({
-      label: key,
-      value: currentMarketData.addresses.GAUGES[key],
-    });
-  }
-
   const isWrongNetwork = connectedChainId !== marketChainId;
+
+  useEffect(()=>{
+    let _gaugePickerData = [];
+    let _pieData = [];
+    for (const key in currentMarketData.addresses.GAUGES) {
+      _gaugePickerData.push({
+        label: key,
+        value: currentMarketData.addresses.GAUGES[key],
+      });
+      _pieData.push({
+        name: key,
+        y: 0.0001,
+      });
+    }
+    setGaugePickerData(_gaugePickerData);
+    setPieOptions({
+      ...pieOptions,
+      series: [{
+        type: 'pie',
+        data: _pieData
+      }]
+    });
+  }, []);
 
   return (
     <>
@@ -453,7 +439,7 @@ export default function GaugeWeightVoting() {
                     >
                       <HighchartsReact
                         highcharts={Highcharts}
-                        options={options}
+                        options={pieOptions}
                       />
                     </Paper>
                   </Box>
