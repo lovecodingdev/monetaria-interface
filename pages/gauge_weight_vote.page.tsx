@@ -214,8 +214,13 @@ export default function GaugeWeightVoting() {
                             </Box>
                           </Box>
                         </Box>
-                        <Box sx={{flex: 1}}/>
-                        {txError && <GasEstimationError txError={txError} />}
+                        {txError ? 
+                          <Box sx={{mt: -4}}>
+                            <GasEstimationError txError={txError} />
+                          </Box>
+                          :
+                          <Box sx={{flex: 1}}/>
+                        }
                         <Box sx={{ display: 'flex' }}>
                           <GuageWeightVoteActions 
                             gaugeAddr={curGauge || ""}
