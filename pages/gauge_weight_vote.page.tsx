@@ -9,7 +9,7 @@ import { useWeb3Context } from '../src/libs/hooks/useWeb3Context';
 import borderGradient from 'src/layouts/borderGradient';
 import { SelectPicker, InputNumber } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
-import ApyEffectList from 'src/modules/dashboard/lists/ApyEffectList/ApyEffectList';
+import ApyEffectList from 'src/modules/gauge-weight-vote/ApyEffectList/ApyEffectList';
 import VoterList from 'src/modules/dashboard/lists/Voters/VoterList';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { ItemDataType } from 'src/helpers/rsuite-types';
@@ -94,6 +94,7 @@ export default function GaugeWeightVoting() {
       ...pieOptions,
       series: [{
         type: 'pie',
+        name: 'Gauges',
         data: _pieData
       }]
     });
@@ -309,7 +310,7 @@ export default function GaugeWeightVoting() {
                             <Typography
                               sx={{ color: '#333333', fontWeight: 700, fontSize: '24px' }}
                             >
-                              596,512.56 <span style={{ fontSize: '14px' }}>veCRV</span>
+                              596,512.56 <span style={{ fontSize: '14px' }}>veMNT</span>
                             </Typography>
                           </Box>
                         </Box>
@@ -325,7 +326,7 @@ export default function GaugeWeightVoting() {
                           <Box>
                             {' '}
                             <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
-                              Total veCRV{' '}
+                              Total veMNT{' '}
                             </Typography>
                           </Box>
                           <Box>
@@ -349,7 +350,7 @@ export default function GaugeWeightVoting() {
                           <Box>
                             {' '}
                             <Typography sx={{ color: '#000', fontWeight: 400, fontSize: '14px' }}>
-                              veCRV supply voted{' '}
+                              veMNT supply voted{' '}
                             </Typography>
                           </Box>
                           <Box>

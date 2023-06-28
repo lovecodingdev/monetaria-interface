@@ -13,7 +13,7 @@ import {
 import { styled } from '@mui/system';
 import { BorrowedPositionsList } from '../dashboard/lists/BorrowedPositionsList/BorrowedPositionsList';
 import { SuppliedPositionsList } from '../dashboard/lists/SuppliedPositionsList/SuppliedPositionsList';
-import TransactionList from '../dashboard/lists/TransactionList/TransactionList';
+import TransactionList from './TransactionList/TransactionList';
 import { Dashboard } from './Dashboard';
 import { FarmPosition } from './FarmPosition';
 

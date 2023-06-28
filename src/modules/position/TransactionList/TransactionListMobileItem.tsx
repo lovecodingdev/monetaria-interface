@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/macro';
 import { Box, Typography } from '@mui/material';
-import { Row } from '../../../../components/primitives/Row';
+import { Row } from '../../../components/primitives/Row';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { Transaction } from './type';
 

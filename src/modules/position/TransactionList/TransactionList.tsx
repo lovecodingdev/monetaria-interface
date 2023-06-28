@@ -3,8 +3,6 @@ import { Box, useMediaQuery, useTheme } from '@mui/material';
 import TransactionListHeader from './TransactionListHeader';
 import TransactionListItem from './TransactionListItem';
 import { TransactionListMobileItem } from './TransactionListMobileItem';
-import { ListHeader } from '../ListHeader';
-import {ethers} from 'ethers'
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
 import { Transaction } from './type';
