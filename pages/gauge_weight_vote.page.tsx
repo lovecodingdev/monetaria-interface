@@ -22,6 +22,7 @@ import { GasEstimationError } from 'src/components/transactions/FlowCommons/GasE
 import * as Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import HighchartsExporting from 'highcharts/modules/exporting'
+import WeightVotingHistory from 'src/modules/gauge-weight-vote/WeightVotingHistory/WeightVotingHistory';
 if (typeof Highcharts === 'object') {
     HighchartsExporting(Highcharts)
 }
@@ -272,6 +273,18 @@ export default function GaugeWeightVoting() {
                       ...borderGradient,
                     }}
                   >
+                    <WeightVotingHistory/>
+                  </Paper>
+                </Box>
+                {/* <Box>
+                  <Paper
+                    sx={{
+                      bgcolor: 'background.header',
+                      padding: '24px',
+                      color: '#F1F1F3',
+                      ...borderGradient,
+                    }}
+                  >
                     <Typography sx={{ color: '#080F26', fontWeight: 500, fontSize: '20px' }}>
                       Weight Voting History
                     </Typography>
@@ -419,7 +432,7 @@ export default function GaugeWeightVoting() {
                       <VoterList />
                     </Box>
                   </Paper>
-                </Box>
+                </Box> */}
               </Box>
             </Box>
           </Box>

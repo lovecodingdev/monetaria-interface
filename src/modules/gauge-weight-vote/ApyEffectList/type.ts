@@ -1,6 +1,5 @@
 export interface ApyEffectListItem {
-    pool: string;
-    currentMNT_APY: string;
-    futureMNT_APY: string;
-  }
-  
+  pool: string;
+  currentMNT_APY: string;
+  futureMNT_APY: string;
+}
