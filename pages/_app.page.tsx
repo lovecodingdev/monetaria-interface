@@ -35,7 +35,7 @@ import { Web3ReactProvider } from '@web3-react/core';
 import { providers } from 'ethers';
 import { WalletModalContextProvider } from 'src/hooks/useWalletModal';
 import { PermissionProvider } from 'src/hooks/usePermissions';
-import AaveMetaImage from 'public/aaveMetaLogo.png';
+import MntMetaImage from 'public/monetaria-brand.png';
 import { FaucetModal } from 'src/components/transactions/Faucet/FaucetModal';
 import { ActionTabsModal } from 'src/components/transactions/ActionTabs/ActionTabsModal';
 
@@ -70,6 +70,7 @@ export default function MyApp(props: MyAppProps) {
         description={
           'Monetaria is an Open Source Protocol to create Non-Custodial Liquidity Markets to earn interest on supplying and borrowing assets with a variable or stable interest rate. The protocol is designed for easy integration into your products and services.'
         }
+        imageUrl={MntMetaImage.src}
       />
 
       <ApolloProvider client={apolloClient}>
