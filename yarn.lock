@@ -2595,10 +2595,10 @@
   resolved "https://registry.npmjs.org/@metamask/safe-event-emitter/-/safe-event-emitter-2.0.0.tgz"
   integrity sha512-/kSXhY692qiV1MXu6EeOZvg5nECLclxNXcKCxJ3cXQgYuRymRHpdx/t7JXfsK+JLjwA1e1c1/SBrlQYpusC29Q==
 
-"@monetaria/contract-helpers@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@monetaria/contract-helpers/-/contract-helpers-1.0.7.tgz#1bef44014c22ed9c38add1a0a16fa6b736af2114"
-  integrity sha512-lD47PXm7A/DHGXTbMZR6E7/HnRsyzgw9noMS+LWl+A7PjgPEe0zbgCWsPAxSnYgg8J8fIYBVK9gkGUWJ2zIolQ==
+"@monetaria/contract-helpers@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@monetaria/contract-helpers/-/contract-helpers-1.0.8.tgz#c88f573ba22990302520b1a9dc5e024bfce27727"
+  integrity sha512-TN1AVtwwFZ64+T6Jt5my7HPcRdv0wh7r1wyV1pOM+8VBsaSIxc10JaLQEBDp/UzOxsL/a4N3r9CzJiMsEADVCA==
   dependencies:
     isomorphic-unfetch "^3.1.0"
 
