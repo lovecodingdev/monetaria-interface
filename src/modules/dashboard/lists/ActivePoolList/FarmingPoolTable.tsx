@@ -311,7 +311,7 @@ export const FarmingPoolTable = ({ showModal }: { showModal: (type: boolean) => 
                   <InfoIcon sx={{ fontSize: '12px', color: '#D5DADD' }} />
                 </Box>
 
-                <InputNumber defaultValue={rowData.leverage} style={{ width: '112px' }} min={0} />
+                <InputNumber defaultValue={0} style={{ width: '112px' }} min={0} value={rowData.leverage}/>
               </Box>
             )}
           </Cell>
