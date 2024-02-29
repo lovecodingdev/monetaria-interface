@@ -14,18 +14,11 @@ import InfoIcon from '@mui/icons-material/Info';
 import { TVLTooltip } from 'src/components/infoTooltips/TVLTooltip';
 import { ListMobileItem } from 'src/components/lists/ListMobileItem';
 
-import data from "_data.json"
+import data from "data.json"
 
 const { Column, HeaderCell, Cell } = Table;
 
 const farmingPoolData = data["data"]["farmingPools"] as FarmingPoolType[];
-
-farmingPoolData.forEach(f=>{
-  f.borrowingInterests.forEach(b=>{
-    b.label = b.symbol;
-    b.value = b.key;
-  })
-});
 
 // console.log({farmingPoolData})
 export const FarmingPoolTable = ({ showModal }: { showModal: (type: boolean) => void }) => {
@@ -108,10 +101,15 @@ export const FarmingPoolTable = ({ showModal }: { showModal: (type: boolean) => 
                 }}
                 onClick={() => router.push('/farm_detail/')}
               >
-                <TokenPair 
-                  tokenA={rowData.workingToken.tokenA.symbol}
-                  tokenB={rowData.workingToken.tokenB.symbol}
-                />
+                {rowData.workingToken.tokenA ?
+                  <TokenPair 
+                    tokenA={rowData.workingToken.tokenA.symbol}
+                    tokenB={rowData.workingToken.tokenB.symbol}
+                  />:
+                  <TokenIcon 
+                    symbol={rowData.workingToken.symbol}
+                  />
+                }
                 <Box
                   sx={{
                     display: 'flex',
@@ -191,9 +189,12 @@ export const FarmingPoolTable = ({ showModal }: { showModal: (type: boolean) => 
                   <Box>Borrowing Interest :</Box>
                   <Box className="farm-custom-select">
                     <SelectPicker
+                      key={rowData.key}
                       data={rowData.borrowingInterests}
+                      labelKey='symbol'
+                      valueKey='symbol'
                       style={{ width: '100%' }}
-                      defaultValue={rowData.borrowingInterests[0].value}
+                      defaultValue={rowData.borrowingInterests[0].symbol}
                       placeholder="borrowing interest"
                       searchable={false}
                       cleanable={false}
