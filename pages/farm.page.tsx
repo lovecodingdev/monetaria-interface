@@ -17,7 +17,7 @@ import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { Input, InputGroup, SelectPicker } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
 import 'rsuite/dist/rsuite.min.css';
-import { RewardTable } from 'src/modules/dashboard/lists/ActivePoolList/RewardTable';
+import { FarmingPoolTable } from 'src/modules/dashboard/lists/ActivePoolList/FarmingPoolTable';
 import { RewardMobileList } from 'src/modules/dashboard/lists/ActivePoolList/RewardMobileList';
 import { BasicModal } from 'src/components/primitives/BasicModal';
 
@@ -476,7 +476,7 @@ export default function Farm() {
 
       <Box>
         {!downToXSM ? (
-          <RewardTable showModal={showModal} />
+          <FarmingPoolTable showModal={showModal} />
         ) : (
           <RewardMobileList showModal={showModal} />
         )}

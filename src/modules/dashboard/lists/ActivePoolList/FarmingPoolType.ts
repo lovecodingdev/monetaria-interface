@@ -28,7 +28,9 @@ export interface BorrowingInterestType {
   symbol: string,
   interestPercent: number,
   interestPercentAt2XLeverage: number,
-  maxLeverage: number
+  maxLeverage: number,
+  label: string,
+  value: string,
 }
 
 export interface TokenType {
