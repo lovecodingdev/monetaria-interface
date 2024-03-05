@@ -20,7 +20,6 @@ const { Column, HeaderCell, Cell } = Table;
 
 const farmingPoolData = data["data"]["farmingPools"] as FarmingPoolType[];
 
-// console.log({farmingPoolData})
 export const FarmingPoolTable = ({ showModal }: { showModal: (type: boolean) => void }) => {
   const { breakpoints } = useTheme();
   const downToXSM = useMediaQuery(breakpoints.down('xsm'));
